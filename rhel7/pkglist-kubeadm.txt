@@ -1,0 +1,10 @@
+kubeadm
+kubectl
+kubelet
+conntrack-tools
+cri-tools
+kubernetes-cni
+libnetfilter_cthelper
+libnetfilter_cttimeout
+libnetfilter_queue
+socat

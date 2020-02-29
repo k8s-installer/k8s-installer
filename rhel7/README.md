@@ -6,6 +6,7 @@
 
     $ sudo yum install yum-utils
     
-## Download docker and dependencies
+## Download docker / kubeadm and dependencies
 
-    $ ./download.sh
+    $ ./download.sh pkglist-docker.txt
+    $ ./download.sh pkglist-kubeadm.txt
