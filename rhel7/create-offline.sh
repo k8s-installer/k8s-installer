@@ -10,6 +10,5 @@ sudo ./install-repo.sh
 sudo ./install-docker.sh
 
 # download kubernetes container images
-echo "==> Pull container images"
 sudo ./pull-images.sh
 
