@@ -9,11 +9,13 @@ fi
 subscription-manager repos --enable=rhel-7-server-extras-rpms
 cp kubernetes.repo /etc/yum.repos.d/
 
+yum check-update -y
+
 # download docker stuff
 ./download-rpms.sh pkglist-docker.txt
 
 # install & start docker
-yum install files/rpms/*.rpm
+yum install -y files/rpms/*.rpm
 systemctl enable docker
 systemctl start docker
 
