@@ -11,8 +11,7 @@ setenforce 0
 # Disable swap
 swapoff -a
 
-# Install kubelet and start
-./install-kubeadm.sh
+# Start kubelet
 systemctl enable --now kubelet
 
 # sysctl
@@ -21,9 +20,6 @@ net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
 EOF
 sysctl --system
-
-# load images
-./load-images.sh
 
 # Do kubeadm init
 kubeadm init --pod-network-cidr=192.168.0.0/16

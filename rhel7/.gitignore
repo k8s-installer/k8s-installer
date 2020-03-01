@@ -1,3 +1,5 @@
 *.rpm
-files/
+*.tar.gz
 .vagrant/
+rpms/
+images/
