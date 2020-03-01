@@ -1,4 +1,7 @@
 #!/bin/sh
+
+. ./scripts/check-root.sh
+
 echo "==> Extracting container images"
 tar xvzf kubernetes-images.tar.gz
 
@@ -8,5 +11,5 @@ echo $IMAGES
 
 for i in $IMAGES; do
     echo "==> Loading $i"
-    sudo docker load -i images/`basename $i`.tar
+    docker load -i images/`basename $i`.tar
 done

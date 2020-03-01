@@ -1,10 +1,7 @@
 #!/bin/sh
-if [ `id -u` -ne 0 ]; then
-    echo "ERROR: You must execute with sudo."
-    exit 1
-fi
 
-. ./config.sh
+. ./scripts/check-root.sh
+. ./scripts/config.sh
 
 echo "==> Installing yum repo"
 mkdir -p $K8S_OFFLINE_YUM_REPO

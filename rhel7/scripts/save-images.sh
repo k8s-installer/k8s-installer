@@ -1,5 +1,7 @@
 #!/bin/sh
 
+. ./scripts/check-root.sh
+
 if [ -e images ]; then
     /bin/rm -rf images
 fi
@@ -13,10 +15,10 @@ echo $IMAGES
 
 for i in $IMAGES; do
     echo "==> pulling $i"
-    sudo docker pull $i
+    docker pull $i
 
     echo "==> saving $i"
-    sudo docker save $i > images/`basename $i`.tar
+    docker save $i > images/`basename $i`.tar
 done
 
 echo "==> Create images tarball"
