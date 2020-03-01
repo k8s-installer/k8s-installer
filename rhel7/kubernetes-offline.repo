@@ -1,0 +1,5 @@
+[kubernetes-offline]
+name=Kubernetes offline repo
+baseurl=file:///opt/kubernetes-offline/rpms
+enabled=1
+gpgcheck=0

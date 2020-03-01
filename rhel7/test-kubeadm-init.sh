@@ -7,7 +7,7 @@ sudo setenforce 0
 sudo swapoff -a
 
 # Install kubelet and start
-#sudo yum install -y files/rpms/*.rpm
+sudo yum install -y --disablerepo=\\* --enablerepo=kubernetes-offline kubeadm kubelet kubectl
 sudo systemctl enable --now kubelet
 
 # sysctl

@@ -1,5 +1,8 @@
 #!/bin/sh
 
+K8S_OFFLINE_DIR=/opt/kubernetes-offline
+K8S_OFFLINE_YUM_REPO=$K8S_OFFLINE_DIR/rpms
+
 # setup repo
 sudo subscription-manager repos --enable=rhel-7-server-extras-rpms
 sudo cp kubernetes.repo /etc/yum.repos.d/
@@ -10,16 +13,20 @@ sudo yum check-update -y
 sudo yum install -y yum-utils createrepo
 
 # download rpms
-mkdir -p files/rpms
-repotrack -a x86_64 -p files/rpms docker kubeadm kubectl kubelet
-/bin/rm files/rpms/*.i686.rpm
+echo "==> Downloading rpms"
+sudo mkdir -p $K8S_OFFLINE_YUM_REPO
+sudo repotrack -a x86_64 -p $K8S_OFFLINE_YUM_REPO docker kubeadm kubectl kubelet
+sudo /bin/rm $K8S_OFFLINE_YUM_REPO/*.i686.rpm
+sudo createrepo $K8S_OFFLINE_YUM_REPO
 
 # install & start docker
-sudo yum install -y files/rpms/*.rpm
+echo "==> Install and start docker"
+sudo cp kubernetes-offline.repo /etc/yum.repos.d/
+sudo yum install -y --disablerepo=\\* --enablerepo=kubernetes-offline docker
 sudo systemctl enable docker
 sudo systemctl start docker
 
 # download kubernetes container images
+echo "==> Pull container images"
 sudo ./pull-images.sh
-
 
