@@ -13,3 +13,6 @@
 
 # download kubernetes container images
 ./scripts/save-images.sh
+
+# download yaml files
+./scripts/get-calico.sh
