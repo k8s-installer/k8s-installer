@@ -14,10 +14,13 @@ sudo yum install -y yum-utils createrepo
 
 # download rpms
 echo "==> Downloading rpms"
+sudo mkdir -p files/rpms
+sudo repotrack -a x86_64 -p files/rpms docker kubeadm kubectl kubelet audit
+sudo /bin/rm files/rpms/*.i686.rpm
+sudo createrepo files/rpms
+
 sudo mkdir -p $K8S_OFFLINE_YUM_REPO
-sudo repotrack -a x86_64 -p $K8S_OFFLINE_YUM_REPO docker kubeadm kubectl kubelet audit
-sudo /bin/rm $K8S_OFFLINE_YUM_REPO/*.i686.rpm
-sudo createrepo $K8S_OFFLINE_YUM_REPO
+sudo cp -r files/rpms/* $K8S_OFFLINE_YUM_REPO/
 
 # install & start docker
 echo "==> Install and start docker"
