@@ -1,18 +1,15 @@
 #!/bin/sh
 
-if [ `id -u` -ne 0 ]; then
-    echo "ERROR: You must execute with sudo."
-    exit 1
-fi
+. ./scripts/check-root.sh
 
 # Install repo
-./install-repo.sh
+./scripts/install-repo.sh
 
 # Install and start docker
-./install-docker.sh
+./scripts/install-docker.sh
 
 # Install kubelet and start
-./install-kubeadm.sh
+./scripts/install-kubeadm.sh
 
 # Load images
-./load-images.sh
+./scripts/load-images.sh

@@ -1,13 +1,15 @@
 #!/bin/sh
 
+. ./scripts/check-root.sh
+
 # create offline repo
-sudo ./create-repo.sh
+./scripts/create-repo.sh
 
 # install offline repo
-sudo ./install-repo.sh
+./scripts/install-repo.sh
 
 # install & start docker
-sudo ./install-docker.sh
+./scripts/install-docker.sh
 
 # download kubernetes container images
-sudo ./save-images.sh
+./scripts/save-images.sh

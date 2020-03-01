@@ -7,7 +7,7 @@ mkdir -p images
 
 echo "==> Pull container images"
 
-IMGLIST=images.txt
+IMGLIST=scripts/images.txt
 IMAGES=`cat $IMGLIST | sed "s/#.*$//g" | sort -u `
 echo $IMAGES
 
