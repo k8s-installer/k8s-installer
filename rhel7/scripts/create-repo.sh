@@ -5,7 +5,7 @@
 
 # setup repo
 echo "==> Setup repo"
-subscription-manager repos --enable=rhel-7-server-extras-rpms
+#subscription-manager repos --enable=rhel-7-server-extras-rpms
 cp scripts/kubernetes.repo /etc/yum.repos.d/
 
 yum check-update -y

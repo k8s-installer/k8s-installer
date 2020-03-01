@@ -1,5 +1,11 @@
 # Download offline packages
 
+## Enable rhel-7-server-extras-rpms
+
+On RHEL7:
+
+    $ subscription-manager repos --enable=rhel-7-server-extras-rpms
+
 ## Create offline repositories
 
 Execute on some machines which has online network connection:
