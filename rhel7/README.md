@@ -8,9 +8,9 @@ Execute on some machines which has online network connection:
 
 Required RPM packages and container images of docker and kubernetes are downloaded.
 
-Transfer all scripts and generated *.tar.gz files to target machine.
-
 ## Install kubernetes and kubeadm
+
+Transfer all scripts and generated *.tar.gz, *.yaml files to target machine.
 
 On the target machine (offline) execute:
 
@@ -18,6 +18,10 @@ On the target machine (offline) execute:
 
 Now you can use kubeadm init.
 
+## kubeadm init
 
+For single machine cluster:
 
-
+    $ sudo ./kubeadm-init.sh
+    $ ./copy-kubelet-config.sh
+    $ kubectl apply -f calico.yml
