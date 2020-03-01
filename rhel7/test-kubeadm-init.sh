@@ -1,26 +1,31 @@
 #!/bin/sh
 
+if [ `id -u` -ne 0 ]; then
+    echo "ERROR: You must execute with sudo."
+    exit 1
+fi
+
 # Disable SELinux
-sudo setenforce 0
+setenforce 0
 
 # Disable swap
-sudo swapoff -a
+swapoff -a
 
 # Install kubelet and start
-sudo yum install -y --disablerepo="*" --enablerepo=kubernetes-offline kubeadm kubelet kubectl
-sudo systemctl enable --now kubelet
+./install-kubeadm.sh
+systemctl enable --now kubelet
 
 # sysctl
-cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+cat <<EOF | tee /etc/sysctl.d/k8s.conf
 net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
 EOF
-sudo sysctl --system
+sysctl --system
 
 # Do kubeadm init
-sudo kubeadm init --pod-network-cidr=192.168.0.0/16
+kubeadm init --pod-network-cidr=192.168.0.0/16
 
 # Copy kubelet config
 mkdir -p $HOME/.kube
-sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-sudo chown $(id -u):$(id -g) $HOME/.kube/config
+cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+chown $(id -u):$(id -g) $HOME/.kube/config
