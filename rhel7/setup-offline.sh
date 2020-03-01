@@ -6,11 +6,13 @@ sudo cp kubernetes.repo /etc/yum.repos.d/
 
 sudo yum check-update -y
 
+# install tools
+sudo yum install -y yum-utils createrepo
+
 # download rpms
 mkdir -p files/rpms
-#sudo ./download-rpms.sh pkglist-docker.txt
-#sudo ./download-rpms.sh pkglist-kubeadm.txt
 repotrack -a x86_64 -p files/rpms docker kubeadm kubectl kubelet
+/bin/rm files/rpms/*.i686.rpm
 
 # install & start docker
 sudo yum install -y files/rpms/*.rpm
