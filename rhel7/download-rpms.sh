@@ -5,12 +5,16 @@ if [ $# != 1 ]; then
     exit 1
 fi
 
+if [ ! -e files/rpms ]; then
+    mkdir -p files/rpms
+fi
+
 PKGLIST=$1
 PKGITEMS=`cat $PKGLIST | sed "s/#.*$//g" | sort -u `
 echo $PKGITEMS
 
 #sudo yum reinstall --downloadonly --downloaddir=./rpms $PKGITEMS
-yumdownloader -x \*i686 --archlist=x86_64 --destdir ./rpms $PKGITEMS
+yumdownloader -x \*i686 --archlist=x86_64 --destdir ./files/rpms $PKGITEMS
 
 #/bin/rm container-selinux-1*.rpm
 
