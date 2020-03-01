@@ -4,8 +4,7 @@ if [ `id -u` -ne 0 ]; then
     exit 1
 fi
 
-K8S_OFFLINE_DIR=/opt/kubernetes-offline
-K8S_OFFLINE_YUM_REPO=$K8S_OFFLINE_DIR/rpms
+. ./config.sh
 
 echo "==> Installing yum repo"
 mkdir -p $K8S_OFFLINE_YUM_REPO

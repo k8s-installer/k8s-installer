@@ -1,0 +1,4 @@
+K8S_VERSION=1.17.3-0
+
+K8S_OFFLINE_DIR=/opt/kubernetes-offline
+K8S_OFFLINE_YUM_REPO=$K8S_OFFLINE_DIR/rpms
