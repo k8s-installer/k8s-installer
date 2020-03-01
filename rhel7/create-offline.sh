@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # create offline repo
-sudo ./create-offline-repo.sh
+sudo ./create-repo.sh
 
 # install offline repo
 sudo ./install-repo.sh

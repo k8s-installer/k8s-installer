@@ -8,5 +8,5 @@ fi
 
 echo "==> Installing yum repo"
 mkdir -p $K8S_OFFLINE_YUM_REPO
-cp -r files/rpms/* $K8S_OFFLINE_YUM_REPO/
+tar xvzf kubernetes-offline-repo.tar.gz -C $K8S_OFFLINE_YUM_REPO/ --strip-components=1
 cp kubernetes-offline.repo /etc/yum.repos.d/
