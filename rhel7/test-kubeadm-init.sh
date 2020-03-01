@@ -7,7 +7,7 @@ sudo setenforce 0
 sudo swapoff -a
 
 # Install kubelet and start
-sudo yum install -y files/rpms/*.rpm
+#sudo yum install -y files/rpms/*.rpm
 sudo systemctl enable --now kubelet
 
 # sysctl
@@ -18,7 +18,7 @@ EOF
 sudo sysctl --system
 
 # Do kubeadm init
-sudo kubeadm init
+sudo kubeadm init --pod-network-cidr=192.168.0.0/16
 
 # Copy kubelet config
 mkdir -p $HOME/.kube
