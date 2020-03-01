@@ -10,7 +10,7 @@ cp kubernetes.repo /etc/yum.repos.d/
 
 subscription-manager repos --enable=rhel-7-server-extras-rpms
 
-rpm -Uvh files/rpms/*.rpm
+yum install files/rpms/*.rpm
 
 systemctl enable docker
 systemctl start docker
