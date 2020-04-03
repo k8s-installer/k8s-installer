@@ -1,7 +1,9 @@
 #!/bin/sh
 
 . ./scripts/check-root.sh
-. ./scripts/config.sh
+
+K8S_OFFLINE_DIR=/opt/kubernetes-offline
+K8S_OFFLINE_YUM_REPO=$K8S_OFFLINE_DIR/rpms
 
 echo "==> Installing yum repo"
 mkdir -p $K8S_OFFLINE_YUM_REPO

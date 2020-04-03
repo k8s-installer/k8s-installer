@@ -17,9 +17,9 @@ yum install -y yum-utils createrepo
 # download rpms
 echo "==> Downloading rpms"
 mkdir -p rpms
-if [ -e /etc/yum.repos.d/kubernetes-offline.repo ]; then
-    /bin/rm /etc/yum.repos.d/kubernetes-offline.repo
-fi
+#if [ -e /etc/yum.repos.d/kubernetes-offline.repo ]; then
+#    /bin/rm /etc/yum.repos.d/kubernetes-offline.repo
+#fi
 
 # download docker (newest version only)
 repotrack -a x86_64 -p rpms docker audit \
