@@ -21,6 +21,7 @@ Transfer all scripts and generated *.tar.gz, *.yaml files to target machine.
 
 On the target machine (offline) execute:
 
+    $ cd installer
     $ sudo ./install.sh
 
 Now you can use kubeadm init.
