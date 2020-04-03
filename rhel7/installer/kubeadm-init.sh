@@ -22,4 +22,4 @@ EOF
 sysctl --system
 
 # Do kubeadm init
-kubeadm init --pod-network-cidr=192.168.0.0/16
+kubeadm init --pod-network-cidr=192.168.0.0/16 --ignore-preflight-errors=ImagePull
