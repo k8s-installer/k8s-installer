@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. ./scripts/check-root.sh
+. ./check-root.sh
 
 if [ -e images ]; then
     /bin/rm -rf images
@@ -9,7 +9,9 @@ mkdir -p images
 
 echo "==> Pull container images"
 
-IMGLIST=scripts/images.txt
+IMGLIST=images.txt
+cp $IMGLIST images
+
 IMAGES=`cat $IMGLIST | sed "s/#.*$//g" | sort -u `
 echo $IMAGES
 

@@ -10,6 +10,7 @@ On RHEL7:
 
 Execute on some machines which has online network connection:
 
+    $ cd generator
     $ sudo ./create-offline.sh
 
 Required RPM packages and container images of docker and kubernetes are downloaded.

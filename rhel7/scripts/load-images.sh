@@ -5,7 +5,7 @@
 echo "==> Extracting container images"
 tar xvzf kubernetes-images.tar.gz
 
-IMGLIST=scripts/images.txt
+IMGLIST=images/images.txt
 IMAGES=`cat $IMGLIST | sed "s/#.*$//g" | sort -u `
 echo $IMAGES
 

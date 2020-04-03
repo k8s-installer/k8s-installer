@@ -1,12 +1,12 @@
 #!/bin/sh
 
-. ./scripts/check-root.sh
-. ./scripts/config.sh
+. ./check-root.sh
+. ./config.sh
 
 # setup repo
 echo "==> Setup repo"
 #subscription-manager repos --enable=rhel-7-server-extras-rpms
-cp scripts/kubernetes.repo /etc/yum.repos.d/
+cp kubernetes.repo /etc/yum.repos.d/
 
 yum check-update -y
 
@@ -31,4 +31,3 @@ createrepo rpms
 echo "==> Create repo tarball"
 tar cvzf kubernetes-offline-repo.tar.gz rpms
 /bin/rm -rf rpms
-
