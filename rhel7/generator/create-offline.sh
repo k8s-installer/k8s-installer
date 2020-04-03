@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. ./scripts/check-root.sh
+. ./check-root.sh
 
 # create offline repo
 ./create-repo.sh
