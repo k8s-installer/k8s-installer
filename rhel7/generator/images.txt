@@ -2,9 +2,9 @@ k8s.gcr.io/kube-apiserver:v1.18.0
 k8s.gcr.io/kube-controller-manager:v1.18.0
 k8s.gcr.io/kube-scheduler:v1.18.0
 k8s.gcr.io/kube-proxy:v1.18.0
-k8s.gcr.io/coredns:1.6.7
+k8s.gcr.io/pause:3.2
 k8s.gcr.io/etcd:3.4.3-0
-k8s.gcr.io/pause:3.1
+k8s.gcr.io/coredns:1.6.7
 registry:2.7.1
 calico/node:v3.8.8-1
 calico/pod2daemon-flexvol:v3.8.8
