@@ -7,7 +7,3 @@
 
 # download kubernetes container images
 ./save-images.sh
-
-# download yaml files
-./get-calico.sh
-
