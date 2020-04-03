@@ -1,5 +1,4 @@
 *.rpm
 *.tar.gz
 .vagrant/
-rpms/
 images/
