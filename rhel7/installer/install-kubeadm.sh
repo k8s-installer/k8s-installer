@@ -7,11 +7,10 @@ fi
 
 # Install offline yum repo
 K8S_OFFLINE_DIR=/opt/kubernetes-offline
-K8S_OFFLINE_YUM_REPO=$K8S_OFFLINE_DIR/rpms
 
 echo "==> Installing yum repo"
-mkdir -p $K8S_OFFLINE_YUM_REPO
-tar xvzf kubernetes-offline-repo.tar.gz -C $K8S_OFFLINE_YUM_REPO/ --strip-components=1
+mkdir -p $K8S_OFFLINE_DIR
+tar xvzf kubernetes-offline-repo.tar.gz -C $K8S_OFFLINE_DIR
 cp kubernetes-offline.repo /etc/yum.repos.d/
 
 # Install and start docker
