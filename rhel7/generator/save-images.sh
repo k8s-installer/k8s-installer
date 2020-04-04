@@ -2,6 +2,12 @@
 
 . ./check-root.sh
 
+if ! type docker >/dev/null 2>&1; then
+    echo "==> Install docker"
+    yum install -y docker || (echo "Error: can't install docker" && exit 1)
+    systemctl enable --now docker
+fi
+
 if [ -e images ]; then
     /bin/rm -rf images
 fi
