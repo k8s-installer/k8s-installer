@@ -11,18 +11,18 @@ On RHEL7:
 Execute on some machines which has online network connection:
 
     $ cd generator
-    $ sudo ./create-offline.sh
+    $ sudo ./generate-offline.sh
 
 Required RPM packages and container images of docker and kubernetes are downloaded.
 
 ## Install kubernetes and kubeadm
 
-Transfer all scripts and generated *.tar.gz, *.yaml files to target machine.
+Transfer all scripts and generated k8s-offline-files.tar.gz files to target machine.
 
 On the target machine (offline) execute:
 
     $ cd installer
-    $ sudo ./install.sh
+    $ sudo ./install-kubeadm-offline.sh
 
 Now you can use kubeadm init.
 
@@ -31,5 +31,5 @@ Now you can use kubeadm init.
 For single machine cluster:
 
     $ sudo ./kubeadm-init.sh
-    $ ./copy-kubelet-config.sh
-    $ kubectl apply -f calico.yml
+    $ ./copy-kubeconfig.sh
+    $ kubectl apply -f offline-files/calico.yml

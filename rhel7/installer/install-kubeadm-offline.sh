@@ -5,13 +5,25 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
+tar xvzf k8s-offline-files.tar.gz
+
+REPO_TARBALL=./offline-files/k8s-offline-repo.tar.gz
+IMAGES_TARBALL=./offline-files/k8s-images.tar.gz
+
 # Install offline yum repo
 K8S_OFFLINE_DIR=/opt/kubernetes-offline
 
 echo "==> Installing yum repo"
 mkdir -p $K8S_OFFLINE_DIR
-tar xvzf kubernetes-offline-repo.tar.gz -C $K8S_OFFLINE_DIR
-cp kubernetes-offline.repo /etc/yum.repos.d/
+tar xvzf $REPO_TARBALL -C $K8S_OFFLINE_DIR
+
+cat <<EOF > /etc/yum.repos.d/kubernetes-offline.repo
+[kubernetes-offline]
+name=Kubernetes offline repo
+baseurl=file:///opt/kubernetes-offline/rpms
+enabled=1
+gpgcheck=0
+EOF
 
 # Install and start docker
 if ! type docker >/dev/null 2>&1; then
@@ -31,7 +43,7 @@ yum install -y --disablerepo="*" --enablerepo=kubernetes-offline \
 
 # Load images
 echo "==> Extracting container images"
-tar xvzf kubernetes-images.tar.gz
+tar xvzf $IMAGES_TARBALL
 
 for i in images/*.tar; do
     echo "==> Loading container image: $i"

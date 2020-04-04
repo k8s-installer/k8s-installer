@@ -30,4 +30,6 @@ for i in $IMAGES; do
 done
 
 echo "==> Create images tarball"
-tar cvzf kubernetes-images.tar.gz images/
+tar cvzf offline-files/k8s-images.tar.gz images/
+
+

@@ -53,5 +53,5 @@ mkdir -p rpms
 createrepo rpms
 
 echo "==> Create repo tarball"
-tar cvzf kubernetes-offline-repo.tar.gz rpms config.sh
+tar cvzf offline-files/k8s-offline-repo.tar.gz rpms config.sh
 #/bin/rm -rf rpms
