@@ -9,8 +9,7 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 22, host: 2222, id: "ssh"
   config.ssh.insert_key = false
 
-  #config.vm.synced_folder "rpms", "/opt/rpms", id: "rpms"
-  #config.vm.synced_folder "images", "/opt/images", id: "images"
+  #config.vm.synced_folder ".", "/home/vagrant/kubeadm-offline", owner: "vagrant", group: "vagrant"
 
   config.vm.provider "virtualbox" do |vb|
     vb.cpus = 2
