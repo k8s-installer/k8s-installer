@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ `id -u` -ne 0 ]; then
+if [ "$(id -u)" -ne 0 ]; then
     echo "ERROR: You must execute with sudo."
     exit 1
 fi
@@ -14,8 +14,10 @@ tar xvzf kubernetes-offline-repo.tar.gz -C $K8S_OFFLINE_DIR
 cp kubernetes-offline.repo /etc/yum.repos.d/
 
 # Install and start docker
-echo "==> Install and start docker"
-yum install -y --disablerepo="*" --enablerepo=kubernetes-offline docker
+if ! type docker >/dev/null 2>&1; then
+    echo "==> Install and start docker"
+    yum install -y --disablerepo="*" --enablerepo=kubernetes-offline docker
+fi
 systemctl enable --now docker
 
 # Install kubeadm

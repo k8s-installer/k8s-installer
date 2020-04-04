@@ -12,6 +12,11 @@ if [ ! -e /etc/yum.repos.d/kubernetes.repo ]; then
     yum check-update -y
 fi
 
-# install kubeadm (and docker)
-yum install -y docker kubeadm-$K8S_VERSION
+# install docker
+if ! type docker >/dev/null 2>&1; then
+    yum install -y docker
+fi
 systemctl enable --now docker
+
+# install kubeadm (and docker)
+yum install -y kubeadm-$K8S_VERSION

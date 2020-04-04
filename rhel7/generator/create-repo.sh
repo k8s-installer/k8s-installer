@@ -13,16 +13,13 @@ if [ ! -e /etc/yum.repos.d/kubernetes.repo ]; then
 fi
 
 # install tools
-if type createrepo > /dev/null; then
-    :
-else
+if ! type createrepo >/dev/null 2>&1; then
     echo "==> Install createrepo"
     yum install -y createrepo
 fi
-if type repotrack > /dev/null; then
-    :
-else
-    yum install -y yum-utils createrepo
+if ! type repotrack >/dev/null 2>&1; then
+    echo "==> Install yum-utils"
+    yum install -y yum-utils
 fi
 
 # download rpms

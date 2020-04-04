@@ -12,7 +12,7 @@ echo "==> Pull container images"
 IMGLIST=images.txt
 cp $IMGLIST images
 
-IMAGES=`cat $IMGLIST | sed "s/#.*$//g" | sort -u `
+IMAGES=$(cat $IMGLIST | sed "s/#.*$//g" | sort -u)
 echo $IMAGES
 
 for i in $IMAGES; do
@@ -20,7 +20,7 @@ for i in $IMAGES; do
     docker pull $i
 
     echo "==> saving $i"
-    docker save $i > images/`basename $i`.tar
+    docker save $i > "images/$(basename $i).tar"
 done
 
 echo "==> Create images tarball"
