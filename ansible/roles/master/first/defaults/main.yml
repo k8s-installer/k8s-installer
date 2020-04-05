@@ -1,3 +1,12 @@
 calico_version: v3.8
 
 calico_manifest_url: "https://docs.projectcalico.org/{{ calico_version }}/manifests/calico.yaml"
+
+# Pod CIDR
+pod_subnet: 192.168.0.0/16
+
+# Load balancer DNS
+master_dns: 127.0.0.1
+
+setproxy_url: ""
+setproxy_noproxy: ""

@@ -28,10 +28,10 @@ kubernetesVersion: stable
 
 apiServer:
   certSANs:
-    - "{{ load_balancer_dns }}"
+    - "{{ master_dns }}"
   #timeoutForControlPlane: 4m0s
 
-controlPlaneEndpoint: "{{ load_balancer_dns }}"
+controlPlaneEndpoint: "{{ master_dns }}"
 
 networking:
   dnsDomain: cluster.local

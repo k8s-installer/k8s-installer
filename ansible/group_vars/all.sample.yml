@@ -5,8 +5,8 @@ offline_install: no
 # kubernetes version (kubeadm, kubelet, kubectl)
 kubernetes_version: 1.18.0-0
 
-# Load balancer DNS (or Master DNS/IP)
-load_balancer_dns: 10.240.0.40
+# Master DNS or IP (Load balancer for HA)
+master_dns: 10.240.0.40
 
 # Pod CIDR
 pod_subnet: 192.168.0.0/16
