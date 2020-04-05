@@ -1,0 +1,21 @@
+- name: Copy masters.tar.gz
+  copy:
+    src: ./files/masters.tar.gz
+    dest: .
+
+- name: Extract masters.tar.gz
+  shell: tar xvzf masters.tar.gz -C /etc/kubernetes
+  become: yes
+
+- name: Execute kubeadm join
+  shell: /etc/kubernetes/join-as-master.sh
+  become: yes
+
+- name: copy admin.conf to ~/.kube/config
+  copy:
+    src: /etc/kubernetes/admin.conf
+    dest: .kube/config
+    owner: "{{ ansible_user_id }}"
+    mode: 0700
+    remote_src: true
+  become: yes

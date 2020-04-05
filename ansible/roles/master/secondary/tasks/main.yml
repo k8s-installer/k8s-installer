@@ -1,12 +1,8 @@
-- name: Copy masters.tar.gz
-  copy:
-    src: ./files/masters.tar.gz
-    dest: .
+- name: Check if kubeadm has already run
+  stat:
+    path: "/etc/kubernetes/pki/ca.key"
+  register: kubeadm_ca
 
-- name: Extract masters.tar.gz
-  shell: tar xvzf masters.tar.gz -C /etc/kubernetes
-  become: yes
-
-- name: Execute kubeadm join
-  shell: /etc/kubernetes/join-as-master.sh
-  become: yes
+- name: Init kubeadm
+  include_tasks: init.yml
+  when: not kubeadm_ca.stat.exists
