@@ -42,13 +42,13 @@ config.sample.sh を config.sh にコピーし、設定を行ってください�
 sudo 可能な一般ユーザ権限でログインしてください(root での直接ログインは不可)。
 以下手順でインストールを実行してください。
 
-    $ sudo ./install.sh
+    $ sudo ./install-common.sh
 
 ## マスターノードのインストール
 
 マスターノード上で kubeadm を使用して Kubernetes マスターコントロールプレーンをインストールします。
 
-    $ sudo ./install-master.sh
+    $ sudo ./install-master-single.sh
 
 インストールには数分かかります。
 画面にワーカーノードを join するための `kubeadm join` コマンドラインが表示されるので、メモしてください。
