@@ -1,15 +1,12 @@
 # Kubernetes installer
 
-Kubernetes installer for RHEL7 / CentOS 7, support offline installation.
+オフラインインストールに対応した Kubernetes インストーラです。
+RHEL 7, CentOS 7 に対応しています。
 
-## Download offline packages
-
-see offline-generator/README.md
-
-## Install kubernetes and kubeadm
-
-see installer/README.md
+* offline-generator: オフラインインストール用のファイルを生成するジェネレータ
+* installer: スクリプトベースのインストーラ
+* ansible: Ansible playbook ベースのインストーラ
 
 ## License
 
-Public domain.
+Public domain です。
