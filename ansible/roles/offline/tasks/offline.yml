@@ -1,0 +1,44 @@
+- name: Create /opt/kubernetes-offline dir
+  file:
+    path: /opt/kubernetes-offline
+    state: directory
+
+- name: Transfer k8s-offline-repo
+  unarchive:
+    src: ./offline-files/{{ item }}
+    dest: /opt/kubernetes-offline/
+  with_items:
+    - k8s-offline-repo.tar.gz
+    - k8s-images.tar.gz
+
+- name: Transfer calico.yml
+  copy:
+    src: ./offline-files/calico.yaml
+    dest: /opt/kubernetes-offline
+
+- name: Install offline yum repo
+  copy:
+    src: kubernetes-offline.repo
+    dest: /etc/yum.repos.d/
+
+- name: Install docker, kubeadm, kubelet, kubectl
+  yum:
+    name:
+      - docker
+      - kubeadm
+      - kubelet
+      - kubectl
+    state: present
+    enablerepo: kubernetes-offline
+    disablerepo: "*"
+
+- name: Enable docker service
+  service:
+    name: docker
+    enabled: true
+    state: started
+
+- name: Load container images
+  shell:
+    cmd: "for i in *.tar; do docker load -i $i; done"
+    chdir: /opt/kubernetes-offline/images
