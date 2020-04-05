@@ -32,15 +32,15 @@ mkdir -p cache
 # download docker (newest version only)
 RT="repotrack -a x86_64 -p cache"
 echo "==> Downloading docker / kubeadms"
-$RT docker audit kubeadm-$K8S_VERSION
+$RT docker audit kubeadm-$K8S_VERSION || (echo "Download error" && exit 1)
 
 echo "==> Downloading kubectl"
-$RT kubectl-$K8S_VERSION
+$RT kubectl-$K8S_VERSION || (echo "Download error" && exit 1)
 
 # download all versions of kubelet, because repotrack can't download
 # specific version of kubelet...
 echo "==> Downloading kubelet (all versions)"
-$RT -n kubelet
+$RT -n kubelet || (echo "Download error" && exit 1)
 
 # create rpms dir
 mkdir -p rpms
