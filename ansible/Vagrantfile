@@ -18,8 +18,8 @@ Vagrant.configure("2") do |config|
       vb.memory = "512"
     end
     
-    c.vm.provision :shell, :path => "scripts/setup-haproxy.sh"
-    c.vm.provision :shell, :path => "scripts/setup-nat-router.sh"
+    c.vm.provision :shell, :path => "vagrant-scripts/setup-haproxy.sh"
+    c.vm.provision :shell, :path => "vagrant-scripts/setup-nat-router.sh"
   end
 
   (0..2).each do |n|
@@ -27,7 +27,7 @@ Vagrant.configure("2") do |config|
       c.vm.hostname = "master-#{n}"
       c.vm.network "private_network", ip: "10.240.0.1#{n}"
 
-      c.vm.provision :shell, :path => "scripts/setup-route.sh"
+      c.vm.provision :shell, :path => "vagrant-scripts/setup-route.sh"
     end
   end
 
@@ -36,7 +36,7 @@ Vagrant.configure("2") do |config|
       c.vm.hostname = "worker-#{n}"
       c.vm.network "private_network", ip: "10.240.0.2#{n}"
       
-      c.vm.provision :shell, :path => "scripts/setup-route.sh"
+      c.vm.provision :shell, :path => "vagrant-scripts/setup-route.sh"
     end
   end
 end
