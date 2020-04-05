@@ -1,0 +1,5 @@
+- hosts: master_secondary
+  become: no
+
+  roles:
+    - master/secondary

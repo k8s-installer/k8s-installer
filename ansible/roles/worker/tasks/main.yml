@@ -1,0 +1,9 @@
+- name: Copy join.sh
+  copy:
+    src: ./files/join.sh
+    dest: .
+    mode: 0700
+
+- name: Execute kubeadm join
+  shell: ./join.sh
+  become: yes

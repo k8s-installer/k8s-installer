@@ -1,0 +1,42 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "centos/7"
+
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = "1536"
+    vb.cpus = 2
+  end
+
+  config.vm.define "lb" do |c|
+    # c.vm.box = "ubuntu/bionic64"
+    c.vm.hostname = "lb"
+    c.vm.network "private_network", ip: "10.240.0.40"
+
+    c.vm.provider "virtualbox" do |vb|
+      vb.memory = "512"
+    end
+    
+    c.vm.provision :shell, :path => "scripts/setup-haproxy.sh"
+    c.vm.provision :shell, :path => "scripts/setup-nat-router.sh"
+  end
+
+  (0..2).each do |n|
+    config.vm.define "master-#{n}" do |c|
+      c.vm.hostname = "master-#{n}"
+      c.vm.network "private_network", ip: "10.240.0.1#{n}"
+
+      c.vm.provision :shell, :path => "scripts/setup-route.sh"
+    end
+  end
+
+  (0..1).each do |n|
+    config.vm.define "worker-#{n}" do |c|
+      c.vm.hostname = "worker-#{n}"
+      c.vm.network "private_network", ip: "10.240.0.2#{n}"
+      
+      c.vm.provision :shell, :path => "scripts/setup-route.sh"
+    end
+  end
+end

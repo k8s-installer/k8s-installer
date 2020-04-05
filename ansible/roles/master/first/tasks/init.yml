@@ -1,0 +1,21 @@
+- name: Execute kubeadm init
+  shell: kubeadm init --config /etc/kubernetes/kubeadm-config.yml
+  become: yes
+  register: kubeadm_init
+
+- name: create ~/.kube
+  file:
+    path: .kube/
+    state: directory
+
+- name: copy admin.conf to ~/.kube/config
+  copy:
+    src: /etc/kubernetes/admin.conf
+    dest: .kube/config
+    owner: "{{ ansible_user_id }}"
+    mode: 0700
+    remote_src: true
+  become: yes
+
+- name: Install calico cni plugin
+  shell: kubectl apply -f {{ calico_manifest_url }}

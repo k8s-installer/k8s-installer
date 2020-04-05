@@ -1,0 +1,29 @@
+- name: Install yum-plugin-versionlock
+  yum:
+    name: yum-plugin-versionlock
+    state: present
+
+- name: Install kubernetes.repo
+  copy:
+    src: kubernetes.repo
+    dest: /etc/yum.repos.d/kubernetes.repo
+
+- name: Install kubelet / kubectl / kubeadm
+  yum:
+    name:
+      - kubelet-{{ kubernetes_version }}
+      - kubectl-{{ kubernetes_version }}
+      - kubeadm-{{ kubernetes_version }}
+    state: present
+
+- name: Lock kubelet / kubectl / kubeadm versions
+  shell: yum versionlock add kubelet kubectl kubeadm
+
+- name: Enable / start kubelet
+  service:
+    name: kubelet
+    enabled: true
+    state: started
+
+- name: Pull images
+  command: kubeadm config images pull
