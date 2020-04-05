@@ -28,14 +28,14 @@ kubernetesVersion: stable
 
 apiServer:
   certSANs:
-    - "{{ master_ip }}"
+    - "{{ load_balancer_dns }}"
   #timeoutForControlPlane: 4m0s
 
-controlPlaneEndpoint: "{{ master_ip }}"
+controlPlaneEndpoint: "{{ load_balancer_dns }}"
 
 networking:
   dnsDomain: cluster.local
-  podSubnet: "192.168.0.0/16"
+  podSubnet: "{{ pod_subnet }}"
 dns:
   type: CoreDNS
 
