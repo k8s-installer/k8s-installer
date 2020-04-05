@@ -1,1 +1,4 @@
+config.sh
+*.tar.gz
+images/
 offline-files/

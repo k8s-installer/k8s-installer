@@ -5,15 +5,22 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
-tar xvzf k8s-offline-files.tar.gz
+. ./prepare.sh
 
+OFFLINE_TARBALL=k8s-offline-files.tar.gz
 REPO_TARBALL=./offline-files/k8s-offline-repo.tar.gz
 IMAGES_TARBALL=./offline-files/k8s-images.tar.gz
+
+if [ ! -e $OFFLINE_TARBALL ]; then
+    echo "No $OFFLINE_TARBALL exists"
+    exit 1
+fi
+tar xvzf $OFFLINE_TARBALL
 
 # Install offline yum repo
 K8S_OFFLINE_DIR=/opt/kubernetes-offline
 
-echo "==> Installing yum repo"
+echo "==> Installing offline yum repo"
 mkdir -p $K8S_OFFLINE_DIR
 tar xvzf $REPO_TARBALL -C $K8S_OFFLINE_DIR
 
