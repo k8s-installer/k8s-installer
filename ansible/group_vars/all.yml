@@ -2,5 +2,8 @@
 offline_install: no
 #offline_install: yes
 
+# kubernetes version (kubeadm, kubelet, kubectl)
+kubernetes_version: 1.18.0-0
+
 # Master IP
 master_ip: 10.240.0.40

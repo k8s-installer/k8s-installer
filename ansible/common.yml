@@ -2,6 +2,7 @@
   become: yes
 
   roles:
+    - offline
     - common
     - docker
     - k8s-packages

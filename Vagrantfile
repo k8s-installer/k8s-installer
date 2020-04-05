@@ -7,7 +7,7 @@ Vagrant.configure("2") do |config|
 
   # config.vm.box_check_update = false
   config.vm.network "private_network", ip: "192.168.33.10"
-  config.vm.network "forwarded_port", guest: 22, host: 2222, id: "ssh"
+  config.vm.network "forwarded_port", guest: 22, host: 2322, id: "ssh"
   config.ssh.insert_key = false
 
   config.vm.synced_folder ".", "/home/vagrant/kubeadm-offline", owner: "vagrant", group: "vagrant"

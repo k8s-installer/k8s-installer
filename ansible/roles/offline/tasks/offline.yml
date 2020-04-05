@@ -21,13 +21,15 @@
     src: kubernetes-offline.repo
     dest: /etc/yum.repos.d/
 
-- name: Install docker, kubeadm, kubelet, kubectl
+- name: Install docker, kubeadm, etc.
   yum:
     name:
       - docker
-      - kubeadm
-      - kubelet
-      - kubectl
+      - kubeadm-{{ kubernetes_version }}
+      - kubelet-{{ kubernetes_version }}
+      - kubectl-{{ kubernetes_version }}
+      - libselinux-python
+      #- yum-plugin-versionlock
     state: present
     enablerepo: kubernetes-offline
     disablerepo: "*"

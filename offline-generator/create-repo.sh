@@ -31,8 +31,8 @@ mkdir -p cache
 
 # download docker (newest version only)
 RT="repotrack -a x86_64 -p cache"
-echo "==> Downloading docker / kubeadms"
-$RT docker audit kubeadm-$K8S_VERSION || (echo "Download error" && exit 1)
+echo "==> Downloading docker, kubeadm, etc"
+$RT docker audit kubeadm-$K8S_VERSION libselinux-python yum-plugin-versionlock || (echo "Download error" && exit 1)
 
 echo "==> Downloading kubectl"
 $RT kubectl-$K8S_VERSION || (echo "Download error" && exit 1)
@@ -43,6 +43,9 @@ echo "==> Downloading kubelet (all versions)"
 $RT -n kubelet || (echo "Download error" && exit 1)
 
 # create rpms dir
+if [ -e rpms ]; then
+    /bin/rm -rf rpms
+fi
 mkdir -p rpms
 /bin/cp cache/*.rpm rpms/
 /bin/rm rpms/*.i686.rpm

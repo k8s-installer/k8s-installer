@@ -7,6 +7,7 @@
   copy:
     src: kubernetes.repo
     dest: /etc/yum.repos.d/kubernetes.repo
+  when: not offline_install
 
 - name: Install kubelet / kubectl / kubeadm
   yum:
@@ -27,3 +28,4 @@
 
 - name: Pull images
   command: kubeadm config images pull
+  when: not offline_install
