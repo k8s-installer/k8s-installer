@@ -1,4 +1,6 @@
 config.sh
+kubeadm-config.yaml
+
 *.tar.gz
 images/
 offline-files/
