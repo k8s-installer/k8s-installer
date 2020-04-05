@@ -11,6 +11,11 @@
   shell: /etc/kubernetes/join-as-master.sh
   become: yes
 
+- name: create ~/.kube
+  file:
+    path: .kube/
+    state: directory
+
 - name: copy admin.conf to ~/.kube/config
   copy:
     src: /etc/kubernetes/admin.conf
