@@ -17,9 +17,17 @@
     remote_src: true
   become: yes
 
-- name: Install calico cni plugin (online mode)
-  shell: kubectl apply -f {{ calico_manifest_url }}
-  when: not offline_install
+- when: not offline_install
+  block:
+    - name: Install calico cni plugin (online mode)
+      shell: curl -L {{ calico_manifest_url }} > ./calico.yaml
+      environment:
+        http_proxy: "{{ setproxy_url }}"
+        https_proxy: "{{ setproxy_url }}"
+        no_proxy: "{{ setproxy_noproxy }}"
+
+    - name: Install calico cni plugin (online mode)
+      shell: kubectl apply -f ./calico.yaml
 
 - name: Install calico cni plugin (offline mode)
   shell: kubectl apply -f /opt/kubernetes-offline/calico.yaml
