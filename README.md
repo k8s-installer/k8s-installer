@@ -1,6 +1,14 @@
-# Kubernetes offline installer
+# Kubernetes installer
 
-For RHEL7 / CentOS 7, see rhel7/README.md.
+Kubernetes installer for RHEL7 / CentOS 7, support offline installation.
+
+## Download offline packages
+
+see offline-generator/README.md
+
+## Install kubernetes and kubeadm
+
+see installer/README.md
 
 ## License
 

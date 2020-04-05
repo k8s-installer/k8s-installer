@@ -1,3 +1,6 @@
+*.rpm
+*.tar.gz
 *~
 
+.vagrant/
 .idea/
