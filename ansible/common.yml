@@ -3,6 +3,7 @@
 
   roles:
     - offline
+    - setproxy
     - common
     - docker
     - k8s-packages

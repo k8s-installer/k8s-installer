@@ -10,3 +10,7 @@ load_balancer_dns: 10.240.0.40
 
 # Pod CIDR
 pod_subnet: 192.168.0.0/16
+
+# Proxy
+#setproxy_url: http://proxy.example.com:8080
+#setporxy_noproxy: 127.0.0.1,localhost

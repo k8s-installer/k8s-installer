@@ -1,0 +1,5 @@
+# Proxy URL
+setproxy_url: ""
+#setproxy_url: http://proxy.example.com:8080
+
+setproxy_noproxy: "127.0.0.1,localhost"
