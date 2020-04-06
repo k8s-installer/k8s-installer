@@ -29,6 +29,16 @@
         - 30000-32767/tcp
       when: is_worker
 
+    - name: Allow firewall for calico
+      firewalld:
+        port: "{{ item }}"
+        permanent: yes
+        state: enabled
+        immediate: yes
+      with_items:
+        - 179/tcp  # BGP port
+        #- 4789/udp # VXLAN
+
 - service:
     name: firewalld
     enabled: false
