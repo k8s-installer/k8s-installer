@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 22, host: 2322, id: "ssh"
   config.ssh.insert_key = false
 
-  config.vm.synced_folder ".", "/home/vagrant/kubeadm-offline", owner: "vagrant", group: "vagrant"
+  config.vm.synced_folder ".", "/home/vagrant/k8s-installer", owner: "vagrant", group: "vagrant"
 
   config.vm.provider "virtualbox" do |vb|
     vb.cpus = 2

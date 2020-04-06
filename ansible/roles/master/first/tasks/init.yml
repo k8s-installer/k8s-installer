@@ -1,7 +1,25 @@
 - name: Execute kubeadm init
   shell: kubeadm init --config /etc/kubernetes/kubeadm-config.yml
   become: yes
+  ignore_errors: yes
   register: kubeadm_init
+  environment:
+    http_proxy: "{{ setproxy_url }}"
+    https_proxy: "{{ setproxy_url }}"
+    no_proxy: "{{ setproxy_noproxy }}"
+
+- when: kubeadm_init|failed
+  block:
+    - name: stderr
+      debug:
+        var: kubeadm_init.stderr
+
+    - name: stdout
+      debug:
+        var: kubeadm_init.stdout_lines
+
+    - fail:
+        msg: kubeadm init failed
 
 - name: create ~/.kube
   file:
