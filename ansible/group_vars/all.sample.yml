@@ -5,12 +5,16 @@ offline_install: no
 # kubernetes version (kubeadm, kubelet, kubectl)
 kubernetes_version: 1.18.0-0
 
-# Master DNS or IP (Load balancer for HA)
+# Master node FQDN or IP
+# (use load balancer for HA cluster)
 master_dns: 10.240.0.40
 
 # Pod CIDR
 pod_subnet: 192.168.0.0/16
 
+# Firewall
+#firewall_enabled: yes
+
 # Proxy
 #setproxy_url: http://proxy.example.com:8080
-#setporxy_noproxy: 127.0.0.1,localhost
+#setporxy_noproxy: 127.0.0.1,localhost,{{ master_dns }}

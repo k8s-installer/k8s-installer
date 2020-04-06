@@ -1,2 +1,4 @@
+firewall_enabled: yes
+
 is_master: no
 is_worker: no
