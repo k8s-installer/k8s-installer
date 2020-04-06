@@ -4,6 +4,7 @@
   roles:
     - offline
     - setproxy
+    - firewall
     - common
     - docker
     - k8s-packages

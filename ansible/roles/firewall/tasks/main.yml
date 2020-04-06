@@ -1,0 +1,20 @@
+- name: Allow firewall for master
+  firewalld:
+    port: "{{ item }}"
+    permanent: yes
+    state: enabled
+  with_items:
+    - 6443/tcp
+    - 2379-2380/tcp
+    - 10250-10252/tcp
+  when: is_master
+
+- name: Allow firewall for worker
+  firewalld:
+    port: "{{ item }}"
+    permanent: yes
+    state: enabled
+  with_items:
+    - 10250/tcp
+    - 30000-32767/tcp
+  when: is_worker
