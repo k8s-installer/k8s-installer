@@ -3,7 +3,7 @@
     - name: Set proxy in yum.conf
       lineinfile:
         path: /etc/yum.conf
-        line: "proxy={{ proxy_url }}"
+        line: "proxy={{ setproxy_url }}"
         regexp: "^proxy="
 
     - name: Create /etc/systemd/system/docker.service.d
