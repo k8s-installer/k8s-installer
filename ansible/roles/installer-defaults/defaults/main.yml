@@ -1,6 +1,4 @@
 ---
-### See roles/installer-defaults/main.yml for default values
-
 ## Offline install mode
 offline_install: no
 
@@ -9,14 +7,18 @@ kubernetes_version: 1.18.0-0
 
 ## Master node FQDN or IP
 ## (use load balancer for HA cluster)
-master_dns: 10.240.0.40
+master_dns: 127.0.0.1
+master_port: 6443
 
 # Pod CIDR
 pod_subnet: 192.168.0.0/16
 
 # Firewall
-#firewall_enabled: yes
+firewall_enabled: yes
 
 # Proxy
-#proxy_url: http://proxy.example.com:8080
-#porxy_noproxy: 127.0.0.1,localhost,{{ master_dns }}
+proxy_url: ""
+porxy_noproxy: "127.0.0.1,localhost,{{ master_dns }}"
+
+is_master: no
+is_worker: no

@@ -1,13 +1,13 @@
-calico_version: v3.8
-
-calico_manifest_url: "https://docs.projectcalico.org/{{ calico_version }}/manifests/calico.yaml"
-
-# Pod CIDR
-pod_subnet: 192.168.0.0/16
-
 # Master IP/DNS (Load balancer for HA)
 master_dns: 127.0.0.1
 master_port: 6443
 
-proxy_url: ""
-proxy_noproxy: ""
+# Pod CIDR
+pod_subnet: 192.168.0.0/16
+
+# Calico version
+calico_version: v3.8
+
+# Calico manifest url
+calico_manifest_url: "https://docs.projectcalico.org/{{ calico_version }}/manifests/calico.yaml"
+

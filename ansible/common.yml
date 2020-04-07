@@ -2,6 +2,7 @@
   become: yes
 
   roles:
+    - installer-defaults
     - offline
     - setproxy
     - firewall
