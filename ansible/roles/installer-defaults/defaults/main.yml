@@ -5,10 +5,13 @@ offline_install: no
 ## kubernetes version (kubeadm, kubelet, kubectl)
 kubernetes_version: 1.18.0-0
 
-## Master node FQDN or IP
-## (use load balancer for HA cluster)
-master_dns: 127.0.0.1
-master_port: 6443
+## External load balancer address and port.
+#lb_apiserver_address: 1.2.3.4
+lb_apiserver_port: 6443
+
+## Advertise address of kube-apiserver on each master nodes.
+## (should be defined as host vars)
+advertise_address: "{{ ansible_default_ipv4.address | default(ansible_all_ipv4_addresses[0]) }}"
 
 # Pod CIDR
 pod_subnet: 192.168.0.0/16
@@ -18,7 +21,7 @@ firewall_enabled: yes
 
 # Proxy
 proxy_url: ""
-porxy_noproxy: "127.0.0.1,localhost,{{ master_dns }}"
+proxy_noproxy: "127.0.0.1,localhost,{{ lb_apiserver_address }}"
 
 is_master: no
 is_worker: no

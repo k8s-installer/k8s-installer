@@ -7,9 +7,8 @@ offline_install: no
 ## kubernetes version (kubeadm, kubelet, kubectl)
 kubernetes_version: 1.18.0-0
 
-## Master node FQDN or IP
-## (use load balancer for HA cluster)
-master_dns: 10.240.0.40
+## External load balancer address.
+lb_apiserver_address: 10.240.0.40   # lb defined in Vagrantfile
 
 # Pod CIDR
 pod_subnet: 192.168.0.0/16
@@ -18,5 +17,5 @@ pod_subnet: 192.168.0.0/16
 #firewall_enabled: yes
 
 # Proxy
-#proxy_url: http://proxy.example.com:8080
-#porxy_noproxy: 127.0.0.1,localhost,{{ master_dns }}
+#proxy_url: ""
+#porxy_noproxy: "127.0.0.1,localhost,{{ lb_apiserver_address }}"

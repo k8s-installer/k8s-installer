@@ -1,24 +1,12 @@
-#apiVersion: kubeadm.k8s.io/v1beta2
-#kind: InitConfiguration
-#bootstrapTokens:
-#  - groups:
-#      - system:bootstrappers:kubeadm:default-node-token
-#    token: abcdef.0123456789abcdef
-#    ttl: 24h0m0s
-#    usages:
-#      - signing
-#      - authentication
-#localAPIEndpoint:
-#  advertiseAddress: 1.2.3.4
-#  bindPort: 6443
-#nodeRegistration:
-#  criSocket: /var/run/dockershim.sock
-#  name: hostname.example.com
-#  taints:
-#  - effect: NoSchedule
-#    key: node-role.kubernetes.io/master
-#---
+apiVersion: kubeadm.k8s.io/v1beta2
+kind: InitConfiguration
+{% if advertise_address is defined %}
+localAPIEndpoint:
+  advertiseAddress: {{ advertise_address }}
+  bindPort: 6443
+{% endif %}
 
+---
 apiVersion: kubeadm.k8s.io/v1beta2
 kind: ClusterConfiguration
 kubernetesVersion: stable
@@ -28,12 +16,16 @@ kubernetesVersion: stable
 
 apiServer:
   certSANs:
-    - "{{ master_dns }}"
+{% if lb_apiserver_address is defined %}
+    - "{{ lb_apiserver_address }}"
+{% endif %}
     - localhost
     - 127.0.0.1
   #timeoutForControlPlane: 4m0s
 
-controlPlaneEndpoint: "{{ master_dns }}:{{ master_port }}"
+{% if lb_apiserver_address is defined %}
+controlPlaneEndpoint: "{{ lb_apiserver_address }}:{{ lb_apiserver_port }}"
+{% endif %}
 
 networking:
   dnsDomain: cluster.local

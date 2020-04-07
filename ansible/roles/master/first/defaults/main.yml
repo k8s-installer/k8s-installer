@@ -1,6 +1,6 @@
 # Master IP/DNS (Load balancer for HA)
-master_dns: 127.0.0.1
-master_port: 6443
+lb_apiserver_address: 127.0.0.1
+lb_apiserver_port: 6443
 
 # Pod CIDR
 pod_subnet: 192.168.0.0/16
