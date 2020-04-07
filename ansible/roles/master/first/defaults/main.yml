@@ -5,8 +5,9 @@ calico_manifest_url: "https://docs.projectcalico.org/{{ calico_version }}/manife
 # Pod CIDR
 pod_subnet: 192.168.0.0/16
 
-# Load balancer DNS
+# Master IP/DNS (Load balancer for HA)
 master_dns: 127.0.0.1
+master_port: 6443
 
 setproxy_url: ""
 setproxy_noproxy: ""

@@ -29,9 +29,11 @@ kubernetesVersion: stable
 apiServer:
   certSANs:
     - "{{ master_dns }}"
+    - localhost
+    - 127.0.0.1
   #timeoutForControlPlane: 4m0s
 
-controlPlaneEndpoint: "{{ master_dns }}"
+controlPlaneEndpoint: "{{ master_dns }}:{{ master_port }}"
 
 networking:
   dnsDomain: cluster.local
