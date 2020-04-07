@@ -37,6 +37,7 @@
 # install yum-plugin-versionlock (dirty hack...)
 - name: Install yum-plugin-versionlock
   shell: rpm -Uvh /opt/kubernetes-offline/rpms/yum-plugin-versionlock-*.rpm
+  ignore_errors: true
 
 - name: Enable docker service
   service:
