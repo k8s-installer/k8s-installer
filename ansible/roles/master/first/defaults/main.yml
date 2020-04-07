@@ -9,5 +9,5 @@ pod_subnet: 192.168.0.0/16
 master_dns: 127.0.0.1
 master_port: 6443
 
-setproxy_url: ""
-setproxy_noproxy: ""
+proxy_url: ""
+proxy_noproxy: ""

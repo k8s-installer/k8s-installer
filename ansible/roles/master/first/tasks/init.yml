@@ -4,9 +4,9 @@
   ignore_errors: yes
   register: kubeadm_init
   #environment:
-  #  http_proxy: "{{ setproxy_url }}"
-  #  https_proxy: "{{ setproxy_url }}"
-  #  no_proxy: "{{ setproxy_noproxy }}"
+  #  http_proxy: "{{ proxy_url }}"
+  #  https_proxy: "{{ proxy_url }}"
+  #  no_proxy: "{{ proxy_noproxy }}"
 
 - when: kubeadm_init|failed
   block:
@@ -40,9 +40,9 @@
     - name: Install calico cni plugin (online mode)
       shell: curl -L {{ calico_manifest_url }} > ./calico.yaml
       environment:
-        http_proxy: "{{ setproxy_url }}"
-        https_proxy: "{{ setproxy_url }}"
-        no_proxy: "{{ setproxy_noproxy }}"
+        http_proxy: "{{ proxy_url }}"
+        https_proxy: "{{ proxy_url }}"
+        no_proxy: "{{ proxy_noproxy }}"
 
     - name: Install calico cni plugin (online mode)
       shell: kubectl apply -f ./calico.yaml

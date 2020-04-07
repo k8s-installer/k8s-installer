@@ -37,7 +37,7 @@ group_vars/all.sample.yml を group_vars/all.yml にコピーし、適宜編集�
 * master_dns: マスタノードのDNS/IPアドレス (HA構成の場合はロードバランサ) を設定してください。
 * offline_install: オフラインインストールをする場合は yes に設定してください。
     * 予め k8s-offline-files.tar.gz を本ディレクトリで展開しておく必要があります。
-* Internet 接続にプロキシを経由する必要がある場合は、setproxy_url, setproxy_noproxy を設定してください。    
+* Internet 接続にプロキシを経由する必要がある場合は、proxy_url, proxy_noproxy を設定してください。    
 
 ## インストール
 

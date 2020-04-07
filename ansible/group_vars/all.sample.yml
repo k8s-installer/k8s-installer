@@ -16,5 +16,5 @@ pod_subnet: 192.168.0.0/16
 #firewall_enabled: yes
 
 # Proxy
-#setproxy_url: http://proxy.example.com:8080
-#setporxy_noproxy: 127.0.0.1,localhost,{{ master_dns }}
+#proxy_url: http://proxy.example.com:8080
+#porxy_noproxy: 127.0.0.1,localhost,{{ master_dns }}
