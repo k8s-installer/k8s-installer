@@ -11,9 +11,12 @@ POD_NETWORK_CIDR=192.168.0.0/16
 #PROXY_URL=http://proxy.example.com:8080
 #NO_PROXY=localhost,127.0.0.1
 
+# Firewall config, set no to disable firewalld.
+#ENABLE_FIREWALLD=yes
+
 ## For HA cluster config
 
 # load balancer DNS or IP
 #LOAD_BALANCER_DNS=
 # load balancer PORT
-#LOAD_BALANCER_PROT=6443
+#LOAD_BALANCER_PORT=6443
