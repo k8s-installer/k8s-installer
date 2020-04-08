@@ -47,6 +47,7 @@ yum install -y --disablerepo="*" --enablerepo=kubernetes-offline \
     kubeadm-$K8S_VERSION \
     kubelet-$K8S_VERSION \
     kubectl-$K8S_VERSION
+systemctl enable --now kubelet
 
 # Load images
 echo "==> Extracting container images"
