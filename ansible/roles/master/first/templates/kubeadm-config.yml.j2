@@ -1,10 +1,8 @@
 apiVersion: kubeadm.k8s.io/v1beta2
 kind: InitConfiguration
-{% if advertise_address is defined %}
 localAPIEndpoint:
   advertiseAddress: {{ advertise_address }}
   bindPort: 6443
-{% endif %}
 
 ---
 apiVersion: kubeadm.k8s.io/v1beta2
@@ -16,16 +14,12 @@ kubernetesVersion: stable
 
 apiServer:
   certSANs:
-{% if lb_apiserver_address is defined %}
     - "{{ lb_apiserver_address }}"
-{% endif %}
     - localhost
     - 127.0.0.1
-  #timeoutForControlPlane: 4m0s
+  timeoutForControlPlane: 4m0s
 
-{% if lb_apiserver_address is defined %}
 controlPlaneEndpoint: "{{ lb_apiserver_address }}:{{ lb_apiserver_port }}"
-{% endif %}
 
 networking:
   dnsDomain: cluster.local
