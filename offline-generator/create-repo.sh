@@ -15,11 +15,11 @@ fi
 # install tools
 if ! type createrepo >/dev/null 2>&1; then
     echo "==> Install createrepo"
-    yum install -y createrepo
+    yum install -y createrepo || exit 1
 fi
 if ! type repotrack >/dev/null 2>&1; then
     echo "==> Install yum-utils"
-    yum install -y yum-utils
+    yum install -y yum-utils || exit 1
 fi
 
 # download rpms
@@ -44,7 +44,7 @@ $RT -n kubelet || (echo "Download error" && exit 1)
 
 # create rpms dir
 if [ -e rpms ]; then
-    /bin/rm -rf rpms
+    /bin/rm -rf rpms || exit 1
 fi
 mkdir -p rpms
 /bin/cp cache/*.rpm rpms/
@@ -53,7 +53,7 @@ mkdir -p rpms
 /bin/rm rpms/*kubelet*
 /bin/cp cache/*kubelet-$K8S_VERSION* rpms/
 
-createrepo rpms
+createrepo rpms || exit 1
 
 echo "==> Create repo tarball"
 tar cvzf offline-files/k8s-offline-repo.tar.gz rpms config.sh
