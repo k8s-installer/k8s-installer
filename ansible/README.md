@@ -32,7 +32,7 @@ hosts ファイルにインストール先のマシンの情報を設定して�
 
 ### 変数設定
 
-group_vars/all.sample.yml を group_vars/all.yml にコピーし、適宜編集してください。
+group_vars/sample/*.yml ファイルを group_vars/all/ ディレクトリにコピーし、適宜編集してください。
 
 * lb_apiserver_address: マスタノードのDNS/IPアドレス (HA構成の場合はロードバランサ) を設定してください。
 * offline_install: オフラインインストールをする場合は yes に設定してください。
