@@ -11,3 +11,11 @@
   roles:
     - installer-defaults
     - upgrade/upgrade-master
+
+- hosts: master_secondary
+  become: yes
+  serial: 1
+
+  roles:
+    - installer-defaults
+    - upgrade/upgrade-master
