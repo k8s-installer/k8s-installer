@@ -3,4 +3,4 @@
 
   roles:
     - installer-defaults
-    - update-cluster/update-kubeadm
+    - upgrade/update-kubeadm

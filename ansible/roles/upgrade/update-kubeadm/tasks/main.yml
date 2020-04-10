@@ -1,0 +1,11 @@
+- name: Unlock yum versions
+  shell: yum versionlock remove {{ item }}
+  with_items:
+    - kubeadm
+    - kubelet
+    - kubectl
+
+- name: Update kubeadm
+  yum:
+    name: kubeadm-{{ kubernetes_version }}
+    state: present
