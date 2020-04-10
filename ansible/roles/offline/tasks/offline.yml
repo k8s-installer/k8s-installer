@@ -25,9 +25,9 @@
   yum:
     name:
       - docker
-      - kubeadm-{{ kubernetes_version }}
-      - kubelet-{{ kubernetes_version }}
-      - kubectl-{{ kubernetes_version }}
+      - kubeadm-{{ kubeadm_version }}
+      - kubelet-{{ kubeadm_version }}
+      - kubectl-{{ kubeadm_version }}
       - libselinux-python
       #- yum-plugin-versionlock
     state: present

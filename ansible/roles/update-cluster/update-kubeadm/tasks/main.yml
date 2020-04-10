@@ -1,4 +1,4 @@
 - name: Update kubeadm
   yum:
-    name: kubeadm-{{ kubernetes_version }}
+    name: kubeadm-{{ kubeadm_version }}
     state: present
