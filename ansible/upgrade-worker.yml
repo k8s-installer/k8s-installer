@@ -1,0 +1,9 @@
+- hosts: worker
+  become: yes
+  serial: "20%"
+
+  roles:
+    - installer-defaults
+    - upgrade/update-kubeadm
+    - upgrade/upgrade-worker
+    - upgrade/upgrade-kubelet

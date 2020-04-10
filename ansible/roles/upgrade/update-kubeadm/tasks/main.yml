@@ -1,8 +1,11 @@
 - name: Unlock yum versions
-  shell: yum versionlock delete kubeadm kubelet kubectl
+  shell: yum versionlock delete kubeadm
   ignore_errors: yes
 
 - name: Update kubeadm
   yum:
     name: kubeadm-{{ kubeadm_version }}
     state: present
+
+- name: Lock yum versions
+  shell: yum versionlock add kubeadm

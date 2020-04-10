@@ -1,0 +1,28 @@
+- hosts: master
+  become: yes
+
+  roles:
+    - installer-defaults
+    - upgrade/update-kubeadm
+
+- hosts: master_first
+  become: yes
+
+  roles:
+    - installer-defaults
+    - upgrade/upgrade-master
+
+- hosts: master_secondary
+  become: yes
+  serial: 1
+
+  roles:
+    - installer-defaults
+    - upgrade/upgrade-master
+
+- hosts: master
+  become: yes
+
+  roles:
+    - installer-defaults
+    - upgrade/upgrade-kubelet

@@ -1,21 +1,2 @@
-- hosts: all
-  become: yes
-
-  roles:
-    - installer-defaults
-    - upgrade/update-kubeadm
-
-- hosts: master_first
-  become: yes
-
-  roles:
-    - installer-defaults
-    - upgrade/upgrade-master
-
-- hosts: master_secondary
-  become: yes
-  serial: 1
-
-  roles:
-    - installer-defaults
-    - upgrade/upgrade-master
+- import_playbook: upgrade-master.yml
+- import_playbook: upgrade-worker.yml

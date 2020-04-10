@@ -1,0 +1,12 @@
+- name: Drain node
+  shell: kubectl drain {{ inventory_hostname }} --force --ignore-daemonsets
+  delegate_to: "{{ groups['master_first'][0] }}"
+  become: no
+
+- name: Upgrade worker to {{ kube_version }}
+  shell: kubeadm upgrade node
+
+- name: Uncordon node
+  shell: kubectl uncordon {{ inventory_hostname }}
+  delegate_to: "{{ groups['master_first'][0] }}"
+  become: no
