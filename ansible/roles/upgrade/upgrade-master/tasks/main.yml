@@ -1,0 +1,25 @@
+- name: Drain node
+  shell: kubectl drain {{ inventory_hostname }} --kubeconfig /etc/kubernetes/admin.conf --force --ignore-daemonsets
+
+- name: Execute kubeadm upgrade plan
+  shell: kubeadm upgrade plan
+  register: kubeadm_upgrade
+  #environment:
+  #  http_proxy: "{{ proxy_url }}"
+  #  https_proxy: "{{ proxy_url }}"
+  #  no_proxy: "{{ proxy_noproxy }}"
+
+- name: stdout
+  debug:
+    var: kubeadm_upgrade.stdout_lines
+
+- name: Upgrade first master
+  shell: kubeadm upgrade apply {{ kubernetes_version }}
+  when: inventory_hostname in groups["master_first"]
+
+- name: Upgrade secondary masters
+  shell: kubeadm upgrade node
+  when: inventory_hostname in groups["master_secondary"]
+
+- name: Uncordon node
+  shell: kubectl uncordon {{ inventory_hostname }} --kubeconfig /etc/kubernetes/admin.conf

@@ -4,3 +4,10 @@
   roles:
     - installer-defaults
     - upgrade/update-kubeadm
+
+- hosts: master_first
+  become: yes
+
+  roles:
+    - installer-defaults
+    - upgrade/upgrade-master
