@@ -30,6 +30,6 @@
     enabled: true
     state: started
 
-- name: Pull images
-  command: kubeadm config images pull
-  when: not offline_install
+#- name: Pull images
+#  command: kubeadm config images pull
+#  when: not offline_install
