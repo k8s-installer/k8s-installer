@@ -11,3 +11,13 @@
 * bootstrap token を作成し、join コマンドを取得
 * Kubernetes PKI ファイル類を収集し masters.tar.gz を作成
 * masters.tar.gz と join スクリプトを fetch
+
+## Variables
+
+* kube_version: Kubernetes version
+* advertise_address: API server advertise address
+* lb_apiserver_address: Load balancer address
+* lb_apiserver_port: Load balancer port
+* pod_subnet: Pod Subnet CIDR
+
+
