@@ -5,21 +5,20 @@
     owner: root
   become: yes
 
-- name: Execute kubeadm join
-  shell: /etc/kubernetes/join.sh --control-plane --apiserver-advertise-address {{ advertise_address }}
-  become: yes
-  ignore_errors: yes
-  register: kubeadm_join
+- block:
+    - name: Execute kubeadm join
+      shell: /etc/kubernetes/join.sh --control-plane --apiserver-advertise-address {{ advertise_address }} -v 5
+      become: yes
+      register: kubeadm_join
 
-- when: kubeadm_join is failed
-  block:
-    - name: stderr
-      debug:
-        var: kubeadm_join.stderr_lines
-
+  rescue:
     - name: stdout
       debug:
         var: kubeadm_join.stdout_lines
+
+    - name: stderr
+      debug:
+        var: kubeadm_join.stderr_lines
 
     - fail:
         msg: kubeadm join failed

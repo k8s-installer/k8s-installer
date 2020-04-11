@@ -1,2 +1,13 @@
-- name: Upgrade worker to {{ kube_version }}
-  shell: kubeadm upgrade node
+- block:
+    - name: Upgrade worker to {{ kube_version }}
+      shell: kubeadm upgrade node -v 5
+      register: kubeadm_upgrade
+
+  always:
+    - name: stdout
+      debug:
+        var: kubeadm_upgrade.stdout_lines
+
+    - name: stderr
+      debug:
+        var: kubeadm_upgrade.stderr_lines

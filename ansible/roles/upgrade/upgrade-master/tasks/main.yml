@@ -1,34 +1,15 @@
 - when: inventory_hostname in groups["master_first"]
   block:
-    - name: Execute kubeadm upgrade plan to {{ kube_version }}
-      shell: kubeadm upgrade plan {{ kube_version }}
-      register: kubeadm_upgrade
-      ignore_errors: yes
-      #environment:
-      #  http_proxy: "{{ proxy_url }}"
-      #  https_proxy: "{{ proxy_url }}"
-      #  no_proxy: "{{ proxy_noproxy }}"
+    - block:
+        - name: Execute kubeadm upgrade plan to {{ kube_version }}
+          shell: kubeadm upgrade plan {{ kube_version }}
+          register: kubeadm_upgrade
+          #environment:
+          #  http_proxy: "{{ proxy_url }}"
+          #  https_proxy: "{{ proxy_url }}"
+          #  no_proxy: "{{ proxy_noproxy }}"
 
-    - name: stdout
-      debug:
-        var: kubeadm_upgrade.stdout_lines
-
-    - name: stderr
-      debug:
-        var: kubeadm_upgrade.stderr_lines
-
-    - fail:
-        msg: kubeadm upgrade plan failed
-      when: kubeadm_upgrade is failed
-
-
-    - name: Upgrade first master to {{ kube_version }}
-      shell: kubeadm upgrade apply {{ kube_version }} -y
-      ignore_errors: yes
-      register: kubeadm_upgrade
-
-    - when: kubeadm_upgrade is failed
-      block:
+      always:
         - name: stdout
           debug:
             var: kubeadm_upgrade.stdout_lines
@@ -37,8 +18,19 @@
           debug:
             var: kubeadm_upgrade.stderr_lines
 
-        - fail:
-            msg: kubeadm upgrade failed
+    - block:
+        - name: Upgrade first master to {{ kube_version }}
+          shell: kubeadm upgrade apply {{ kube_version }} -y -v 5
+          register: kubeadm_upgrade
+
+      always:
+        - name: stdout
+          debug:
+            var: kubeadm_upgrade.stdout_lines
+
+        - name: stderr
+          debug:
+            var: kubeadm_upgrade.stderr_lines
 
 - when: inventory_hostname in groups["master_secondary"]
   block:

@@ -1,21 +1,18 @@
-- name: Execute kubeadm init
-  shell: kubeadm init --config /etc/kubernetes/kubeadm-config.yml -v 5
-  become: yes
-  ignore_errors: yes
-  register: kubeadm_init
-  #environment:
-  #  http_proxy: "{{ proxy_url }}"
-  #  https_proxy: "{{ proxy_url }}"
-  #  no_proxy: "{{ proxy_noproxy }}"
+- block:
+    - name: Execute kubeadm init
+      shell: kubeadm init --config /etc/kubernetes/kubeadm-config.yml -v 5
+      become: yes
+      register: kubeadm_init
+      #environment:
+      #  http_proxy: "{{ proxy_url }}"
+      #  https_proxy: "{{ proxy_url }}"
+      #  no_proxy: "{{ proxy_noproxy }}"
 
-- name: stdout
-  debug:
-    var: kubeadm_init.stdout_lines
+  always:
+    - name: stdout
+      debug:
+        var: kubeadm_init.stdout_lines
 
-- name: stderr
-  debug:
-    var: kubeadm_init.stderr_lines
-
-- fail:
-    msg: kubeadm init failed
-  when: kubeadm_init is failed
+    - name: stderr
+      debug:
+        var: kubeadm_init.stderr_lines

@@ -4,14 +4,14 @@
     dest: .
     mode: 0700
 
-- name: Execute kubeadm join
-  shell: ./join.sh
-  become: yes
-  ignore_errors: yes
-  register: kubeadm_join
+- block:
+    - name: Execute kubeadm join
+      shell: ./join.sh -v 5
+      become: yes
+      ignore_errors: yes
+      register: kubeadm_join
 
-- when: kubeadm_join is failed
-  block:
+  rescue:
     - name: stderr
       debug:
         var: kubeadm_join.stderr_lines
