@@ -30,6 +30,10 @@
     enabled: true
     state: started
 
+- name: Install kubectl bash completion
+  shell: "kubectl completion bash >/etc/bash_completion.d/kubectl.sh"
+  ignore_errors: yes
+
 #- name: Pull images
 #  command: kubeadm config images pull
 #  when: not offline_install
