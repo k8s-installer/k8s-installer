@@ -1,5 +1,6 @@
 - hosts: master_secondary
   become: no
+  any_errors_fatal: true
 
   roles:
     - installer-defaults

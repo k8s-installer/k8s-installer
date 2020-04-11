@@ -1,5 +1,6 @@
 - hosts: master
   become: yes
+  any_errors_fatal: true
 
   roles:
     - installer-defaults
@@ -7,6 +8,7 @@
 
 - hosts: master_first
   become: yes
+  any_errors_fatal: true
 
   roles:
     - installer-defaults
@@ -16,6 +18,7 @@
 
 - hosts: master_secondary
   become: yes
+  any_errors_fatal: true
   serial: 1
 
   roles:
@@ -26,6 +29,7 @@
 
 - hosts: master
   become: yes
+  any_errors_fatal: true
 
   roles:
     - installer-defaults
