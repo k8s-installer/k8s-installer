@@ -16,7 +16,7 @@
   block:
     - name: stderr
       debug:
-        var: kubeadm_join.stderr
+        var: kubeadm_join.stderr_lines
 
     - name: stdout
       debug:
