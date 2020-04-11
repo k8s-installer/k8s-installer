@@ -8,9 +8,6 @@
 * kubeadm init を実行
 * ~/.kube/config を投入
 * calico plugin をインストール
-* bootstrap token を作成し、join コマンドを取得
-* Kubernetes PKI ファイル類を収集し masters.tar.gz を作成
-* masters.tar.gz と join スクリプトを fetch
 
 ## Variables
 
