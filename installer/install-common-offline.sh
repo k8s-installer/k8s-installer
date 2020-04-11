@@ -44,9 +44,9 @@ systemctl enable --now docker
 
 echo "==> Install kubeadm"
 yum install -y --disablerepo="*" --enablerepo=kubernetes-offline \
-    kubeadm-$K8S_VERSION \
-    kubelet-$K8S_VERSION \
-    kubectl-$K8S_VERSION
+    kubeadm-$KUBEADM_VERSION \
+    kubelet-$KUBEADM_VERSION \
+    kubectl-$KUBEADM_VERSION
 systemctl enable --now kubelet
 
 # Load images
