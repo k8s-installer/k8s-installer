@@ -2,7 +2,7 @@
   block:
     - block:
         - name: Execute kubeadm upgrade plan to {{ kube_version }}
-          shell: kubeadm upgrade plan {{ kube_version }}
+          shell: kubeadm upgrade plan v{{ kube_version }}
           register: kubeadm_upgrade
           #environment:
           #  http_proxy: "{{ proxy_url }}"
@@ -20,7 +20,7 @@
 
     - block:
         - name: Upgrade first master to {{ kube_version }}
-          shell: kubeadm upgrade apply {{ kube_version }} -y -v 5
+          shell: kubeadm upgrade apply v{{ kube_version }} -y -v 5
           register: kubeadm_upgrade
 
       always:
@@ -34,5 +34,5 @@
 
 - when: inventory_hostname in groups["master_secondary"]
   block:
-    - name: Upgrade secondary masters to {{ kube_version }}
+    - name: Upgrade secondary masters to v{{ kube_version }}
       shell: kubeadm upgrade node

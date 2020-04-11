@@ -1,5 +1,5 @@
 - block:
-    - name: Upgrade worker to {{ kube_version }}
+    - name: Upgrade worker to v{{ kube_version }}
       shell: kubeadm upgrade node -v 5
       register: kubeadm_upgrade
 

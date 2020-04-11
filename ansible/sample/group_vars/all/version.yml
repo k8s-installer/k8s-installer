@@ -1,8 +1,8 @@
 ## kubernetes version
-#kube_version: v1.18.1
+#kube_version: 1.18.1
 
 ## kubeadm version (RPM)
-#kubeadm_version: 1.18.1-0
+#kubeadm_version: "{{ kube_version }}-0"
 
 ## kubelet version (RPM)
 #kubelet_version: "{{ kubeadm_version }}"
