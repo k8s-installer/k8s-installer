@@ -1,10 +1,10 @@
-- name: Install / update docker
+- name: Install / update docker (online)
   yum:
     name: docker
     state: latest
   when: not offline_install
 
-- name: Install / update docker
+- name: Install / update docker (offline)
   yum:
     name:
       - docker

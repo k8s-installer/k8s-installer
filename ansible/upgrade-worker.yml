@@ -4,6 +4,8 @@
 
   roles:
     - installer-defaults
+    - offline
+    - docker
     - upgrade/update-kubeadm
     - upgrade/drain
     - upgrade/upgrade-worker
