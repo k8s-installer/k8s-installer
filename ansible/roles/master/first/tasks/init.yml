@@ -8,15 +8,14 @@
   #  https_proxy: "{{ proxy_url }}"
   #  no_proxy: "{{ proxy_noproxy }}"
 
-- when: kubeadm_init|failed
-  block:
-    - name: stderr
-      debug:
-        var: kubeadm_init.stderr
+- name: stderr
+  debug:
+    var: kubeadm_init.stderr
 
-    - name: stdout
-      debug:
-        var: kubeadm_init.stdout_lines
+- name: stdout
+  debug:
+    var: kubeadm_init.stdout_lines
 
-    - fail:
-        msg: kubeadm init failed
+- fail:
+    msg: kubeadm init failed
+  when: kubeadm_init|failed
