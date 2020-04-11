@@ -49,7 +49,6 @@ sample/group_vars/all/*.yml ファイルを inventory/group_vars/all/ ディレ�
 
 * common.yml: Docker/Kubeadm インストール、オフラインリポジトリ設定、Proxy設定など、全マシン共通のインストールが実行されます。
 * master-first.yml: 1台目のマスタノードへの Kubernetes デプロイが実行されます。
-* get-join-files.yml: ノードをクラスタに join するのに必要な bootstrap token、証明書ファイル類を取得します。
 * master-secondary.yml: 2台目以降のマスタノードへの Kubernetes デプロイが実行されます。
 * worker.yml: ワーカーノードへの Kubernetes デプロイが実行されます。
 

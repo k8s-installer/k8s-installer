@@ -5,3 +5,4 @@
   roles:
     - installer-defaults
     - master/first
+    - master/get-join-files
