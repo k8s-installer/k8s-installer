@@ -14,8 +14,7 @@ cd join-files
 # Generate token and get join command
 kubeadm token create --print-join-command > join.sh || exit 1
 
-cp join.sh join-as-master.sh
-sed -i  "s/^\(kubeadm join.*\)$/\1 --control-plane/" join-as-master.sh
+sed -i  's/^\(kubeadm join.*\)$/\1 $*/' join.sh
 chmod 755 *.sh
 
 mkdir -p pki/etcd

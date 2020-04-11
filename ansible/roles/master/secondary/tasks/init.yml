@@ -6,7 +6,7 @@
   become: yes
 
 - name: Execute kubeadm join
-  shell: /etc/kubernetes/join-as-master.sh
+  shell: /etc/kubernetes/join.sh --control-plane --apiserver-advertise-address {{ advertise_address }}
   become: yes
   ignore_errors: yes
   register: kubeadm_join
