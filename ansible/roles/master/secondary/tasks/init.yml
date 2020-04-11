@@ -10,6 +10,20 @@
 - name: Execute kubeadm join
   shell: /etc/kubernetes/join-as-master.sh
   become: yes
+  register: kubeadm_join
+
+- when: kubeadm_join|failed
+  block:
+    - name: stderr
+      debug:
+        var: kubeadm_join.stderr
+
+    - name: stdout
+      debug:
+        var: kubeadm_join.stdout_lines
+
+    - fail:
+        msg: kubeadm join failed
 
 - name: create ~/.kube
   file:

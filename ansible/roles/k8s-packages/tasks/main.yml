@@ -9,7 +9,7 @@
     dest: /etc/yum.repos.d/kubernetes.repo
   when: not offline_install
 
-- name: Lock kubelet / kubectl / kubeadm versions
+- name: Unlock kubelet / kubectl / kubeadm versions
   shell: yum versionlock delete kubelet kubectl kubeadm || exit 0
 
 - name: Install kubelet / kubectl / kubeadm
