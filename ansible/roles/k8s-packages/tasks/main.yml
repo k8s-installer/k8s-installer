@@ -10,8 +10,7 @@
   when: not offline_install
 
 - name: Lock kubelet / kubectl / kubeadm versions
-  shell: yum versionlock delete kubelet kubectl kubeadm
-  ignore_errors: yes
+  shell: yum versionlock delete kubelet kubectl kubeadm || exit 0
 
 - name: Install kubelet / kubectl / kubeadm
   yum:
