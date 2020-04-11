@@ -1,3 +1,8 @@
+- name: Clear /opt/kubernetes-offline dir
+  file:
+    path: /opt/kubernetes-offline
+    state: absent
+
 - name: Create /opt/kubernetes-offline dir
   file:
     path: /opt/kubernetes-offline
