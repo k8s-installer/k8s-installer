@@ -1,18 +1,17 @@
-- name: Copy join-files.tar.gz
-  copy:
-    src: ./files/join-files.tar.gz
-    dest: .
-
 - name: Extract join-files.tar.gz
-  shell: tar xvzf join-files.tar.gz -C /etc/kubernetes
+  unarchive:
+    src: ./files/join-files.tar.gz
+    dest: /etc/kubernetes
+    owner: root
   become: yes
 
 - name: Execute kubeadm join
   shell: /etc/kubernetes/join-as-master.sh
   become: yes
+  ignore_errors: yes
   register: kubeadm_join
 
-- when: kubeadm_join|failed
+- when: kubeadm_join is failed
   block:
     - name: stderr
       debug:

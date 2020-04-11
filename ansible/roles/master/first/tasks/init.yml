@@ -18,4 +18,4 @@
 
 - fail:
     msg: kubeadm init failed
-  when: kubeadm_init|failed
+  when: kubeadm_init is failed

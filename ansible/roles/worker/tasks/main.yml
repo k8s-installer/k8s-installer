@@ -7,3 +7,18 @@
 - name: Execute kubeadm join
   shell: ./join.sh
   become: yes
+  ignore_errors: yes
+  register: kubeadm_join
+
+- when: kubeadm_join is failed
+  block:
+    - name: stderr
+      debug:
+        var: kubeadm_join.stderr_lines
+
+    - name: stdout
+      debug:
+        var: kubeadm_join.stdout_lines
+
+    - fail:
+        msg: kubeadm join failed
