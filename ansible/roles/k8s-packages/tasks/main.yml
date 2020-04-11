@@ -1,26 +1,37 @@
-- name: Install yum-plugin-versionlock
-  yum:
-    name: yum-plugin-versionlock
-    state: present
-
 - name: Install kubernetes.repo
   copy:
     src: kubernetes.repo
     dest: /etc/yum.repos.d/kubernetes.repo
   when: not offline_install
 
-- name: Unlock kubelet / kubectl / kubeadm versions
+- name: Unlock kubeadm, kubelet, kubectl versions
   shell: yum versionlock delete kubelet kubectl kubeadm || exit 0
 
-- name: Install kubelet / kubectl / kubeadm
+- name: Install kubeadm / kubelet / kubectl ver {{ kubeadm_version }}, etc (online mode)
   yum:
     name:
+      - kubeadm-{{ kubeadm_version }}
       - kubelet-{{ kubeadm_version }}
       - kubectl-{{ kubeadm_version }}
-      - kubeadm-{{ kubeadm_version }}
+      - yum-plugin-versionlock
     state: present
+    allow_downgrade: yes
+  when: not offline_install
 
-- name: Lock kubelet / kubectl / kubeadm versions
+- name: Install kubeadm / kubelet / kubectl ver {{ kubeadm_version }}, etc (offline mode)
+  yum:
+    name:
+      - kubeadm-{{ kubeadm_version }}
+      - kubelet-{{ kubeadm_version }}
+      - kubectl-{{ kubeadm_version }}
+      - yum-plugin-versionlock
+    state: present
+    allow_downgrade: yes
+    enablerepo: kubernetes-offline
+    disablerepo: "*"
+  when: offline_install
+
+- name: Lock kubeadm, kubelet, kubectl versions.
   shell: yum versionlock add kubelet kubectl kubeadm
 
 - name: Enable / start kubelet

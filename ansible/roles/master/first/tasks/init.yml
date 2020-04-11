@@ -10,7 +10,7 @@
 
 - name: stderr
   debug:
-    var: kubeadm_init.stderr
+    var: kubeadm_init.stderr_lines
 
 - name: stdout
   debug:

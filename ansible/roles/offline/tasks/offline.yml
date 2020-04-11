@@ -26,23 +26,19 @@
     src: kubernetes-offline.repo
     dest: /etc/yum.repos.d/
 
-- name: Install docker, kubeadm, etc.
+- name: Install / update docker
   yum:
     name:
       - docker
-      - kubeadm-{{ kubeadm_version }}
-      - kubelet-{{ kubeadm_version }}
-      - kubectl-{{ kubeadm_version }}
       - libselinux-python
       #- yum-plugin-versionlock
-    state: present
+    state: latest
     enablerepo: kubernetes-offline
     disablerepo: "*"
 
 # install yum-plugin-versionlock (dirty hack...)
 - name: Install yum-plugin-versionlock
-  shell: rpm -Uvh /opt/kubernetes-offline/rpms/yum-plugin-versionlock-*.rpm
-  ignore_errors: true
+  shell: rpm -Uvh /opt/kubernetes-offline/rpms/yum-plugin-versionlock-*.rpm || exit 0
 
 - name: Enable docker service
   service:
