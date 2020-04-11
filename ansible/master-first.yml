@@ -5,4 +5,6 @@
   roles:
     - installer-defaults
     - master/first
+    - master/install-kubeconfig
+    - master/cni-plugin
     - master/get-join-files

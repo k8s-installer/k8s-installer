@@ -25,16 +25,3 @@
     - fail:
         msg: kubeadm join failed
 
-- name: create ~/.kube
-  file:
-    path: .kube/
-    state: directory
-
-- name: copy admin.conf to ~/.kube/config
-  copy:
-    src: /etc/kubernetes/admin.conf
-    dest: .kube/config
-    owner: "{{ ansible_user_id }}"
-    mode: 0700
-    remote_src: true
-  become: yes
