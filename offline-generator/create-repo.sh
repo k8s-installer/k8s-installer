@@ -32,10 +32,10 @@ mkdir -p cache
 # download docker (newest version only)
 RT="repotrack -a x86_64 -p cache"
 echo "==> Downloading docker, kubeadm, etc"
-$RT docker audit kubeadm-$K8S_VERSION libselinux-python yum-plugin-versionlock || (echo "Download error" && exit 1)
+$RT docker audit kubeadm-$KUBEADM_VERSION libselinux-python yum-plugin-versionlock || (echo "Download error" && exit 1)
 
 echo "==> Downloading kubectl"
-$RT kubectl-$K8S_VERSION || (echo "Download error" && exit 1)
+$RT kubectl-$KUBEADM_VERSION || (echo "Download error" && exit 1)
 
 # download all versions of kubelet, because repotrack can't download
 # specific version of kubelet...
@@ -51,7 +51,7 @@ mkdir -p rpms
 /bin/rm rpms/*.i686.rpm
 
 /bin/rm rpms/*kubelet*
-/bin/cp cache/*kubelet-$K8S_VERSION* rpms/
+/bin/cp cache/*kubelet-$KUBEADM_VERSION* rpms/
 
 createrepo rpms || exit 1
 

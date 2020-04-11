@@ -19,4 +19,4 @@ fi
 systemctl enable --now docker
 
 # install kubeadm (and docker)
-yum install -y kubeadm-$K8S_VERSION
+yum install -y kubeadm-$KUBEADM_VERSION
