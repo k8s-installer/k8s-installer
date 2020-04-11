@@ -1,0 +1,4 @@
+- name: Drain node
+  shell: kubectl drain {{ inventory_hostname }} --force --ignore-daemonsets
+  delegate_to: "{{ groups['master_first'][0] }}"
+  become: no

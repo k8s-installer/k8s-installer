@@ -10,7 +10,9 @@
 
   roles:
     - installer-defaults
+    - upgrade/drain
     - upgrade/upgrade-master
+    - upgrade/uncordon
 
 - hosts: master_secondary
   become: yes
@@ -18,7 +20,9 @@
 
   roles:
     - installer-defaults
+    - upgrade/drain
     - upgrade/upgrade-master
+    - upgrade/uncordon
 
 - hosts: master
   become: yes

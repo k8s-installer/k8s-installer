@@ -5,5 +5,7 @@
   roles:
     - installer-defaults
     - upgrade/update-kubeadm
+    - upgrade/drain
     - upgrade/upgrade-worker
+    - upgrade/uncordon
     - upgrade/upgrade-kubelet

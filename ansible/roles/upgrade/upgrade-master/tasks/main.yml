@@ -1,6 +1,3 @@
-- name: Drain node
-  shell: kubectl drain {{ inventory_hostname }} --kubeconfig /etc/kubernetes/admin.conf --force --ignore-daemonsets
-
 - when: inventory_hostname in groups["master_first"]
   block:
     - name: Execute kubeadm upgrade plan
@@ -21,6 +18,3 @@
 - name: Upgrade secondary masters to {{ kube_version }}
   shell: kubeadm upgrade node
   when: inventory_hostname in groups["master_secondary"]
-
-- name: Uncordon node
-  shell: kubectl uncordon {{ inventory_hostname }} --kubeconfig /etc/kubernetes/admin.conf
