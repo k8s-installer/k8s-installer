@@ -31,5 +31,3 @@ done
 
 echo "==> Create images tarball"
 tar cvzf offline-files/k8s-images.tar.gz images/
-
-

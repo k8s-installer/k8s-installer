@@ -31,16 +31,20 @@ mkdir -p cache
 
 # download docker (newest version only)
 RT="repotrack -a x86_64 -p cache"
+YD="yumdownloader --destdir=cache -y"
+
 echo "==> Downloading docker, kubeadm, etc"
 $RT docker audit kubeadm-$KUBEADM_VERSION libselinux-python yum-plugin-versionlock || (echo "Download error" && exit 1)
 
 echo "==> Downloading kubectl"
 $RT kubectl-$KUBEADM_VERSION || (echo "Download error" && exit 1)
 
-# download all versions of kubelet, because repotrack can't download
-# specific version of kubelet...
-echo "==> Downloading kubelet (all versions)"
-$RT -n kubelet || (echo "Download error" && exit 1)
+echo "==> Downloading kubelet"
+#$RT -n kubelet || (echo "Download error" && exit 1)  # download all versions with '-n'
+$RT kubelet-$KUBEADM_VERSION || (echo "Download error" && exit 1)
+
+# download with yumdownloader, because repotrack can't download specific version of kubelet...
+$YD kubelet-$KUBEADM_VERSION || (echo "Download error" && exit 1)
 
 # create rpms dir
 if [ -e rpms ]; then
@@ -50,8 +54,8 @@ mkdir -p rpms
 /bin/cp cache/*.rpm rpms/
 /bin/rm rpms/*.i686.rpm
 
-/bin/rm rpms/*kubelet*
-/bin/cp cache/*kubelet-$KUBEADM_VERSION* rpms/
+#/bin/rm rpms/*kubelet*
+#/bin/cp cache/*kubelet-$KUBEADM_VERSION* rpms/
 
 createrepo rpms || exit 1
 
