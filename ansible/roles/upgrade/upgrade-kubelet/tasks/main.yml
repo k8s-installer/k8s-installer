@@ -18,4 +18,6 @@
     state: restarted
 
 - name: Lock yum versions
-  shell: yum versionlock add kubelet kubectl
+  shell:
+    cmd: yum versionlock add kubelet kubectl
+    warn: false

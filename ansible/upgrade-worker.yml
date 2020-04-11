@@ -1,13 +1,25 @@
 - hosts: worker
   become: yes
-  serial: "20%"
 
   roles:
     - installer-defaults
     - offline
     - docker
     - upgrade/update-kubeadm
+
+- hosts: worker
+  become: yes
+  serial: "20%"
+
+  roles:
+    - installer-defaults
     - upgrade/drain
     - upgrade/upgrade-worker
     - upgrade/uncordon
+
+- hosts: worker
+  become: yes
+
+  roles:
+    - installer-defaults
     - upgrade/upgrade-kubelet

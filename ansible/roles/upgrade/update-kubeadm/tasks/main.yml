@@ -11,4 +11,6 @@
     disablerepo: "{{ yum_disablerepo }}"
 
 - name: Lock yum versions
-  shell: yum versionlock add kubeadm
+  shell:
+    cmd: yum versionlock add kubeadm
+    warn: false
