@@ -58,7 +58,7 @@ sample/group_vars/all/*.yml ファイルを inventory/group_vars/all/ ディレ�
 inventory/group_vars/all/version.yml の以下の値を変更してください。
 
 * kube_version: Kubernetes のバージョン
-* kubeadm_version: kubeadm, kubelet, kubectl のバージョン (RPMバージョン)
+* kubeadm_version, kubelet_version, kubectl_version: kubeadm, kubelet, kubectl のバージョン (RPMバージョン)
 
 注: バージョンは一度に 0.1 ずつしか上げることができませんので、注意してください。
 

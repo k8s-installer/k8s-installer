@@ -9,12 +9,12 @@
     cmd: yum versionlock delete kubelet kubectl kubeadm || exit 0
     warn: false
 
-- name: Install kubeadm / kubelet / kubectl ver {{ kubeadm_version }}, etc
+- name: Install kubeadm-{{ kubeadm_version }}, kubelet-{{ kubelet_version }} and kubectl-{{ kubectl_version }}, etc.
   yum:
     name:
       - kubeadm-{{ kubeadm_version }}
-      - kubelet-{{ kubeadm_version }}
-      - kubectl-{{ kubeadm_version }}
+      - kubelet-{{ kubelet_version }}
+      - kubectl-{{ kubectl_version }}
       - yum-plugin-versionlock
     state: present
     allow_downgrade: yes

@@ -6,8 +6,8 @@
 - name: Update kubelet and kubectl
   yum:
     name:
-      - kubelet-{{ kubeadm_version }}
-      - kubectl-{{ kubeadm_version }}
+      - kubelet-{{ kubelet_version }}
+      - kubectl-{{ kubectl_version }}
     state: present
     enablerepo: "{{ yum_enablerepo }}"
     disablerepo: "{{ yum_disablerepo }}"

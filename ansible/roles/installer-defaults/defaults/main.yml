@@ -5,8 +5,14 @@ offline_install: no
 ## kubernetes version
 kube_version: v1.18.1
 
-## kubeadm, kubelet, kubectl version
+## kubeadm version (RPM)
 kubeadm_version: 1.18.1-0
+
+## kubelet version (RPM)
+kubelet_version: "{{ kubeadm_version }}"
+
+## kubectl version (RPM)
+kubectl_version: "{{ kubelet_version }}"
 
 ## Advertise address of kube-apiserver on each master nodes.
 ## (should be defined as host vars)
