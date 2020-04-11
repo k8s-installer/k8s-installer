@@ -4,4 +4,4 @@
 
   roles:
     - installer-defaults
-    - master/first
+    - master/collect-masters
