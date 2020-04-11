@@ -10,6 +10,8 @@
       shell: /etc/kubernetes/join.sh --control-plane --apiserver-advertise-address {{ advertise_address }} -v 5
       become: yes
       register: kubeadm_join
+      retries: 3
+      delay: 5
 
   rescue:
     - name: stdout
