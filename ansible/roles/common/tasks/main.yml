@@ -1,16 +1,9 @@
-- name: Install libselinux-python (online)
+- name: Install libselinux-python
   yum:
     name: libselinux-python
     state: latest
-  when: not offline_install
-
-- name: Install libselinux-python (offline)
-  yum:
-    name: libselinux-python
-    state: latest
-    enablerepo: kubernetes-offline
-    disablerepo: "*"
-  when: offline_install
+    enablerepo: "{{ yum_enablerepo }}"
+    disablerepo: "{{ yum_disablerepo }}"
 
 - name: Disable SELinux
   selinux:

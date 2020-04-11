@@ -1,0 +1,11 @@
+- name: set fact for online install
+  set_fact:
+    yum_enablerepo: ""
+    yum_disablerepo: ""
+  when: not offline_install
+
+- name: set fact for offline install
+  set_fact:
+    yum_enablerepo: kubernetes-offline
+    yum_disablerepo: "*"
+  when: offline_install

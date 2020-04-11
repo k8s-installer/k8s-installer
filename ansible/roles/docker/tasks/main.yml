@@ -1,18 +1,9 @@
-- name: Install / update docker (online)
+- name: Install / update docker
   yum:
     name: docker
     state: latest
-  when: not offline_install
-
-- name: Install / update docker (offline)
-  yum:
-    name:
-      - docker
-      - libselinux-python
-    state: latest
-    enablerepo: kubernetes-offline
-    disablerepo: "*"
-  when: offline_install
+    enablerepo: "{{ yum_enablerepo }}"
+    disablerepo: "{{ yum_disablerepo }}"
 
 - name: Enable / start docker
   service:

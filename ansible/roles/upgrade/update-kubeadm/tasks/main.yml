@@ -5,6 +5,8 @@
   yum:
     name: kubeadm-{{ kubeadm_version }}
     state: present
+    enablerepo: "{{ yum_enablerepo }}"
+    disablerepo: "{{ yum_disablerepo }}"
 
 - name: Lock yum versions
   shell: yum versionlock add kubeadm

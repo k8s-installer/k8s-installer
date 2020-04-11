@@ -7,7 +7,7 @@
 - name: Unlock kubeadm, kubelet, kubectl versions
   shell: yum versionlock delete kubelet kubectl kubeadm || exit 0
 
-- name: Install kubeadm / kubelet / kubectl ver {{ kubeadm_version }}, etc (online mode)
+- name: Install kubeadm / kubelet / kubectl ver {{ kubeadm_version }}, etc
   yum:
     name:
       - kubeadm-{{ kubeadm_version }}
@@ -16,20 +16,8 @@
       - yum-plugin-versionlock
     state: present
     allow_downgrade: yes
-  when: not offline_install
-
-- name: Install kubeadm / kubelet / kubectl ver {{ kubeadm_version }}, etc (offline mode)
-  yum:
-    name:
-      - kubeadm-{{ kubeadm_version }}
-      - kubelet-{{ kubeadm_version }}
-      - kubectl-{{ kubeadm_version }}
-      - yum-plugin-versionlock
-    state: present
-    allow_downgrade: yes
-    enablerepo: kubernetes-offline
-    disablerepo: "*"
-  when: offline_install
+    enablerepo: "{{ yum_enablerepo }}"
+    disablerepo: "{{ yum_disablerepo }}"
 
 - name: Lock kubeadm, kubelet, kubectl versions.
   shell: yum versionlock add kubelet kubectl kubeadm
