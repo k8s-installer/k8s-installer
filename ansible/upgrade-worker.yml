@@ -5,7 +5,7 @@
     - installer-defaults
     - offline
     - docker
-    - upgrade/update-kubeadm
+    - upgrade/upgrade-kubeadm
 
 - hosts: worker
   become: yes

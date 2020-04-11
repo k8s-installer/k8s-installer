@@ -3,7 +3,7 @@
     cmd: yum versionlock delete kubelet kubectl || exit 0
     warn: false
 
-- name: Update kubelet and kubectl
+- name: Update kubelet {{ kubelet_version }} and kubectl {{ kubectl_version }}
   yum:
     name:
       - kubelet-{{ kubelet_version }}

@@ -3,10 +3,11 @@
     cmd: yum versionlock delete kubeadm || exit 0
     warn: false
 
-- name: Update kubeadm
+- name: Upgrade kubeadm to {{ kubeadm_version }}
   yum:
     name: kubeadm-{{ kubeadm_version }}
     state: present
+    allow_downgrade: yes
     enablerepo: "{{ yum_enablerepo }}"
     disablerepo: "{{ yum_disablerepo }}"
 
