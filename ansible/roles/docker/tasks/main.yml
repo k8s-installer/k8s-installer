@@ -1,10 +1,27 @@
-- name: Install docker
+- name: Install / update docker
   yum:
     name: docker
-    state: present
+    state: latest
+  when: not offline_install
+
+- name: Install / update docker
+  yum:
+    name:
+      - docker
+      - libselinux-python
+    state: latest
+    enablerepo: kubernetes-offline
+    disablerepo: "*"
+  when: offline_install
 
 - name: Enable / start docker
   service:
     name: docker
     enabled: true
     state: started
+
+- name: Load container images
+  shell:
+    cmd: "for i in *.tar; do docker load -i $i; done"
+    chdir: /opt/kubernetes-offline/images
+  when: offline_install

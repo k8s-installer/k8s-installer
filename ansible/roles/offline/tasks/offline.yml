@@ -26,27 +26,6 @@
     src: kubernetes-offline.repo
     dest: /etc/yum.repos.d/
 
-- name: Install / update docker
-  yum:
-    name:
-      - docker
-      - libselinux-python
-      #- yum-plugin-versionlock
-    state: latest
-    enablerepo: kubernetes-offline
-    disablerepo: "*"
-
 # install yum-plugin-versionlock (dirty hack...)
 - name: Install yum-plugin-versionlock
   shell: rpm -Uvh /opt/kubernetes-offline/rpms/yum-plugin-versionlock-*.rpm || exit 0
-
-- name: Enable docker service
-  service:
-    name: docker
-    enabled: true
-    state: started
-
-- name: Load container images
-  shell:
-    cmd: "for i in *.tar; do docker load -i $i; done"
-    chdir: /opt/kubernetes-offline/images
