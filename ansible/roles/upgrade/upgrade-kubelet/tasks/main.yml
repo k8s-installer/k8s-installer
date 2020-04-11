@@ -1,5 +1,7 @@
 - name: Unlock yum versions
-  shell: yum versionlock delete kubelet kubectl || exit 0
+  shell:
+    cmd: yum versionlock delete kubelet kubectl || exit 0
+    warn: false
 
 - name: Update kubelet and kubectl
   yum:

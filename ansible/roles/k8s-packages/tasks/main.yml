@@ -5,7 +5,9 @@
   when: not offline_install
 
 - name: Unlock kubeadm, kubelet, kubectl versions
-  shell: yum versionlock delete kubelet kubectl kubeadm || exit 0
+  shell:
+    cmd: yum versionlock delete kubelet kubectl kubeadm || exit 0
+    warn: false
 
 - name: Install kubeadm / kubelet / kubectl ver {{ kubeadm_version }}, etc
   yum:

@@ -1,5 +1,5 @@
 - import_playbook: common.yml
 - import_playbook: master-first.yml
-- import_playbook: collect-masters.yml
+- import_playbook: get-join-files.yml
 - import_playbook: master-secondary.yml
 - import_playbook: worker.yml

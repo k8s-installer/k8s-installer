@@ -4,4 +4,4 @@
 
   roles:
     - installer-defaults
-    - master/collect-masters
+    - master/get-join-files

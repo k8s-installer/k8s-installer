@@ -5,11 +5,11 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
-if [ -e masters ]; then
-  /bin/rm -rf master
+if [ -e join-files ]; then
+  /bin/rm -rf join-files
 fi
-mkdir masters
-cd masters
+mkdir join-files
+cd join-files
 
 # Generate token and get join command
 kubeadm token create --print-join-command > join.sh || exit 1
@@ -28,7 +28,7 @@ cp \
 cp /etc/kubernetes/pki/etcd/ca* ./pki/etcd
 cp /etc/kubernetes/admin.conf .
 
-tar cvzf ../masters.tar.gz .
+tar cvzf ../join-files.tar.gz .
 
 # To extract:
-# sudo tar xvzf masters.tar.gz -C /etc/kubernetes
+# sudo tar xvzf join-files.tar.gz -C /etc/kubernetes

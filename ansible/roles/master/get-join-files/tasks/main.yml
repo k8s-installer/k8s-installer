@@ -1,0 +1,21 @@
+- name: Copy get-join-files.sh
+  copy:
+    src: get-join-files.sh
+    dest: get-join-files.sh
+    mode: 0755
+
+- name: Execute get-join-files.sh
+  shell: ./get-join-files.sh
+  become: yes
+
+- name: Fetch join-files.tar.gz
+  fetch:
+    src: join-files.tar.gz
+    dest: ./files/
+    flat: yes
+
+- name: Fetch join.sh
+  fetch:
+    src: join-files/join.sh
+    dest: ./files/
+    flat: yes

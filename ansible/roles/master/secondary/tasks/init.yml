@@ -1,10 +1,10 @@
-- name: Copy masters.tar.gz
+- name: Copy join-files.tar.gz
   copy:
-    src: ./files/masters.tar.gz
+    src: ./files/join-files.tar.gz
     dest: .
 
-- name: Extract masters.tar.gz
-  shell: tar xvzf masters.tar.gz -C /etc/kubernetes
+- name: Extract join-files.tar.gz
+  shell: tar xvzf join-files.tar.gz -C /etc/kubernetes
   become: yes
 
 - name: Execute kubeadm join
