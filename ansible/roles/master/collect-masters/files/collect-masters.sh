@@ -5,11 +5,14 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
+if [ -e masters ]; then
+  /bin/rm -rf master
+fi
 mkdir masters
 cd masters
 
 # Generate token and get join command
-kubeadm token create --print-join-command > join.sh && exit 1
+kubeadm token create --print-join-command > join.sh || exit 1
 
 cp join.sh join-as-master.sh
 sed -i  "s/^\(kubeadm join.*\)$/\1 --control-plane/" join-as-master.sh
