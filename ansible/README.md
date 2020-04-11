@@ -52,3 +52,20 @@ sample/group_vars/all/*.yml ファイルを inventory/group_vars/all/ ディレ�
 * get-join-files.yml: ノードをクラスタに join するのに必要な bootstrap token、証明書ファイル類を取得します。
 * master-secondary.yml: 2台目以降のマスタノードへの Kubernetes デプロイが実行されます。
 * worker.yml: ワーカーノードへの Kubernetes デプロイが実行されます。
+
+## クラスタのアップグレード
+
+inventory/group_vars/all/version.yml の以下の値を変更してください。
+
+* kube_version: Kubernetes のバージョン
+* kubeadm_version: kubeadm, kubelet, kubectl のバージョン (RPMバージョン)
+
+注: バージョンは一度に 0.1 ずつしか上げることができませんので、注意してください。
+
+以下手順でマスターノードをアップグレードしてください。
+
+    $ ansible-playbook -i inventory/hosts upgrade-master.yml
+
+以下手順でワーカーノードをアップグレードしてください。
+    
+    $ ansible-playbook -i inventory/hosts upgrade-worker.yml
