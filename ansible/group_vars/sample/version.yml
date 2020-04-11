@@ -1,5 +1,0 @@
-## kubernetes version
-kube_version: v1.18.1
-
-## kubeadm version
-kubeadm_version: 1.18.1-0

@@ -24,7 +24,7 @@ Note: 全マスター/ワーカーノードのデフォルトゲートウェイ�
 
 ### インベントリ
 
-hosts ファイルにインストール先のマシンの情報を設定してください。
+インベントリファイル `inventory/hosts` ファイルにインストール先のマシンの情報を設定してください。サンプルは `sample/hosts` ファイルにあります。
 
 * master_first: マスタノードを指定してください。
 * master_secondary: HA構成を取る場合に2台目以降のマスタノードを指定してください。
@@ -32,18 +32,18 @@ hosts ファイルにインストール先のマシンの情報を設定して�
 
 ### 変数設定
 
-group_vars/sample/*.yml ファイルを group_vars/all/ ディレクトリにコピーし、適宜編集してください。
+sample/group_vars/all/*.yml ファイルを inventory/group_vars/all/ ディレクトリにコピーし、適宜編集してください。
 
 * lb_apiserver_address: マスタノードのDNS/IPアドレス (HA構成の場合はロードバランサ) を設定してください。
 * offline_install: オフラインインストールをする場合は yes に設定してください。
     * 予め k8s-offline-files.tar.gz を本ディレクトリで展開しておく必要があります。
-* Internet 接続にプロキシを経由する必要がある場合は、proxy_url, proxy_noproxy を設定してください。    
+* Internet 接続にプロキシを経由する必要がある場合は、proxy_url, proxy_noproxy を設定してください。
 
 ## インストール
 
 以下手順でインストールを行ってください。
 
-    $ ansible-playbook -i hosts site.yml
+    $ ansible-playbook -i inventory/hosts site.yml
 
 以下の playbook が順次実行されます。
 
