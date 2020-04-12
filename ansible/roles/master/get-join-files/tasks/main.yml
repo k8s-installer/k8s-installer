@@ -19,3 +19,12 @@
     src: join-files/join.sh
     dest: ./files/
     flat: yes
+
+- name: Cleanup join files
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - join-files.tar.gz
+    - join-files
+  become: yes
