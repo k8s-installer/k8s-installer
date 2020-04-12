@@ -39,7 +39,8 @@
         - 179/tcp  # BGP port
         #- 4789/udp # VXLAN
 
-- service:
+- name: Disable firewalld
+  service:
     name: firewalld
     enabled: false
     state: stopped
