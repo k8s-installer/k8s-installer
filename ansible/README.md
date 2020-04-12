@@ -4,6 +4,10 @@ Ansible / kubeadm を使用して Kubernetes クラスタを構成するため�
 
 オフラインインストールにも対応しています。 
 
+## 必要環境
+
+[こちら](../README.md) を参照してください。
+
 ## 設定
 
 ### インベントリ
@@ -34,6 +38,11 @@ sample/group_vars/all/*.yml ファイルを inventory/group_vars/all/ ディレ�
 * offline_install: オフラインインストールをする場合は yes に設定してください。
     * 予め k8s-offline-files.tar.gz を本ディレクトリで展開しておく必要があります。
 * Internet 接続にプロキシを経由する必要がある場合は、proxy_url, proxy_noproxy を設定してください。
+
+### オフラインインストール
+
+オフラインインストールを行う場合は、[offline-generator](../offline-generator/README.md) を使用して
+`k8s-offline-files.tar.gz` を作成し、本ディレクトリで展開してください。
 
 ## インストール
 

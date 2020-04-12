@@ -1,4 +1,4 @@
-# Kubernetes installer
+# Kubernetes installer (script based)
 
 ## 概要
 
@@ -8,27 +8,7 @@ Kubernetes クラスタを kubeadm を使用してインストールするスク
 
 ## 必要環境
 
-マスターノード・ワーカーノードには以下いずれかの OS がインストールされていること。
-(全マシンで同一のOSがインストールされていること)
-
-* RHEL 7
-* CentOS 7
-
-RHEL7 を使用する場合は、サブスクリプションの登録(register)が完了していること。
-
-オンラインインストールを行う場合は、全マシン Internet に接続可能であること。
-(Proxy経由での接続も可)
-
-オフラインインストールを行う場合は、事前にオフラインインストールファイルを
-(k8s-offline-files.tar.gz)を生成して本ディレクトリに配置しておくこと。
-
-HA構成時はロードバランサが必要です。
-
-## 事前準備
-
-RHEL 7 を使用する場合は、以下手順で rhel-7-server-extras-rpms リポジトリを有効にしておく必要があります。
-
-    $ subscription-manager repos --enable=rhel-7-server-extras-rpms
+[こちら](../README.md) を参照してください。
 
 ## 設定
 
