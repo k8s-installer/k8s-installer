@@ -8,6 +8,8 @@ Ansible / kubeadm を使用して Kubernetes クラスタを構成するため�
 
 [こちら](../README.md) を参照してください。
 
+この他に、Ansible が必要です。
+
 ## 設定
 
 ### インベントリ
@@ -27,17 +29,22 @@ Ansible / kubeadm を使用して Kubernetes クラスタを構成するため�
 * hostname: ここに指定した文字列がそのまま Kubernetes のノード名となります。
 * ansible_host: ssh でログイン可能なホスト名・IPアドレスを指定します。
     * ホスト名と同一の場合は省略可能です。
-* ip: kube-apiserver で広告する IP アドレスを指定します。
+* ip: kube-apiserver および kubelet で使用(広告)する IP アドレスを指定します。
     * 省略した場合は、デフォルトゲートウェイに指定されたインタフェースのIPアドレスが使用されます。 
 
 ### 変数設定
 
 sample/group_vars/all/*.yml ファイルを inventory/group_vars/all/ ディレクトリにコピーし、適宜編集してください。
 
-* lb_apiserver_address: マスタノードのDNS/IPアドレス (HA構成の場合はロードバランサ) を設定してください。
-* offline_install: オフラインインストールをする場合は yes に設定してください。
-    * 予め k8s-offline-files.tar.gz を本ディレクトリで展開しておく必要があります。
-* Internet 接続にプロキシを経由する必要がある場合は、proxy_url, proxy_noproxy を設定してください。
+* all.yml
+    * lb_apiserver_address: HA構成の場合、ロードバランサの FQDN名またはIPアドレスを設定してください。
+    * pod_subnet: Podサブネット(CIDR)を指定してください。
+* offline.yml    
+    * offline_install: オフラインインストールをする場合は yes に設定してください。
+* proxy.yml    
+    * Internet 接続にプロキシを経由する必要がある場合は、proxy_url, proxy_noproxy を設定してください。
+* version.yml
+    * インストールする Kubernetes バージョンを適宜指定します。無指定の場合はデフォルト値が使用されます。    
 
 ### オフラインインストール
 
@@ -74,11 +81,11 @@ inventory/group_vars/all/version.yml の以下の値を変更してください�
     
     $ ansible-playbook -i inventory/hosts upgrade-worker.yml
 
-## Vagrant 設定について
+## Vagrant について
 
 vagrant を使用してテスト用のクラスタを起動することができます。
 
-`vagrant up` を実行すると、以下のコンフィグレーションで VM が起動します。
+本ディレクトリで `vagrant up` を実行すると、以下のコンフィグレーションで VM が起動します。
 
 * lb: 10.240.0.40
     * load balander (haproxy) and NAT router
