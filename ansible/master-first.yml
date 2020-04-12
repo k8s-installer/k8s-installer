@@ -6,5 +6,5 @@
     - { role: installer-defaults }
     - { role: master/first, tags: [master, master-first] }
     - { role: master/install-kubeconfig, tags: [master, master-first] }
-    - { role: master/cni-plugin, tags: [master, master-first] }
+    - { role: network-plugin/calico, tags: [master, master-first] }
     - { role: master/get-join-files, tags: [master, master-first, get-join-files] }
