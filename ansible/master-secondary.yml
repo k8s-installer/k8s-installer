@@ -4,6 +4,6 @@
   serial: 1
 
   roles:
-    - installer-defaults
-    - master/secondary
-    - master/install-kubeconfig
+    - { role: installer-defaults }
+    - { role: master/secondary, tags: [master, master-secondary] }
+    - { role: master/install-kubeconfig, tags: [master, master-secondary] }

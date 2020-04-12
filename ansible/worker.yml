@@ -2,5 +2,5 @@
   become: no
 
   roles:
-    - installer-defaults
-    - worker
+    - { role: installer-defaults }
+    - { role: worker, tags: worker }

@@ -3,5 +3,5 @@
   any_errors_fatal: true
 
   roles:
-    - installer-defaults
-    - master/get-join-files
+    - { role: installer-defaults }
+    - { role: master/get-join-files, tags: [master, master-first, get-join-files] }
