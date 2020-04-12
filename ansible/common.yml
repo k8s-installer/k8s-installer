@@ -6,6 +6,6 @@
     - { role: offline, tags: [common, offline] }
     - { role: setproxy, tags: common }
     - { role: firewall, tags: common }
-    - { role: common, tags: common }
+    - { role: preinstall, tags: common }
     - { role: container-engine/docker, tags: common }
     - { role: k8s-packages, tags: common }

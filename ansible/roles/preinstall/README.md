@@ -1,4 +1,4 @@
-# common role
+# preinstall role
 
 以下手順を実施します。
 
