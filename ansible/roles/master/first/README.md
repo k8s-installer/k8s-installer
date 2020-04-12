@@ -12,7 +12,7 @@
 ## Variables
 
 * kube_version: Kubernetes version
-* advertise_address: API server advertise address
+* ip: API server advertise address
 * lb_apiserver_address: Load balancer address
 * lb_apiserver_port: Load balancer port
 * pod_subnet: Pod Subnet CIDR

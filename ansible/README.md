@@ -18,12 +18,12 @@ Ansible / kubeadm を使用して Kubernetes クラスタを構成するため�
 
 マシンの指定方法の例を示します。
 
-    hostname ansible_host=10.0.1.10 advertise_address=10.0.1.10
+    hostname ansible_host=10.0.1.10 ip=10.0.1.10
 
 * hostname: ここに指定した文字列がそのまま Kubernetes のノード名となります。
 * ansible_host: ssh でログイン可能なホスト名・IPアドレスを指定します。
     * ホスト名と同一の場合は省略可能です。
-* advertise_address: kube-apiserver で広告する IP アドレスを指定します (マスターノードでのみ有効)。
+* ip: kube-apiserver で広告する IP アドレスを指定します。
     * 省略した場合は、デフォルトゲートウェイに指定されたインタフェースのIPアドレスが使用されます。 
 
 ### 変数設定

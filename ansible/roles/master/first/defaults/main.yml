@@ -1,5 +1,5 @@
 # Master IP/DNS (Load balancer for HA)
-#lb_apiserver_address: "{{ advertise_address }"
+#lb_apiserver_address: "{{ ip }}"
 #lb_apiserver_port: 6443
 
 # Pod CIDR

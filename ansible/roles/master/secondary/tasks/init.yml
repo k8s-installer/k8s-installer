@@ -7,7 +7,7 @@
 
 - block:
     - name: Execute kubeadm join
-      shell: /etc/kubernetes/join.sh --control-plane --apiserver-advertise-address {{ advertise_address }} --node-name {{ inventory_hostname }} # -v 5
+      shell: /etc/kubernetes/join.sh --control-plane --apiserver-advertise-address {{ ip }} --node-name {{ inventory_hostname }} # -v 5
       become: yes
       register: kubeadm_join
       retries: 3

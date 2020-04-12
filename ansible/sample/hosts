@@ -1,13 +1,13 @@
 [master_first]
-master-0  # advertise_address=10.240.0.10
+master-0  # ansible_host=master-0 ip=10.240.0.10
 
 [master_secondary]
-master-1  # advertise_address=10.240.0.11
-master-2  # advertise_address=10.240.0.12
+master-1  # ansible_host=master-1 ip=10.240.0.11
+master-2  # ansible_host=master-2 ip=10.240.0.12
 
 [worker]
-worker-0  # advertise_address=10.240.0.20
-worker-1  # advertise_address=10.240.0.21
+worker-0  # ansible_host=worker-0 ip=10.240.0.20
+worker-1  # ansible_host=worker-1 ip=10.240.0.21
 
 [master:children]
 master_first

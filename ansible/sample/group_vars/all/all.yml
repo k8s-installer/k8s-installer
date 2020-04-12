@@ -3,7 +3,7 @@
 
 ## Advertise address of kube-apiserver on each master nodes.
 ## (should be defined as host vars)
-#advertise_address: "{{ ansible_default_ipv4.address | default(ansible_all_ipv4_addresses[0]) }}"
+#ip: "{{ ansible_default_ipv4.address | default(ansible_all_ipv4_addresses[0]) }}"
 
 ## External load balancer address.
 #lb_apiserver_address: 10.240.0.40   # lb defined in Vagrantfile

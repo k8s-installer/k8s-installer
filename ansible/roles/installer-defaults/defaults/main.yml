@@ -16,11 +16,11 @@ kubectl_version: "{{ kubelet_version }}"
 
 ## Advertise address of kube-apiserver on each master nodes.
 ## (should be defined as host vars)
-advertise_address: "{{ ansible_default_ipv4.address | default(ansible_all_ipv4_addresses[0]) }}"
+ip: "{{ ansible_default_ipv4.address | default(ansible_all_ipv4_addresses[0]) }}"
 
 ## External load balancer address and port.
 #lb_apiserver_address: 1.2.3.4
-lb_apiserver_address: "{{ advertise_address }}"
+lb_apiserver_address: "{{ ip }}"
 lb_apiserver_port: 6443
 
 # Pod CIDR
@@ -31,7 +31,7 @@ firewall_enabled: yes
 
 # Proxy
 proxy_url: ""
-proxy_noproxy: "127.0.0.1,localhost,{{ advertise_address }}"
+proxy_noproxy: "127.0.0.1,localhost,{{ ip }}"
 
 is_master: no
 is_worker: no
