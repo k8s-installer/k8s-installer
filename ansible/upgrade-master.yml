@@ -6,6 +6,7 @@
     - installer-defaults
     - offline/prepare
     - docker
+    - offline/load-images
     - upgrade/upgrade-kubeadm
 
 - hosts: master_first

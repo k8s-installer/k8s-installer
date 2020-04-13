@@ -7,11 +7,12 @@
 全ノードの共通処理
 
 * [installer-defaults](../roles/installer-defaults/README.md) : 変数デフォルト値を設定する
-* [offline](../roles/offline/README.md) : オフラインインストール用のファイル転送・展開を行う
+* [offline/prepare](../roles/offline/prepare/README.md) : オフラインインストール用のファイル転送・展開を行う
 * [setproxy](../roles/setproxy/README.md) : Proxy 設定を行う (yum/docker)
 * [firewall](../roles/firewall/README.md) : firewalld の設定を行う
 * [preinstall](../roles/preinstall/README.md) : プレインストール処理を行う
-* [container-engine/docker](../roles/container-engine/docker/README.md) : Docker コンテナインストール、オフラインインストール時のコンテナロードを行う
+* [container-engine/docker](../roles/container-engine/docker/README.md) : Docker インストールを行う
+* [offline/load-images](../roles/offline/load-images/README.md) : オフラインインストール時のコンテナロードを行う
 * [k8s-packages](../roles/k8s-packages/README.md): kubeadm / kubelet のインストールを行う
     * kubernetes yum リポジトリを追加
     * kubeadm, kubelet, kubectl をインストールし、バージョンロック

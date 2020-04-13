@@ -10,9 +10,3 @@
     name: docker
     enabled: true
     state: started
-
-- name: Load container images
-  shell:
-    cmd: "for i in *.tar; do docker load -i $i; done"
-    chdir: /opt/kubernetes-offline/images
-  when: offline_install

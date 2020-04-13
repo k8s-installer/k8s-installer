@@ -8,4 +8,5 @@
     - { role: firewall, tags: common }
     - { role: preinstall, tags: common }
     - { role: container-engine/docker, tags: common }
+    - { role: offline/load-images, tags: [common, offline] }
     - { role: k8s-packages, tags: common }
