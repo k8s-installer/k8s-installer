@@ -18,6 +18,7 @@
     - upgrade/drain
     - upgrade/upgrade-master
     - upgrade/uncordon
+    - network-plugin/calico
 
 - hosts: master_secondary
   become: yes
