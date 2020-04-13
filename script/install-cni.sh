@@ -5,7 +5,7 @@
 if [ -e ./offline-files/calico.yaml ]; then
     YAML=./offline-files/calico.yaml
 else
-    https_proxy=$PROXY_URL curl -SLO https://docs.projectcalico.org/v3.8/manifests/calico.yaml
+    https_proxy=$PROXY_URL curl -SLO https://docs.projectcalico.org/v3.13/manifests/calico.yaml
     YAML=calico.yaml
 fi
 
