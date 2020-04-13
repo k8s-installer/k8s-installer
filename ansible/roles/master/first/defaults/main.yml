@@ -4,10 +4,3 @@
 
 # Pod CIDR
 pod_subnet: 192.168.0.0/16
-
-# Calico version
-calico_version: v3.8
-
-# Calico manifest url
-calico_manifest_url: "https://docs.projectcalico.org/{{ calico_version }}/manifests/calico.yaml"
-

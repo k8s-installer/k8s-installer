@@ -1,0 +1,6 @@
+# Calico version
+calico_version: v3.8
+
+# Calico manifest url
+calico_manifest_url: "https://docs.projectcalico.org/{{ calico_version }}/manifests/calico.yaml"
+
