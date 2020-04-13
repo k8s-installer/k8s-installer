@@ -1,4 +1,4 @@
-# offline role
+# offline/prepare role
 
 オフラインインストールの準備を実行します。
 offline_install が yes の場合のみ実行されます。

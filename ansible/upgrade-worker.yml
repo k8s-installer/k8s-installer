@@ -3,7 +3,7 @@
 
   roles:
     - installer-defaults
-    - offline
+    - offline/prepare
     - docker
     - upgrade/upgrade-kubeadm
 
