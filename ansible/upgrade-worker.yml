@@ -4,7 +4,7 @@
   roles:
     - installer-defaults
     - offline/prepare
-    - docker
+    - container-engine/docker
     - offline/load-images
     - upgrade/upgrade-kubeadm
 
