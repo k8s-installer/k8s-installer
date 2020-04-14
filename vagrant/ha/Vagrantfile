@@ -25,6 +25,7 @@ Vagrant.configure("2") do |config|
 
   (0..2).each do |n|
     config.vm.define "master-#{n}" do |c|
+      #c.vm.box = "generic/ubuntu1804" if n == 2
       c.vm.hostname = "master-#{n}"
       c.vm.network "private_network", ip: "10.240.0.1#{n}"
 
@@ -34,6 +35,7 @@ Vagrant.configure("2") do |config|
 
   (0..1).each do |n|
     config.vm.define "worker-#{n}" do |c|
+      #c.vm.box = "generic/ubuntu1804" if n == 1
       c.vm.hostname = "worker-#{n}"
       c.vm.network "private_network", ip: "10.240.0.2#{n}"
       
