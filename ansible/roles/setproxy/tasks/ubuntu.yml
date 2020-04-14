@@ -1,0 +1,13 @@
+- when: proxy_url != ""
+  block:
+    - name: Set http proxy in apt.conf
+      lineinfile:
+        path: /etc/apt/apt.conf
+        line: Acquire::http::Proxy "{{ proxy_url }}"
+        regexp: "^Acquire::http::Proxy"
+
+    - name: Set https proxy in apt.conf
+      lineinfile:
+        path: /etc/apt/apt.conf
+        line: Acquire::https::Proxy "{{ proxy_url }}"
+        regexp: "^Acquire::http:s:Proxy"

@@ -1,17 +1,5 @@
-- when: proxy_url != ""
-  block:
-    - name: Set proxy in yum.conf
-      lineinfile:
-        path: /etc/yum.conf
-        line: "proxy={{ proxy_url }}"
-        regexp: "^proxy="
+- import_tasks: rhel.yml
+  when: ansible_distribution in ["RedHat", "CentOS"]
 
-    - name: Create /etc/systemd/system/docker.service.d
-      file:
-        path: /etc/systemd/system/docker.service.d
-        state: directory
-
-    - name: Install docker http-proxy.conf
-      template:
-        src: http-proxy.conf.j2
-        dest: /etc/systemd/system/docker.service.d/http-proxy.conf
+- import_tasks: ubuntu.yml
+  when: ansible_distribution in ["Ubuntu"]
