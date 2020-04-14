@@ -1,0 +1,22 @@
+- name: Unhold kubelet/kubectl versions
+  dpkg_selections:
+    name: "{{ item }}"
+    selection: install
+  with_items:
+    - kubelet
+    - kubectl
+
+- name: Update kubelet {{ kubelet_apt_version }} and kubectl {{ kubectl_apt_version }}
+  apt:
+    name:
+      - kubelet-{{ kubelet_apt_version }}
+      - kubectl-{{ kubectl_apt_version }}
+    state: present
+
+- name: Hold kubelet/kubectl versions
+  dpkg_selections:
+    name: "{{ item }}"
+    selection: hold
+  with_items:
+    - kubelet
+    - kubectl

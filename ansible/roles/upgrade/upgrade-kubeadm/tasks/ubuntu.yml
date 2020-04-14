@@ -1,0 +1,16 @@
+- name: Unhold kubeadm version
+  dpkg_selections:
+    name: kubeadm
+    selection: install
+
+- name: Update kubeadm to {{ kubeadm_apt_version }}
+  apt:
+    name:
+      - kubeadm={{ kubeadm_apt_version }}
+    state: present
+    update_cache: yes
+
+- name: Hold kubeadm version
+  dpkg_selections:
+    name: kubeadm
+    selection: hold
