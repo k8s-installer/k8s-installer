@@ -1,5 +1,12 @@
 - when: firewall_enabled
   block:
+    - name: Install firewalld
+      yum:
+        name: firewalld
+        state: present
+        enablerepo: "{{ yum_enablerepo }}"
+        disablerepo: "{{ yum_disablerepo }}"
+
     - name: Enable firewalld
       service:
         name: firewalld
@@ -44,4 +51,5 @@
     name: firewalld
     enabled: false
     state: stopped
+  ignore_errors: yes
   when: not firewall_enabled
