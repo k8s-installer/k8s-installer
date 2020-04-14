@@ -4,6 +4,8 @@
         - name: Execute kubeadm upgrade plan to {{ kube_version }}
           shell: kubeadm upgrade plan v{{ kube_version }}
           register: kubeadm_upgrade
+          tags:
+            - upgrade-plan
           #environment:
           #  http_proxy: "{{ proxy_url }}"
           #  https_proxy: "{{ proxy_url }}"
