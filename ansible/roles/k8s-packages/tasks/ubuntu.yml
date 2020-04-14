@@ -1,0 +1,24 @@
+- name: Add k8s apt repository
+  apt_repository:
+    repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
+    state: present
+
+- name: Install packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - apt-transport-https
+    - curl
+    - kubelet
+    - kubeadm
+    - kubectl
+
+- name: Hold kubeadm/kubelet/kubectl versions
+  dpkg_selections:
+    name: "{{ item }}"
+    selection: hold
+  with_items:
+    - kubelet
+    - kubeadm
+    - kubectl
