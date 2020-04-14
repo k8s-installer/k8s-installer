@@ -1,0 +1,17 @@
+- name: Create kubelet env file
+  file:
+    path: "{{ kubelet_env_path }}"
+    state: touch
+
+- name: Set --node-ip option for kubelet
+  lineinfile:
+    path: "{{ kubelet_env_path }}"
+    line: "KUBELET_EXTRA_ARGS=--node-ip={{ ip }}"
+    regexp: "^KUBELET_EXTRA_ARGS="
+  notify: restart_kubelet
+
+- name: Enable / start kubelet
+  service:
+    name: kubelet
+    enabled: true
+    state: started

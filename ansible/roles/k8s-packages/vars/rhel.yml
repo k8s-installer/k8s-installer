@@ -1,0 +1,1 @@
+kubelet_env_path: /etc/sysconfig/kubelet

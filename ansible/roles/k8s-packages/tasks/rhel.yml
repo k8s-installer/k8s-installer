@@ -25,10 +25,3 @@
   shell:
     cmd: yum versionlock add kubelet kubectl kubeadm
     warn: false
-
-- name: Set --node-ip option for kubelet
-  lineinfile:
-    path: /etc/sysconfig/kubelet
-    line: "KUBELET_EXTRA_ARGS=--node-ip={{ ip }}"
-    regexp: "^KUBELET_EXTRA_ARGS="
-  notify: restart_kubelet

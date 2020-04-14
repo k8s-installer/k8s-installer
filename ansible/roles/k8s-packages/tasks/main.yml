@@ -1,14 +1,14 @@
-- import_tasks: rhel.yml
-  when: ansible_distribution in ["RedHat", "CentOS"]
+- when: ansible_distribution in ["RedHat", "CentOS"]
+  block:
+    - include_vars: rhel.yml
+    - import_tasks: rhel.yml
 
-- import_tasks: ubuntu.yml
-  when: ansible_distribution in ["Ubuntu"]
+- when: ansible_distribution in ["Ubuntu"]
+  block:
+    - include_vars: ubuntu.yml
+    - import_tasks: ubuntu.yml
 
-- name: Enable / start kubelet
-  service:
-    name: kubelet
-    enabled: true
-    state: started
+- import_tasks: kubelet.yml
 
 - name: Install kubectl bash completion
   shell: "kubectl completion bash >/etc/bash_completion.d/kubectl.sh"
