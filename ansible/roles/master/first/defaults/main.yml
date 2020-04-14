@@ -4,3 +4,12 @@
 
 # Pod CIDR
 pod_subnet: 192.168.0.0/16
+
+# Extra cert SANs (Subject alternate names)
+extra_cert_sans: []
+
+# cluster name
+cluster_name: kubernetes
+
+# image repository
+image_repository: k8s.gcr.io

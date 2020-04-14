@@ -1,8 +1,36 @@
+- name: Collect cert SANs
+  set_fact:
+    apiserver_cert_sans: "{{ (base + extra_cert_sans + ips + default_ips + hostnames + fqdns) | sort | unique }}"
+  vars:
+    base:
+      - "{{ lb_apiserver_address }}"
+      - localhost
+      - 127.0.0.1
+    ips: "{{ groups['master'] | map('extract', hostvars, 'ip') | list | select('defined') | list }}"
+    default_ips: "{{ groups['master'] | map('extract', hostvars, ['ansible_default_ipv4', 'address']) | list | select('defined') | list }}"
+    #hostnames: "{{ groups['master'] | map('extract', hostvars, ['ansible_hostname']) | list | select('defined') | list }}"
+    hostnames: "{{ groups['master'] | map('extract', hostvars, ['inventory_hostname']) | list | select('defined') | list }}"
+    fqdns: "{{ groups['master'] | map('extract', hostvars, ['ansible_fqdn']) | list | select('defined') | list }}"
+  tags:
+    - kubeadm-config
+
+- debug:
+    msg: "apiserver certSANs : {{ apiserver_cert_sans }}"
+  tags:
+    - kubeadm-config
+
+#- debug:
+#    var: hostvars
+#  tags:
+#    - kubeadm-config
+
 - name: copy kubeadm-config.yml
   template:
     src: kubeadm-config.yml.j2
     dest: /etc/kubernetes/kubeadm-config.yml
   become: yes
+  tags:
+    - kubeadm-config
 
 - name: Check if kubeadm has already run
   stat:

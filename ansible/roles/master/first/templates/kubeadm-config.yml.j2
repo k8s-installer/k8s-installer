@@ -11,14 +11,14 @@ apiVersion: kubeadm.k8s.io/v1beta2
 kind: ClusterConfiguration
 #kubernetesVersion: stable
 kubernetesVersion: v{{ kube_version }}
-#clusterName: kubernetes
-#imageRepository: k8s.gcr.io
+clusterName: {{ cluster_name }}
+imageRepository: {{ image_repository }}
 
 apiServer:
   certSANs:
-    - "{{ lb_apiserver_address }}"
-    - localhost
-    - 127.0.0.1
+{% for san in apiserver_cert_sans %}
+    - {{ san }}
+{% endfor %}
   timeoutForControlPlane: 4m0s
 
 controlPlaneEndpoint: "{{ lb_apiserver_address }}:{{ lb_apiserver_port }}"
