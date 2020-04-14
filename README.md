@@ -39,4 +39,4 @@ RHEL 7 を使用する場合は、以下手順で rhel-7-server-extras-rpms リ�
 
 ## License
 
-Public domain です。
+[MIT License](./LICENSE.txt)
