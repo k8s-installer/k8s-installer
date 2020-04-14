@@ -34,7 +34,7 @@ RT="repotrack -a x86_64 -p cache"
 YD="yumdownloader --destdir=cache -y"
 
 echo "==> Downloading docker, kubeadm, etc"
-$RT docker audit kubeadm-$KUBEADM_VERSION libselinux-python yum-plugin-versionlock firewalld || (echo "Download error" && exit 1)
+$RT docker audit kubeadm-$KUBEADM_VERSION libselinux-python yum-plugin-versionlock firewalld python3 || (echo "Download error" && exit 1)
 
 echo "==> Downloading kubectl"
 $RT kubectl-$KUBEADM_VERSION || (echo "Download error" && exit 1)
