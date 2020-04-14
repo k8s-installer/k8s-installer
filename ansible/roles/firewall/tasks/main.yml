@@ -13,6 +13,13 @@
         enabled: true
         state: started
 
+    - name: Allow ssh
+      firewalld:
+        service: ssh
+        permanent: yes
+        state: enabled
+        immediate: yes
+
     - name: Allow firewall for master
       firewalld:
         port: "{{ item }}"
