@@ -4,7 +4,6 @@
     state: latest
     enablerepo: "{{ yum_enablerepo }}"
     disablerepo: "{{ yum_disablerepo }}"
-  when: ansible_distribution in ["RedHat", "CentOS"]
 
 - name: Enable / start docker
   service:

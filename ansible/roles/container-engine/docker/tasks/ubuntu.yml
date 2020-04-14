@@ -1,0 +1,30 @@
+- name: Add apt_key of docker apt repository
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+  environment:
+    http_proxy: "{{ proxy_url }}"
+    https_proxy: "{{ proxy_url }}"
+    no_proxy: "{{ proxy_noproxy }}"
+
+- name: Get lsb_release
+  shell: lsb_release -cs
+  ignore_errors: True
+  register: lsb_release
+
+- name: Add docker apt repository
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ lsb_release.stdout }} stable
+    state: present
+
+- name: Install / update docker-ce
+  apt:
+    name: docker-ce
+    state: latest
+    update_cache: yes
+
+- name: Enable / start docker
+  service:
+    name: docker
+    enabled: true
+    state: started
