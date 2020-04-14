@@ -2,7 +2,7 @@
   shell: subscription-manager repos --enable=rhel-7-server-extras-rpms
   when: ansible_distribution == "RedHat"
 
-- name: Install libselinux-python
+- name: Install libselinux-python (rhel)
   yum:
     name: libselinux-python
     state: latest
@@ -10,9 +10,18 @@
     disablerepo: "{{ yum_disablerepo }}"
   when: ansible_distribution in [ "RedHat", "CentOS" ]
 
+#- name: Install selinux-utils, python-selinux (ubuntu)
+#  apt:
+#    name:
+#      - selinux-utils
+#      - python-selinux
+#    state: latest
+#  when: ansible_distribution in [ "Ubuntu" ]
+
 - name: Disable SELinux
   selinux:
     state: disabled
+  when: ansible_distribution in [ "RedHat", "CentOS" ]
 
 - name: Disable swap
   shell: swapoff -a

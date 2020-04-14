@@ -8,6 +8,12 @@
         disablerepo: "{{ yum_disablerepo }}"
       when: ansible_distribution in ["RedHat", "CentOS"]
 
+    - name: Install firewalld (ubuntu)
+      apt:
+        name: firewalld
+        state: present
+      when: ansible_distribution in ["Ubuntu"]
+
     - name: Enable firewalld
       service:
         name: firewalld

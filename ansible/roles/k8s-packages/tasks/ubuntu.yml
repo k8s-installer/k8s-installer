@@ -1,3 +1,12 @@
+- name: Add apt_key of k8s apt repository
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+  environment:
+    http_proxy: "{{ proxy_url }}"
+    https_proxy: "{{ proxy_url }}"
+    no_proxy: "{{ proxy_noproxy }}"
+
 - name: Add k8s apt repository
   apt_repository:
     repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
@@ -5,14 +14,14 @@
 
 - name: Install packages
   apt:
-    name: "{{ item }}"
+    name:
+      - apt-transport-https
+      - curl
+      - kubelet={{ kubelet_apt_version }}
+      - kubeadm={{ kubeadm_apt_version }}
+      - kubectl={{ kubectl_apt_version }}
     state: present
-  with_items:
-    - apt-transport-https
-    - curl
-    - kubelet-{{ kubelet_apt_version }}
-    - kubeadm-{{ kubeadm_apt_version }}
-    - kubectl-{{ kubectl_apt_version }}
+    update_cache: yes
 
 - name: Hold kubeadm/kubelet/kubectl versions
   dpkg_selections:
