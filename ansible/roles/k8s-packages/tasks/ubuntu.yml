@@ -10,9 +10,9 @@
   with_items:
     - apt-transport-https
     - curl
-    - kubelet
-    - kubeadm
-    - kubectl
+    - kubelet-{{ kubelet_apt_version }}
+    - kubeadm-{{ kubeadm_apt_version }}
+    - kubectl-{{ kubectl_apt_version }}
 
 - name: Hold kubeadm/kubelet/kubectl versions
   dpkg_selections:
