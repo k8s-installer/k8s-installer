@@ -3,22 +3,22 @@
   any_errors_fatal: true
 
   roles:
-    - installer-defaults
-    - offline/prepare
-    - container-engine/docker
-    - offline/load-images
-    - upgrade/upgrade-kubeadm
+    - { role: installer-defaults }
+    - { role: offline/prepare, tags: [common, offline] }
+    - { role: container-engine/docker, tags: [common, docker] }
+    - { role: offline/load-images, tags: [common, offline] }
+    - { role: upgrade/upgrade-kubeadm, tags: [common, kubeadm] }
 
 - hosts: master_first
   become: yes
   any_errors_fatal: true
 
   roles:
-    - installer-defaults
-    - upgrade/drain
-    - upgrade/upgrade-master
-    - upgrade/uncordon
-    - network-plugin/calico
+    - { role: installer-defaults }
+    - { role: upgrade/drain, tags: master_first }
+    - { role: upgrade/upgrade-master, tags: master_first }
+    - { role: upgrade/uncordon, tags: master_first }
+    - { role: network-plugin/calico, tags: [master_first, calico] }
 
 - hosts: master_secondary
   become: yes
@@ -26,15 +26,15 @@
   serial: 1
 
   roles:
-    - installer-defaults
-    - upgrade/drain
-    - upgrade/upgrade-master
-    - upgrade/uncordon
+    - { role: installer-defaults }
+    - { role: upgrade/drain, tags: master_secondary }
+    - { role: upgrade/upgrade-master, tags: master_secondary }
+    - { role: upgrade/uncordon, tags: master_secondary }
 
 - hosts: master
   become: yes
   any_errors_fatal: true
 
   roles:
-    - installer-defaults
-    - upgrade/upgrade-kubelet
+    - { role: installer-defaults }
+    - { role: upgrade/upgrade-kubelet, tags: kubelet }

@@ -3,11 +3,11 @@
 
   roles:
     - { role: installer-defaults }
-    - { role: preflight, tags: common }
+    - { role: preflight, tags: [common, preflight] }
     - { role: offline/prepare, tags: [common, offline] }
-    - { role: setproxy, tags: common }
-    - { role: firewall, tags: common }
+    - { role: setproxy, tags: [common, proxy] }
+    - { role: firewall, tags: [common, firewall] }
     - { role: preinstall, tags: common }
-    - { role: container-engine/docker, tags: common }
+    - { role: container-engine/docker, tags: [common, docker] }
     - { role: offline/load-images, tags: [common, offline] }
-    - { role: k8s-packages, tags: common }
+    - { role: k8s-packages, tags: [common, k8s-packages] }

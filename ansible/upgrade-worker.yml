@@ -2,25 +2,25 @@
   become: yes
 
   roles:
-    - installer-defaults
-    - offline/prepare
-    - container-engine/docker
-    - offline/load-images
-    - upgrade/upgrade-kubeadm
+    - { role: installer-defaults }
+    - { role: offline/prepare, tags: [common, offline] }
+    - { role: container-engine/docker, tags: [common, docker] }
+    - { role: offline/load-images, tags: [common, offline] }
+    - { role: upgrade/upgrade-kubeadm, tags: [common, kubeadm] }
 
 - hosts: worker
   become: yes
   serial: "20%"
 
   roles:
-    - installer-defaults
-    - upgrade/drain
-    - upgrade/upgrade-worker
-    - upgrade/uncordon
+    - { role: installer-defaults }
+    - { role: upgrade/drain }
+    - { role: upgrade/upgrade-worker }
+    - { role: upgrade/uncordon }
 
 - hosts: worker
   become: yes
 
   roles:
-    - installer-defaults
-    - upgrade/upgrade-kubelet
+    - { role: installer-defaults }
+    - { role: upgrade/upgrade-kubelet, tags: kubelet }
