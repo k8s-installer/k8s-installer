@@ -1,0 +1,17 @@
+- name: Unlock yum versions
+  shell:
+    cmd: yum versionlock delete kubeadm || exit 0
+    warn: false
+
+- name: Upgrade kubeadm to {{ kubeadm_version }}
+  yum:
+    name: kubeadm-{{ kubeadm_version }}
+    state: present
+    allow_downgrade: yes
+    enablerepo: "{{ yum_enablerepo }}"
+    disablerepo: "{{ yum_disablerepo }}"
+
+- name: Lock yum versions
+  shell:
+    cmd: yum versionlock add kubeadm
+    warn: false

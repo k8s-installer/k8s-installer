@@ -6,6 +6,7 @@
         state: present
         enablerepo: "{{ yum_enablerepo }}"
         disablerepo: "{{ yum_disablerepo }}"
+      when: ansible_distribution in ["RedHat", "CentOS"]
 
     - name: Enable firewalld
       service:

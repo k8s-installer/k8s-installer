@@ -1,2 +1,2 @@
-- include_tasks: offline.yml
+- import_tasks: offline.yml
   when: offline_install

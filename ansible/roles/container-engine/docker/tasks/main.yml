@@ -1,12 +1,2 @@
-- name: Install / update docker
-  yum:
-    name: docker
-    state: latest
-    enablerepo: "{{ yum_enablerepo }}"
-    disablerepo: "{{ yum_disablerepo }}"
-
-- name: Enable / start docker
-  service:
-    name: docker
-    enabled: true
-    state: started
+- import_tasks: rhel.yml
+  when: ansible_distribution in ["RedHat", "CentOS"]

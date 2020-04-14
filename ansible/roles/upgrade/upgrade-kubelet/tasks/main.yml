@@ -1,23 +1,7 @@
-- name: Unlock yum versions
-  shell:
-    cmd: yum versionlock delete kubelet kubectl || exit 0
-    warn: false
-
-- name: Update kubelet {{ kubelet_version }} and kubectl {{ kubectl_version }}
-  yum:
-    name:
-      - kubelet-{{ kubelet_version }}
-      - kubectl-{{ kubectl_version }}
-    state: present
-    enablerepo: "{{ yum_enablerepo }}"
-    disablerepo: "{{ yum_disablerepo }}"
+- import_tasks: rhel.yml
+  when: ansible_distribution in ["RedHat", "CentOS"]
 
 - name: Restart kubelet
   service:
     name: kubelet
     state: restarted
-
-- name: Lock yum versions
-  shell:
-    cmd: yum versionlock add kubelet kubectl
-    warn: false

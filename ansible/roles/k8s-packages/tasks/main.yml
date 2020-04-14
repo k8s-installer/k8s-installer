@@ -1,37 +1,5 @@
-- name: Install kubernetes.repo
-  copy:
-    src: kubernetes.repo
-    dest: /etc/yum.repos.d/kubernetes.repo
-  when: not offline_install
-
-- name: Unlock kubeadm, kubelet, kubectl versions
-  shell:
-    cmd: yum versionlock delete kubelet kubectl kubeadm || exit 0
-    warn: false
-
-- name: Install kubeadm-{{ kubeadm_version }}, kubelet-{{ kubelet_version }} and kubectl-{{ kubectl_version }}, etc.
-  yum:
-    name:
-      - kubeadm-{{ kubeadm_version }}
-      - kubelet-{{ kubelet_version }}
-      - kubectl-{{ kubectl_version }}
-      - yum-plugin-versionlock
-    state: present
-    allow_downgrade: yes
-    enablerepo: "{{ yum_enablerepo }}"
-    disablerepo: "{{ yum_disablerepo }}"
-
-- name: Lock kubeadm, kubelet, kubectl versions.
-  shell:
-    cmd: yum versionlock add kubelet kubectl kubeadm
-    warn: false
-
-- name: Set --node-ip option for kubelet
-  lineinfile:
-    path: /etc/sysconfig/kubelet
-    line: "KUBELET_EXTRA_ARGS=--node-ip={{ ip }}"
-    regexp: "^KUBELET_EXTRA_ARGS="
-  notify: restart_kubelet
+- import_tasks: rhel.yml
+  when: ansible_distribution in ["RedHat", "CentOS"]
 
 - name: Enable / start kubelet
   service:

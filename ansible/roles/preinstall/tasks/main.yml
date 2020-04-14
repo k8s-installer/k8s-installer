@@ -1,9 +1,14 @@
+- name: Enable rhel-7-server-extras-rpms
+  shell: subscription-manager repos --enable=rhel-7-server-extras-rpms
+  when: ansible_distribution == "RedHat"
+
 - name: Install libselinux-python
   yum:
     name: libselinux-python
     state: latest
     enablerepo: "{{ yum_enablerepo }}"
     disablerepo: "{{ yum_disablerepo }}"
+  when: ansible_distribution in [ "RedHat", "CentOS" ]
 
 - name: Disable SELinux
   selinux:
