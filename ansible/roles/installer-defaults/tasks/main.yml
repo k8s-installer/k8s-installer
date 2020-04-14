@@ -1,15 +1,23 @@
 - name: set vars for online install
   include_vars: online.yml
   when: not offline_install
+  tags:
+    - always
 
 - name: set vars for offline install
   include_vars: offline.yml
   when: offline_install
+  tags:
+    - always
 
 - name: set vars for master
   include_vars: master.yml
   when: inventory_hostname in groups["master"]
+  tags:
+    - always
 
 - name: set vars for worker
   include_vars: worker.yml
   when: inventory_hostname in groups["worker"]
+  tags:
+    - always
