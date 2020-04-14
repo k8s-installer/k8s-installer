@@ -1,11 +1,11 @@
 - name: Copy get-join-files.sh
   copy:
     src: get-join-files.sh
-    dest: get-join-files.sh
+    dest: /tmp/get-join-files.sh
     mode: 0755
 
 - name: Execute get-join-files.sh
-  shell: ./get-join-files.sh
+  shell: /tmp/get-join-files.sh
   become: yes
 
 - name: Fetch join-files.tar.gz
