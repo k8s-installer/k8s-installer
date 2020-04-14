@@ -10,13 +10,13 @@
 
 - name: Fetch join-files.tar.gz
   fetch:
-    src: join-files.tar.gz
+    src: /tmp/join-files.tar.gz
     dest: ./files/
     flat: yes
 
 - name: Fetch join.sh
   fetch:
-    src: join-files/join.sh
+    src: /tmp/join.sh
     dest: ./files/
     flat: yes
 
@@ -25,6 +25,6 @@
     path: "{{ item }}"
     state: absent
   with_items:
-    - join-files.tar.gz
-    - join-files
+    - /tmp/join-files.tar.gz
+    - /tmp/join.sh
   become: yes

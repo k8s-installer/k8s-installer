@@ -5,11 +5,8 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
-if [ -e join-files ]; then
-  /bin/rm -rf join-files
-fi
-mkdir join-files
-cd join-files
+TMPDIR=$(mktemp -d)
+cd "$TMPDIR" || exit 1
 
 # Generate token and get join command
 kubeadm token create --print-join-command > join.sh || exit 1
@@ -27,7 +24,11 @@ cp \
 cp /etc/kubernetes/pki/etcd/ca* ./pki/etcd
 cp /etc/kubernetes/admin.conf .
 
-tar cvzf ../join-files.tar.gz .
+tar cvzf /tmp/join-files.tar.gz .
+cp join.sh /tmp/
+
+cd /
+/bin/rm -rf "$TMPDIR"
 
 # To extract:
 # sudo tar xvzf join-files.tar.gz -C /etc/kubernetes
