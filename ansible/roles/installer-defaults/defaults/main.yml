@@ -14,6 +14,15 @@ kubelet_version: "{{ kubeadm_version }}"
 ## kubectl version (RPM)
 kubectl_version: "{{ kubelet_version }}"
 
+## kubeadm version (apt)
+kubeadm_apt_version: "{{ kube_version }}-00"
+
+## kubelet version (apt)
+kubelet_apt_version: "{{ kubeadm_apt_version }}"
+
+## kubectl version (apt)
+kubectl_apt_version: "{{ kubelet_apt_version }}"
+
 ## Advertise address of kube-apiserver on each master nodes.
 ## (should be defined as host vars)
 ip: "{{ ansible_default_ipv4.address | default(ansible_all_ipv4_addresses[0]) }}"
