@@ -1,18 +1,30 @@
 - when: not offline_install
   block:
-    - name: Install kubernetes.repo
+    - name: Copy gpg keys of kubenrnetes repo
       copy:
-        src: kubernetes.repo
-        dest: /etc/yum.repos.d/kubernetes.repo
+        src: "{{ item }}"
+        dest: /tmp/
+      with_items:
+        - yum-key.gpg
+        - rpm-package-key.gpg
 
-    - name: Install gpg key of kubernetes.repo
+    - name: Install gpg keys of kubernetes repo
       rpm_key:
         key: "{{ item }}"
         state: present
       with_items:
-        - https://packages.cloud.google.com/yum/doc/yum-key.gpg
-        - https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
-      environment: "{{ proxy_env }}"
+        - /tmp/yum-key.gpg
+        - /tmp/rpm-package-key.gpg
+        #- https://packages.cloud.google.com/yum/doc/yum-key.gpg
+        #- https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+
+    - name: Install kubernetes repo
+      yum_repository:
+        name: kubernetes
+        description: Kubernetes
+        baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+        gpgcheck: yes
+        repo_gpgcheck: no
 
 - name: Unlock kubeadm, kubelet, kubectl versions
   shell:
