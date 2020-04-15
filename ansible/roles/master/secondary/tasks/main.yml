@@ -1,6 +1,7 @@
 - name: Check if kubeadm has already run
   stat:
     path: "/etc/kubernetes/pki/ca.key"
+  become: yes
   register: kubeadm_ca
 
 - name: Execute kubeadm join

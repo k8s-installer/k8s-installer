@@ -8,10 +8,10 @@
       environment: "{{ proxy_env }}"
 
     - name: Install calico cni plugin (online mode)
-      shell: kubectl apply -f /etc/kubernetes/calico.yaml
+      command: kubectl apply -f /etc/kubernetes/calico.yaml
       become: no
 
 - name: Install calico cni plugin (offline mode)
-  shell: kubectl apply -f /opt/kubernetes-offline/calico.yaml
+  command: kubectl apply -f /opt/kubernetes-offline/calico.yaml
   become: no
   when: offline_install

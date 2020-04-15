@@ -1,17 +1,23 @@
 - when: ansible_distribution in ["RedHat", "CentOS"]
   block:
-    - include_vars: rhel.yml
-    - import_tasks: rhel.yml
+    - name: Include rhel vars
+      include_vars: rhel.yml
+    - name: Import rhel tasks
+      import_tasks: rhel.yml
 
 - when: ansible_distribution in ["Ubuntu"]
   block:
-    - include_vars: ubuntu.yml
-    - import_tasks: ubuntu.yml
+    - name: Include ubuntu vars
+      include_vars: ubuntu.yml
+    - name: Import ubuntu tasks
+      import_tasks: ubuntu.yml
 
 - import_tasks: kubelet.yml
 
 - name: Install kubectl bash completion
-  shell: "kubectl completion bash >/etc/bash_completion.d/kubectl.sh"
+  shell:
+    cmd: kubectl completion bash >/etc/bash_completion.d/kubectl.sh
+    creates: /etc/bash_completion.d/kubectl.sh
   ignore_errors: yes
 
 #- name: Pull images

@@ -44,6 +44,6 @@
     disablerepo: "{{ yum_disablerepo }}"
 
 - name: Lock kubeadm, kubelet, kubectl versions.
-  shell:
+  command:
     cmd: yum versionlock add kubelet kubectl kubeadm
     warn: false

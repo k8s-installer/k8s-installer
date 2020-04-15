@@ -22,6 +22,12 @@
       debug:
         var: kubeadm_join.stderr_lines
 
-    - fail:
+    - name: Abort if kubeadm join failed
+      fail:
         msg: kubeadm join failed
 
+  always:
+    - name: Delete join.sh
+      file:
+        path: /etc/kubernetes/join.sh
+        state: absent

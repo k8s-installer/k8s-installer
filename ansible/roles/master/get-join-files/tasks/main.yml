@@ -5,7 +5,7 @@
     mode: 0755
 
 - name: Execute get-join-files.sh
-  shell: /tmp/get-join-files.sh
+  command: /tmp/get-join-files.sh
   become: yes
 
 - name: Fetch join-files.tar.gz
