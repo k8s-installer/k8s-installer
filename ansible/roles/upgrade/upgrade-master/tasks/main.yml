@@ -6,10 +6,7 @@
           register: kubeadm_upgrade
           tags:
             - upgrade-plan
-          #environment:
-          #  http_proxy: "{{ proxy_url }}"
-          #  https_proxy: "{{ proxy_url }}"
-          #  no_proxy: "{{ proxy_noproxy }}"
+          #environment: "{{ proxy_env }}"
 
       always:
         - name: stdout

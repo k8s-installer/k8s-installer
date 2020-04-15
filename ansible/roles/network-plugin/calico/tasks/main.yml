@@ -5,10 +5,7 @@
         url: "{{ calico_manifest_url }}"
         dest: /etc/kubernetes/calico.yaml
       become: yes
-      environment:
-        http_proxy: "{{ proxy_url }}"
-        https_proxy: "{{ proxy_url }}"
-        no_proxy: "{{ proxy_noproxy }}"
+      environment: "{{ proxy_env }}"
 
     - name: Install calico cni plugin (online mode)
       shell: kubectl apply -f /etc/kubernetes/calico.yaml

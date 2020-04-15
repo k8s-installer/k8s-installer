@@ -42,5 +42,10 @@ firewall_enabled: yes
 proxy_url: ""
 proxy_noproxy: "127.0.0.1,localhost,{{ ip }}"
 
+proxy_env:
+  http_proxy: "{{ proxy_url }}"
+  https_proxy: "{{ proxy_url }}"
+  no_proxy: "{{ proxy_noproxy }}"
+
 is_master: no
 is_worker: no

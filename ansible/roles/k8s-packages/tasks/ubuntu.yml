@@ -2,10 +2,7 @@
   apt_key:
     url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
     state: present
-  environment:
-    http_proxy: "{{ proxy_url }}"
-    https_proxy: "{{ proxy_url }}"
-    no_proxy: "{{ proxy_noproxy }}"
+  environment: "{{ proxy_env }}"
 
 - name: Add k8s apt repository
   apt_repository:

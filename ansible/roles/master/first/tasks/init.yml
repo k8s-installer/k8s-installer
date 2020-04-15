@@ -3,10 +3,7 @@
       shell: kubeadm init --config /etc/kubernetes/kubeadm-config.yml -v 5
       become: yes
       register: kubeadm_init
-      #environment:
-      #  http_proxy: "{{ proxy_url }}"
-      #  https_proxy: "{{ proxy_url }}"
-      #  no_proxy: "{{ proxy_noproxy }}"
+      #environment: "{{ proxy_env }}"
 
   always:
     - name: stdout

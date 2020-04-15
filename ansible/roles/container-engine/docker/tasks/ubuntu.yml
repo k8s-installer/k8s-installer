@@ -2,10 +2,7 @@
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
     state: present
-  environment:
-    http_proxy: "{{ proxy_url }}"
-    https_proxy: "{{ proxy_url }}"
-    no_proxy: "{{ proxy_noproxy }}"
+  environment: "{{ proxy_env }}"
 
 - name: Get lsb_release
   shell: lsb_release -cs
