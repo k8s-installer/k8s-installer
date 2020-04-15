@@ -1,6 +1,16 @@
 # ChangeLog
 
-## [0.0.1] - 2020/4/15
+## xxx - 2020/4/16
+
+### Added
+
+- Add metrics-server 0.3.6 (#6)
+
+### Fixed
+
+- Disable repo_gpgcheck (#5)
+
+## 0.0.1 - 2020/4/15
 
 Initial release
 
