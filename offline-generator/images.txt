@@ -9,4 +9,5 @@ calico/cni:v3.13.2
 calico/kube-controllers:v3.13.2
 calico/node:v3.13.2
 calico/pod2daemon-flexvol:v3.13.2
+k8s.gcr.io/metrics-server-amd64:v0.3.6
 registry:2.7.1

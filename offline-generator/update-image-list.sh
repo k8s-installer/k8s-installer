@@ -4,6 +4,11 @@
 
 . ./config.sh
 
+function parse_yaml() {
+    grep "^ *image: " $1 | sed 's/^ *image: *//' | sort | uniq >> images.txt
+}
+
+
 if ! type kubeadm >/dev/null 2>&1; then
     sudo ./install-kubeadm.sh
 fi
@@ -12,7 +17,8 @@ fi
 kubeadm config images list --kubernetes-version $KUBE_VERSION > images.txt
 
 # Get calico image list
-grep "^ *image: " offline-files/calico.yaml | sed 's/^ *image: *//' | sort | uniq >> images.txt
+parse_yaml offline-files/calico.yaml
+parse_yaml offline-files/metrics-server.yaml
 
 # Additional list
 cat <<EOF >> images.txt
