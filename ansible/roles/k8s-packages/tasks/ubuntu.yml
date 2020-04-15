@@ -7,6 +7,7 @@
 - name: Add k8s apt repository
   apt_repository:
     repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
+    filename: kubernetes
     state: present
 
 - name: Install packages
