@@ -14,8 +14,9 @@
   block:
     - name: Check Ubuntu version
       fail:
-        msg: "Only support ver 18.x of Ubuntu"
-      when: ansible_distribution_major_version != "18"
+        msg: "Only support Ubuntu 18.04"
+      #when: ansible_distribution_major_version != "18"
+      when: ansible_distribution_version != "18.04"
 
     - fail:
         msg: "Offline install is not supported for Ubuntu"
