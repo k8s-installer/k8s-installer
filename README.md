@@ -39,6 +39,17 @@ RHEL 7 を使用する場合は、以下手順で rhel-7-server-extras-rpms リ�
 
 * [offline-generator](./offline-generator/README.md): オフラインインストール用のファイルを生成するジェネレータ
 
+## Kubespray との比較
+
+本 Ansible インストーラと [Kubespray](https://kubespray.io/) の比較です。
+
+* 完全オフラインインストールに対応
+    * 本インストーラは完全オフラインインストールに対応しています。
+* シンプル
+    * Kubesprayに比べると機能を最小限に絞り込んでいるためシンプルです
+        * Kubespray は role 配下に 300個程度の yaml がありますが、本インストーラは50個程度です
+    * 逆にあまり高度なことはできません          
+
 ## License
 
 [MIT License](./LICENSE.txt)
