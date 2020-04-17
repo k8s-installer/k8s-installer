@@ -1,5 +1,11 @@
 # ChangeLog
 
+## x.x.x
+
+### Updated
+
+- Support kubernetes 1.18.2
+
 ## 0.0.2 - 2020/4/17
 
 ### Added
