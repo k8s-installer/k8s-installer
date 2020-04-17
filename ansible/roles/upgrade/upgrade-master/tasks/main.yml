@@ -12,10 +12,14 @@
         - name: stdout
           debug:
             var: kubeadm_upgrade.stdout_lines
+          tags:
+            - upgrade-plan
 
         - name: stderr
           debug:
             var: kubeadm_upgrade.stderr_lines
+          tags:
+            - upgrade-plan
 
     - block:
         - name: Upgrade first master to {{ kube_version }}
