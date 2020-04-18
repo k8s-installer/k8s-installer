@@ -8,7 +8,16 @@ Ansible / kubeadm を使用して Kubernetes クラスタを構成するため�
 
 [こちら](../README.md) を参照してください。
 
-この他に、Ansible が必要です。
+この他に、Python 3, pip3, Ansible が必要です。
+
+### Ansible のインストール
+
+以下手順で Ansible をインストールしてください。
+
+    pip3 install -r requirements.txt
+    
+オフライン環境で Ansible をインストールする必要がある場合は、
+[python-offline-env](https://github.com/tmurakam/python-offline-env) を使用してください。    
 
 ## 設定
 
