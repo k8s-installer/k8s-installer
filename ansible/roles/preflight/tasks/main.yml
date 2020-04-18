@@ -18,7 +18,8 @@
       #when: ansible_distribution_major_version != "18"
       when: ansible_distribution_version != "18.04"
 
-    - name: Fail if offline install with ubuntu
-      fail:
-        msg: "Offline install is not supported for Ubuntu"
-      when: offline_install
+    #- name: Fail if offline install with ubuntu
+    #  fail:
+    #    msg: "Offline install is not supported for Ubuntu"
+    #  when: offline_install
+    

@@ -1,14 +1,16 @@
-- name: Add apt_key of k8s apt repository
-  apt_key:
-    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
-    state: present
-  environment: "{{ proxy_env }}"
+- when: not offline_install
+  block:
+    - name: Add apt_key of k8s apt repository
+      apt_key:
+        url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+        state: present
+      environment: "{{ proxy_env }}"
 
-- name: Add k8s apt repository
-  apt_repository:
-    repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
-    filename: kubernetes
-    state: present
+    - name: Add k8s apt repository
+      apt_repository:
+        repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
+        filename: kubernetes
+        state: present
 
 - name: Install packages
   apt:
@@ -19,7 +21,7 @@
       - kubeadm={{ kubeadm_apt_version }}
       - kubectl={{ kubectl_apt_version }}
     state: present
-    update_cache: yes
+    update_cache: "{{ offline_install | bool == False }}"
 
 - name: Hold kubeadm/kubelet/kubectl versions
   dpkg_selections:

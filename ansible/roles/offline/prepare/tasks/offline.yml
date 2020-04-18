@@ -1,3 +1,9 @@
+- include_vars: rhel.yml
+  when: ansible_distribution in ["RedHat", "CentOS"]
+
+- include_vars: ubuntu.yml
+  when: ansible_distribution in ["Ubuntu"]
+
 - name: Clear /opt/kubernetes-offline dir
   file:
     path: /opt/kubernetes-offline
@@ -13,7 +19,7 @@
     src: ./offline-files/{{ item }}
     dest: /opt/kubernetes-offline/
   with_items:
-    - k8s-offline-repo.tar.gz
+    - "{{ k8s_offline_repo_tarball }}"
     - k8s-images.tar.gz
 
 - name: Transfer calico.yml
@@ -21,11 +27,27 @@
     src: ./offline-files/calico.yaml
     dest: /opt/kubernetes-offline
 
-- name: Install offline yum repo
-  copy:
-    src: kubernetes-offline.repo
-    dest: /etc/yum.repos.d/
+- when: ansible_distribution in ["RedHat", "CentOS"]
+  block:
+    - name: Install offline yum repo
+      copy:
+        src: kubernetes-offline.repo
+        dest: /etc/yum.repos.d/
 
-# install yum-plugin-versionlock (dirty hack...)
-- name: Install yum-plugin-versionlock
-  shell: rpm -Uvh /opt/kubernetes-offline/rpms/yum-plugin-versionlock-*.rpm || exit 0
+    # install yum-plugin-versionlock (dirty hack...)
+    - name: Install yum-plugin-versionlock
+      shell: rpm -Uvh /opt/kubernetes-offline/rpms/yum-plugin-versionlock-*.rpm || exit 0
+
+- when: ansible_distribution in ["Ubuntu"]
+  block:
+    - name: Install apt offline config
+      copy:
+        src: 99offline
+        dest: /etc/apt/apt.conf.d/
+
+    - name: Install offline apt repo
+      apt_repository:
+        repo: deb [trusted=yes] file:/opt/kubernetes-offline/debs/ ./
+        filename: kubernetes-offline
+        state: present
+        update_cache: no

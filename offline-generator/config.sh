@@ -1,8 +1,11 @@
 ## Kubernetes version
 KUBE_VERSION=1.18.2
 
-## kubeadm version
-KUBEADM_VERSION=1.18.2-0
+## kubeadm version (rpm)
+KUBEADM_VERSION=${KUBE_VERSION}-0
+
+## kubeadm version (apt)
+KUBEADM_APT_VERSION=${KUBE_VERSION}-00
 
 ## Proxy config
 #PROXY_URL=http://proxy.example.com:8080
