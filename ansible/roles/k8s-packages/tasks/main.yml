@@ -1,16 +1,5 @@
-- when: ansible_distribution in ["RedHat", "CentOS"]
-  block:
-    - name: Include rhel vars
-      include_vars: rhel.yml
-    - name: Import rhel tasks
-      import_tasks: rhel.yml
-
-- when: ansible_distribution in ["Ubuntu"]
-  block:
-    - name: Include ubuntu vars
-      include_vars: ubuntu.yml
-    - name: Import ubuntu tasks
-      import_tasks: ubuntu.yml
+- include_vars: "{{ ansible_os_family }}.yml"
+- include_tasks: "{{ ansible_os_family }}.yml"
 
 - import_tasks: kubelet.yml
 

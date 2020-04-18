@@ -10,7 +10,7 @@
     state: latest
     enablerepo: "{{ yum_enablerepo }}"
     disablerepo: "{{ yum_disablerepo }}"
-  when: ansible_distribution in [ "RedHat", "CentOS" ]
+  when: ansible_os_family == "RedHat"
 
 #- name: Install selinux-utils, python-selinux (ubuntu)
 #  apt:
@@ -23,7 +23,7 @@
 - name: Disable SELinux
   selinux:
     state: disabled
-  when: ansible_distribution in [ "RedHat", "CentOS" ]
+  when: ansible_os_family == "RedHat"
 
 - name: Disable swap
   command: swapoff -a

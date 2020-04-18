@@ -1,8 +1,4 @@
-- import_tasks: rhel.yml
-  when: ansible_distribution in ["RedHat", "CentOS"]
-
-- import_tasks: ubuntu.yml
-  when: ansible_distribution in ["Ubuntu"]
+- include_tasks: "{{ ansible_os_family }}.yml"
 
 - name: Restart kubelet
   service:
