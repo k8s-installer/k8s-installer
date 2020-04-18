@@ -10,6 +10,8 @@ Kubernetes クラスタを kubeadm を使用してインストールするスク
 
 [こちら](../README.md) を参照してください。
 
+注: 本スクリプトは RHEL 7 / CentOS 7 にのみ対応しています。Ubuntu には対応していません。
+
 ## 設定
 
 config.sample.sh を config.sh にコピーし、設定を行ってください。

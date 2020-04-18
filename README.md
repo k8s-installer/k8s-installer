@@ -3,7 +3,7 @@
 完全オフラインインストールに対応した Kubernetes インストーラです。
 内部では kubeadm を使用しています。
 
-RHEL 7, CentOS 7 に対応しています。Ubuntu 18.04 も一部対応しています。
+RHEL 7, CentOS 7, Ubuntu 18.04 に対応しています。
 
 ## 必要環境
 
@@ -12,7 +12,6 @@ RHEL 7, CentOS 7 に対応しています。Ubuntu 18.04 も一部対応して�
         * RedHat サブスクリプションの登録(register)が完了していること。
     * CentOS 7
     * Ubuntu 18.04
-         * Ansibleインストールのみ、オフラインインストールは未対応
 * [Kubeadm 要件](https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/install-kubeadm/) を満たすこと
     * 1台あたり最低限2GB以上のメモリ (推奨 4GB以上)
     * 2コア以上の CPU

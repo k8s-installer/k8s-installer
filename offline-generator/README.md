@@ -15,9 +15,12 @@ Kubernetes クラスタをオフラインインストールするために必要
 
 ## 必要環境
 
-* Internet 接続されているマシン。Kubernetesクラスタを構成するマシンと同一の OS がインストールされていること
-    * RHEL 7
-    * CentOS 7
+Internet 接続されているマシン。
+Kubernetesクラスタを構成するマシンと同一の OS がインストールされていること (以下いずれか)
+
+* RHEL 7
+* CentOS 7
+* Ubuntu 18.04
 
 ## 事前準備
 
@@ -31,9 +34,16 @@ Internet 接続に Proxy サーバを経由する必要がある場合は、事�
 
 なお、`config.sh` に Proxy 設定を追記し `sudo ./setup-proxy.sh` を実行することで以下設定を自動投入可能です。
 
-### yum
+### yum (RHEL7/CentOS7)
 
-/etc/yum.conf に `proxy=http://proxy.example.com` の行を追加して Proxy サーバを指定してください。
+/etc/yum.conf に `proxy=http://proxy.example.com:port` の行を追加して Proxy サーバを指定してください。
+
+### apt (Ubuntu)
+
+/etc/apt/apt.conf.d/99proxy.conf を以下の内容で作成してください。
+
+    Acquire::http::Proxy "http://proxy.example.com:port";
+    Acquire::https::Proxy "http://proxy.example.com:port";
 
 ### Docker
 

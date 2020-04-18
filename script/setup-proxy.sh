@@ -9,8 +9,16 @@ fi
 export http_proxy=$PROXY_URL
 export https_proxy=$PROXY_URL
 
-# yum proxy
-grep "^proxy=$PROXY_URL" /etc/yum.conf > /dev/null || echo "proxy=$PROXY_URL" >> /etc/yum.conf
+if [ -e /etc/redhat-release ]; then
+    # yum proxy
+    grep "^proxy=$PROXY_URL" /etc/yum.conf > /dev/null || echo "proxy=$PROXY_URL" >> /etc/yum.conf
+else
+    # apt proxy
+    cat << EOF > /etc/apt/apt.conf.d/99proxy.conf
+Acquire::http::Proxy "http://proxy.example.com:port";
+Acquire::https::Proxy "http://proxy.example.com:port";
+EOF
+fi
 
 # docker proxy
 mkdir -p /etc/systemd/system/docker.service.d
