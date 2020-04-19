@@ -34,9 +34,10 @@
 
 - name: Check if kubeadm has already run
   stat:
-    path: "/etc/kubernetes/pki/ca.key"
-  register: kubeadm_ca
+    path: "/etc/kubernetes/admin.conf"
+  register: admin_conf
+  become: yes
 
 - name: Execute kubeadm init
   import_tasks: init.yml
-  when: not kubeadm_ca.stat.exists
+  when: not admin_conf.stat.exists
