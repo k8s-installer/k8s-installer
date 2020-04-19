@@ -1,0 +1,11 @@
+## kubernetes version
+#kube_version: 1.18.2
+
+## kubeadm version (RPM)
+#kubeadm_version: "{{ kube_version }}-0"
+
+## kubelet version (RPM)
+#kubelet_version: "{{ kubeadm_version }}"
+
+## kubectl version (RPM)
+#kubectl_version: "{{ kubelet_version }}"

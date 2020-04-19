@@ -1,0 +1,14 @@
+[master_first]
+master ansible_host=10.240.0.50 ip=10.240.0.50
+
+[master_secondary]
+
+[worker]
+worker ansible_host=10.240.0.51 ip=10.240.0.51
+
+[master:children]
+master_first
+master_secondary
+
+[all:vars]
+ansible_user=vagrant
