@@ -3,12 +3,10 @@
     src: ./files/join-files.tar.gz
     dest: /etc/kubernetes
     owner: root
-  become: yes
 
 - block:
     - name: Execute kubeadm join
       shell: /etc/kubernetes/join.sh --control-plane --apiserver-advertise-address {{ ip }} --node-name {{ inventory_hostname }} # -v 5
-      become: yes
       register: kubeadm_join
       retries: 3
       delay: 5

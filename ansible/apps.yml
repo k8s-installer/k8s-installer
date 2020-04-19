@@ -1,5 +1,5 @@
 - hosts: master_first
-  become: no
+  become: yes
 
   roles:
     - { role: k8s-apps/metrics-server, tags: metrics-server }

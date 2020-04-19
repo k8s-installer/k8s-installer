@@ -1,7 +1,6 @@
 - block:
     - name: Execute kubeadm init
       command: kubeadm init --config /etc/kubernetes/kubeadm-config.yml -v 5
-      become: yes
       register: kubeadm_init
       #environment: "{{ proxy_env }}"
 

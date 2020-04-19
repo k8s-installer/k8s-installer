@@ -6,7 +6,6 @@
 
 - name: Execute get-join-files.sh
   command: /tmp/get-join-files.sh
-  become: yes
 
 - name: Fetch join-files.tar.gz
   fetch:
@@ -27,4 +26,3 @@
   with_items:
     - /tmp/join-files.tar.gz
     - /tmp/join.sh
-  become: yes

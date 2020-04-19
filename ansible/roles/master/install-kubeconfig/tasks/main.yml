@@ -9,6 +9,6 @@
     src: /etc/kubernetes/admin.conf
     dest: .kube/config
     owner: "{{ ansible_user_id }}"
-    mode: 0700
+    mode: 0600
     remote_src: true
   become: yes

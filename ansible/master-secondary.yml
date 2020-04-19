@@ -1,9 +1,15 @@
 - hosts: master_secondary
-  become: no
+  become: yes
   any_errors_fatal: true
   serial: 1
 
   roles:
     - { role: installer-defaults }
     - { role: master/secondary, tags: [master, master-secondary] }
-    - { role: master/install-kubeconfig, tags: [master, master-secondary, kubeconfig] }
+
+- hosts: master_secondary
+  become: no
+  any_errors_fatal: true
+
+  roles:
+    - { role: master/install-kubeconfig, tags: [master, master-first, kubeconfig] }

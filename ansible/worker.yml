@@ -1,5 +1,5 @@
 - hosts: worker
-  become: no
+  become: yes
 
   roles:
     - { role: installer-defaults }

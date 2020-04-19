@@ -28,7 +28,6 @@
   template:
     src: kubeadm-config.yml.j2
     dest: /etc/kubernetes/kubeadm-config.yml
-  become: yes
   tags:
     - kubeadm-config
 
@@ -36,7 +35,6 @@
   stat:
     path: "/etc/kubernetes/admin.conf"
   register: admin_conf
-  become: yes
 
 - name: Execute kubeadm init
   import_tasks: init.yml

@@ -7,7 +7,6 @@
 - block:
     - name: Execute kubeadm join
       shell: /tmp/join.sh --node-name {{ inventory_hostname }} # -v 5
-      become: yes
       ignore_errors: yes
       register: kubeadm_join
 

@@ -5,13 +5,11 @@
     owner: root
     group: root
     mode: 0755
-  become: yes
 
 - name: metrics-server | Create manifests
   copy:
     src: components.yaml
     dest: /etc/kubernetes/addons/metrics-server/
-  become: yes
 
 - name: metrics-server | Apply manifests
-  command: kubectl apply -f /etc/kubernetes/addons/metrics-server/components.yaml
+  command: kubectl apply -f /etc/kubernetes/addons/metrics-server/components.yaml --kubeconfig /etc/kubernetes/admin.conf

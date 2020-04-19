@@ -4,14 +4,11 @@
       get_url:
         url: "{{ calico_manifest_url }}"
         dest: /etc/kubernetes/calico.yaml
-      become: yes
       environment: "{{ proxy_env }}"
 
     - name: Install calico cni plugin (online mode)
-      command: kubectl apply -f /etc/kubernetes/calico.yaml
-      become: no
+      command: kubectl apply -f /etc/kubernetes/calico.yaml --kubeconfig /etc/kubernetes/admin.conf
 
 - name: Install calico cni plugin (offline mode)
-  command: kubectl apply -f /opt/kubernetes-offline/calico.yaml
-  become: no
+  command: kubectl apply -f /opt/kubernetes-offline/calico.yaml --kubeconfig /etc/kubernetes/admin.conf
   when: offline_install
