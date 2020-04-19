@@ -1,0 +1,61 @@
+- name: Check if {{ basename }}.crt exists?
+  stat:
+    path: /etc/kubernetes/pki/{{ basename }}.crt
+  register: st
+
+- when: not st.stat.exists
+  block:
+    - name: Generate {{ basename }} key
+      openssl_privatekey:
+        path: "{{ role_path }}/files/{{ basename }}.key"
+        size: 2048
+        mode: 0600
+        #owner: root
+      delegate_to: localhost
+      become: no
+      run_once: yes
+
+    - name: Generate {{ basename }} csr
+      openssl_csr:
+        path: "{{ role_path }}/files/{{ basename }}.csr"
+        privatekey_path: "{{ role_path }}/files/{{ basename }}.key"
+        common_name:  "{{ cn }}"
+        basic_constraints:
+          - "CA:TRUE"
+        #basic_constraints_critical: yes
+        key_usage:
+          - keyCertSign
+          - cRLSign
+          - digitalSignature
+        #extended_key_usage_critical: yes
+      delegate_to: localhost
+      become: no
+      run_once: yes
+
+    - name: Generate {{ basename }} cert
+      openssl_certificate:
+        path: "{{ role_path }}/files/{{ basename }}.crt"
+        privatekey_path: "{{ role_path }}/files/{{ basename }}.key"
+        csr_path: "{{ role_path }}/files/{{ basename }}.csr"
+        provider: selfsigned
+        selfsigned_not_after: "{{ ca_not_after }}"
+      delegate_to: localhost
+      become: no
+      run_once: yes
+
+    - name: Create pki dir
+      file:
+        path: /etc/kubernetes/pki/etcd
+        state: directory
+        owner: root
+        mode: 0755
+
+    - name: Install {{ basename }} certificate / key
+      copy:
+        src: "{{ item.name }}"
+        dest: /etc/kubernetes/pki/{{ item.name }}
+        mode: "{{ item.mode }}"
+        owner: root
+      with_items:
+        - { name: "{{ basename }}.crt", mode: "0644" }
+        - { name: "{{ basename }}.key", mode: "0600" }

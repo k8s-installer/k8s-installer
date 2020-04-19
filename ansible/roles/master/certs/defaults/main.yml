@@ -1,0 +1,2 @@
+# CA certificate expiration
+ca_not_after: +10950d
