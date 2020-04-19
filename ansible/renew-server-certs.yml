@@ -1,0 +1,7 @@
+# Renew all server certificates
+- hosts: all
+  become: yes
+  serial: 1
+
+  roles:
+    - { role: ops/renew-server-certs }

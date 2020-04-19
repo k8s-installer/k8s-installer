@@ -1,0 +1,29 @@
+- when: inventory_hostname in groups["master"]
+  block:
+    - import_tasks: check-expiration.yml
+      tags:
+        - check-expiration
+
+    - name: Renew server certs
+      command: kubeadm alpha certs renew all
+      tags:
+        - renew-certs
+
+    - import_tasks: check-expiration.yml
+      tags:
+        - renew-certs
+
+- name: Remove kubelet server certs to regenerate them
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - /var/lib/kubelet/pki/kubelet.crt
+    - /var/lib/kubelet/pki/kubelet.key
+
+- name: Restart kubelet to regenrate certs
+  service:
+    name: kubelet
+    state: restarted
+  tags:
+    - renew-certs

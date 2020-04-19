@@ -1,0 +1,7 @@
+- name: Get server expiration
+  command: kubeadm alpha certs check-expiration
+  register: expiration
+
+- name: Show server expiration
+  debug:
+    var: expiration.stdout_lines
