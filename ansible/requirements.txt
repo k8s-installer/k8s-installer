@@ -1,2 +1,3 @@
-ansible
+ansible>=2.9
+cryptography>=2.8
 pyopenssl
