@@ -1,5 +1,12 @@
 # ChangeLog
 
+## x.x.x
+
+### Updated
+
+- Support offline installer for Ubuntu.
+- Generate CA certificates have longer expirations.
+
 ## 0.0.3 - 2020/4/18
 
 ### Updated
