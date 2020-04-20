@@ -18,16 +18,3 @@
   vars:
     basename: front-proxy-ca
     cn: front-proxy-ca
-
-# TODO:
-# apiserver
-# apiserver-etcd-client
-# apiserver-kubelet-client
-# etcd-healthcheck-client
-# etcd-peer
-# etcd-server
-# front-proxy-client
-
-# admin.conf
-# controller-manager.conf
-# scheduler.conf
