@@ -9,7 +9,7 @@ TMPDIR=$(mktemp -d)
 cd "$TMPDIR" || exit 1
 
 # Generate token and get join command
-kubeadm token create --print-join-command > join.sh || exit 1
+kubeadm token create --print-join-command --kubeconfig=/etc/kubernetes/admin.conf > join.sh || exit 1
 
 sed -i  's/^\(kubeadm join.*\)$/\1 $*/' join.sh
 chmod 755 *.sh
