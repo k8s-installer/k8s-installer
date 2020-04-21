@@ -3,7 +3,11 @@
 . ./check-root.sh
 . ./config.sh
 
-#subscription-manager repos --enable=rhel-7-server-extras-rpms
+# rhel7
+if type subscription-manager >/dev/null 2>&1; then
+    subscription-manager repos --enable=rhel-7-server-extras-rpms  # for docker
+    #subscription-manager repos --enable rhel-7-server-optional-rpms  # for python3-devel
+fi
 
 # setup repo
 if [ ! -e /etc/yum.repos.d/kubernetes.repo ]; then
@@ -33,7 +37,9 @@ mkdir -p cache
 RT="repotrack -a x86_64 -p cache"
 YD="yumdownloader --destdir=cache -y"
 
-DEPS="docker audit libselinux-python yum-plugin-versionlock firewalld python3 gnupg2 python2-cryptography"
+PY2DEPS="libselinux-python python-virtualenv python2-cryptography"
+PY3DEPS="python3" # python3-devel gcc openssl-devel"
+DEPS="docker audit yum-plugin-versionlock firewalld gnupg2 $PY2DEPS $PY3DEPS"
 
 echo "==> Downloading docker, kubeadm, etc"
 $RT kubeadm-$KUBEADM_VERSION $DEPS || (echo "Download error" && exit 1)
