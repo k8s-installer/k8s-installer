@@ -5,6 +5,7 @@
 
   roles:
     - { role: installer-defaults }
+    - { role: master/kubeadm-config, tags: [master, master-secondary, kubeadm-config] }
     - { role: master/secondary, tags: [master, master-secondary] }
 
 - hosts: master_secondary

@@ -5,6 +5,7 @@
   roles:
     - { role: installer-defaults }
     - { role: master/certs/ca, tags: [master, master-first, cacerts] }
+    - { role: master/kubeadm-config, tags: [master, master-first, kubeadm-config] }
     - { role: master/first, tags: [master, master-first] }
     - { role: network-plugin/calico, tags: [master, master-first, calico] }
     - { role: master/get-join-files, tags: [master, master-first, get-join-files] }

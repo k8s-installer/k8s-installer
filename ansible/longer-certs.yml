@@ -4,4 +4,5 @@
 
   roles:
     - { role: installer-defaults }
+    - { role: master/kubeadm-config, tags: kubeadm-config }
     - { role: master/certs/longer-certs }

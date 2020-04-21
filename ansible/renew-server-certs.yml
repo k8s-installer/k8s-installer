@@ -4,4 +4,6 @@
   serial: 1
 
   roles:
+    - { role: installer-defaults }
+    - { role: master/kubeadm-config, tags: kubeadm-config }
     - { role: ops/renew-server-certs }

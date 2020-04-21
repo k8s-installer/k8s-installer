@@ -8,6 +8,7 @@
     - { role: container-engine/docker, tags: [common, docker] }
     - { role: offline/load-images, tags: [common, offline] }
     - { role: upgrade/upgrade-kubeadm, tags: [common, kubeadm] }
+    - { role: master/kubeadm-config, tags: kubeadm-config }
 
 - hosts: master_first
   become: yes
