@@ -4,3 +4,5 @@
       - python2-cryptography
       #- python36-cryptography
     state: present
+    enablerepo: "{{ yum_enablerepo }}"
+    disablerepo: "{{ yum_disablerepo }}"
