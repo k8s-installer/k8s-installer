@@ -1,4 +1,4 @@
-apiVersion: kubeadm.k8s.io/v1beta2
+apiVersion: kubeadm.k8s.io/{{ kubeadm_config_api_version }}
 kind: InitConfiguration
 localAPIEndpoint:
   advertiseAddress: {{ ip }}
@@ -7,7 +7,7 @@ nodeRegistration:
   name: {{ inventory_hostname }}
 
 ---
-apiVersion: kubeadm.k8s.io/v1beta2
+apiVersion: kubeadm.k8s.io/{{ kubeadm_config_api_version }}
 kind: ClusterConfiguration
 #kubernetesVersion: stable
 kubernetesVersion: v{{ kube_version }}

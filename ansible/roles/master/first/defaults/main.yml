@@ -13,3 +13,6 @@ cluster_name: kubernetes
 
 # image repository
 image_repository: k8s.gcr.io
+
+# kubeadm config api version
+kubeadm_config_api_version: v1beta2
