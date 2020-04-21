@@ -1,8 +1,9 @@
-- file:
-    path: "{{ role_path }}/files/etcd"
+- name: Create pki dir
+  file:
+    path: /etc/kubernetes/pki/etcd
     state: directory
-  delegate_to: localhost
-  become: no
+    owner: root
+    mode: 0755
 
 - import_tasks: ca.yml
   vars:
