@@ -4,4 +4,4 @@
 
   roles:
     - { role: installer-defaults }
-    - { role: master/certs/longer-certs }
+    - { role: master/certs/revert-certs }

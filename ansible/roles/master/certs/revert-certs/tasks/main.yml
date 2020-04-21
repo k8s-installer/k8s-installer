@@ -1,0 +1,23 @@
+- name: Remove certificates
+  file:
+    path: /etc/kubernetes/{{ item }}
+    state: absent
+  with_items:
+    - pki/apiserver.crt
+    - pki/apiserver.key
+    - pki/apiserver-etcd-client.crt
+    - pki/apiserver-etcd-client.key
+    - pki/apiserver-kubelet-client.crt
+    - pki/apiserver-kubelet-client.key
+    - pki/front-proxy-client.crt
+    - pki/front-proxy-client.key
+    - admin.conf
+    - controller-manager.conf
+    - kubelet.conf
+    - scheduler.conf
+
+- name: Regenerate certs
+  command: kubeadm init phase certs all --config /etc/kubernetes/kubeadm-config.yml
+
+- name: Regenerate kubeconfigs
+  command: kubeadm init phase kubeconfig all --config /etc/kubernetes/kubeadm-config.yml
