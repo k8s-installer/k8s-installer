@@ -89,3 +89,23 @@ inventory/group_vars/all/version.yml の以下の値を変更してください�
 以下手順でワーカーノードをアップグレードしてください。
     
     $ ansible-playbook -i inventory/hosts upgrade-worker.yml
+
+## 証明書更新
+
+Kubernetes コントロールプレーンの証明書は有効期限は1年となっています。
+これは Kubernetes のマイナーバージョンアップのタイミングで自動的に更新されます。
+
+### 有効期限の矯正更新
+
+有効期限を手動で強制的に更新したい場合は以下を実行してください。
+
+    $ ansible-playbook -i inventory/hosts renew-server-certs.yml
+
+### 有効期限の延長
+
+証明書期限をより長く設定することも可能です。以下手順を実行してください。
+
+    $ ansible-playbook -i inventory/hosts longer-certs.yml
+
+有効期限5年で証明書が更新設定されます。
+ただし、Kubernetes のマイナーバージョンを行うと1年にリセットされますので、その場合は再度本手順の実行が必要です。
