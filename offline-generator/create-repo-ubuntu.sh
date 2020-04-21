@@ -21,7 +21,9 @@ sudo apt-get update && sudo apt-get install -y $DOCKER_DEPS
 
 mkdir -p cache
 
-PKGLIST="$DOCKER_DEPS docker-ce docker-ce-cli containerd.io kubeadm=${KUBEADM_APT_VERSION} kubelet=${KUBEADM_APT_VERSION} kubectl=${KUBEADM_APT_VERSION} firewalld"
+DEPS="docker-ce docker-ce-cli containerd.io firewalld python-cryptography"
+
+PKGLIST="$DOCKER_DEPS $DEPS kubeadm=${KUBEADM_APT_VERSION} kubelet=${KUBEADM_APT_VERSION} kubectl=${KUBEADM_APT_VERSION}"
 
 # Get all dependencies
 DEPS=$(apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances --no-pre-depends $PKGLIST | grep "^\w" | sort | uniq)

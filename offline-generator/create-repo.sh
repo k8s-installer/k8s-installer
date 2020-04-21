@@ -33,8 +33,10 @@ mkdir -p cache
 RT="repotrack -a x86_64 -p cache"
 YD="yumdownloader --destdir=cache -y"
 
+DEPS="docker audit libselinux-python yum-plugin-versionlock firewalld python3 gnupg2 python2-cryptography"
+
 echo "==> Downloading docker, kubeadm, etc"
-$RT docker audit kubeadm-$KUBEADM_VERSION libselinux-python yum-plugin-versionlock firewalld python3 gnupg2 || (echo "Download error" && exit 1)
+$RT kubeadm-$KUBEADM_VERSION $DEPS || (echo "Download error" && exit 1)
 
 echo "==> Downloading kubectl"
 $RT kubectl-$KUBEADM_VERSION || (echo "Download error" && exit 1)

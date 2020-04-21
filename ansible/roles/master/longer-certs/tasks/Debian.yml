@@ -1,0 +1,6 @@
+- name: Install python cryptography
+  apt:
+    name: python-cryptography
+    state: present
+    update_cache: "{{ offline_install | bool == False }}"
+

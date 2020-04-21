@@ -1,0 +1,80 @@
+- include_tasks: "{{ ansible_os_family }}.yml"
+
+- name: Delete csr dir
+  file:
+    path: /etc/kubernetes/pki/csr
+    state: absent
+
+- name: Create CSRs
+  command: kubeadm alpha certs renew all --csr-only --csr-dir /etc/kubernetes/pki/csr
+
+- name: Sign certs
+  include_tasks: cert.yml
+  vars:
+    basename: "{{ item }}"
+    ca: ca
+  with_items:
+    - admin.conf
+    - apiserver
+    - apiserver-kubelet-client
+    - controller-manager.conf
+    - scheduler.conf
+
+- name: Sign certs
+  include_tasks: cert.yml
+  vars:
+    basename: "{{ item }}"
+    ca: etcd/ca
+  with_items:
+    - apiserver-etcd-client
+    - etcd-healthcheck-client
+    - etcd-peer
+    - etcd-server
+
+- name: Sign certs
+  include_tasks: cert.yml
+  vars:
+    basename: "{{ item }}"
+    ca: front-proxy-ca
+  with_items:
+    - front-proxy-client
+
+- name: Install certs
+  copy:
+    src: /etc/kubernetes/pki/csr/{{ item }}
+    dest: /etc/kubernetes/pki/
+    remote_src: yes
+  with_items:
+    - apiserver.key
+    - apiserver.crt
+    - apiserver-etcd-client.key
+    - apiserver-etcd-client.crt
+    - apiserver-kubelet-client.key
+    - apiserver-kubelet-client.crt
+    - front-proxy-client.key
+    - front-proxy-client.crt
+
+- name: Install etcd certs
+  copy:
+    src: /etc/kubernetes/pki/csr/etcd-{{ item }}
+    dest: /etc/kubernetes/pki/etcd/{{ item }}
+    remote_src: yes
+  with_items:
+    - healthcheck-client.key
+    - healthcheck-client.crt
+    - peer.key
+    - peer.crt
+    - server.key
+    - server.crt
+
+- name: Update kubeconfig files
+  shell: >-
+    kubectl config set-credentials {{ item.user }}
+    --client-certificate=/etc/kubernetes/pki/csr/{{ item.file }}.crt
+    --client-key=/etc/kubernetes/pki/csr/{{ item.file }}.key
+    --embed-certs=true
+    --kubeconfig=/etc/kubernetes/{{ item.file }}
+  with_items:
+    - { file: admin.conf, user: kubernetes-admin }
+    - { file: controller-manager.conf, user: "system:kube-controller-manager" }
+    - { file: scheduler.conf, user: "system:kube-scheduler" }
