@@ -1,0 +1,12 @@
+- name: confirm
+  pause: prompt="This resets the Kubernetes cluster COMPLETELY!!. Are you sure? (y/n)"
+  register: yn
+
+- name: abort
+  fail: msg="Aborted."
+  when: yn.user_input != 'y'
+  run_once: true
+
+- name: Execute kubeadm reset
+  command: kubeadm reset
+  become: yes
