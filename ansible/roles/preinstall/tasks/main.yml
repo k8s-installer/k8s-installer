@@ -1,29 +1,4 @@
-- name: Enable rhel-7-server-extras-rpms
-  command: subscription-manager repos --enable=rhel-7-server-extras-rpms
-  when: ansible_distribution == "RedHat"
-
-- name: Install required packages (rhel)
-  yum:
-    name:
-      - libselinux-python
-      - gnupg2
-    state: latest
-    enablerepo: "{{ yum_enablerepo }}"
-    disablerepo: "{{ yum_disablerepo }}"
-  when: ansible_os_family == "RedHat"
-
-#- name: Install selinux-utils, python-selinux (ubuntu)
-#  apt:
-#    name:
-#      - selinux-utils
-#      - python-selinux
-#    state: latest
-#  when: ansible_distribution in [ "Ubuntu" ]
-
-- name: Disable SELinux
-  selinux:
-    state: disabled
-  when: ansible_os_family == "RedHat"
+- include_tasks: "{{ ansible_os_family }}.yml"
 
 - name: Disable swap
   command: swapoff -a

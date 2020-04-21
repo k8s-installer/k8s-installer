@@ -4,3 +4,9 @@
     state: present
     update_cache: "{{ offline_install | bool == False }}"
 
+#- name: Install selinux-utils, python-selinux (ubuntu)
+#  apt:
+#    name:
+#      - selinux-utils
+#      - python-selinux
+#    state: latest

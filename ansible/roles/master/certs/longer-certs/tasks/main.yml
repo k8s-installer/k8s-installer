@@ -1,5 +1,3 @@
-- include_tasks: "{{ ansible_os_family }}.yml"
-
 - name: Delete csr dir
   file:
     path: /etc/kubernetes/pki/csr
