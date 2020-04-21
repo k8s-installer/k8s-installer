@@ -1,0 +1,3 @@
+# Renew certificates on upgrade
+certificate_renewal: yes
+

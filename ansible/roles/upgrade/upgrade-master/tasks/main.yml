@@ -1,3 +1,6 @@
+#- debug:
+#    var: certificate_renewal
+
 - when: inventory_hostname in groups["master_first"]
   block:
     - block:
@@ -23,7 +26,12 @@
 
     - block:
         - name: Upgrade first master to {{ kube_version }}
-          shell: kubeadm upgrade apply v{{ kube_version }} -y -v 5
+          shell: >-
+            kubeadm upgrade apply v{{ kube_version }}
+            {% if not certificate_renewal|bool %}
+            --certificate-renewal=false
+            {% endif %}
+            -y -v 5
           register: kubeadm_upgrade
 
       always:
@@ -38,4 +46,8 @@
 - when: inventory_hostname in groups["master_secondary"]
   block:
     - name: Upgrade secondary masters to v{{ kube_version }}
-      shell: kubeadm upgrade node
+      shell: >-
+        kubeadm upgrade node
+        {% if not certificate_renewal|bool %}
+        --certificate-renewal=false
+        {% endif %}

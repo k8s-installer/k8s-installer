@@ -109,8 +109,8 @@ Kubernetes コントロールプレーンの証明書は有効期限は1年と�
 
 有効期限5年で証明書が更新設定されます。
 
-なお、この状態では Kubernetes のマイナーバージョンアップグレードが失敗しますので、
-アップグレードを行う場合は事前に以下手順で証明書を revert してください。
+なお、有効期限を延長した状態で Kubernetes のマイナーバージョンアップグレードを
+行う場合は、以下のように必ず certificate_renewal の値を no にして実行してください。
+この値を指定しないとアップグレードが失敗します。
 
-
-    $ ansible-playbook -i inventory/hosts revert-certs.yml
+    $ ansible-playbook -i inventory/hosts update-master.yml -e certificate_renewal=no
