@@ -2,10 +2,15 @@
 
 ## x.x.x
 
+### Added
+
+- Support offline installer for Ubuntu
+- Add renew-server-certs playbook
+- Add longer-certs playbook
+
 ### Updated
 
-- Support offline installer for Ubuntu.
-- Generate CA certificates have longer expirations.
+- Generate CA certificates have longer expirations (30y).
 
 ## 0.0.3 - 2020/4/18
 
