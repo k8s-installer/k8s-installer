@@ -23,7 +23,12 @@ mkdir -p cache
 
 DEPS="docker-ce docker-ce-cli containerd.io firewalld python-cryptography"
 
-PKGLIST="$DOCKER_DEPS $DEPS kubeadm=${KUBEADM_APT_VERSION} kubelet=${KUBEADM_APT_VERSION} kubectl=${KUBEADM_APT_VERSION}"
+PKGLIST="$DOCKER_DEPS $DEPS"
+
+for v in $KUBE_VERSIONS; do
+    PKGLIST="$PKGLIST kubeadm=${v}-00 kubelet=${v}-00 kubectl=${v}-00"
+done
+
 
 # Get all dependencies
 DEPS=$(apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances --no-pre-depends $PKGLIST | grep "^\w" | sort | uniq)

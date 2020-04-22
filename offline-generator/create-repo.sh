@@ -41,18 +41,25 @@ PY2DEPS="libselinux-python python-virtualenv python2-cryptography"
 PY3DEPS="python3" # python3-devel gcc openssl-devel"
 DEPS="docker audit yum-plugin-versionlock firewalld gnupg2 $PY2DEPS $PY3DEPS"
 
-echo "==> Downloading docker, kubeadm, etc"
-$RT kubeadm-$KUBEADM_VERSION $DEPS || (echo "Download error" && exit 1)
+echo "==> Downloading docker, etc"
+$RT $DEPS || (echo "Download error" && exit 1)
 
-echo "==> Downloading kubectl"
-$RT kubectl-$KUBEADM_VERSION || (echo "Download error" && exit 1)
 
-echo "==> Downloading kubelet"
-#$RT -n kubelet || (echo "Download error" && exit 1)  # download all versions with '-n'
-$RT kubelet-$KUBEADM_VERSION || (echo "Download error" && exit 1)
+for v in $KUBE_VERSIONs; do
+    KUBEADM_VERSION=${v}-0
 
-# download with yumdownloader, because repotrack can't download specific version of kubelet...
-$YD kubelet-$KUBEADM_VERSION || (echo "Download error" && exit 1)
+    echo "==> Downloading kubeadm $KUBEADM_VERSION"
+    $RT kubeadm-$KUBEADM_VERSION $DEPS || (echo "Download error" && exit 1)
+
+    echo "==> Downloading kubectl $KUBEADM_VERSION"
+    $RT kubectl-$KUBEADM_VERSION || (echo "Download error" && exit 1)
+
+    echo "==> Downloading kubelet $KUBEADM_VERSION"
+    #$RT kubelet-$KUBEADM_VERSION || (echo "Download error" && exit 1)
+
+    # download with yumdownloader, because repotrack can't download specific version of kubelet...
+    $YD kubelet-$KUBEADM_VERSION || (echo "Download error" && exit 1)
+done
 
 # create rpms dir
 if [ -e rpms ]; then
