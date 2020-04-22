@@ -19,7 +19,7 @@
     - { role: upgrade/drain, tags: master_first }
     - { role: upgrade/upgrade-master, tags: master_first }
     - { role: upgrade/uncordon, tags: master_first }
-    - { role: network-plugin/calico, tags: [master_first, calico] }
+    - { role: network-plugin, tags: [master_first, network-plugin] }
 
 - hosts: master_secondary
   become: yes

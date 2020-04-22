@@ -8,6 +8,6 @@
     - { role: setproxy, tags: [common, proxy] }
     - { role: firewall, tags: [common, firewall] }
     - { role: preinstall, tags: common }
-    - { role: container-engine/docker, tags: [common, docker] }
+    - { role: container-engine, tags: [common, container-engine] }
     - { role: offline/load-images, tags: [common, offline] }
     - { role: k8s-packages, tags: [common, k8s-packages] }
