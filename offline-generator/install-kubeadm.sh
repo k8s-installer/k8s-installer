@@ -3,7 +3,7 @@
 # install kubeadm, needed to pull image of k8s images
 
 . ./check-root.sh
-. ./config.sh
+#. ./config.sh
 
 # setup repo
 if [ ! -e /etc/yum.repos.d/kubernetes.repo ]; then
@@ -18,5 +18,7 @@ if ! type docker >/dev/null 2>&1; then
 fi
 systemctl enable --now docker
 
-# install kubeadm (and docker)
-yum install -y kubeadm-$KUBEADM_VERSION
+# install kubeadm
+#yum install -y kubeadm-$KUBEADM_VERSION
+yum install -y kubeadm
+

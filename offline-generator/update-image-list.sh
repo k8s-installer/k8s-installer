@@ -13,8 +13,12 @@ if ! type kubeadm >/dev/null 2>&1; then
     sudo ./install-kubeadm.sh
 fi
 
+/bin/rm images.txt
+
 # Get kubernetes container image list
-kubeadm config images list --kubernetes-version $KUBE_VERSION > images.txt
+for v in $KUBE_VERSIONS; do
+    kubeadm config images list --kubernetes-version $v >> images.txt
+done
 
 # Get calico image list
 parse_yaml offline-files/calico.yaml

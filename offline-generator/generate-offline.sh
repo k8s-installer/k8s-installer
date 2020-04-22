@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [ -e /etc/redhat-release ]; then
-    CREATEREPO="sudo ./create-repo.sh"
+    CREATEREPO="sudo ./create-repo-rhel.sh"
 else
     CREATEREPO="./create-repo-ubuntu.sh"
 fi
