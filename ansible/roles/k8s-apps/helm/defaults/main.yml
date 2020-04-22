@@ -1,0 +1,5 @@
+helm_version: v3.1.2
+
+helm_tarball: helm-{{ helm_version }}-linux-amd64.tar.gz
+
+helm_download_url: https://get.helm.sh/{{ helm_tarball }}

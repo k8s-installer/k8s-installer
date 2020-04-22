@@ -1,5 +1,11 @@
 # ChangeLog
 
+## x.x.x
+
+### Added
+
+- Add helm v3 installation
+
 ## 0.0.4 - 2020/4/21
 
 ### Added
