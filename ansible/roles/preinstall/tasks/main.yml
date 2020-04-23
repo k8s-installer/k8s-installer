@@ -19,3 +19,5 @@
 
 - name: sysctl
   command: sysctl --system
+
+- import_tasks: cfssl.yml

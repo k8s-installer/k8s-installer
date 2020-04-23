@@ -1,0 +1,9 @@
+- name: Install cfssl
+  copy:
+    src: "{{ item }}"
+    dest: /usr/local/bin/{{ item }}
+    mode: 0755
+    owner: root
+  with_items:
+    - cfssl
+    - cfssljson

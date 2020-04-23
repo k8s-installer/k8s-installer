@@ -7,7 +7,7 @@
     - { role: offline/prepare, tags: [common, offline] }
     - { role: setproxy, tags: [common, proxy] }
     - { role: firewall, tags: [common, firewall] }
-    - { role: preinstall, tags: common }
+    - { role: preinstall, tags: [common, preinstall] }
     - { role: container-engine, tags: [common, container-engine] }
     - { role: offline/load-images, tags: [common, offline] }
     - { role: k8s-packages, tags: [common, k8s-packages] }
