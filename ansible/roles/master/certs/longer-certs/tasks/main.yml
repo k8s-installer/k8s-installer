@@ -6,64 +6,65 @@
 - name: Create CSRs
   command: kubeadm alpha certs renew all --csr-only --csr-dir /etc/kubernetes/pki/csr
 
-- name: Sign certs
+- name: Sign certs (ca)
   include_tasks: cert.yml
   vars:
-    basename: "{{ item }}"
+    basename: "{{ item.name }}"
     ca: ca
+    profile: "{{ item.profile }}"
   with_items:
-    - admin.conf
-    - apiserver
-    - apiserver-kubelet-client
-    - controller-manager.conf
-    - scheduler.conf
+    - { name: admin.conf, profile: client }
+    - { name: apiserver, profile: server }
+    - { name: apiserver-kubelet-client, profile: client }
+    - { name: controller-manager.conf, profile: client }
+    - { name: scheduler.conf, profile: client }
 
-- name: Sign certs
+- name: Sign certs (etcd/ca)
   include_tasks: cert.yml
   vars:
-    basename: "{{ item }}"
+    basename: "{{ item.name }}"
     ca: etcd/ca
+    profile: "{{ item.profile }}"
   with_items:
-    - apiserver-etcd-client
-    - etcd-healthcheck-client
-    - etcd-peer
-    - etcd-server
+    - { name: apiserver-etcd-client, profile: client }
+    - { name: etcd-healthcheck-client, profile: client }
+    - { name: etcd-peer, profile: server-client }
+    - { name: etcd-server, profile: server-client }
 
-- name: Sign certs
+- name: Sign certs (front-proxy)
   include_tasks: cert.yml
   vars:
-    basename: "{{ item }}"
+    basename: front-proxy-client
     ca: front-proxy-ca
-  with_items:
-    - front-proxy-client
+    profile: client
 
-- name: Install certs
+- name: Copy certs/keys
   copy:
     src: /etc/kubernetes/pki/csr/{{ item }}
     dest: /etc/kubernetes/pki/
     remote_src: yes
   with_items:
-    - apiserver.key
     - apiserver.crt
-    - apiserver-etcd-client.key
+    - apiserver.key
     - apiserver-etcd-client.crt
-    - apiserver-kubelet-client.key
+    - apiserver-etcd-client.key
     - apiserver-kubelet-client.crt
-    - front-proxy-client.key
+    - apiserver-kubelet-client.key
     - front-proxy-client.crt
+    - front-proxy-client.key
 
-- name: Install etcd certs
+- name: Copy cert/keys (etcd)
   copy:
     src: /etc/kubernetes/pki/csr/etcd-{{ item }}
     dest: /etc/kubernetes/pki/etcd/{{ item }}
     remote_src: yes
   with_items:
-    - healthcheck-client.key
     - healthcheck-client.crt
-    - peer.key
+    - healthcheck-client.key
     - peer.crt
-    - server.key
+    - peer.key
     - server.crt
+    - server.key
 
 - name: Update kubeconfig files
   shell: >-

@@ -1,11 +1,16 @@
 - name: Sign and generate {{ basename }} cert
-  openssl_certificate:
-    privatekey_path: /etc/kubernetes/pki/csr/{{ basename }}.key
-    csr_path: /etc/kubernetes/pki/csr/{{ basename }}.csr
-    path: /etc/kubernetes/pki/csr/{{ basename }}.crt
-    #subject_alt_name: "{{ sans }}"
+  shell:
+    cmd: >-
+      /usr/local/bin/cfssl sign
+      -config ../config/ca-config.json
+      -profile {{ profile }}
+      -ca ../{{ ca }}.crt
+      -ca-key ../{{ ca }}.key
+      {{ basename }}.csr
+      | /usr/local/bin/cfssljson -bare {{ basename }}
+    chdir: /etc/kubernetes/pki/csr
 
-    provider: ownca
-    ownca_path: /etc/kubernetes/pki/{{ ca }}.crt
-    ownca_privatekey_path: /etc/kubernetes/pki/{{ ca }}.key
-    ownca_not_after: "{{ cert_not_after }}"
+- name: Rename cert
+  shell:
+    cmd: /bin/mv {{ basename }}.pem {{ basename }}.crt
+    chdir: /etc/kubernetes/pki/csr

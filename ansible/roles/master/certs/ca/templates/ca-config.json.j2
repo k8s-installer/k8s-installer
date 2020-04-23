@@ -4,7 +4,15 @@
       "expiry": "{{ cert_expiry }}"
     },
     "profiles": {
-      "kubernetes": {
+      "server": {
+        "usages": ["signing", "key encipherment", "server auth"],
+        "expiry": "{{ cert_expiry }}"
+      },
+      "client": {
+        "usages": ["signing", "key encipherment", "client auth"],
+        "expiry": "{{ cert_expiry }}"
+      },
+      "server-client": {
         "usages": ["signing", "key encipherment", "server auth", "client auth"],
         "expiry": "{{ cert_expiry }}"
       }
