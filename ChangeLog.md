@@ -1,10 +1,16 @@
 # ChangeLog
 
-## x.x.x
+## 0.0.5 - 2020/4/23
 
 ### Added
 
 - Add helm v3 installation
+- Add ops/reset-cluster role
+
+### Updated
+
+- Update calico v3.13.3
+- Use cfssl to generate certificates
 
 ## 0.0.4 - 2020/4/21
 
