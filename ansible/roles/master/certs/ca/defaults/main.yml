@@ -1,2 +1,5 @@
-# CA certificate expiration
-ca_not_after: +10950d
+# CA expiry: 262980h = 30y
+ca_expiry: 262980h
+
+# Cert expiry: 43830h = 5y
+cert_expiry: 43830h

@@ -5,36 +5,26 @@
 
 - when: not st.stat.exists
   block:
-    - name: Generate {{ basename }} key
-      openssl_privatekey:
-        path: /etc/kubernetes/pki/{{ basename }}.key
-        size: 2048
-        mode: 0600
-        #owner: root
+    - name: Generate {{ basename }} csr json
+      template:
+        src: ca-csr.json.j2
+        dest: /etc/kubernetes/pki/{{ basename }}-csr.json
 
-    - name: Generate {{ basename }} csr
-      openssl_csr:
-        path: /etc/kubernetes/pki/{{ basename }}.csr
-        privatekey_path: /etc/kubernetes/pki/{{ basename }}.key
-        common_name:  "{{ cn }}"
-        basic_constraints:
-          - "CA:TRUE"
-        #basic_constraints_critical: yes
-        key_usage:
-          - keyCertSign
-          - cRLSign
-          - digitalSignature
-        #extended_key_usage_critical: yes
+    - name: Generate {{ basename }} certs
+      shell:
+        cmd: /usr/local/bin/cfssl gencert -initca /etc/kubernetes/pki/{{ basename }}-csr.json | /usr/local/bin/cfssljson -bare {{ basename }}
+        chdir: /etc/kubernetes/pki
 
-    - name: Generate {{ basename }} cert
-      openssl_certificate:
-        path: /etc/kubernetes/pki/{{ basename }}.crt
-        privatekey_path: /etc/kubernetes/pki/{{ basename }}.key
-        csr_path: /etc/kubernetes/pki/{{ basename }}.csr
-        provider: selfsigned
-        selfsigned_not_after: "{{ ca_not_after }}"
+    - name: Move {{ basename }} key
+      shell: /bin/mv /etc/kubernetes/pki/{{ basename }}-key.pem /etc/kubernetes/pki/{{ basename }}.key
 
-    - name: Delete {{ basename }} csr
+    - name: Move {{ basename }} cert
+      shell: /bin/mv /etc/kubernetes/pki/{{ basename }}.pem /etc/kubernetes/pki/{{ basename }}.crt
+
+    - name: Delete csr
       file:
-        path: /etc/kubernetes/pki/{{ basename }}.csr
+        path: /etc/kubernetes/pki/{{ item }}
         state: absent
+      with_items:
+        - "{{ basename }}-csr.json"
+        - "{{ basename }}.csr"
