@@ -1,2 +1,2 @@
-# Certificate expiration dates
-cert_not_after: +1826d
+# Cert expiry: 43830h = 5y
+cert_expiry: 43830h

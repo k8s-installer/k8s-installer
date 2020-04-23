@@ -6,12 +6,6 @@
     mode: 0755
   with_items:
     - etcd
-    - config
-
-- name: Create ca config json for cfssl
-  template:
-    src: ca-config.json.j2
-    dest: /etc/kubernetes/pki/config/ca-config.json
 
 - import_tasks: ca.yml
   vars:

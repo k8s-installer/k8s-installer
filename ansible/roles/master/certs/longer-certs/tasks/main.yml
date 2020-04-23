@@ -1,3 +1,15 @@
+- name: Create pki/config dir
+  file:
+    path: /etc/kubernetes/pki/config
+    state: directory
+    owner: root
+    mode: 0755
+
+- name: Create ca config json for cfssl
+  template:
+    src: ca-config.json.j2
+    dest: /etc/kubernetes/pki/config/ca-config.json
+
 - name: Delete csr dir
   file:
     path: /etc/kubernetes/pki/csr
