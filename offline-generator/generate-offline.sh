@@ -6,8 +6,10 @@ else
     CREATEREPO="./create-repo-ubuntu.sh"
 fi
 
-$CREATEREPO \
-    && sudo ./save-images.sh \
-    && tar cvzf k8s-offline-files.tar.gz offline-files/
+./download-urls.sh || exit 1
+$CREATEREPO || exit 1
+sudo ./save-images.sh || exit 1
+
+tar cvzf k8s-offline-files.tar.gz offline-files/
 
 echo "Done."

@@ -4,7 +4,7 @@
 
 . ./config.sh
 
-function parse_yaml() {
+parse_yaml() {
     grep "^ *image: " $1 | sed 's/^ *image: *//' | sort | uniq >> images.txt
 }
 

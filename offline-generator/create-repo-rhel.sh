@@ -45,11 +45,11 @@ echo "==> Downloading docker, etc"
 $RT $DEPS || (echo "Download error" && exit 1)
 
 
-for v in $KUBE_VERSIONs; do
+for v in $KUBE_VERSIONS; do
     KUBEADM_VERSION=${v}-0
 
     echo "==> Downloading kubeadm $KUBEADM_VERSION"
-    $RT kubeadm-$KUBEADM_VERSION $DEPS || (echo "Download error" && exit 1)
+    $RT kubeadm-$KUBEADM_VERSION || (echo "Download error" && exit 1)
 
     echo "==> Downloading kubectl $KUBEADM_VERSION"
     $RT kubectl-$KUBEADM_VERSION || (echo "Download error" && exit 1)
@@ -77,3 +77,5 @@ createrepo rpms || exit 1
 echo "==> Create repo tarball"
 tar cvzf offline-files/k8s-offline-repo.tar.gz rpms config.sh
 #/bin/rm -rf rpms
+
+echo "create-repo done."
