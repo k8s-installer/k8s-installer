@@ -89,3 +89,8 @@
     - { file: admin.conf, user: kubernetes-admin }
     - { file: controller-manager.conf, user: "system:kube-controller-manager" }
     - { file: scheduler.conf, user: "system:kube-scheduler" }
+
+- name: Cleanup csr dir
+  file:
+    path: /etc/kubernetes/pki/csr
+    state: absent
