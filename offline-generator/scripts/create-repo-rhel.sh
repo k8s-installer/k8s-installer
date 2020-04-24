@@ -1,29 +1,28 @@
 #!/bin/sh
 
-. ./check-root.sh
 . ./config.sh
 
 # rhel7
 if type subscription-manager >/dev/null 2>&1; then
-    subscription-manager repos --enable=rhel-7-server-extras-rpms  # for docker
-    #subscription-manager repos --enable rhel-7-server-optional-rpms  # for python3-devel
+    sudo subscription-manager repos --enable=rhel-7-server-extras-rpms  # for docker
+    #sudo subscription-manager repos --enable rhel-7-server-optional-rpms  # for python3-devel
 fi
 
 # setup repo
 if [ ! -e /etc/yum.repos.d/kubernetes.repo ]; then
     echo "==> Setup repo"
-    cp kubernetes.repo /etc/yum.repos.d/
-    yum check-update -y
+    sudo cp kubernetes.repo /etc/yum.repos.d/
+    sudo yum check-update -y
 fi
 
 # install tools
 if ! type createrepo >/dev/null 2>&1; then
     echo "==> Install createrepo"
-    yum install -y createrepo || exit 1
+    sudo yum install -y createrepo || exit 1
 fi
 if ! type repotrack >/dev/null 2>&1; then
     echo "==> Install yum-utils"
-    yum install -y yum-utils || exit 1
+    sudo yum install -y yum-utils || exit 1
 fi
 
 # download rpms
@@ -31,11 +30,14 @@ fi
 #    /bin/rm /etc/yum.repos.d/kubernetes-offline.repo
 #fi
 
-mkdir -p cache
+CACHEDIR=outputs/cache-rpms
+mkdir -p $CACHEDIR
+
+cp ./config.sh outputs
 
 # download docker (newest version only)
-RT="repotrack -a x86_64 -p cache"
-YD="yumdownloader --destdir=cache -y"
+RT="sudo repotrack -a x86_64 -p $CACHEDIR"
+YD="sudo yumdownloader --destdir=$CACHEDIR -y"
 
 PY2DEPS="libselinux-python python-virtualenv python2-cryptography"
 PY3DEPS="python3" # python3-devel gcc openssl-devel"
@@ -43,8 +45,6 @@ DEPS="docker audit yum-plugin-versionlock firewalld gnupg2 $PY2DEPS $PY3DEPS"
 
 echo "==> Downloading docker, etc"
 $RT $DEPS || (echo "Download error" && exit 1)
-
-
 for v in $KUBE_VERSIONS; do
     KUBEADM_VERSION=${v}-0
 
@@ -62,20 +62,22 @@ for v in $KUBE_VERSIONS; do
 done
 
 # create rpms dir
-if [ -e rpms ]; then
-    /bin/rm -rf rpms || exit 1
+RPMDIR=outputs/rpms
+if [ -e $RPMDIR ]; then
+    /bin/rm -rf $RPMDIR || exit 1
 fi
-mkdir -p rpms
-/bin/cp cache/*.rpm rpms/
-/bin/rm rpms/*.i686.rpm
+mkdir -p $RPMDIR
+/bin/cp $CACHEDIR/*.rpm $RPMDIR/
+/bin/rm $RPMDIR/*.i686.rpm
 
 #/bin/rm rpms/*kubelet*
 #/bin/cp cache/*kubelet-$KUBEADM_VERSION* rpms/
 
-createrepo rpms || exit 1
+sudo createrepo $RPMDIR || exit 1
 
 echo "==> Create repo tarball"
-tar cvzf offline-files/k8s-offline-repo.tar.gz rpms config.sh
+mkdir -p outputs/offline-files
+(cd outputs && tar cvzf offline-files/k8s-offline-repo.tar.gz rpms config.sh)
 #/bin/rm -rf rpms
 
 echo "create-repo done."

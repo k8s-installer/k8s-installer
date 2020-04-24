@@ -2,7 +2,11 @@
 
 # install kubeadm, needed to pull image of k8s images
 
-. ./check-root.sh
+if [ "$(id -u)" -ne 0 ]; then
+    echo "ERROR: You must execute with sudo."
+    exit 1
+fi
+
 #. ./config.sh
 
 # setup repo

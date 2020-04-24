@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 #. ./check-root.sh
 . ./config.sh
@@ -19,7 +19,10 @@ EOF
 DOCKER_DEPS="apt-transport-https ca-certificates curl gnupg-agent software-properties-common"
 sudo apt-get update && sudo apt-get install -y $DOCKER_DEPS
 
-mkdir -p cache
+CACHEDIR=outputs/cache-debs
+mkdir -p $CACHEDIR
+
+cp ./config.sh outputs
 
 #DEPS="docker-ce docker-ce-cli containerd.io firewalld python-cryptography"
 DEPS="docker.io firewalld"
@@ -35,22 +38,24 @@ done
 DEPS=$(apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances --no-pre-depends $PKGLIST | grep "^\w" | sort | uniq)
 
 # Download packages
-(cd cache && apt download $PKGLIST $DEPS)
+(cd $CACHEDIR && apt download $PKGLIST $DEPS)
 
 # Create repo
-if [ -e debs ]; then
-    /bin/rm -rf debs
+DEBDIR=outputs/debs
+if [ -e $DEBDIR ]; then
+    /bin/rm -rf $DEBDIR
 fi
-mkdir debs
-/bin/cp cache/* debs/
-/bin/rm debs/*i386.deb
+mkdir $DEBDIR
+/bin/cp $CACHEDIR/* $DEBDIR
+/bin/rm $DEBDIR/*i386.deb
 
-cd debs
+pushd $DEBDIR || exit 1
 apt-ftparchive sources . > Sources && gzip -c9 Sources > Sources.gz
 apt-ftparchive packages . > Packages && gzip -c9 Packages > Packages.gz
 apt-ftparchive contents . > Contents-amd64 && gzip -c9 Contents-amd64 > Contents-amd64.gz
 apt-ftparchive release . > Release
-cd ..
+popd
 
 # Create tarball
-tar cvzf offline-files/k8s-offline-apt-repo.tar.gz debs config.sh
+(cd outputs && mkdir -p offline-files && tar cvzf offline-files/k8s-offline-apt-repo.tar.gz debs config.sh)
+

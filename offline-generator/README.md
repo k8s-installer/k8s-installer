@@ -22,12 +22,6 @@ Kubernetesクラスタを構成するマシンと同一の OS がインストー
 * CentOS 7
 * Ubuntu 18.04
 
-## 事前準備
-
-RHEL 7 を使用する場合は、以下手順で rhel-7-server-extras-rpms リポジトリを有効にしておく必要があります。
-
-    $ subscription-manager repos --enable=rhel-7-server-extras-rpms
-
 ## Proxy 設定
 
 Internet 接続に Proxy サーバを経由する必要がある場合は、事前に Proxy 設定が必要です。
@@ -58,9 +52,9 @@ sudo 可能な一般ユーザ権限でログインしてください。
 
 以下手順でオフラインインストールファイルを生成してください。
 
-    $ sudo ./generate-offline.sh
+    $ ./generate-offline.sh
 
-オフラインインストールファイルは `k8s-offline-files.tar.gz` というファイル名で生成されます。
+オフラインインストールファイルは `outputs/k8s-offline-files.tar.gz` というファイル名で生成されます。
 
 ## 注意事項
 

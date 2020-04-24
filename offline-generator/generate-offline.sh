@@ -1,15 +1,20 @@
 #!/bin/sh
 
 if [ -e /etc/redhat-release ]; then
-    CREATEREPO="sudo ./create-repo-rhel.sh"
+    CREATEREPO="./scripts/create-repo-rhel.sh"
 else
-    CREATEREPO="./create-repo-ubuntu.sh"
+    CREATEREPO="./scripts/create-repo-ubuntu.sh"
 fi
 
-./download-urls.sh || exit 1
-$CREATEREPO || exit 1
-sudo ./save-images.sh || exit 1
+doit() {
+    $1 $2 $3 $4 $5 || (echo "ERROR: $1 failed"; exit 1)
+}
 
-tar cvzf k8s-offline-files.tar.gz offline-files/
+doit ./scripts/process-yaml.sh
+doit ./scripts/download-urls.sh
+doit $CREATEREPO
+doit ./scripts/save-images.sh
+
+(cd outputs && tar cvzf k8s-offline-files.tar.gz offline-files/)
 
 echo "Done."

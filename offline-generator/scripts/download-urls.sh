@@ -1,12 +1,22 @@
 #!/bin/sh
 
+# Copy pre-configured yaml, to prevent overwrite.
+./scripts/process-yaml.sh
+
+OUTDIR=outputs/offline-files
+if [ ! -e $OUTDIR ]; then
+    mkdir -p $OUTDIR
+fi
+
 download() {
   url="$1"
   file="$2"
 
-  if [ ! -e "offline-files/$file" ]; then
+  if [ ! -e "$OUTDIR/$file" ]; then
     echo "===> Downloading: $url"
-    curl -SL "$url" > "offline-files/$file" || exit 1
+    curl -SL "$url" > "$OUTDIR/$file" || exit 1
+  else
+    echo "===> $file already exists, skip download"
   fi
 }
 
