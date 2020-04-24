@@ -10,10 +10,10 @@ deb https://apt.kubernetes.io/ kubernetes-xenial main
 EOF
 
 # seteup docker repo
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-cat <<EOF | sudo tee /etc/apt/sources.list.d/docker.list
-deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable
-EOF
+#curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+#cat <<EOF | sudo tee /etc/apt/sources.list.d/docker.list
+#deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable
+#EOF
 
 # install tools
 DOCKER_DEPS="apt-transport-https ca-certificates curl gnupg-agent software-properties-common"
@@ -21,7 +21,8 @@ sudo apt-get update && sudo apt-get install -y $DOCKER_DEPS
 
 mkdir -p cache
 
-DEPS="docker-ce docker-ce-cli containerd.io firewalld python-cryptography"
+#DEPS="docker-ce docker-ce-cli containerd.io firewalld python-cryptography"
+DEPS="docker.io firewalld"
 
 PKGLIST="$DOCKER_DEPS $DEPS"
 
