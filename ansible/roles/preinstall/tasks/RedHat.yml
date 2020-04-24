@@ -7,7 +7,7 @@
     name:
       - libselinux-python
       - gnupg2
-      - python2-cryptography
+      #- python2-cryptography
     state: latest
     enablerepo: "{{ yum_enablerepo }}"
     disablerepo: "{{ yum_disablerepo }}"
