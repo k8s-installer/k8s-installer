@@ -1,5 +1,12 @@
 # ChangeLog
 
+## x.x.x
+
+### Updated
+
+- Support Ubuntu 20.04
+- Use docker.io for Ubuntu (18.04/20.04)
+
 ## 0.0.5 - 2020/4/23
 
 ### Added

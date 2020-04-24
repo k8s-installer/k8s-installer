@@ -2,5 +2,8 @@
 
 Docker をインストール/アップデート、有効化します。
 
-* RHEL7/CentOS7: 標準の docker (1.13) をインストールします。
-* Ubuntu: 最新の docker-ce をインストールします。
+デフォルトでは OS 標準の docker をインストールします。
+
+## Variables
+
+* docker_ce: Docker CE を使用するか (default: no)

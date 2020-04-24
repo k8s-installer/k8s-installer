@@ -1,1 +1,5 @@
 - include_tasks: "{{ ansible_os_family }}.yml"
+  when: not docker_ce
+
+- include_tasks: "{{ ansible_os_family }}-ce.yml"
+  when: docker_ce
