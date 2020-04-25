@@ -12,7 +12,6 @@
       apt:
         name: firewalld
         state: present
-        update_cache: "{{ offline_install | bool == False }}"
       when: ansible_os_family == "Debian"
 
     - name: Enable firewalld

@@ -27,7 +27,6 @@
   apt:
     name: docker-ce
     state: latest
-    update_cache: "{{ offline_install | bool == False }}"
 
 - name: Enable / start docker
   service:
