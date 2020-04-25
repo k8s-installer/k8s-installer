@@ -12,6 +12,7 @@
       - kubelet={{ kubelet_apt_version }}
       - kubectl={{ kubectl_apt_version }}
     state: present
+    update_cache: "{{ offline_install | bool == False }}"
 
 - name: Hold kubelet/kubectl versions
   dpkg_selections:

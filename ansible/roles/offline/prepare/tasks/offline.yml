@@ -51,3 +51,6 @@
         filename: kubernetes-offline
         state: present
         update_cache: no
+
+    - name: Update apt cache for offline repo
+      shell: apt update || exit 0

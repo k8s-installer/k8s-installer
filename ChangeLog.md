@@ -4,8 +4,12 @@
 
 ### Updated
 
-- Support Ubuntu 20.04
+- Support Ubuntu 20.04 (except for offline install)
 - Use docker.io for Ubuntu (18.04/20.04)
+
+### Fixed
+
+- Offline install of ubuntu
 
 ## 0.0.5 - 2020/4/23
 
