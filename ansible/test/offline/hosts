@@ -1,0 +1,16 @@
+[master_first]
+master ansible_host=10.240.0.53 ip=10.240.0.53
+
+[master_secondary]
+
+[worker]
+worker ansible_host=10.240.0.52 ip=10.240.0.52
+
+[master:children]
+master_first
+master_secondary
+
+[all:vars]
+offline_install=True
+ansible_user=vagrant
+ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
