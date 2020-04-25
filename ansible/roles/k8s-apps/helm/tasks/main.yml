@@ -9,7 +9,7 @@
 
 - name: Unarchive helm (offline)
   unarchive:
-    src: ./files/{{ helm_tarball }}
+    src: ./offline-files/{{ helm_tarball }}
     dest: /tmp
     creates: /tmp/linux-amd64/helm
   when: offline_install
