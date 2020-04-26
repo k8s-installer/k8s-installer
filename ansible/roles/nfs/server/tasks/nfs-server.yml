@@ -1,0 +1,42 @@
+- name: Create nfs directory at {{ nfs_server_path }}
+  file:
+    path: "{{ nfs_server_path }}"
+    state: directory
+
+- name: Add /etc/exports entry
+  lineinfile:
+    path: /etc/exports
+    line: "{{ nfs_server_path }} {{ nfs_export_cidr }}({{ nfs_export_opts }})"
+    regexp: "^{{ nfs_server_path }}"
+
+- name: Execute exportfs
+  shell: "{{ item }}"
+  with_items:
+    - exportfs -ra
+    - exportfs -v
+
+- name: Set domain in /etc/idmapd.conf
+  lineinfile:
+    path: /etc/idmapd.conf
+    line: "Domain = {{ nfs_domain }}"
+    regexp: "^Domain"
+
+- name: Enable and start nfs services
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  with_items:
+    - rpcbind
+    - nfs-lock
+    - nfs-idmap
+    - nfs-server
+  when: ansible_os_family == "RedHat"
+
+- name: Allow nfs in firewall
+  firewalld:
+    service: nfs
+    permanent: yes
+    state: enabled
+    immediate: yes
+  when: firewall_enabled

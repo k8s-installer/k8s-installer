@@ -1,0 +1,8 @@
+- name: Install nfs-utils and rpcbind
+  yum:
+    name:
+      - nfs-utils
+      - rpcbind
+    state: present
+    enablerepo: "{{ yum_enablerepo }}"
+    disablerepo: "{{ yum_disablerepo }}"

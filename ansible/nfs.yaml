@@ -1,0 +1,15 @@
+- hosts: all
+  become: yes
+  any_errors_fatal: true
+
+  roles:
+    - { role: installer-defaults }
+    - { role: nfs/common, tags: nfs }
+
+- hosts: nfs_server
+  become: yes
+  any_errors_fatal: true
+
+  roles:
+    - { role: installer-defaults }
+    - { role: nfs/server, tags: [nfs, nfs-server] }
