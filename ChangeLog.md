@@ -2,9 +2,15 @@
 
 ## x.x.x
 
+### Added
+
+- Add rook/ceph role/playbook
+- Add NFS server role/playbook
+- Add master/schedulable role
+
 ### Updated
 
-- Support Ubuntu 20.04 (except for offline install)
+- Support Ubuntu 20.04
 - Use docker.io for Ubuntu (18.04/20.04)
 
 ### Fixed
