@@ -2,6 +2,12 @@
 
 . ./config.sh
 
+# dependencies
+PY2DEPS="libselinux-python python-virtualenv python2-cryptography"
+PY3DEPS="python3" # python3-devel gcc openssl-devel"
+NFS_DEPS="rpcbind nfs-utils"
+DEPS="docker audit yum-plugin-versionlock firewalld gnupg2 $PY2DEPS $PY3DEPS $NFS_DEPS"
+
 # rhel7
 if type subscription-manager >/dev/null 2>&1; then
     sudo subscription-manager repos --enable=rhel-7-server-extras-rpms  # for docker
@@ -38,10 +44,6 @@ cp ./config.sh outputs
 # download docker (newest version only)
 RT="sudo repotrack -a x86_64 -p $CACHEDIR"
 YD="sudo yumdownloader --destdir=$CACHEDIR -y"
-
-PY2DEPS="libselinux-python python-virtualenv python2-cryptography"
-PY3DEPS="python3" # python3-devel gcc openssl-devel"
-DEPS="docker audit yum-plugin-versionlock firewalld gnupg2 $PY2DEPS $PY3DEPS"
 
 echo "==> Downloading docker, etc"
 $RT $DEPS || (echo "Download error" && exit 1)
