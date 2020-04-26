@@ -13,4 +13,11 @@
   any_errors_fatal: true
 
   roles:
-    - { role: master/install-kubeconfig, tags: [master, master-first, kubeconfig] }
+    - { role: master/install-kubeconfig, tags: [master, master-secondary, kubeconfig] }
+
+- hosts: master_first
+  become: no
+  any_errors_fatal: true
+
+  roles:
+    - { role: master/schedulable, tags: [master, master-secondary, schedulable] }

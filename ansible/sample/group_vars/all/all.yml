@@ -13,3 +13,6 @@ pod_subnet: 192.168.0.0/16
 
 # Firewall
 #firewall_enabled: yes
+
+# master schedulable?
+#master_schedulable: no
