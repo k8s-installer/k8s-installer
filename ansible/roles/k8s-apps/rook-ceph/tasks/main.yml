@@ -6,14 +6,14 @@
 - name: Copy rook + ceph yamlc
   copy:
     src: "{{ item }}"
-    dest: /etc/kubernetes/addons/rook-cech/
+    dest: /etc/kubernetes/addons/rook-ceph/
   with_items:
     - common.yaml
     - operator.yaml
     - cluster.yaml
 
 - name: Apply rook + ceph yamls
-  shell: kubectl apply -f /etc/kubernetes/addons/rook-cech/{{ item }} --kubeconfig /etc/kubernetes/admin.conf
+  shell: kubectl apply -f /etc/kubernetes/addons/rook-ceph/{{ item }} --kubeconfig /etc/kubernetes/admin.conf
   with_items:
     - common.yaml
     - operator.yaml
