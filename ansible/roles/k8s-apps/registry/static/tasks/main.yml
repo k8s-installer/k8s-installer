@@ -6,12 +6,16 @@
     - data
     - config
 
-# Needs python pathlib
+# Create htpasswd
+# Note: do not use ansible htpassword module
 - name: Create htpasswd
-  htpasswd:
+  shell:
+    cmd: docker run --rm --entrypoint htpasswd registry:2 -Bbn {{ registry_user }} {{ registry_password }} > htpasswd
+    chdir: /var/lib/registry/config
+
+- name: Change htpasswd mode
+  file:
     path: /var/lib/registry/config/htpasswd
-    name: "{{ registry_user }}"
-    password: "{{ registry_password }}"
     owner: root
     mode: 0600
 
@@ -27,7 +31,7 @@
       -ca /etc/kubernetes/pki/ca.crt
       -ca-key /etc/kubernetes/pki/ca.key
       -cn registry
-      -hostname localhost,127.0.0.1
+      -hostname localhost,127.0.0.1,{{ inventory_hostname }}
       registry.csr.json
       | /usr/local/bin/cfssljson -bare registry
     chdir: /var/lib/registry/config
