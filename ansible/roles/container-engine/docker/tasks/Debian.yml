@@ -7,9 +7,3 @@
   apt:
     name: docker.io
     state: latest
-
-- name: Enable / start docker
-  service:
-    name: docker
-    enabled: true
-    state: started

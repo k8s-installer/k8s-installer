@@ -3,3 +3,9 @@
 
 - include_tasks: "{{ ansible_os_family }}-ce.yml"
   when: docker_ce
+
+- name: Enable / start docker
+  service:
+    name: docker
+    enabled: yes
+    state: started

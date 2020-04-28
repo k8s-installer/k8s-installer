@@ -1,0 +1,19 @@
+- name: Install docker-ce repo
+  shell: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+  environment: "{{ proxy_env }}"
+  when: not offline_install
+
+- name: Uninstall docker
+  yum:
+    name:
+      - docker
+      - docker-common
+      - docker-client
+    state: absent
+
+- name: Install docker-ce
+  yum:
+    name: docker-ce
+    state: present
+    enablerepo: "{{ yum_enablerepo }}"
+    disablerepo: "{{ yum_disablerepo }}"
