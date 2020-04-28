@@ -1,6 +1,9 @@
-- name: Create /var/lib/registry dirs
+- name: Create registry namespacef
+  shell: kubectl get namespace registry --kubeconfig /etc/kubernetes/admin.conf || kubectl create namespace registry --kubeconfig /etc/kubernetes/admin.conf
+
+- name: Create {{ registry_dir }} dirs
   file:
-    path: /var/lib/registry/{{ item }}
+    path: "{{ registry_dir }}/{{ item }}"
     state: directory
   with_items:
     - data
@@ -10,19 +13,19 @@
 # Note: do not use ansible htpassword module
 - name: Create htpasswd
   shell:
-    cmd: docker run --rm --entrypoint htpasswd registry:2 -Bbn {{ registry_user }} {{ registry_password }} > htpasswd
-    chdir: /var/lib/registry/config
+    cmd: docker run --rm --entrypoint htpasswd registry:{{ registry_version }} -Bbn {{ registry_user }} {{ registry_password }} > htpasswd
+    chdir: "{{ registry_dir }}/config"
 
 - name: Change htpasswd mode
   file:
-    path: /var/lib/registry/config/htpasswd
+    path: "{{ registry_dir }}/config/htpasswd"
     owner: root
     mode: 0600
 
 - name: Copy registry.csr json
   copy:
     src: registry.csr.json
-    dest: /var/lib/registry/config/
+    dest: "{{ registry_dir }}/config/"
 
 - name: Create certificates
   shell:
@@ -34,17 +37,25 @@
       -hostname localhost,127.0.0.1,{{ inventory_hostname }}
       registry.csr.json
       | /usr/local/bin/cfssljson -bare registry
-    chdir: /var/lib/registry/config
+    chdir: "{{ registry_dir }}/config"
 
 - name: Rename certificate
   shell:
     cmd: "{{ item }}"
-    chdir: /var/lib/registry/config
+    chdir: "{{ registry_dir }}/config"
   with_items:
     - /bin/mv registry-key.pem registry.key
     - /bin/mv registry.pem registry.crt
 
 - name: Install registry static pod manifest
-  copy:
-    src: registry.yml
-    dest: /etc/kubernetes/manifests
+  template:
+    src: registry.yml.j2
+    dest: /etc/kubernetes/manifests/registry.yml
+
+- name: Allow firewall for registry
+  firewalld:
+    port: "{{ registry_port }}"
+    permanent: yes
+    state: enabled
+    immediate: yes
+  when: firewall_enabled
