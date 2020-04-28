@@ -1,0 +1,6 @@
+- hosts: registry
+  become: yes
+
+  roles:
+    - { role: installer-defaults }
+    - { role: k8s-apps/registry/static, tags: registry }
