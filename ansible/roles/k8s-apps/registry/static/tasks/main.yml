@@ -1,0 +1,46 @@
+- name: Create /var/lib/registry dirs
+  file:
+    path: /var/lib/registry/{{ item }}
+    state: directory
+  with_items:
+    - data
+    - config
+
+# Needs python pathlib
+- name: Create htpasswd
+  htpasswd:
+    path: /var/lib/registry/config/htpasswd
+    name: "{{ registry_user }}"
+    password: "{{ registry_password }}"
+    owner: root
+    mode: 0600
+
+- name: Copy registry.csr json
+  copy:
+    src: registry.csr.json
+    dest: /var/lib/registry/config/
+
+- name: Create certificates
+  shell:
+    cmd: >-
+      /usr/local/bin/cfssl gencert
+      -ca /etc/kubernetes/pki/ca.crt
+      -ca-key /etc/kubernetes/pki/ca.key
+      -cn registry
+      -hostname localhost,127.0.0.1
+      registry.csr.json
+      | /usr/local/bin/cfssljson -bare registry
+    chdir: /var/lib/registry/config
+
+- name: Rename certificate
+  shell:
+    cmd: "{{ item }}"
+    chdir: /var/lib/registry/config
+  with_items:
+    - /bin/mv registry-key.pem registry.key
+    - /bin/mv registry.pem registry.crt
+
+- name: Install registry static pod manifest
+  copy:
+    src: registry.yml
+    dest: /etc/kubernetes/manifests
