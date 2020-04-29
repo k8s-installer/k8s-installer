@@ -25,16 +25,16 @@ spec:
           value: /config/registry.key
       volumeMounts:
         - name: registry-data
-          mountPath: {{ registry_dir }}
+          mountPath: /var/lib/registry
         - name: registry-config
           mountPath: /config
   hostNetwork: true
   volumes:
     - name: registry-data
       hostPath:
-        path: {{ registry_dir }}/data
+        path: {{ registry_data_dir }}
         type: Directory
     - name: registry-config
       hostPath:
-        path: {{ registry_dir }}/config
+        path: {{ registry_config_dir }}
         type: Directory

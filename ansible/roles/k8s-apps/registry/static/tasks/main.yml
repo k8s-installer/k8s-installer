@@ -1,31 +1,33 @@
-- name: Create registry namespacef
+- name: Create registry namespace
   shell: kubectl get namespace registry --kubeconfig /etc/kubernetes/admin.conf || kubectl create namespace registry --kubeconfig /etc/kubernetes/admin.conf
 
-- name: Create {{ registry_dir }} dirs
+- name: Create {{ registry_data_dir }} dirs
   file:
-    path: "{{ registry_dir }}/{{ item }}"
+    path: "{{ registry_data_dir }}"
     state: directory
-  with_items:
-    - data
-    - config
+
+- name: Create {{ registry_config_dir }} dir
+  file:
+    path: "{{ registry_config_dir }}"
+    state: directory
 
 # Create htpasswd
 # Note: do not use ansible htpassword module
 - name: Create htpasswd
   shell:
     cmd: docker run --rm --entrypoint htpasswd registry:{{ registry_version }} -Bbn {{ registry_user }} {{ registry_password }} > htpasswd
-    chdir: "{{ registry_dir }}/config"
+    chdir: "{{ registry_config_dir }}"
 
 - name: Change htpasswd mode
   file:
-    path: "{{ registry_dir }}/config/htpasswd"
+    path: "{{ registry_config_dir }}/htpasswd"
     owner: root
     mode: 0600
 
 - name: Copy registry.csr json
   copy:
     src: registry.csr.json
-    dest: "{{ registry_dir }}/config/"
+    dest: "{{ registry_config_dir }}/"
 
 - name: Create certificates
   shell:
@@ -37,12 +39,12 @@
       -hostname localhost,127.0.0.1,{{ inventory_hostname }}
       registry.csr.json
       | /usr/local/bin/cfssljson -bare registry
-    chdir: "{{ registry_dir }}/config"
+    chdir: "{{ registry_config_dir }}"
 
 - name: Rename certificate
   shell:
     cmd: "{{ item }}"
-    chdir: "{{ registry_dir }}/config"
+    chdir: "{{ registry_config_dir }}"
   with_items:
     - /bin/mv registry-key.pem registry.key
     - /bin/mv registry.pem registry.crt
