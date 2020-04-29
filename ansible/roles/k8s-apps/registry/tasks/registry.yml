@@ -46,3 +46,6 @@
 
 - import_tasks: static-pod.yml
   when: registry_type == "static-pod"
+
+- import_tasks: pv-based.yml
+  when: registry_type == "pv"

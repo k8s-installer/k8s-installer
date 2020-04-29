@@ -1,7 +1,7 @@
 # Registry enabled?
 registry_enabled: no
 
-# Registry type: static-pod
+# Registry type: static-pod or pv
 registry_type: static-pod
 
 # Auth user
@@ -18,3 +18,10 @@ registry_version: 2.7.1
 
 # Registry data dir (on host machine)
 registry_data_dir: /var/lib/registry
+
+## For PV based config
+# PVC storage class name
+registry_pvc_storage_class: rook-nfs-share1  # Default use rook-nfs
+
+# PVC storage size
+registry_pvc_size: 1Gi

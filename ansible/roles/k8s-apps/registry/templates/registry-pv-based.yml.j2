@@ -1,0 +1,74 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: registry-pv-claim
+  namespace: registry
+spec:
+  storageClassName: {{ registry_pvc_storage_class }}
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ registry_pvc_size }}
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: registry
+  namespace: registry
+  labels:
+    app: registry
+    component: registry
+spec:
+  containers:
+    - name: registry
+      image: registry:{{ registry_version }}
+      imagePullPolicy: IfNotPresent
+      env:
+        - name: REGISTRY_HTTP_ADDR
+          value: "0.0.0.0:{{ registry_port }}"
+        - name: REGISTRY_AUTH
+          value: htpasswd
+        - name: REGISTRY_AUTH_HTPASSWD_REALM
+          value: "Registry Realm"
+        - name: REGISTRY_AUTH_HTPASSWD_PATH
+          value: /secrets/htpasswd
+        - name: REGISTRY_HTTP_TLS_CERTIFICATE
+          value: /config/registry.crt
+        - name: REGISTRY_HTTP_TLS_KEY
+          value: /secrets/registry.key
+      volumeMounts:
+        - name: registry-data
+          mountPath: /var/lib/registry
+        - name: registry-config
+          mountPath: /config
+        - name: registry-secrets
+          mountPath: /secrets
+  hostNetwork: true
+  volumes:
+    - name: registry-data
+      persistentVolumeClaim:
+        claimName: registry-pv-claim
+    - name: registry-config
+      configMap:
+        name: registry-config
+    - name: registry-secrets
+      secret:
+        secretName: registry-secrets
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: registry-svc
+  namespace: registry
+spec:
+  selector:
+    app: registry
+  type: NodePort
+  ports:
+    - name: registry-http
+      protocol: TCP
+      port: 5000
+      targetPort: 5000
