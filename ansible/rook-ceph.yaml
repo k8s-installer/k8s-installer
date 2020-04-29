@@ -1,7 +1,0 @@
-- hosts: master_first
-  become: yes
-  any_errors_fatal: true
-
-  roles:
-    - { role: installer-defaults }
-    - { role: k8s-apps/rook-ceph }

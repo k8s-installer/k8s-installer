@@ -2,6 +2,8 @@
 
 NFS サーバをセットアップします。
 
+注: 本 role は deprecated です。rook-nfs を使用してください。
+
 ## Variables
 
 * nfs_enabled: NFS有効にするか (default: no)

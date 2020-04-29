@@ -1,3 +1,4 @@
+# NFS server: deprecated.
 - hosts: nfs_server
   become: yes
   any_errors_fatal: true
