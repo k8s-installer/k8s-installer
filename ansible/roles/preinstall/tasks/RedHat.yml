@@ -2,12 +2,13 @@
   command: subscription-manager repos --enable=rhel-7-server-extras-rpms
   when: ansible_distribution == "RedHat"
 
-- name: Install required packages (rhel)
+- name: Install common packages (rhel)
   yum:
     name:
       - libselinux-python
       - gnupg2
-      #- python2-cryptography
+      - nfs-utils
+      - rpcbind
     state: latest
     enablerepo: "{{ yum_enablerepo }}"
     disablerepo: "{{ yum_disablerepo }}"
