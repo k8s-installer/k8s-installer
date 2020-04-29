@@ -1,3 +1,9 @@
+# Registry enabled?
+registry_enabled: no
+
+# Registry type: static
+registry_type: static
+
 # Auth user
 registry_user: registry
 
