@@ -1,20 +1,2 @@
-- name: Create /etc/kubernetes/addons/rook-ceph dir
-  file:
-    path: /etc/kubernetes/addons/rook-ceph
-    state: directory
-
-- name: Copy rook + ceph yamlc
-  copy:
-    src: "{{ item }}"
-    dest: /etc/kubernetes/addons/rook-ceph/
-  with_items:
-    - common.yaml
-    - operator.yaml
-    - cluster.yaml
-
-- name: Apply rook + ceph yamls
-  shell: kubectl apply -f /etc/kubernetes/addons/rook-ceph/{{ item }} --kubeconfig /etc/kubernetes/admin.conf
-  with_items:
-    - common.yaml
-    - operator.yaml
-    - cluster.yaml
+- import_tasks: rook_ceph.yml
+  when: rook_ceph_enabled
