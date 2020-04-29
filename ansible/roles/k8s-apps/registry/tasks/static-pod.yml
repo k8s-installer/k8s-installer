@@ -1,0 +1,17 @@
+- name: Create {{ registry_data_dir }} dirs
+  file:
+    path: "{{ registry_data_dir }}"
+    state: directory
+
+- name: Install registry static pod manifest
+  template:
+    src: registry.yml.j2
+    dest: /etc/kubernetes/manifests/registry.yml
+
+- name: Allow firewall for registry
+  firewalld:
+    port: "{{ registry_port }}"
+    permanent: yes
+    state: enabled
+    immediate: yes
+  when: firewall_enabled

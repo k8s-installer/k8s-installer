@@ -1,8 +1,8 @@
 # Registry enabled?
 registry_enabled: no
 
-# Registry type: static
-registry_type: static
+# Registry type: static-pod
+registry_type: static-pod
 
 # Auth user
 registry_user: registry
@@ -13,8 +13,8 @@ registry_password: registry
 # Registry port
 registry_port: 5000
 
-# Registry data dir (on host machine)
-registry_data_dir: /var/lib/registry
-
 # Registry image version
 registry_version: 2.7.1
+
+# Registry data dir (on host machine)
+registry_data_dir: /var/lib/registry
