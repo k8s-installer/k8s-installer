@@ -1,0 +1,2 @@
+- import_tasks: rook_nfs.yml
+  when: rook_nfs_enabled

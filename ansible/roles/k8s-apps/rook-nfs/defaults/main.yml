@@ -1,0 +1,7 @@
+rook_nfs_enabled: false
+
+rook_nfs_pv_host: ""
+
+rook_nfs_pv_size: 10Gi
+
+rook_nfs_pv_dir: /var/lib/rook-nfs

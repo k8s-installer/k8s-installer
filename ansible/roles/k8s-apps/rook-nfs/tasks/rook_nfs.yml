@@ -1,0 +1,36 @@
+- name: Create dir for nfs local volume on {{ rook_nfs_pv_host }}
+  file:
+    path: "{{ rook_nfs_pv_dir }}"
+    state: directory
+  delegate_to: "{{ rook_nfs_pv_host }}"
+
+- name: Create nfs yaml dir
+  file:
+    path: /etc/kubernetes/rook-nfs
+    state: directory
+
+- name: Copy yaml files
+  copy:
+    src: "{{ item }}"
+    dest: /etc/kubernetes/rook-nfs/
+  with_items:
+    - namespace.yml
+    - localstorage-sc.yml
+    - rook/operator.yaml
+
+- name: Copy yaml templates
+  template:
+    src: "{{ item }}.j2"
+    dest: /etc/kubernetes/rook-nfs/{{ item }}
+  with_items:
+    - nfs-local-pv.yml
+    - nfs-server.yml
+
+- name: Apply kubernetes yamls
+  shell: kubectl apply -f /etc/kubernetes/rook-nfs/{{ item }} --kubeconfig=/etc/kubernetes/admin.conf
+  with_items:
+    - namespace.yml
+    - localstorage-sc.yml
+    - nfs-local-pv.yml
+    - operator.yaml
+    - nfs-server.yml
