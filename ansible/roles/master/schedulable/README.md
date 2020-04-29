@@ -4,4 +4,4 @@ Make all master nodes schedulable.
 
 ## Variables
 
-- master_schedulable: Make master schedulable if yes (default: no)
+- master_schedulable: Make master schedulable if yes (default: yes)

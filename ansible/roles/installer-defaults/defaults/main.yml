@@ -48,7 +48,7 @@ proxy_env:
   no_proxy: "{{ proxy_noproxy }}"
 
 # master schedulable?
-master_schedulable: no
+master_schedulable: yes
 
 is_master: no
 is_worker: no

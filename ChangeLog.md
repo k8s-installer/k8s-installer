@@ -4,11 +4,11 @@
 
 ### Added
 
+- Add master/schedulable role
 - Add NFS server role/playbook
 - Add rook-nfs role/playbook
 - Add rook-ceph role/playbook
-- Add master/schedulable role
-- Add registry/static role/playbook
+- Add registry role/playbook
 
 ### Updated
 
