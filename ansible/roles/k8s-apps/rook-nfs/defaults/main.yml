@@ -1,7 +1,11 @@
-rook_nfs_enabled: false
+# rook-nfs Enabled?
+rook_nfs_enabled: no
 
+# Hostname hosts NFS PV local volume
 rook_nfs_pv_host: ""
 
+# NFS local volume size
 rook_nfs_pv_size: 10Gi
 
+# NFS local volume dir on host
 rook_nfs_pv_dir: /var/lib/rook-nfs

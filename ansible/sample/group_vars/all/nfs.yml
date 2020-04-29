@@ -1,3 +1,5 @@
+##############################################
+## Host NFS server
 # NFS Enabled?
 #nfs_enabled: no
 
@@ -12,3 +14,17 @@
 
 # NFS domain
 #nfs_domain: kubernetes.cluster.local
+
+##############################################
+## NFS server on k8s (rook-nfs)
+# rook-nfs Enabled?
+#rook_nfs_enabled: no
+
+# Hostname hosts NFS PV local volume
+#rook_nfs_pv_host: ""
+
+# NFS local volume size
+#rook_nfs_pv_size: 10Gi
+
+# NFS local volume dir on host
+#rook_nfs_pv_dir: /var/lib/rook-nfs
