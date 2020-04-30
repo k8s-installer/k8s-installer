@@ -54,8 +54,10 @@ sample/group_vars/all/*.yml ファイルを inventory/group_vars/all/ ディレ�
     * Internet 接続にプロキシを経由する必要がある場合は、proxy_url, proxy_noproxy を設定してください。
 * version.yml
     * インストールする Kubernetes バージョンを適宜指定します。無指定の場合はデフォルト値が使用されます。    
-* nfs.yml
-    * rook-nfs を使用して NFS サーバを起動する場合の設定を指定します。
+* storage.yml
+    * ストレージの設定を行います。
+* registry.yml
+    * Private Registry の設定を行います。    
 
 ### オフラインインストール
 

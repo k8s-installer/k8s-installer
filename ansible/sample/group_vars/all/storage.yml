@@ -1,0 +1,20 @@
+#----------------------------------------------------------
+# rook-nfs config
+#----------------------------------------------------------
+
+# rook-nfs Enabled?
+#rook_nfs_enabled: no
+
+# Hostname hosts NFS PV local volume
+#rook_nfs_pv_host: "{{ groups['master_first'][0] }}"
+
+# NFS local volume size
+#rook_nfs_pv_size: 10Gi
+
+# NFS local volume dir on host
+#rook_nfs_pv_dir: /var/lib/rook-nfs
+
+#----------------------------------------------------------
+# rook-ceph config
+#----------------------------------------------------------
+#rook_ceph_enabled: no
