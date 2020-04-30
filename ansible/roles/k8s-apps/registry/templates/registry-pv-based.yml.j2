@@ -35,14 +35,12 @@ spec:
         - name: REGISTRY_AUTH_HTPASSWD_PATH
           value: /secrets/htpasswd
         - name: REGISTRY_HTTP_TLS_CERTIFICATE
-          value: /config/registry.crt
+          value: /secrets/registry.crt
         - name: REGISTRY_HTTP_TLS_KEY
           value: /secrets/registry.key
       volumeMounts:
         - name: registry-data
           mountPath: /var/lib/registry
-        - name: registry-config
-          mountPath: /config
         - name: registry-secrets
           mountPath: /secrets
   hostNetwork: true
@@ -50,9 +48,6 @@ spec:
     - name: registry-data
       persistentVolumeClaim:
         claimName: registry-pv-claim
-    - name: registry-config
-      configMap:
-        name: registry-config
     - name: registry-secrets
       secret:
         secretName: registry-secrets
