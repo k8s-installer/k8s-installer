@@ -1,13 +1,13 @@
 # ChangeLog
 
-## x.x.x
+## 0.0.6 - 2020/4/30
 
 ### Added
 
-- Add master/schedulable role
-- Add rook-nfs role/playbook
-- Add rook-ceph role/playbook
-- Add registry role/playbook
+- Add master/configure role
+- Add rook-nfs role
+- Add rook-ceph role
+- Add registry role
 
 ### Updated
 

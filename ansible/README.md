@@ -8,13 +8,14 @@ Ansible / kubeadm を使用して Kubernetes クラスタを構成するため�
 
 [こちら](../README.md) を参照してください。
 
-この他に、Python 3, pip3, Ansible が必要です。
+この他に、Python (2 or 3), pip, Ansible が必要です。
 
 ### Ansible のインストール
 
 以下手順で Ansible をインストールしてください。
+virtualenv または venv を使用することを推奨します。
 
-    pip3 install -r requirements.txt
+    pip install -r requirements.txt
     
 オフライン環境で Ansible をインストールする必要がある場合は、
 [python-offline-env](https://github.com/tmurakam/python-offline-env) を使用してください。    
@@ -72,10 +73,11 @@ sample/group_vars/all/*.yml ファイルを inventory/group_vars/all/ ディレ�
 
 以下の playbook が順次実行されます。
 
-* common.yml: Docker/Kubeadm インストール、オフラインリポジトリ設定、Proxy設定など、全マシン共通のインストールが実行されます。
-* master-first.yml: 1台目のマスタノードへの Kubernetes デプロイが実行されます。
-* master-secondary.yml: 2台目以降のマスタノードへの Kubernetes デプロイが実行されます。
-* worker.yml: ワーカーノードへの Kubernetes デプロイが実行されます。
+* common.yml: Docker/Kubeadm インストール、オフラインリポジトリ設定、Proxy設定など、全マシン共通のインストールを実行します。
+* master-first.yml: 1台目のマスタノードへの Kubernetes デプロイを実行します。
+* master-secondary.yml: 2台目以降のマスタノードへの Kubernetes デプロイを実行します。
+* worker.yml: ワーカーノードへの Kubernetes デプロイを実行します。
+* apps.yml: アプリケーションのデプロイを実行します。
 
 ## クラスタのアップグレード
 
