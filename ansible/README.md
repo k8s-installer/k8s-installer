@@ -45,7 +45,7 @@ Ansible / kubeadm を使用して Kubernetes クラスタを構成するため�
 
 sample/group_vars/all/*.yml ファイルを inventory/group_vars/all/ ディレクトリにコピーし、適宜編集してください。
 
-* all.yml
+* main.yml
     * lb_apiserver_address: HA構成の場合、ロードバランサの FQDN名またはIPアドレスを設定してください。
     * pod_subnet: Podサブネット(CIDR)を指定してください。
 * offline.yml    
@@ -54,6 +54,8 @@ sample/group_vars/all/*.yml ファイルを inventory/group_vars/all/ ディレ�
     * Internet 接続にプロキシを経由する必要がある場合は、proxy_url, proxy_noproxy を設定してください。
 * version.yml
     * インストールする Kubernetes バージョンを適宜指定します。無指定の場合はデフォルト値が使用されます。    
+* nfs.yml
+    * rook-nfs を使用して NFS サーバを起動する場合の設定を指定します。
 
 ### オフラインインストール
 
