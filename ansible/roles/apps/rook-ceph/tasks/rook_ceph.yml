@@ -1,16 +1,22 @@
-- name: Create {{ yaml_dir }} dir
+- name: Create {{ yaml_dir }} dirs
   file:
-    path: "{{ yaml_dir }}"
+    path: "{{ yaml_dir }}/{{ item }}"
     state: directory
+  with_items:
+    - csi/rbd
+    - csi/cephfs
 
 - name: Copy rook + ceph yamlc
   copy:
     src: "{{ item }}"
-    dest: "{{ yaml_dir }}"
+    dest: "{{ yaml_dir }}/{{ item | dirname }}"
   with_items:
     - common.yaml
     - operator.yaml
     - cluster.yaml
+    - filesystem.yaml
+    - csi/rbd/storageclass.yaml
+    - csi/cephfs/storageclass.yaml
     - dashboard-external.yaml
 
 - name: Apply rook + ceph yamls
@@ -19,6 +25,9 @@
     - common.yaml
     - operator.yaml
     - cluster.yaml
+    - filesystem.yaml
+    - csi/rbd/storageclass.yaml
+    - csi/cephfs/storageclass.yaml
 
 - name: View the dashboard external to the cluster
   shell: kubectl apply -f {{ yaml_dir }}/dashboard-external.yaml --kubeconfig /etc/kubernetes/admin.conf
