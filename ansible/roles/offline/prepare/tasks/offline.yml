@@ -18,9 +18,12 @@
     - "{{ k8s_offline_repo_tarball }}"
     - k8s-images.tar.gz
 
-- name: Transfer calico.yml
+- name: Transfer yaml files
   copy:
-    src: ./offline-files/calico.yaml
+    src: "{{ item }}"
     dest: /opt/kubernetes-offline
+  with_fileglob:
+    - ./offline-files/*.yaml
+    - ./offline-files/*.yml
 
 - include_tasks: "{{ ansible_os_family }}.yml"
