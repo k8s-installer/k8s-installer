@@ -1,20 +1,25 @@
-- name: Create /etc/kubernetes/addons/rook-ceph dir
+- name: Create {{ yaml_dir }} dir
   file:
-    path: /etc/kubernetes/addons/rook-ceph
+    path: {{ yaml_dir }}
     state: directory
 
 - name: Copy rook + ceph yamlc
   copy:
     src: "{{ item }}"
-    dest: /etc/kubernetes/addons/rook-ceph/
+    dest: "{{ yaml_dir }}"
+  with_items:
+    - common.yaml
+    - operator.yaml
+    - cluster.yaml
+    - dashboard-external.yaml
+
+- name: Apply rook + ceph yamls
+  shell: kubectl apply -f {{ yaml_dir }}/{{ item }} --kubeconfig /etc/kubernetes/admin.conf
   with_items:
     - common.yaml
     - operator.yaml
     - cluster.yaml
 
-- name: Apply rook + ceph yamls
-  shell: kubectl apply -f /etc/kubernetes/addons/rook-ceph/{{ item }} --kubeconfig /etc/kubernetes/admin.conf
-  with_items:
-    - common.yaml
-    - operator.yaml
-    - cluster.yaml
+- name: View the dashboard external to the cluster
+  shell: kubectl apply -f {{ yaml_dir }}/dashboard-external.yaml --kubeconfig /etc/kubernetes/admin.conf
+  when: rook_ceph_dashboard_external
