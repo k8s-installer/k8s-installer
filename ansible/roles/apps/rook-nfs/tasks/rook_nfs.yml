@@ -15,7 +15,6 @@
     dest: "{{ yaml_dir }}"
   with_items:
     - namespace.yml
-    - localstorage-sc.yml
     - rook/operator.yaml
 
 - name: Copy yaml templates
@@ -30,7 +29,6 @@
   shell: kubectl apply -f {{ yaml_dir }}/{{ item }} --kubeconfig=/etc/kubernetes/admin.conf
   with_items:
     - namespace.yml
-    - localstorage-sc.yml
     - nfs-local-pv.yml
     - operator.yaml
     - nfs-server.yml

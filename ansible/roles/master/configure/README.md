@@ -1,6 +1,6 @@
-# master/schedulable role
+# master/configure role
 
-Make all master nodes schedulable.
+Deploy some configurations for the cluster.
 
 ## Variables
 

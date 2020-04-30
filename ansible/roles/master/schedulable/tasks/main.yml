@@ -1,3 +1,0 @@
-- name: Make master schedulable
-  shell: kubectl taint nodes --all node-role.kubernetes.io/master-
-  when: master_schedulable

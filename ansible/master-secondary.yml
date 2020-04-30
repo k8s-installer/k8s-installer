@@ -16,8 +16,8 @@
     - { role: master/install-kubeconfig, tags: [master, master-secondary, kubeconfig] }
 
 - hosts: master_first
-  become: no
+  become: yes
   any_errors_fatal: true
 
   roles:
-    - { role: master/schedulable, tags: [master, master-secondary, schedulable] }
+    - { role: master/configure, tags: [master, master-secondary, configure] }
