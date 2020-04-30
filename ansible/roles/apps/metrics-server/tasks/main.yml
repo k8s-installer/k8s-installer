@@ -1,6 +1,6 @@
 - name: metrics-server | Create dir
   file:
-    path: /etc/kubernetes/addons/metrics-server
+    path: /etc/kubernetes/apps/metrics-server
     state: directory
     owner: root
     group: root
@@ -9,7 +9,7 @@
 - name: metrics-server | Create manifests
   copy:
     src: components.yaml
-    dest: /etc/kubernetes/addons/metrics-server/
+    dest: /etc/kubernetes/apps/metrics-server/
 
 - name: metrics-server | Apply manifests
-  command: kubectl apply -f /etc/kubernetes/addons/metrics-server/components.yaml --kubeconfig /etc/kubernetes/admin.conf
+  command: kubectl apply -f /etc/kubernetes/apps/metrics-server/components.yaml --kubeconfig /etc/kubernetes/admin.conf

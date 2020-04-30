@@ -11,11 +11,12 @@ registry_user: registry
 # Auth password
 registry_password: registry
 
-# Registry port
-registry_port: 5000
-
 # Registry image version
 registry_version: 2.7.1
+
+## For static-pod config
+# Registry port
+registry_port: 5000
 
 # Registry data dir (on host machine)
 registry_data_dir: /var/lib/registry

@@ -6,13 +6,13 @@
 
 - name: Create nfs yaml dir
   file:
-    path: /etc/kubernetes/rook-nfs
+    path: "{{ yaml_dir }}"
     state: directory
 
 - name: Copy yaml files
   copy:
     src: "{{ item }}"
-    dest: /etc/kubernetes/rook-nfs/
+    dest: "{{ yaml_dir }}"
   with_items:
     - namespace.yml
     - localstorage-sc.yml
@@ -21,13 +21,13 @@
 - name: Copy yaml templates
   template:
     src: "{{ item }}.j2"
-    dest: /etc/kubernetes/rook-nfs/{{ item }}
+    dest: "{{ yaml_dir }}/{{ item }}"
   with_items:
     - nfs-local-pv.yml
     - nfs-server.yml
 
 - name: Apply kubernetes yamls
-  shell: kubectl apply -f /etc/kubernetes/rook-nfs/{{ item }} --kubeconfig=/etc/kubernetes/admin.conf
+  shell: kubectl apply -f {{ yaml_dir }}/{{ item }} --kubeconfig=/etc/kubernetes/admin.conf
   with_items:
     - namespace.yml
     - localstorage-sc.yml
