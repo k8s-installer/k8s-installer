@@ -3,8 +3,8 @@
 
   roles:
     - { role: installer-defaults }
-    - { role: k8s-apps/metrics-server, tags: metrics-server }
-    - { role: k8s-apps/helm, tags: helm }
-    - { role: k8s-apps/rook-nfs, tags: rook-nfs }
-    - { role: k8s-apps/rook-ceph, tags: rook-ceph }
-    - { role: k8s-apps/registry, tags: registry }
+    - { role: apps/metrics-server, tags: metrics-server }
+    - { role: apps/helm, tags: helm }
+    - { role: apps/rook-nfs, tags: rook-nfs }
+    - { role: apps/rook-ceph, tags: rook-ceph }
+    - { role: apps/registry, tags: registry }
