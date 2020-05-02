@@ -5,4 +5,4 @@
 
   roles:
     - { role: installer-defaults }
-    - { role: nfs/server, tags: [nfs, nfs-server] }
+    - { role: storage/nfs/server, tags: [nfs, nfs-server] }

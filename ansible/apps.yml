@@ -5,6 +5,7 @@
     - { role: installer-defaults }
     - { role: apps/metrics-server, tags: metrics-server }
     - { role: apps/helm, tags: helm }
-    - { role: apps/rook-nfs, tags: rook-nfs }
-    - { role: apps/rook-ceph, tags: rook-ceph }
+    - { role: storage/rook-nfs, tags: rook-nfs }
+    - { role: storage/rook-ceph, tags: rook-ceph }
+    - { role: storage/storageclass, tags: storageclass }
     - { role: apps/registry, tags: registry }

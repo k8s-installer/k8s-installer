@@ -1,0 +1,4 @@
+- name: Change default storage class
+  shell:
+    cmd: "kubectl patch storageclass {{ default_storage_class }} -p '{\"metadata\": {\"annotations\": {\"storageclass.kubernetes.io/is-default-class\": \"true\"}}}' --kubeconfig=/etc/kubernetes/admin.conf"
+  when: default_storage_class != ""

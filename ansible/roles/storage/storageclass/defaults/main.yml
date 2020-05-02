@@ -1,0 +1,4 @@
+default_storage_class: ""
+#default_storage_class: "rook-ceph-block"
+#default_storage_class: "rook-cephfs"
+#default_storage_class: "rook-nfs-share1"

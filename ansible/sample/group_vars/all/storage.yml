@@ -1,3 +1,9 @@
+# Default storage class
+default_storage_class: ""
+#default_storage_class: "rook-nfs-share1"
+#default_storage_class: "rook-ceph-block"
+#default_storage_class: "rook-cephfs"
+
 #----------------------------------------------------------
 # rook-nfs config
 #----------------------------------------------------------
