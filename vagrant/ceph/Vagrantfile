@@ -10,7 +10,7 @@ Vagrant.configure("2") do |config|
     c.vm.network "private_network", ip: "10.240.0.10"
     c.vm.network "forwarded_port", guest: 22, host: 2310, id: "ssh"
     c.vm.provider "virtualbox" do |vb|
-      vb.memory = "2048"
+      vb.memory = "4096"
       vb.cpus = 2
     end
   end
@@ -21,7 +21,7 @@ Vagrant.configure("2") do |config|
       c.vm.network "private_network", ip: "10.240.0.2#{n}"
       c.vm.network "forwarded_port", guest: 22, host: 2320 + n, id: "ssh"
       c.vm.provider "virtualbox" do |vb|
-        vb.memory = "2048"
+        vb.memory = "3072"
         vb.cpus = 2
 
         # attach virtual disk
@@ -36,7 +36,7 @@ Vagrant.configure("2") do |config|
                            'createmedium', 'disk',
                            '--filename', vdisk,
                            '--format', 'VDI',
-                           '--size', 10 * 1024 ]
+                           '--size', 30 * 1024 ]
         end
         vb.customize [
                          'storageattach', :id,
