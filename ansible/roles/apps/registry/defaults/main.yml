@@ -24,6 +24,7 @@ registry_data_dir: /var/lib/registry
 ## For PV based config
 # PVC storage class name
 registry_pvc_storage_class: rook-nfs-share1  # Default use rook-nfs
+#registry_pvc_storage_class: rook-ceph-block  # Use rook-ceph block storage
 
 # PVC storage size
 registry_pvc_size: 10Gi
