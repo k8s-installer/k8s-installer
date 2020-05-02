@@ -8,7 +8,7 @@ DOCKER_PKGS="apt-transport-https ca-certificates curl gnupg-agent software-prope
 DOCKER_PKGS="docker.io $DOCKER_PKGS"
 #DOCKER_PKGS="docker-ce docker-ce-cli containerd.io firewalld python-cryptography $DOCKER_PKGS"
 
-PKGS="$DOCKER_PKGS firewalld nfs-common nfs-kernel-server"
+PKGS="$DOCKER_PKGS firewalld nfs-common nfs-kernel-server lvm2"
 
 for v in $KUBE_VERSIONS; do
     PKGS="$PKGS kubeadm=${v}-00 kubelet=${v}-00 kubectl=${v}-00"

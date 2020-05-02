@@ -6,7 +6,7 @@
 PY2DEPS="libselinux-python python-virtualenv python2-cryptography"
 PY3DEPS="python3" # python3-devel gcc openssl-devel"
 NFS_DEPS="rpcbind nfs-utils"
-DEPS="docker audit yum-plugin-versionlock firewalld gnupg2 $PY2DEPS $PY3DEPS $NFS_DEPS"
+DEPS="docker audit yum-plugin-versionlock firewalld gnupg2 lvm2 $PY2DEPS $PY3DEPS $NFS_DEPS"
 
 # rhel7
 if type subscription-manager >/dev/null 2>&1; then

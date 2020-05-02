@@ -6,6 +6,7 @@
   yum:
     name:
       - libselinux-python
+      - lvm2
       - gnupg2
       - nfs-utils
       - rpcbind
