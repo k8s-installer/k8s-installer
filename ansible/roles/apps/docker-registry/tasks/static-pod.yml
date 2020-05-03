@@ -18,7 +18,7 @@
 
 - name: Install registry static pod manifest
   template:
-    src: registry-static-pod.yml.j2
+    src: static-pod/registry.yml.j2
     dest: /etc/kubernetes/manifests/registry.yml
 
 - name: Allow firewall for registry
