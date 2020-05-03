@@ -15,6 +15,7 @@
 #registry_version: 2.7.1
 
 # PVC storage class name
+#registry_pvc_storage_class: ""  # Use default storage class
 #registry_pvc_storage_class: rook-nfs-share1  # Default to use rook-nfs
 #registry_pvc_storage_class: rook-ceph-block  # Use rook-ceph block storage
 
