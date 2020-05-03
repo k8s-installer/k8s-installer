@@ -14,3 +14,15 @@
 - name: Disable SELinux
   selinux:
     state: disabled
+
+- name: Add br_netfilter.modules
+  copy:
+    src: br_netfilter.modules
+    dest: /etc/sysconfig/modules/
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Modprobe br_netfilter
+  shell:
+    cmd: /etc/sysconfig/modules/br_netfilter.modules
