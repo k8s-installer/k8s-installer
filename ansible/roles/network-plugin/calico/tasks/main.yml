@@ -1,13 +1,18 @@
+- name: Create {{ calico_config_dir }} dir
+  file:
+    path: "{{ calico_config_dir }}"
+    state: directory
+
 - when: not offline_install
   block:
     - name: Install calico cni plugin (online mode)
       get_url:
         url: "{{ calico_manifest_url }}"
-        dest: /etc/kubernetes/calico.yaml
+        dest: "{{ calico_config_dir }}/calico.yaml"
       environment: "{{ proxy_env }}"
 
     - name: Install calico cni plugin (online mode)
-      command: kubectl apply -f /etc/kubernetes/calico.yaml --kubeconfig /etc/kubernetes/admin.conf
+      command: kubectl apply -f {{ calico_config_dir }}/calico.yaml --kubeconfig /etc/kubernetes/admin.conf
 
 - name: Install calico cni plugin (offline mode)
   command: kubectl apply -f /opt/kubernetes-offline/calico.yaml --kubeconfig /etc/kubernetes/admin.conf

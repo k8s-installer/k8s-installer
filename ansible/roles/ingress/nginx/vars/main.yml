@@ -1,1 +1,1 @@
-config_dir: /etc/kubernetes/
+ingress_nginx_config_dir: /etc/kubernetes/addons/ingress-nginx
