@@ -3,6 +3,7 @@
 
   roles:
     - { role: installer-defaults }
+    - { role: ingress, tags: ingress }
     - { role: apps/metrics-server, tags: metrics-server }
     - { role: apps/helm, tags: helm }
     - { role: storage/rook-nfs, tags: rook-nfs }

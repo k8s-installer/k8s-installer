@@ -1,0 +1,13 @@
+- name: Create {{ config_dir }} dir
+  file:
+    path: "{{ config_dir }}"
+    state: directory
+
+- name: Copy deployment yaml
+  copy:
+    src: deploy.yaml
+    dest: "{{ config_dir }}"
+
+- name: Apply deployment yaml
+  shell:
+    cmd: kubectl apply -f {{ config_dir }}/deploy.yaml --kubeconfig=/etc/kubernetes/admin.conf
