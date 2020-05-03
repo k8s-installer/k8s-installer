@@ -15,7 +15,7 @@ spec:
 
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: ReplicaSet
 metadata:
   name: registry
   namespace: registry
@@ -32,6 +32,17 @@ spec:
       labels:
         app: registry
     spec:
+      initContainers:
+        # Generate htpasswd file
+        - name: init-registry
+          image: registry:{{ registry_version }}
+          imagePullPolicy: IfNotPresent
+          command: [ /bin/sh ]
+          args: [ -c, "/usr/bin/htpasswd -Bbn {{ registry_user }} {{ registry_password }} > /htpasswd/htpasswd" ]
+          volumeMounts:
+            - name: htpasswd-dir
+              mountPath: /htpasswd
+
       containers:
         - name: registry
           image: registry:{{ registry_version }}
@@ -44,7 +55,7 @@ spec:
             - name: REGISTRY_AUTH_HTPASSWD_REALM
               value: "Registry Realm"
             - name: REGISTRY_AUTH_HTPASSWD_PATH
-              value: /secrets/htpasswd
+              value: /htpasswd/htpasswd
             - name: REGISTRY_HTTP_TLS_CERTIFICATE
               value: /secrets/registry.crt
             - name: REGISTRY_HTTP_TLS_KEY
@@ -54,7 +65,9 @@ spec:
               mountPath: /var/lib/registry
             - name: registry-secrets
               mountPath: /secrets
-      hostNetwork: true
+            - name: htpasswd-dir
+              mountPath: /htpasswd
+
       volumes:
         - name: registry-data
           persistentVolumeClaim:
@@ -62,6 +75,8 @@ spec:
         - name: registry-secrets
           secret:
             secretName: registry-secrets
+        - name: htpasswd-dir
+          emptyDir: {}
 
 ---
 kind: Service

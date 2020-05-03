@@ -3,7 +3,6 @@
     path: "{{ registry_config_dir }}/{{ item }}"
   register: slurp_file
   with_items:
-    - htpasswd
     - registry.crt
     - registry.key
 
@@ -12,9 +11,8 @@
 #  with_items: "{{ slurp_file.results }}"
 
 - set_fact:
-    htpasswd_content: "{{ slurp_file.results[0].content }}"
-    registry_crt_content: "{{ slurp_file.results[1].content }}"
-    registry_key_content: "{{ slurp_file.results[2].content }}"
+    registry_crt_content: "{{ slurp_file.results[0].content }}"
+    registry_key_content: "{{ slurp_file.results[1].content }}"
   
 - name: Install registry pod manifest
   template:
@@ -22,7 +20,7 @@
     dest: "{{ registry_config_dir }}/{{ item.dest }}"
     mode: "{{ item.mode }}"
   with_items:
-    - { src: registry-pv-based.yml.j2, dest: registry.yml, mode: "0644" }
+    - { src: registry-pv-based.yml.j2, dest: registry.yml, mode: "0600" }
     - { src: registry-configmap.yml.j2, dest: configmap.yml, mode: "0600" }
 
 - name: Apply registry pod manifest
