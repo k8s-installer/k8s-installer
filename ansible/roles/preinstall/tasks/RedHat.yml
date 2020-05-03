@@ -1,15 +1,12 @@
 - name: Enable rhel-7-server-extras-rpms
   command: subscription-manager repos --enable=rhel-7-server-extras-rpms
-  when: ansible_distribution == "RedHat"
+  when: ansible_distribution == "RedHat" and ansible_distribution_major_version == "7"
+
+- include_vars: "{{ ansible_os_family }}{{ ansible_distribution_major_version }}.yml"
 
 - name: Install common packages (rhel)
   yum:
-    name:
-      - libselinux-python
-      - lvm2
-      - gnupg2
-      - nfs-utils
-      - rpcbind
+    name: "{{ preinstall_dependencies }}"
     state: latest
     enablerepo: "{{ yum_enablerepo }}"
     disablerepo: "{{ yum_disablerepo }}"

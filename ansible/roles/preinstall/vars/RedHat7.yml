@@ -1,0 +1,6 @@
+preinstall_dependencies:
+  - libselinux-python
+  - lvm2
+  - gnupg2
+  - nfs-utils
+  - rpcbind
