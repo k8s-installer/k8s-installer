@@ -25,12 +25,6 @@
 - name: Set os dependent variables
   include_vars: "{{ ansible_os_family }}.yml"
 
-- name: Set container-engine
-  set_fact:
-    container_engine: "docker"
-  tags:
-    - always
-
 - name: Change container-engine for RHEL8/CentOS8
   set_fact:
     container_engine: "containerd"
