@@ -1,4 +1,4 @@
-# master/first role
+# master/secondary role
 
 マスタノード2台目以降に Kubernetes コントロールプレーンをインストールします。
 
