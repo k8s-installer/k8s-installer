@@ -1,5 +1,11 @@
 # ChangeLog
 
+## x.x.x
+
+### Added
+
+- Add nginx ingress controller 0.32
+
 ## 0.0.6 - 2020/4/30
 
 ### Added

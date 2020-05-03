@@ -9,4 +9,4 @@
     - { role: storage/rook-nfs, tags: rook-nfs }
     - { role: storage/rook-ceph, tags: rook-ceph }
     - { role: storage/storageclass, tags: storageclass }
-    - { role: apps/registry, tags: registry }
+    - { role: apps/docker-registry, tags: registry }

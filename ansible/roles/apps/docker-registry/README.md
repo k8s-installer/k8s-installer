@@ -1,4 +1,4 @@
-# registry role
+# docker-registry role
 
 Docker private registry を起動する role です。
 
