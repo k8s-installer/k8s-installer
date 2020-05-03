@@ -1,0 +1,16 @@
+- name: Create config dir
+  file:
+    path: "{{ yaml_dir }}"
+    state: directory
+
+- name: Copy yaml files
+  copy:
+    src: "{{ item }}"
+    dest: "{{ yaml_dir }}"
+  with_items:
+    - localstorage-sc.yml
+
+- name: Apply kubernetes yamls
+  shell: kubectl apply -f {{ yaml_dir }}/{{ item }} --kubeconfig=/etc/kubernetes/admin.conf
+  with_items:
+    - localstorage-sc.yml

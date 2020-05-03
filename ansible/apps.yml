@@ -6,6 +6,7 @@
     - { role: ingress, tags: ingress }
     - { role: apps/metrics-server, tags: metrics-server }
     - { role: apps/helm, tags: helm }
+    - { role: storage/local-storage, tags: local-storage }
     - { role: storage/rook-nfs, tags: rook-nfs }
     - { role: storage/rook-ceph, tags: rook-ceph }
     - { role: storage/storageclass, tags: storageclass }
