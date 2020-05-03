@@ -5,6 +5,8 @@
 ### Added
 
 - Add nginx ingress controller 0.32
+- Alpha support for RHEL/CentOS 8 (#10)
+- Add containerd role for RHEL/CentOS 8
 
 ## 0.0.6 - 2020/4/30
 
