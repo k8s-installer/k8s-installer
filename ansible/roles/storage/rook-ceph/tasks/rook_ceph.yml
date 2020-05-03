@@ -18,6 +18,7 @@
     - csi/rbd/storageclass.yaml
     - csi/cephfs/storageclass.yaml
     - dashboard-external.yaml
+    - toolbox.yml
 
 - name: Apply rook + ceph yamls
   shell: kubectl apply -f {{ yaml_dir }}/{{ item }} --kubeconfig /etc/kubernetes/admin.conf

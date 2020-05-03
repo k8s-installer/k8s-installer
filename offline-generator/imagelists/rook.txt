@@ -7,3 +7,4 @@ quay.io/k8scsi/csi-resizer:v0.4.0
 quay.io/k8scsi/csi-provisioner:v1.4.0
 quay.io/k8scsi/csi-snapshotter:v1.2.2
 quay.io/k8scsi/csi-attacher:v2.1.0
+rook/toolbox:v0.5.1
