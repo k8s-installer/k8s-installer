@@ -50,5 +50,8 @@ proxy_env:
 # master schedulable?
 master_schedulable: yes
 
+# Container engine
+container_engine: docker
+
 is_master: no
 is_worker: no

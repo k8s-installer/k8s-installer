@@ -1,0 +1,2 @@
+#!/bin/sh
+/sbin/modprobe br_netfilter >/dev/null 2>&1

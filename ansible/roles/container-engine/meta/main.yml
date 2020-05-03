@@ -1,2 +1,8 @@
 dependencies:
   - role: container-engine/docker
+    when:
+      - container_engine == "docker"
+
+  - role: container-engine/containerd
+    when:
+      - container_engine == "containerd"
