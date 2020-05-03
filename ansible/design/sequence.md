@@ -62,8 +62,9 @@
     * [nginx](../roles/ingress/nginx) : Nginx ingress controller
 * [metrics-server](../roles/apps/metrics-server) : metrics server
 * [helm](../roles/apps/helm) : Helm CLI
+* [local-storage](../roles/storage/local-storage) : local-storage Storage Class 設定
 * [rook-nfs](../roles/storage/rook-nfs) : Rook NFS
 * [rook-ceph](../roles/storage/rook-ceph) : Rook Ceph
-* [storageclass](../roles/storage/storageclass) : デフォルト Storage Class の設定
+* [default-storage-class](../roles/storage/default-storage-class) : デフォルト Storage Class の設定
 * [docker-registry](../roles/apps/docker-registry) : Docker Registry
 
