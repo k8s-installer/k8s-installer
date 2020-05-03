@@ -640,6 +640,10 @@ spec:
               value: "info"
             - name: FELIX_HEALTHENABLED
               value: "true"
+            # Support both nftables (for RHEL8/CentOS8) and iptables
+            # See https://docs.projectcalico.org/reference/felix/configuration
+            - name: FELIX_IPTABLESBACKEND
+              value: "Auto"
           securityContext:
             privileged: true
           resources:
