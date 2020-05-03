@@ -11,6 +11,7 @@
   get_url:
     url: "{{ containerd_download_url }}"
     dest: /tmp/{{ containerd_tarball }}
+  environment: "{{ proxy_env }}"
 
 - name: Unarchive containerd
   unarchive:
