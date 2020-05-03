@@ -24,7 +24,19 @@ spec:
           image: registry:{{ registry_version }}
           imagePullPolicy: IfNotPresent
           command: [ /bin/sh ]
-          args: [ -c, "/usr/bin/htpasswd -Bbn {{ registry_user }} {{ registry_password }} > /htpasswd/htpasswd" ]
+          args: [ -c, "/usr/bin/htpasswd -Bbn \"$REGISTRY_USER\" \"$REGISTRY_PASSWORD\" > /htpasswd/htpasswd" ]
+          env:
+            - name: REGISTRY_USER
+              valueFrom:
+                secretKeyRef:
+                  name: registry-secrets
+                  key: registry.user
+            - name: REGISTRY_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: registry-secrets
+                  key: registry.password
+
           volumeMounts:
             - name: htpasswd-dir
               mountPath: /htpasswd

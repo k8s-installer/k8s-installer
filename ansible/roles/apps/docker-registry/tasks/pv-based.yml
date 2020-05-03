@@ -20,7 +20,7 @@
     dest: "{{ registry_config_dir }}/{{ item.dest }}"
     mode: "{{ item.mode }}"
   with_items:
-    - { src: registry-pv-based.yml.j2, dest: registry.yml, mode: "0600" }
+    - { src: registry-pv-based.yml.j2, dest: registry.yml, mode: "0644" }
     - { src: registry-configmap.yml.j2, dest: configmap.yml, mode: "0600" }
 
 - name: Apply registry pod manifest

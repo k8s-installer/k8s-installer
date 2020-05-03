@@ -5,5 +5,7 @@ metadata:
   name: registry-secrets
   namespace: registry
 data:
+  registry.user: {{ registry_user | b64encode }}
+  registry.password: {{ registry_password | b64encode }}
   registry.crt: {{ registry_crt_content }}
   registry.key: {{ registry_key_content }}
