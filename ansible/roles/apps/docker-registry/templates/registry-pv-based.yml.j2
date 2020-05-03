@@ -4,7 +4,7 @@ metadata:
   name: registry-pv-claim
   namespace: registry
 spec:
-{% if registry_pvc_stroge_class != "" %}
+{% if registry_pvc_storage_class != "" %}
   storageClassName: {{ registry_pvc_storage_class }}
 {% endif %}
   accessModes:
