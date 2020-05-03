@@ -1,21 +1,6 @@
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: registry-pv-claim
-  namespace: registry
-spec:
-{% if registry_pvc_storage_class != "" %}
-  storageClassName: {{ registry_pvc_storage_class }}
-{% endif %}
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: {{ registry_pvc_size }}
-
 ---
 apiVersion: apps/v1
-kind: ReplicaSet
+kind: StatefulSet
 metadata:
   name: registry
   namespace: registry
@@ -23,6 +8,7 @@ metadata:
     app: registry
     component: registry
 spec:
+  serviceName: registry
   replicas: 1
   selector:
     matchLabels:
@@ -69,14 +55,24 @@ spec:
               mountPath: /htpasswd
 
       volumes:
-        - name: registry-data
-          persistentVolumeClaim:
-            claimName: registry-pv-claim
         - name: registry-secrets
           secret:
             secretName: registry-secrets
         - name: htpasswd-dir
           emptyDir: {}
+
+  volumeClaimTemplates:
+    - metadata:
+        name: registry-data
+      spec:
+{% if registry_pvc_storage_class != "" %}
+        storageClassName: {{ registry_pvc_storage_class }}
+{% endif %}
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: {{ registry_pvc_size }}
 
 ---
 kind: Service
