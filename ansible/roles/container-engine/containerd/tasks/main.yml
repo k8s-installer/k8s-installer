@@ -1,4 +1,12 @@
-- name: Install runc
+- name: Install runc (from yum repo)
+  yum:
+    name: runc
+    state: latest
+    enablerepo: "{{ yum_enablerepo }}"
+    disablerepo: "{{ yum_disablerepo }}"
+  when: ansible_os_family == "RedHat"
+
+- name: Install runc (from website)
   get_url:
     url: "{{ runc_download_url }}"
     dest: /usr/bin/runc
@@ -6,6 +14,7 @@
     group: root
     mode: 0755
   environment: "{{ proxy_env }}"
+  when: ansible_os_family != "RedHat"
 
 - name: Download containerd
   get_url:

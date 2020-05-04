@@ -1,4 +1,4 @@
-- name: Create {{ config_dir }} dir
+- name: Create config dir
   file:
     path: "{{ ingress_nginx_config_dir }}"
     state: directory
