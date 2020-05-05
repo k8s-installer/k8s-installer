@@ -1,29 +1,32 @@
 - include_vars: "{{ ansible_os_family }}.yml"
 
-- name: Clear /opt/kubernetes-offline dir
-  file:
-    path: /opt/kubernetes-offline
-    state: absent
-
 - name: Create /opt/kubernetes-offline dir
   file:
     path: /opt/kubernetes-offline
     state: directory
 
-- name: Transfer k8s-offline-repo
-  unarchive:
-    src: ./offline-files/{{ item }}
-    dest: /opt/kubernetes-offline/
+- name: Cleanup /opt/kubernetes-offline dir
+  file:
+    path: /opt/kubernetes-offline/{{ item }}
+    state: absent
   with_items:
-    - "{{ k8s_offline_repo_tarball }}"
-    - k8s-images.tar.gz
+    - rpms
+    - debs
 
-- name: Transfer yaml files
+- name: Transfer all offline file
   copy:
     src: "{{ item }}"
     dest: /opt/kubernetes-offline
   with_fileglob:
-    - ./offline-files/*.yaml
-    - ./offline-files/*.yml
+    - ./offline-files/*
+
+- name: Unarchive files
+  unarchive:
+    src: /opt/kubernetes-offline/{{ item }}
+    dest: /opt/kubernetes-offline/
+    remote_src: yes
+  with_items:
+    - "{{ k8s_offline_repo_tarball }}"
+    - k8s-images.tar.gz
 
 - include_tasks: "{{ ansible_os_family }}.yml"
