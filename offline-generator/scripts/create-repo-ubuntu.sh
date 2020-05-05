@@ -8,7 +8,8 @@ DOCKER_PKGS="apt-transport-https ca-certificates curl gnupg-agent software-prope
 DOCKER_PKGS="docker.io $DOCKER_PKGS"
 #DOCKER_PKGS="docker-ce docker-ce-cli containerd.io firewalld python-cryptography $DOCKER_PKGS"
 
-PKGS="$DOCKER_PKGS firewalld nfs-common nfs-kernel-server lvm2"
+PKGS="$DOCKER_PKGS firewalld lvm2 nfs-common nfs-kernel-server"
+PKGS="$PKGS runc"
 
 for v in $KUBE_VERSIONS; do
     PKGS="$PKGS kubeadm=${v}-00 kubelet=${v}-00 kubectl=${v}-00"
@@ -32,8 +33,8 @@ sudo apt-get update && sudo apt-get install -y $DOCKER_PKGS
 CACHEDIR=outputs/cache-debs
 mkdir -p $CACHEDIR
 
-# Get all dependencies
-DEPS=$(apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances --no-pre-depends $PKGLIST | grep "^\w" | sort | uniq)
+# Resolve all dependencies
+DEPS=$(apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances --no-pre-depends $PKGS | grep "^\w" | sort | uniq)
 
 # Download packages
 (cd $CACHEDIR && apt download $PKGS $DEPS)
