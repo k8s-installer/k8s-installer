@@ -27,8 +27,9 @@ for i in $IMAGES; do
     echo "==> pulling $i"
     sudo docker pull $i
 
+    f="$(echo $i | sed 's/\//__/g').tar"
     echo "==> saving $i"
-    sudo docker save $i > "$IMAGEDIR/$(basename $i).tar"
+    sudo docker save $i > "$IMAGEDIR/$f"
 done
 
 echo "==> Create images tarball"
