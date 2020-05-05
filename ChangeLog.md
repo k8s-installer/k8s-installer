@@ -1,11 +1,12 @@
 # ChangeLog
 
-## x.x.x
+## 0.0.7 - 2020/5/5
 
 ### Added
 
 - Add Nginx ingress controller 0.32
 - Add MetalLB 0.9.3
+- Disable firewalld by default
 - Alpha support for RHEL/CentOS 8 (#10)
 - Add containerd role for RHEL/CentOS 8
 

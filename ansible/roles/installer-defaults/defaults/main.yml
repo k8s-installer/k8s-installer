@@ -36,7 +36,7 @@ lb_apiserver_port: 6443
 pod_subnet: 192.168.0.0/16
 
 # Firewall
-firewall_enabled: yes
+firewall_enabled: no
 
 # Proxy
 proxy_url: ""

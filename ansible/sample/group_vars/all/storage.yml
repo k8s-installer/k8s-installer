@@ -1,3 +1,7 @@
+#----------------------------------------------------------
+# Storage Class config
+#----------------------------------------------------------
+
 # Default storage class
 default_storage_class: ""
 #default_storage_class: "rook-nfs-share1"
@@ -8,7 +12,7 @@ default_storage_class: ""
 # rook-nfs config
 #----------------------------------------------------------
 
-# rook-nfs Enabled?
+# Enable rook-nfs?
 #rook_nfs_enabled: no
 
 # Hostname hosts NFS PV local volume
@@ -23,4 +27,6 @@ default_storage_class: ""
 #----------------------------------------------------------
 # rook-ceph config
 #----------------------------------------------------------
+
+# Enable rook-ceph?
 #rook_ceph_enabled: no
