@@ -11,6 +11,11 @@
       retries: 3
       delay: 5
 
+    - name: Delete join.sh
+      file:
+        path: /etc/kubernetes/join.sh
+        state: absent
+
   rescue:
     - name: stdout
       debug:
@@ -23,9 +28,3 @@
     - name: Abort if kubeadm join failed
       fail:
         msg: kubeadm join failed
-
-  always:
-    - name: Delete join.sh
-      file:
-        path: /etc/kubernetes/join.sh
-        state: absent
