@@ -1,4 +1,14 @@
-- name: Change default storage class
+- name: Set storage class for rook-ceph
+  set_fact:
+    default_storage_class: rook-ceph-block
+  when: default_storage_class == "" and rook_ceph_enabled
+
+- name: Set storage class for rook-nfs
+  set_fact:
+    default_storage_class: rook-nfs-share1
+  when: default_storage_class == "" and rook_nfs_enabled
+
+- name: Change default storage class to {{ default_storage_class }}
   shell:
     cmd: "kubectl patch storageclass {{ default_storage_class }} -p '{\"metadata\": {\"annotations\": {\"storageclass.kubernetes.io/is-default-class\": \"true\"}}}' --kubeconfig=/etc/kubernetes/admin.conf"
   when: default_storage_class != ""
