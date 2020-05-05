@@ -1,29 +1,13 @@
-- name: Copy join.sh
-  copy:
-    src: ./files/join.sh
-    dest: /tmp/
-    mode: 0700
+- name: Check if kubeadm join has already run
+  stat:
+    path: "/etc/kubernetes/kubelet.conf"
+  register: kubelet_conf
 
-- block:
-    - name: Execute kubeadm join
-      shell: /tmp/join.sh --node-name {{ inventory_hostname }} # -v 5
-      ignore_errors: yes
-      register: kubeadm_join
+- name: Check if kubeadm join has aborted
+  stat:
+    path: "/etc/kubernetes/join.sh"
+  register: join
 
-    - name: Delete join.sh
-      file:
-        path: /tmp/join.sh
-        state: absent
-
-  rescue:
-    - name: stderr
-      debug:
-        var: kubeadm_join.stderr_lines
-
-    - name: stdout
-      debug:
-        var: kubeadm_join.stdout_lines
-
-    - name: Abort if kubeadm join failed
-      fail:
-        msg: kubeadm join failed
+- name: Execute kubeadm join
+  import_tasks: join.yml
+  when: not kubelet_conf.stat.exists or join.stat.exists

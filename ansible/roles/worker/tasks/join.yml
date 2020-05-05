@@ -1,0 +1,29 @@
+- name: Copy join.sh
+  copy:
+    src: ./files/join.sh
+    dest: /etc/kubernetes/
+    mode: 0700
+
+- block:
+    - name: Execute kubeadm join
+      shell: /etc/kubernetes/join.sh --node-name {{ inventory_hostname }} # -v 5
+      ignore_errors: yes
+      register: kubeadm_join
+
+    - name: Delete join.sh
+      file:
+        path: /etc/kubernetes/join.sh
+        state: absent
+
+  rescue:
+    - name: stderr
+      debug:
+        var: kubeadm_join.stderr_lines
+
+    - name: stdout
+      debug:
+        var: kubeadm_join.stdout_lines
+
+    - name: Abort if kubeadm join failed
+      fail:
+        msg: kubeadm join failed
