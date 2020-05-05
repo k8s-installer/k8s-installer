@@ -1,0 +1,6 @@
+- hosts: master_first
+  become: yes
+
+  roles:
+    - { role: installer-defaults }
+    - { role: networking/ingress, tags: ingress }

@@ -3,11 +3,6 @@
 
   roles:
     - { role: installer-defaults }
-    - { role: networking/ingress, tags: ingress }
     - { role: apps/metrics-server, tags: metrics-server }
     - { role: apps/helm, tags: helm }
-    - { role: storage/local-storage, tags: local-storage }
-    - { role: storage/rook-nfs, tags: rook-nfs }
-    - { role: storage/rook-ceph, tags: rook-ceph }
-    - { role: storage/default-storage-class, tags: default-storage-class }
     - { role: apps/docker-registry, tags: registry }

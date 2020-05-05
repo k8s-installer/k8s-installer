@@ -1,2 +1,2 @@
 dependencies:
-  - role: ingress/nginx
+  - role: networking/ingress/nginx

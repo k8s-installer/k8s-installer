@@ -3,4 +3,6 @@
 - import_playbook: master-secondary.yml
 - import_playbook: worker.yml
 #- import_playbook: nfs.yml
+- import_playbook: networking.yml
+- import_playbook: storage.yml
 - import_playbook: apps.yml
