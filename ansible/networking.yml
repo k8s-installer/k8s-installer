@@ -4,3 +4,4 @@
   roles:
     - { role: installer-defaults }
     - { role: networking/ingress, tags: ingress }
+    - { role: networking/loadbalancer, tags: loadbalancer }

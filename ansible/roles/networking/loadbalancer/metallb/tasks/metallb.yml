@@ -1,0 +1,33 @@
+- name: Create config dir
+  file:
+    path: "{{ metallb_config_dir }}"
+    state: directory
+
+- name: Copy deployment yaml
+  copy:
+    src: "{{ item }}"
+    dest: "{{ metallb_config_dir }}"
+  with_items:
+    - namespace.yaml
+    - metallb.yaml
+
+- name: Apply deployment yaml
+  shell:
+    cmd: kubectl apply -f {{ metallb_config_dir }}/{{ item }} --kubeconfig=/etc/kubernetes/admin.conf
+  with_items:
+    - namespace.yaml
+    - metallb.yaml
+
+- name: Create memberlist secret
+  shell:
+    cmd: kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)" --kubeconfig=/etc/kubernetes/admin.conf
+  ignore_errors: yes
+
+- name: Create configuration
+  template:
+    src: config.yml.j2
+    dest: "{{ metallb_config_dir }}/config.yml"
+
+- name: Apply configuration
+  shell:
+    cmd: kubectl apply -f {{ metallb_config_dir }}/config.yml --kubeconfig=/etc/kubernetes/admin.conf

@@ -55,6 +55,8 @@ sample/group_vars/all/*.yml ファイルを inventory/group_vars/all/ ディレ�
     * Internet 接続にプロキシを経由する必要がある場合は、proxy_url, proxy_noproxy を設定してください。
 * version.yml
     * インストールする Kubernetes バージョンを適宜指定します。無指定の場合はデフォルト値が使用されます。    
+* networking.yml
+    * ネットワーク関連の設定を行います。    
 * storage.yml
     * ストレージの設定を行います。
 * registry.yml
@@ -77,6 +79,8 @@ sample/group_vars/all/*.yml ファイルを inventory/group_vars/all/ ディレ�
 * master-first.yml: 1台目のマスタノードへの Kubernetes デプロイを実行します。
 * master-secondary.yml: 2台目以降のマスタノードへの Kubernetes デプロイを実行します。
 * worker.yml: ワーカーノードへの Kubernetes デプロイを実行します。
+* networking.yml: ネットワーク関連(ingress, loadbalancer)のデプロイを実行します。
+* storage.yml: ストレージ関連(rook, storage class)のデプロイを実行します。
 * apps.yml: アプリケーションのデプロイを実行します。
 
 ## クラスタのアップグレード

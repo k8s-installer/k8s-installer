@@ -1,0 +1,5 @@
+# Enable MetalLB?
+#metallb_enabled: no
+
+# MetalLB IP address pool range
+#metallb_ip_range: 192.168.1.200-192.168.1.210

@@ -4,7 +4,8 @@
 
 ### Added
 
-- Add nginx ingress controller 0.32
+- Add Nginx ingress controller 0.32
+- Add MetalLB 0.9.3
 - Alpha support for RHEL/CentOS 8 (#10)
 - Add containerd role for RHEL/CentOS 8
 

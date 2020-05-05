@@ -1,0 +1,1 @@
+metallb_config_dir: /etc/kubernetes/addons/loadbalancer-metallb
