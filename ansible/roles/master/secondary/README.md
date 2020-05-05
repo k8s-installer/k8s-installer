@@ -8,3 +8,8 @@
 * join スクリプトを投入
 * kubeadm join を実行
 * ~/.kube/config を投入
+
+## 注意事項
+
+/etc/kubernetes/pki/ca.key ファイルが存在している場合はすでに join は実行されているとみなし、
+再実行は行われません。
