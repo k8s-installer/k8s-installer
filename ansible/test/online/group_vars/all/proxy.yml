@@ -1,3 +1,0 @@
-# Proxy
-#proxy_url: ""
-#porxy_noproxy: "127.0.0.1,localhost,{{ lb_apiserver_address }}"
