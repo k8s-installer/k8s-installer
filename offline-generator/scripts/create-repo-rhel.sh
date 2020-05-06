@@ -2,11 +2,19 @@
 
 . ./config.sh
 
+. /etc/os-release
+
 # dependencies
 PY2DEPS="libselinux-python python-virtualenv python2-cryptography"
 PY3DEPS="python3" # python3-devel gcc openssl-devel"
 NFS_DEPS="rpcbind nfs-utils"
-DEPS="docker audit yum-plugin-versionlock firewalld gnupg2 lvm2 $PY2DEPS $PY3DEPS $NFS_DEPS"
+
+DEPS="audit yum-plugin-versionlock firewalld gnupg2 lvm2"
+if [ "$VERSION_ID" = "7" ]; then
+    DEPS="docker $DEPS $PY2DEPS $PY3DEPS $NFS_DEPS"
+else
+    DEPS="runc $DEPS $PY3DEPS $NFS_DEPS"
+fi
 
 # rhel7
 if type subscription-manager >/dev/null 2>&1; then
@@ -41,12 +49,17 @@ mkdir -p $CACHEDIR
 
 cp ./config.sh outputs
 
-# download docker (newest version only)
-RT="sudo repotrack -a x86_64 -p $CACHEDIR"
+if [ "$VERSION_ID" = "8" ]; then
+    RT="sudo dnf download --resolve --alldeps --downloaddir $CACHEDIR"
+else
+    RT="sudo repotrack -a x86_64 -p $CACHEDIR"
+fi
+
 YD="sudo yumdownloader --destdir=$CACHEDIR -y"
 
-echo "==> Downloading docker, etc"
+echo "==> Downloading $DEPS"
 $RT $DEPS || (echo "Download error" && exit 1)
+
 for v in $KUBE_VERSIONS; do
     KUBEADM_VERSION=${v}-0
 
