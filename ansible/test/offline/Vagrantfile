@@ -10,14 +10,16 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "centos" do |c|
-    c.vm.hostname = "centos"
-    c.vm.network "private_network", ip: "10.240.0.52"
+    c.vm.hostname = "test-offline-centos"
     c.vm.box = "generic/centos7"
+    c.vm.network "private_network", ip: "10.240.0.72"
+    c.vm.network "forwarded_port", guest: 22, host: 2372, id: "ssh"
   end
 
   config.vm.define "ubuntu" do |c|
-    c.vm.hostname = "ubuntu"
-    c.vm.network "private_network", ip: "10.240.0.53"
+    c.vm.hostname = "test-offline-ubuntu"
     c.vm.box = "generic/ubuntu1804"
+    c.vm.network "private_network", ip: "10.240.0.73"
+    c.vm.network "forwarded_port", guest: 22, host: 2373, id: "ssh"
   end
 end
