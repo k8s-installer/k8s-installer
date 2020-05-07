@@ -9,7 +9,7 @@ PY2DEPS="libselinux-python python-virtualenv python2-cryptography"
 PY3DEPS="python3" # python3-devel gcc openssl-devel"
 NFS_DEPS="rpcbind nfs-utils"
 
-DEPS="audit yum-plugin-versionlock firewalld gnupg2 lvm2"
+DEPS="audit yum-plugin-versionlock firewalld gnupg2 lvm2 unzip"
 if [ "$VERSION_ID" = "7" ]; then
     DEPS="docker $DEPS $PY2DEPS $PY3DEPS $NFS_DEPS"
 else
