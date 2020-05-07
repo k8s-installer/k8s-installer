@@ -4,3 +4,4 @@ preinstall_dependencies:
   - gnupg2
   - nfs-utils
   - rpcbind
+  - unzip
