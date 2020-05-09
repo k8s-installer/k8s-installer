@@ -1,5 +1,15 @@
 # ChangeLog
 
+## x.x.x
+
+### Added
+
+- Add containerd support for RHEL/CentOS 7
+
+### Fixed
+
+- Fix offline generator
+
 ## 0.0.7 - 2020/5/5
 
 ### Added
