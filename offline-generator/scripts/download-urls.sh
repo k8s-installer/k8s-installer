@@ -38,8 +38,8 @@ HELM_FILE=helm-${HELM_VERSION}-linux-amd64.tar.gz
 download https://get.helm.sh/$HELM_FILE
 
 # download runC
-RUNC_VERSION=v1.0.0-rc10
-download https://github.com/opencontainers/runc/releases/download/${RUNC_VERSION}/runc.amd64 runc.amd64_${RUNC_VERSION}
+#RUNC_VERSION=v1.0.0-rc10
+#download https://github.com/opencontainers/runc/releases/download/${RUNC_VERSION}/runc.amd64 runc.amd64_${RUNC_VERSION}
 
 # download containerd
 CONTAINERD_FILE=containerd-${CONTAINERD_VERSION}.linux-amd64.tar.gz
