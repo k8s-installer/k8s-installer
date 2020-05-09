@@ -51,13 +51,14 @@ DEBDIR=outputs/debs
 if [ -e $DEBDIR ]; then
     /bin/rm -rf $DEBDIR
 fi
-mkdir -p $DEBDIR/packages
-/bin/cp $CACHEDIR/* $DEBDIR/packages
-/bin/rm $DEBDIR/packages/*i386.deb
+mkdir -p $DEBDIR/pkgs
+/bin/cp $CACHEDIR/* $DEBDIR/pkgs
+/bin/rm $DEBDIR/pkgs/*i386.deb
 
 pushd $DEBDIR || exit 1
-apt-ftparchive packages . | gzip -c9 > Packages.gz
-apt-ftparchive contents . | gzip -c9 > Contents-amd64.gz
+apt-ftparchive sources . > Sources && gzip -c9 Sources > Sources.gz
+apt-ftparchive packages . > Packages && gzip -c9 Packages > Packages.gz
+apt-ftparchive contents . > Contents-amd64 && gzip -c9 Contents-amd64 > Contents-amd64.gz
 apt-ftparchive release . > Release
 popd
 
