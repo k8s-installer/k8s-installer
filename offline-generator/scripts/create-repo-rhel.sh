@@ -12,14 +12,13 @@ NFS_DEPS="rpcbind nfs-utils"
 DEPS="audit yum-plugin-versionlock firewalld gnupg2 lvm2 unzip"
 if [ "$VERSION_ID" = "7" ]; then
     DEPS="docker $DEPS $PY2DEPS $PY3DEPS $NFS_DEPS"
+    if type subscription-manager >/dev/null 2>&1; then
+        sudo subscription-manager repos --enable=rhel-7-server-extras-rpms  # for docker
+        #sudo subscription-manager repos --enable rhel-7-server-optional-rpms  # for python3-devel
+    fi
 else
+    # RHEL/CentOS 8
     DEPS="runc $DEPS $PY3DEPS $NFS_DEPS"
-fi
-
-# rhel7
-if type subscription-manager >/dev/null 2>&1; then
-    sudo subscription-manager repos --enable=rhel-7-server-extras-rpms  # for docker
-    #sudo subscription-manager repos --enable rhel-7-server-optional-rpms  # for python3-devel
 fi
 
 # setup repo
