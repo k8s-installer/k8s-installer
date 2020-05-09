@@ -16,15 +16,24 @@
   environment: "{{ proxy_env }}"
   when: ansible_os_family != "RedHat"
 
-- name: Download containerd
-  get_url:
-    url: "{{ containerd_download_url }}"
-    dest: /tmp/{{ containerd_tarball }}
-  environment: "{{ proxy_env }}"
+- when: not offline_install
+  block:
+    - name: Download containerd
+      get_url:
+        url: "{{ containerd_download_url }}"
+        dest: /tmp/{{ containerd_tarball }}
+      environment: "{{ proxy_env }}"
+
+    - set_fact:
+        containerd_taball_fullpath: /tmp/{{ containerd_tarball }}
+
+- set_fact:
+    containerd_tarball_fullpath: /opt/kubernetes-offline/{{ containerd_tarball }}
+  when: offline_install
 
 - name: Unarchive containerd
   unarchive:
-    src: /tmp/{{ containerd_tarball }}
+    src: "{{ containerd_tarball_fullpath }}"
     remote_src: yes
     dest: /usr/bin
     owner: root
