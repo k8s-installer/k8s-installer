@@ -1,7 +1,18 @@
 - include_vars: "{{ container_engine }}.yml"
   
+#- name: Load container images
+#  shell:
+#    cmd: "for i in *.tar; do {{ load_image_command }} $i; done"
+#    chdir: /opt/kubernetes-offline/images
+#  when: offline_install
+
+- name: Get container image filenames
+  find:
+    paths: /opt/kubernetes-offline/images
+    patterns: "*.tar"
+  register: images
+
 - name: Load container images
   shell:
-    cmd: "for i in *.tar; do {{ load_image_command }} $i; done"
-    chdir: /opt/kubernetes-offline/images
-  when: offline_install
+    cmd: "{{ load_image_command }} {{ item.path }}"
+  with_items: "{{ images.files }}"
