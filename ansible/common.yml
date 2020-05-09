@@ -9,5 +9,5 @@
     - { role: preinstall, tags: [common, preinstall] }
     - { role: firewall, tags: [common, firewall] }
     - { role: container-engine, tags: [common, container-engine] }
-    - { role: offline/load-images, tags: [common, offline] }
     - { role: k8s-packages, tags: [common, k8s-packages] }
+    - { role: offline/load-images, tags: [common, offline] }
