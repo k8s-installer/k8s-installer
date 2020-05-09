@@ -22,7 +22,13 @@ Kubernetesクラスタを構成するマシンと同一の OS がインストー
 * CentOS 7
 * Ubuntu 18.04
 
-## Proxy 設定
+## 設定
+
+最初に `config.sh.sample` を `config.sh` にコピーし、必要な設定を行ってください。
+
+* コンテナエンジンに docker ではなく containerd を使用する場合は、CONTAINER_ENGINE に "containerd" を指定してください。
+
+### Proxy 設定
 
 Internet 接続に Proxy サーバを経由する必要がある場合は、事前に Proxy 設定が必要です。
 
