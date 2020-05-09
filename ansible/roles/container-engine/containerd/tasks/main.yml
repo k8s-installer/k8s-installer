@@ -1,4 +1,4 @@
-- name: Install runc (from yum repo)
+- name: Install runc (yum)
   yum:
     name: runc
     state: latest
@@ -6,15 +6,20 @@
     disablerepo: "{{ yum_disablerepo }}"
   when: ansible_os_family == "RedHat"
 
-- name: Install runc (from website)
-  get_url:
-    url: "{{ runc_download_url }}"
-    dest: /usr/bin/runc
-    owner: root
-    group: root
-    mode: 0755
-  environment: "{{ proxy_env }}"
-  when: ansible_os_family != "RedHat"
+- name: Install runc (apt)
+  apt:
+    name: runc
+    state: latest
+  when: ansible_os_family == "Debian"
+
+#- name: Install runc (online)
+#  get_url:
+#    url: "{{ runc_download_url }}"
+#    dest: /usr/bin/runc
+#    owner: root
+#    group: root
+#    mode: 0755
+#  environment: "{{ proxy_env }}"
 
 - when: not offline_install
   block:
