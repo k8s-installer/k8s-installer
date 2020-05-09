@@ -1,5 +1,7 @@
+- include_vars: "{{ container_engine }}.yml"
+  
 - name: Load container images
   shell:
-    cmd: "for i in *.tar; do docker load -i $i; done"
+    cmd: "for i in *.tar; do {{ load_image_command }} $i; done"
     chdir: /opt/kubernetes-offline/images
   when: offline_install

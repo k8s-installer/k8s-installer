@@ -1,13 +1,17 @@
 #!/bin/sh
 
-if ! type docker >/dev/null 2>&1; then
-    echo "==> Install docker"
-    if [ -e /etc/redhat-release ]; then
-        sudo yum install -y docker || (echo "Error: can't install docker" && exit 1)
-    else
-        sudo apt install docker.io || (echo "Error: can't install docker.io" && exit 1)
-    fi
+. ./config.sh
+
+if [ "$CONTAINER_ENGINE" = "containerd" ]; then
+    PULL="sudo ctr images pull"
+    EXPORT="sudo images export"
+    ./scripts/install-containerd.sh || exit 1
+else
+    PULL="sudo docker pull"
+    EXPORT="sudo docker save"
+    ./scripts/install-docker.sh || exit 1
 fi
+
 sudo systemctl enable --now docker
 
 IMAGEDIR=outputs/images
@@ -25,11 +29,11 @@ IMAGES=$(cat $IMAGEDIR/images.txt)
 
 for i in $IMAGES; do
     echo "==> pulling $i"
-    sudo docker pull $i
+    $PULL $i
 
     f="$(echo $i | sed 's/\//__/g').tar"
     echo "==> saving $i"
-    sudo docker save $i > "$IMAGEDIR/$f"
+    $EXPORT $i > "$IMAGEDIR/$f"
 done
 
 echo "==> Create images tarball"

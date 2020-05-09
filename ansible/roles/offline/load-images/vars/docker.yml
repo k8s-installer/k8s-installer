@@ -1,0 +1,1 @@
+load_image_command: docker load -i

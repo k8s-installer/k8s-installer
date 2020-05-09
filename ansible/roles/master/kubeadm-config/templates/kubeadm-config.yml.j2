@@ -5,6 +5,9 @@ localAPIEndpoint:
   bindPort: 6443
 nodeRegistration:
   name: {{ inventory_hostname }}
+{% if container_engine == "containerd" %}
+  criSocket: /run/containerd/containerd.sock
+{% endif %}
 
 ---
 apiVersion: kubeadm.k8s.io/{{ kubeadm_config_api_version }}

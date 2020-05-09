@@ -50,7 +50,7 @@ proxy_env:
 # master schedulable?
 master_schedulable: yes
 
-# Container engine
+# Container engine: Docker or containerd
 container_engine: docker
 
 is_master: no

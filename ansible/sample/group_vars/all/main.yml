@@ -8,8 +8,12 @@
 ## External load balancer address.
 #lb_apiserver_address: 10.240.0.40   # lb defined in Vagrantfile
 
-# Pod CIDR
+## Pod CIDR
 pod_subnet: 192.168.0.0/16
 
-# master schedulable?
+## master schedulable?
 #master_schedulable: yes
+
+## Container engine: 'docker' or 'containerd'.
+# Note: RHEL/CentOS 8 supports containerd only.
+#container_engine: docker

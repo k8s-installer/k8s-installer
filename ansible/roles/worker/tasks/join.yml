@@ -4,9 +4,18 @@
     dest: /etc/kubernetes/
     mode: 0700
 
+- name: Set default --cri-socket option
+  set_fact:
+    crisocket_flag: ""
+
+- name: Set --cri-socket option for containerd
+  set_fact:
+    crisocket_flag: --cri-socket /run/containerd/containerd.sock
+  when: container_engine == "containerd"
+
 - block:
     - name: Execute kubeadm join
-      shell: /etc/kubernetes/join.sh --node-name {{ inventory_hostname }} # -v 5
+      shell: /etc/kubernetes/join.sh --node-name {{ inventory_hostname }} {{ crisocket_flag }} # -v 5
       ignore_errors: yes
       register: kubeadm_join
 
