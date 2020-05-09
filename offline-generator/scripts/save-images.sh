@@ -1,18 +1,44 @@
-#!/bin/sh
+#!/bin/bash
 
 . ./config.sh
 
-if [ "$CONTAINER_ENGINE" = "containerd" ]; then
-    PULL="sudo ctr images pull"
-    EXPORT="sudo images export"
-    ./scripts/install-containerd.sh || exit 1
-else
-    PULL="sudo docker pull"
-    EXPORT="sudo docker save"
-    ./scripts/install-docker.sh || exit 1
-fi
+expand_image_repo() {
+    local repo="$1"
 
-sudo systemctl enable --now docker
+    if [[ "$repo" =~ ^[a-zA-Z0-9]+: ]]; then
+        repo="docker.io/library/$repo"
+    elif [[ "$repo" =~ ^[a-zA-Z0-9]+\/ ]]; then
+        repo="docker.io/$repo"
+    fi
+    echo "$repo"
+}
+
+image_pull() {
+    image="$1"
+
+    if [ "$CONTAINER_ENGINE" = "docker" ]; then
+        sudo docker pull $image || exit 1
+    else
+        sudo ctr -n k8s.io images pull $image || exit 1
+    fi
+}
+
+image_save() {
+    image="$1"
+    out="$2"
+
+    if [ "$CONTAINER_ENGINE" = "docker" ]; then
+        sudo docker save $image > "$out" || exit 1
+    else
+        sudo ctr -n k8s.io images export $out $image || exit 1
+    fi
+}
+
+if [ "$CONTAINER_ENGINE" = "docker" ]; then
+    ./scripts/install-docker.sh || exit 1
+else
+    ./scripts/install-containerd.sh || exit 1
+fi
 
 IMAGEDIR=outputs/images
 if [ -e $IMAGEDIR ]; then
@@ -28,12 +54,14 @@ cat $IMAGEDIR/images.txt
 IMAGES=$(cat $IMAGEDIR/images.txt)
 
 for i in $IMAGES; do
-    echo "==> pulling $i"
-    $PULL $i
+    i=$(expand_image_repo $i)
+    f="$(echo $i | sed 's/\//_/g').tar"
 
-    f="$(echo $i | sed 's/\//__/g').tar"
-    echo "==> saving $i"
-    $EXPORT $i > "$IMAGEDIR/$f"
+    echo "==> pulling $i"
+    image_pull $i
+
+    echo "==> saving $i to $IMAGEDIR/$f"
+    image_save $i "$IMAGEDIR/$f" || exit 1
 done
 
 echo "==> Create images tarball"
