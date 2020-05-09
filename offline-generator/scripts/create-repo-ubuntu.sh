@@ -29,8 +29,8 @@ EOF
 #EOF
 
 # install docker
-echo "===> Installing docker"
-sudo apt-get update && sudo apt-get install -y $DOCKER_PKGS
+#echo "===> Installing docker"
+#sudo apt-get update && sudo apt-get install -y $DOCKER_PKGS
 
 CACHEDIR=outputs/cache-debs
 mkdir -p $CACHEDIR
@@ -65,7 +65,7 @@ popd
 cp ./config.sh outputs
 
 # Create tarball
-(cd outputs && mkdir -p offline-files && tar czf offline-files/k8s-offline-apt-repo.tar.gz debs config.sh)
+(cd outputs && mkdir -p offline-files && tar czf offline-files/offline-apt-repo.tar.gz debs config.sh)
 
 echo "Done."
 

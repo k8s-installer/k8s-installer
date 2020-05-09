@@ -66,4 +66,4 @@ done
 
 echo "==> Create images tarball"
 mkdir -p outputs/offline-files
-(cd outputs && tar cvzf offline-files/k8s-images.tar.gz images/)
+(cd outputs && tar cvzf offline-files/container-images.tar.gz images/)

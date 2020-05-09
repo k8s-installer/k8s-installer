@@ -92,7 +92,7 @@ sudo createrepo $RPMDIR || exit 1
 
 echo "==> Create repo tarball"
 mkdir -p outputs/offline-files
-(cd outputs && tar cvzf offline-files/k8s-offline-repo.tar.gz rpms config.sh)
+(cd outputs && tar cvzf offline-files/offline-rpm-repo.tar.gz rpms config.sh)
 #/bin/rm -rf rpms
 
 echo "create-repo done."

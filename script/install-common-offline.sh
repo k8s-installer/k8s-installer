@@ -8,8 +8,8 @@ fi
 . ./prepare.sh
 
 OFFLINE_TARBALL=k8s-offline-files.tar.gz
-REPO_TARBALL=./offline-files/k8s-offline-repo.tar.gz
-IMAGES_TARBALL=./offline-files/k8s-images.tar.gz
+REPO_TARBALL=./offline-files/offline-rpm-repo.tar.gz
+IMAGES_TARBALL=./offline-files/container-images.tar.gz
 
 if [ ! -e $OFFLINE_TARBALL ]; then
     echo "No $OFFLINE_TARBALL exists"

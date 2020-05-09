@@ -27,6 +27,6 @@
     remote_src: yes
   with_items:
     - "{{ k8s_offline_repo_tarball }}"
-    - k8s-images.tar.gz
+    - container-images.tar.gz
 
 - include_tasks: "{{ ansible_os_family }}.yml"
