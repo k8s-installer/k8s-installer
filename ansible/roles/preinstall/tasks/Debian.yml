@@ -11,3 +11,16 @@
       - nfs-common
       - nfs-kernel-server
     state: present
+
+- name: Add br_netfilter modules
+  copy:
+    src: bridge.conf
+    dest: /etc/modules-load.d/bridge.conf
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Modprobe br_netfilter
+  service:
+    name: systemd-modules-load
+    state: restarted
