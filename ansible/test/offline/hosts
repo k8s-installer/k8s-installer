@@ -1,10 +1,10 @@
 [master_first]
-master ansible_host=10.240.0.53 ip=10.240.0.53
+master ansible_host=10.240.0.73 ip=10.240.0.73
 
 [master_secondary]
 
 [worker]
-worker ansible_host=10.240.0.52 ip=10.240.0.52
+worker ansible_host=10.240.0.72 ip=10.240.0.72
 
 [master:children]
 master_first
