@@ -17,6 +17,14 @@
     src: sysctl-k8s.conf
     dest: /etc/sysctl.d/k8s.conf
 
+- name: Add module loader
+  copy:
+    src: container-modules.conf
+    dest: /etc/modules-load.d/
+    owner: root
+    group: root
+  notify: load_modules
+
 - name: sysctl
   command: sysctl --system
 

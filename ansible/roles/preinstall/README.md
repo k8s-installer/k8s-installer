@@ -6,4 +6,5 @@
 * SELinux を無効化
 * Swap を無効化
 * bridge-nf-call-iptables sysctl 設定を追加
+* モジュール(overlay,br_netfilter)をロード
 * cfssl をインストール
