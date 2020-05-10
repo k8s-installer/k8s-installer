@@ -30,7 +30,7 @@
       environment: "{{ proxy_env }}"
 
     - set_fact:
-        containerd_taball_fullpath: /tmp/{{ containerd_tarball }}
+        containerd_tarball_fullpath: /tmp/{{ containerd_tarball }}
 
 - set_fact:
     containerd_tarball_fullpath: /opt/kubernetes-offline/{{ containerd_tarball }}
