@@ -1,0 +1,5 @@
+- name: update_ca_certs_rhel
+  shell: update-ca-trust enable
+
+- name: update_ca_certs_ubuntu
+  shell: dpkg-reconfigure ca-certificates

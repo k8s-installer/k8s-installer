@@ -5,28 +5,18 @@
         src: apt.conf.j2
         dest: /etc/apt/apt.conf.d/99proxy.conf
 
-    - name: Create /etc/systemd/system/docker.service.d
-      file:
-        path: /etc/systemd/system/docker.service.d
-        state: directory
+    - include_tasks: service_proxy.yml
 
-    - name: Install docker http-proxy.conf
-      template:
-        src: http-proxy.conf.j2
-        dest: /etc/systemd/system/docker.service.d/http-proxy.conf
+- name: Create certs dir
+  file:
+    path: /usr/share/ca-certificates/extra
+    state: directory
 
-- when: proxy_ca_certs|length > 0
-  block:
-    - name: Create certs dir
-      file:
-        path: /usr/share/ca-certificates/extra
-        state: directory
-
-    - name: Install root certs
-      copy:
-        src: "{{ item }}"
-        dest: /usr/share/ca-certificates/extra
-      with_items: "{{ proxy_ca_certs }}"
-
-    - name: Update root certs
-      shell: dpkg-reconfigure ca-certificates
+- name: Install root certs (ubuntu)
+  copy:
+    src: "{{ item }}"
+    dest: /usr/share/ca-certificates/extra
+  with_fileglob:
+    - "*.crt"
+  notify:
+    - update_ca_certs_ubuntu

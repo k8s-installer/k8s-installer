@@ -6,23 +6,13 @@
         line: "proxy={{ proxy_url }}"
         regexp: "^proxy="
 
-    - name: Create /etc/systemd/system/docker.service.d
-      file:
-        path: /etc/systemd/system/docker.service.d
-        state: directory
+    - include_tasks: service.proxy.yml
 
-    - name: Install docker http-proxy.conf
-      template:
-        src: http-proxy.conf.j2
-        dest: /etc/systemd/system/docker.service.d/http-proxy.conf
-
-- when: proxy_ca_certs|length > 0
-  block:
-    - name: Install root certs
-      copy:
-        src: "{{ item }}"
-        dest: /usr/share/pki/ca-trustsource/anchors/
-      with_items: "{{ proxy_ca_certs }}"
-
-    - name: Update root certs
-      shell: update-ca-trust enable
+- name: Install root certs (rhel)
+  copy:
+    src: "{{ item }}"
+    dest: /usr/share/pki/ca-trustsource/anchors/
+  with_fileglob:
+    - "*.crt"
+  notify:
+    - update_ca_certs_rhel

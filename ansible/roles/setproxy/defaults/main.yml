@@ -4,6 +4,3 @@ proxy_url: ""
 
 # No Proxy
 proxy_noproxy: "127.0.0.1,localhost"
-
-# Root CA certificates
-proxy_ca_certs: []
