@@ -1,11 +1,16 @@
-- when: proxy_url != ""
-  block:
-    - name: Install apt proxy config
-      template:
-        src: apt.conf.j2
-        dest: /etc/apt/apt.conf.d/99proxy.conf
+- name: Install apt proxy config
+  template:
+    src: apt.conf.j2
+    dest: /etc/apt/apt.conf.d/99proxy.conf
+  when: proxy_url != ""
 
-    - include_tasks: service_proxy.yml
+- name: Delete apt proxy config
+  file:
+    path: /etc/apt/apt.conf.d/99proxy.conf
+    state: absent
+  when: proxy_url == ""
+
+- include_tasks: service_proxy.yml
 
 - name: Create certs dir
   file:

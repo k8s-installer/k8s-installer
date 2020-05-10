@@ -1,12 +1,18 @@
-- when: proxy_url != ""
-  block:
-    - name: Set proxy in yum.conf
-      lineinfile:
-        path: /etc/yum.conf
-        line: "proxy={{ proxy_url }}"
-        regexp: "^proxy="
+- name: Set proxy in yum.conf
+  lineinfile:
+    path: /etc/yum.conf
+    line: "proxy={{ proxy_url }}"
+    regexp: "^proxy="
+  when: proxy_url != ""
 
-    - include_tasks: service.proxy.yml
+- name: Remove proxy in yum.conf
+  lineinfile:
+    path: /etc/yum.conf
+    regexp: "^proxy="
+    state: absent
+  when: proxy_url == ""
+
+- include_tasks: service_proxy.yml
 
 - name: Install root certs (rhel)
   copy:
