@@ -1,0 +1,16 @@
+- name: Check RHEL/CentOS version
+  fail:
+    msg: "Only support ver 7.x / 8.x of RHEL/CentOS"
+  when: not ansible_distribution_major_version in [ "7", "8" ]
+
+- when: ansible_distribution_major_version == "8"
+  block:
+    - name: Check firewall config
+      fail:
+        msg: "Firewall is not supported for RHEL/CentOS 8"
+      when: firewall_enabled
+
+    #- name: Check container engine
+    #  fail:
+    #    msg: "Only support containerd for RHEL/CentOS 8"
+    #  when: container_engine != "containerd"

@@ -3,22 +3,4 @@
     msg: "Unsupported OS : {{ ansible_distribution }}"
   when: not ansible_distribution in ["RedHat", "CentOS", "Ubuntu"]
 
-- when: ansible_distribution in ["RedHat", "CentOS"]
-  block:
-    - name: Check RHEL/CentOS version
-      fail:
-        msg: "Only support ver 7.x / 8.x of RHEL/CentOS"
-      when: not ansible_distribution_major_version in [ "7", "8" ]
-
-- when: ansible_distribution in ["Ubuntu"]
-  block:
-    - name: Check Ubuntu version
-      fail:
-        msg: "Only support Ubuntu 18.04/20.04"
-      #when: ansible_distribution_major_version != "18"
-      when: not ansible_distribution_version in [ "18.04", "20.04" ]
-
-    #- name: Fail if offline install with ubuntu
-    #  fail:
-    #    msg: "Offline install is not supported for Ubuntu"
-    #  when: offline_install
+- include_tasks: "{{ ansible_os_family }}.yml"

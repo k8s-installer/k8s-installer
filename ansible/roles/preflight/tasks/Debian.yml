@@ -1,0 +1,5 @@
+- name: Check Ubuntu version
+  fail:
+    msg: "Only support Ubuntu 18 / 20"
+  when: ansible_distribution_major_version in [ "18", "19", "20" ]
+  #when: not ansible_distribution_version in [ "18.04", "20.04" ]

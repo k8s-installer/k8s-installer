@@ -5,6 +5,7 @@
 ### Added
 
 - Add containerd support for RHEL/CentOS 7
+- Support RHEL/CentOS 8 (#10)
 
 ### Fixed
 
