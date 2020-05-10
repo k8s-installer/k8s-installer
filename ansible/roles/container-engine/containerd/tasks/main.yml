@@ -68,3 +68,8 @@
     enabled: yes
     state: started
     daemon_reload: yes
+
+- name: Install crictl.yaml
+  copy:
+    src: crictl.yaml
+    dest: /etc
