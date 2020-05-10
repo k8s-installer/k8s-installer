@@ -1,11 +1,12 @@
 # ChangeLog
 
-## x.x.x
+## 0.9.0 - 2020/5/11
 
 ### Added
 
 - Add containerd support for RHEL/CentOS 7
 - Support RHEL/CentOS 8 (#10)
+- Support Ubuntu 20.04 (#9)
 
 ### Fixed
 
