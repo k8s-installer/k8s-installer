@@ -14,6 +14,12 @@ Vagrant.configure("2") do |config|
     c.vm.box = "generic/centos7"
     c.vm.network "private_network", ip: "10.240.0.72"
     c.vm.network "forwarded_port", guest: 22, host: 2372, id: "ssh"
+
+    # make offline
+    c.vm.provision "shell", inline: <<-EOL
+      ip route delete default
+      ip route add default via 10.240.0.254 dev eth1
+    EOL
   end
 
   config.vm.define "ubuntu" do |c|
@@ -21,5 +27,11 @@ Vagrant.configure("2") do |config|
     c.vm.box = "generic/ubuntu1804"
     c.vm.network "private_network", ip: "10.240.0.73"
     c.vm.network "forwarded_port", guest: 22, host: 2373, id: "ssh"
+
+    # make offline
+    c.vm.provision "shell", inline: <<-EOL
+      ip route delete default
+      ip route add default via 10.240.0.254 dev eth1
+    EOL
   end
 end
