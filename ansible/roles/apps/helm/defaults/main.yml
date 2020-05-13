@@ -1,4 +1,4 @@
-helm_version: v3.1.2
+helm_version: v3.2.1
 
 helm_tarball: helm-{{ helm_version }}-linux-amd64.tar.gz
 

@@ -5,6 +5,7 @@
 ### Updated
 
 - Update calico 3.13.3 -> 3.14.0
+- Update helm 3.1.2 -> 3.2.1
 
 ## 0.9.0 - 2020/5/11
 
