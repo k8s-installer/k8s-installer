@@ -1,5 +1,11 @@
 # ChangeLog
 
+## x.x.x
+
+### Fix
+
+- Fix ubuntu version check miss
+
 ## 0.9.1 - 2020/5/13
 
 ### Updated
