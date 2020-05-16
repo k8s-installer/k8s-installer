@@ -4,12 +4,7 @@
 . ./config.sh
 
 # Package list
-DOCKER_PKGS="apt-transport-https ca-certificates curl gnupg-agent software-properties-common"
-DOCKER_PKGS="docker.io $DOCKER_PKGS"
-#DOCKER_PKGS="docker-ce docker-ce-cli containerd.io firewalld python-cryptography $DOCKER_PKGS"
-
-PKGS="$DOCKER_PKGS firewalld lvm2 nfs-common nfs-kernel-server"
-PKGS="$PKGS runc"
+PKGS=$(cat pkglist/ubuntu/*.txt | grep -v "^#" | sort | uniq)
 
 for v in $KUBE_VERSIONS; do
     PKGS="$PKGS kubeadm=${v}-00 kubelet=${v}-00 kubectl=${v}-00"
@@ -22,7 +17,7 @@ cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
 deb https://apt.kubernetes.io/ kubernetes-xenial main
 EOF
 
-# seteup docker repo
+# setup docker repo
 #curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 #cat <<EOF | sudo tee /etc/apt/sources.list.d/docker.list
 #deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable
@@ -35,6 +30,9 @@ EOF
 CACHEDIR=outputs/cache-debs
 mkdir -p $CACHEDIR
 
+echo "===> Update apt cache"
+sudo apt update
+
 # Resolve all dependencies
 echo "===> Resolving dependencies"
 DEPS=$(apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances --no-pre-depends $PKGS | grep "^\w" | sort | uniq)
@@ -42,7 +40,7 @@ DEPS=$(apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts 
 #echo "$DEPS"
 
 # Download packages
-echo "===> Downloading packages"
+echo "===> Downloading packages: " $PKGS $DEPS
 (cd $CACHEDIR && apt download $PKGS $DEPS)
 
 # Create repo

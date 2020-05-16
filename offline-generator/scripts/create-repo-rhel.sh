@@ -4,28 +4,31 @@
 
 . /etc/os-release
 
-# dependencies
-PY2DEPS="libselinux-python python-virtualenv python2-cryptography"
-PY3DEPS="python3" # python3-devel gcc openssl-devel"
-NFS_DEPS="rpcbind nfs-utils"
-
-DEPS="audit yum-plugin-versionlock firewalld gnupg2 lvm2 unzip"
+# packages
+PKGLIST="pkglist/rhel/*.txt"
 if [ "$VERSION_ID" = "7" ]; then
-    DEPS="$DEPS $PY2DEPS $PY3DEPS $NFS_DEPS"
-    if type subscription-manager >/dev/null 2>&1; then
+    PKGLIST="$PKGLIST pkglist/rhel/7/*.txt"
+    
+    if grep "Red Hat" /etc/redhat-release >/dev/null 2>&1; then
         sudo subscription-manager repos --enable=rhel-7-server-extras-rpms  # for docker
         #sudo subscription-manager repos --enable rhel-7-server-optional-rpms  # for python3-devel
     fi
-else
-    # RHEL/CentOS 8
-    DEPS="$DEPS $PY3DEPS $NFS_DEPS"
 fi
+PKGS=$(cat $PKGLIST | grep -v "^#" | sort | uniq)
 
 if [ "$CONTAINER_ENGINE" = "docker" ]; then
-    DEPS="docker $DEPS"
+    PKGS="docker $PKGS"
 else
-    DEPS="runc $DEPS"  # for containerd
+    PKGS="runc $PKGS"  # for containerd
 fi
+
+for v in $KUBE_VERSIONS; do
+    KUBEADM_VERSION=${v}-0
+
+    PKGS="$PKGS kubeadm-$KUBEADM_VERSION"
+    PKGS="$PKGS kubectl-$KUBEADM_VERSION"
+    #PKGS="$PKGS kubelet-$KUBEADM_VERSION"
+done
 
 # setup repo
 if [ ! -e /etc/yum.repos.d/kubernetes.repo ]; then
@@ -57,22 +60,14 @@ fi
 
 YD="sudo yumdownloader --destdir=$CACHEDIR -y"
 
-echo "==> Downloading $DEPS"
-$RT $DEPS || (echo "Download error" && exit 1)
+echo "==> Downloading: " $PKGS
+$RT $PKGS || (echo "Download error" && exit 1)
 
+# download kubelet with yumdownloader, because repotrack can't download specific version of kubelet...
 for v in $KUBE_VERSIONS; do
     KUBEADM_VERSION=${v}-0
 
-    echo "==> Downloading kubeadm $KUBEADM_VERSION"
-    $RT kubeadm-$KUBEADM_VERSION || (echo "Download error" && exit 1)
-
-    echo "==> Downloading kubectl $KUBEADM_VERSION"
-    $RT kubectl-$KUBEADM_VERSION || (echo "Download error" && exit 1)
-
     echo "==> Downloading kubelet $KUBEADM_VERSION"
-    #$RT kubelet-$KUBEADM_VERSION || (echo "Download error" && exit 1)
-
-    # download with yumdownloader, because repotrack can't download specific version of kubelet...
     $YD kubelet-$KUBEADM_VERSION || (echo "Download error" && exit 1)
 done
 
