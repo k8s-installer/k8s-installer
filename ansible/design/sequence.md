@@ -1,63 +1,63 @@
-# シーケンス
+# Install sequence
 
-各 playbook, role の実行シーケンスは以下の通り。
+Install sequence of each playbooks and roles.
 
 ## [common playbook](../common.yml)
 
-全ノードの共通処理
+Common sequence for all nodes.
 
-* [installer-defaults](../roles/installer-defaults) : 変数デフォルト値を設定する
-* [preflight](../roles/preflight) : プリフライトチェックを行う
-* [offline/prepare](../roles/offline/prepare) : オフラインインストール用のファイル転送・展開を行う
-* [setproxy](../roles/setproxy) : Proxy 設定を行う (yum/docker)
-* [firewall](../roles/firewall) : firewalld の設定を行う
-* [preinstall](../roles/preinstall) : プレインストール処理を行う
+* [installer-defaults](../roles/installer-defaults) : Set default values of variables.
+* [preflight](../roles/preflight) : Do preflight check
+* [offline/prepare](../roles/offline/prepare) : Execute file transfer and unarchive for offline install.
+* [setproxy](../roles/setproxy) : Configure proxy (yum/docker)
+* [firewall](../roles/firewall) : Configure firewalld
+* [preinstall](../roles/preinstall) : Pre install process
 * container-engine
-    * [docker](../roles/container-engine/docker) : Docker インストールを行う
-    * [containerd](../roles/container-engine/containerd) : containerd をインストールする (RHEL/CentOS 8)
-* [offline/load-images](../roles/offline/load-images) : オフラインインストール時のコンテナロードを行う
-* [k8s-packages](../roles/k8s-packages): kubeadm / kubelet のインストールを行う
-    * kubernetes yum リポジトリを追加
-    * kubeadm, kubelet, kubectl をインストールし、バージョンロック
-    * kubelet の --node-ip オプション追加
-    * kubelet 起動
+    * [docker](../roles/container-engine/docker) : Install docker
+    * [containerd](../roles/container-engine/containerd) : Install containerd (RHEL/CentOS 8)
+* [offline/load-images](../roles/offline/load-images) : Import container images for offline install
+* [k8s-packages](../roles/k8s-packages): Install kubeadm / kubelet.
+    * Add kubernetes yum/apt repository.
+    * Install kubeadm, kubelet, kubectl and lock versions
+    * Add --node-ip option to kubelet
+    * Start kubelet
 
 ## [master-first playbook](../master-first.yml)
 
-1台目のマスターノードのインストールを行う
+Install primary master node.
 
-* [master/certs/ca](../roles/master/certs/ca) : CAを生成する (有効期限30年)
-* [master/kubeadm-config](../roles/master/kubeadm-config) : kubeadm config ファイルを生成する
-* [master/first](../roles/master/first) : 1台目マスターノードの kubeadm init を実行する
+* [master/certs/ca](../roles/master/certs/ca) : Generate CA (30 years)
+* [master/kubeadm-config](../roles/master/kubeadm-config) : Generate kubeadm config file
+* [master/first](../roles/master/first) : Execute `kubeadm init` for primary master.
 * network-plugin
-    * [calico](../roles/network-plugin/calico) : Calico ネットワークプラグインをインストール
-* [master/get-join-files](../roles/master/get-join-files) : Join に必要なファイルを収集
-    * bootstrap token を生成し、join スクリプトを取得
-    * 証明書ファイルを収集
-* [master/install-kubeconfig](../roles/master/install-kubeconfig) : ~/.kube/config を設定
+    * [calico](../roles/network-plugin/calico) : Install Calico network plugin.
+* [master/get-join-files](../roles/master/get-join-files) : Collect required files for `kubeadm join`.
+    * Generate bootstrap token and get join script.
+    * Collect certificates.
+* [master/install-kubeconfig](../roles/master/install-kubeconfig) : Install ~/.kube/config file.
 
 ## [master-secondary playbook](../master-secondary.yml)
 
-2台目以降のマスターノードのインストールを行う
+Install secondary master nodes.
 
-* [master/kubeadm-config](../roles/master/kubeadm-config) : kubeadm config ファイルを生成する
-* [master/secondary](../roles/master/secondary) : 2台目以降のマスターノードの kubeadm join を実行する
-    * 収集した証明書ファイル・joinスクリプトを展開
-    * kubeadm join を実行
-* [master/install-kubeconfig](../roles/master/install-kubeconfig) : ~/.kube/config を設定     
-* [master/configure](../roles/master/configure) : Scheduleable 設定などを行う
+* [master/kubeadm-config](../roles/master/kubeadm-config) : Generate kubeadm config file.
+* [master/secondary](../roles/master/secondary) : Exeucte `kubeadm init` for secondary masters.
+    * Expand certificates and join script.
+    * Execute `kubeadm join`.
+* [master/install-kubeconfig](../roles/master/install-kubeconfig) : Install ~/.kube/config file.     
+* [master/configure](../roles/master/configure) : Configure Scheduleable config etc.
 
 ## [worker playbook](../worker.yml)
 
-ワーカーノードのインストールを行う
+Install worker nodes.
 
-* [worker](../roles/worker) : ワーカーノードの kubeadm join を実行する
-    * 収集した joinスクリプトを展開
-    * kubeadm join を実行
+* [worker](../roles/worker) : Execute `kubeadm join` for worker nodes.
+    * Expand join script.
+    * Execute `kubeadm join`.
 
 ## [networking playbook](../networking.yml)
 
-ネットワーキングのデプロイを行う。
+Deploy networking.
 
 * ingress: Ingress controller
     * [nginx](../roles/networking/ingress/nginx) : Nginx ingress controller
@@ -66,16 +66,16 @@
 
 ## [storage playbook](../storage.yml)
 
-ストレージのデプロイを行う。
+Deploy storage.
 
-* [local-storage](../roles/storage/local-storage) : local-storage Storage Class 設定
+* [local-storage](../roles/storage/local-storage) : Configure `local-storage` Storage Class.
 * [rook-nfs](../roles/storage/rook-nfs) : Rook NFS
 * [rook-ceph](../roles/storage/rook-ceph) : Rook Ceph
-* [default-storage-class](../roles/storage/default-storage-class) : デフォルト Storage Class の設定
+* [default-storage-class](../roles/storage/default-storage-class) : Set default storage class.
 
 ## [apps playbook](../apps.yml)
 
-アプリケーションのデプロイを行う。
+Deploy applications.
 
 * [metrics-server](../roles/apps/metrics-server) : metrics server
 * [helm](../roles/apps/helm) : Helm CLI

@@ -1,12 +1,12 @@
-# 概要
+# Abstract
 
-## 基本方針
+## Policy
 
-* kubeadm を使用する
-* 完全オフラインでのインストールができるようにする
-    * Kubespray では完全オフラインインストールはできない。
-      各ノードはオフラインでもよいが、ansible 実行ホストはオンラインでなければならない(ファイルをダウンロードする必要があるため)
-    * 本インストーラでは、事前に別ホストでファイルをすべてダウンロードし、メディア経由で転送できるようにする。
-* 極力シンプルにする
-    * 環境を限定する (RHEL7/CentOS7, docker, calico固定)
-    * kubeadm ドキュメントに提示された手順から大幅に外れることはしない
+* Use `kubeadm`
+* Enabled complete offline installation.
+    * Kubespray does not allow for full offline installation. 
+      Each node may be offline, but the ANSIBLE execution host must be online (because it needs to download some files).
+    * This installer allows you to download all the files on a different host in advance and transfer them via some media.
+* Keep it as simple as possible.
+    * Restricted environment (RHEL7/CentOS7, docker, calico)
+    * DO NOT deviate substantially from the steps presented in the `kubeadm` document.

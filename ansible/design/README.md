@@ -1,5 +1,5 @@
 # Ansible playbook design
 
-* [概要](abstract.md)
-* [シーケンス](sequence.md)
-* [RHEL8/CentOS8サポート](rhel8.md)
+* [Abstract](abstract.md)
+* [Install sequence](sequence.md)
+* [RHEL8/CentOS8 support](rhel8.md)
