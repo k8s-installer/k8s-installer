@@ -16,7 +16,7 @@ parse_yaml() {
 # Generate image lists from y aml
 echo "==> Updating outputs/yaml-images.txt"
 /bin/rm outputs/yaml-images.txt >/dev/null 2>&1
-parse_yaml yamls/*.yaml
+parse_yaml yamls/*.yaml yamls/*.yml
 
 # Copy yaml files
-cp yamls/*.yaml $OUTDIR
+cp yamls/*.yaml yamls/*.yml $OUTDIR

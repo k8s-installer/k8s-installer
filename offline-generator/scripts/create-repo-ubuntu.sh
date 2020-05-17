@@ -17,16 +17,6 @@ cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
 deb https://apt.kubernetes.io/ kubernetes-xenial main
 EOF
 
-# setup docker repo
-#curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-#cat <<EOF | sudo tee /etc/apt/sources.list.d/docker.list
-#deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable
-#EOF
-
-# install docker
-#echo "===> Installing docker"
-#sudo apt-get update && sudo apt-get install -y $DOCKER_PKGS
-
 CACHEDIR=outputs/cache-debs
 mkdir -p $CACHEDIR
 
@@ -36,8 +26,6 @@ sudo apt update
 # Resolve all dependencies
 echo "===> Resolving dependencies"
 DEPS=$(apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances --no-pre-depends $PKGS | grep "^\w" | sort | uniq)
-#DEPS=$(apt-cache depends --recurse $PKGS | grep "^\w" | sort | uniq)
-#echo "$DEPS"
 
 # Download packages
 echo "===> Downloading packages: " $PKGS $DEPS

@@ -4,17 +4,15 @@
 
 . /etc/os-release
 
-# packages
-PKGLIST="pkglist/rhel/*.txt"
 if [ "$VERSION_ID" = "7" ]; then
-    PKGLIST="$PKGLIST pkglist/rhel/7/*.txt"
-    
     if grep "Red Hat" /etc/redhat-release >/dev/null 2>&1; then
         sudo subscription-manager repos --enable=rhel-7-server-extras-rpms  # for docker
         #sudo subscription-manager repos --enable rhel-7-server-optional-rpms  # for python3-devel
     fi
 fi
-PKGS=$(cat $PKGLIST | grep -v "^#" | sort | uniq)
+
+# packages
+PKGS=$(cat pkglist/rhel/*.txt pkglist/rhel/${VERSION_ID}/*.txt | grep -v "^#" | sort | uniq)
 
 if [ "$CONTAINER_ENGINE" = "docker" ]; then
     PKGS="docker $PKGS"
@@ -80,14 +78,10 @@ mkdir -p $RPMDIR
 /bin/cp $CACHEDIR/*.rpm $RPMDIR/
 /bin/rm $RPMDIR/*.i686.rpm
 
-#/bin/rm rpms/*kubelet*
-#/bin/cp cache/*kubelet-$KUBEADM_VERSION* rpms/
-
 sudo createrepo $RPMDIR || exit 1
 
 echo "==> Create repo tarball"
 mkdir -p outputs/offline-files
 (cd outputs && tar cvzf offline-files/offline-rpm-repo.tar.gz rpms config.sh)
-#/bin/rm -rf rpms
 
 echo "create-repo done."
