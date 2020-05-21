@@ -2,6 +2,10 @@
 
 ## x.x.x
 
+### Updated
+
+- Update kubernetes 1.18.2 -> 1.18.3
+
 ### Fix
 
 - Fix ubuntu version check miss
