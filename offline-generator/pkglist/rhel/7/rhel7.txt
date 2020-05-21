@@ -1,0 +1,4 @@
+# python2
+libselinux-python
+python-virtualenv
+python2-cryptography

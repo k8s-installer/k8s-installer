@@ -1,11 +1,11 @@
 - name: Get kubeadm version
   command: kubeadm version -o short
-  register: kubeadm_version
+  register: kubeadm_version_result
 
 - name: Get kubeadm config version
   set_fact:
     kubeadm_config_api_version: v1beta1
-  when: kubeadm_version.stdout is version('v1.15.0', '<')
+  when: kubeadm_version_result.stdout is version('v1.15.0', '<')
 
 - name: Collect cert SANs
   set_fact:

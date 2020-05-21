@@ -2,17 +2,24 @@
 
 . ./config.sh
 
+#
+# Expand container image repo.
+# ex)
+#   registry:2       => docker.io/library/registry:2
+#   rook/ceph:v1.3.2 => docker.io/rook/ceph:v1.3.2
+#
 expand_image_repo() {
     local repo="$1"
 
-    if [[ "$repo" =~ ^[a-zA-Z0-9]+: ]]; then
+    if [[ "$repo" =~ ^[a-zA-Z0-9]+: ]]; then  # does not contain slash
         repo="docker.io/library/$repo"
-    elif [[ "$repo" =~ ^[a-zA-Z0-9]+\/ ]]; then
-        repo="docker.io/$repo"
+    elif [[ "$repo" =~ ^[a-zA-Z0-9]+\/ ]]; then  # does not cotain fqdn (period)
+            repo="docker.io/$repo"
     fi
     echo "$repo"
 }
 
+# Pull container image
 image_pull() {
     image="$1"
 
@@ -23,6 +30,7 @@ image_pull() {
     fi
 }
 
+# Save container image to tarball
 image_save() {
     image="$1"
     out="$2"

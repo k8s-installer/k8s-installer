@@ -5,7 +5,7 @@
   roles:
     - { role: installer-defaults }
     - { role: offline/prepare, tags: [common, offline] }
-    - { role: container-engine/docker, tags: [common, docker] }
+    - { role: container-engine, tags: [common, container-engine] }
     - { role: offline/load-images, tags: [common, offline] }
     - { role: upgrade/upgrade-kubeadm, tags: [common, kubeadm] }
     - { role: master/kubeadm-config, tags: kubeadm-config }
