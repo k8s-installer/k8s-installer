@@ -1,11 +1,12 @@
 ## kubernetes version
 #kube_version: 1.18.3
 
-## kubeadm version (RPM)
+## kubeadm/kubelet/kubectl version (RPM)
 #kubeadm_version: "{{ kube_version }}-0"
-
-## kubelet version (RPM)
 #kubelet_version: "{{ kubeadm_version }}"
-
-## kubectl version (RPM)
 #kubectl_version: "{{ kubelet_version }}"
+
+## kubeadm/kubelet/kubectl version (apt)
+#kubeadm_apt_version: "{{ kube_version }}-00"
+#kubelet_apt_version: "{{ kubeadm_apt_version }}"
+#kubectl_apt_version: "{{ kubelet_apt_version }}"
