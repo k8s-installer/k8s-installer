@@ -1,4 +1,5 @@
 - name: Drain node
-  shell: kubectl drain {{ inventory_hostname }} --force --ignore-daemonsets --delete-local-data
+  shell: kubectl drain {{ inventory_hostname }} --force --ignore-daemonsets --delete-local-data --grace-period={{ drain_grace_period }} --timeout={{ drain_timeout }}
   delegate_to: "{{ groups['master_first'][0] }}"
   become: no
+  ignore_errors: yes

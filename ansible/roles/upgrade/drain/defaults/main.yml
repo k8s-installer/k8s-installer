@@ -1,0 +1,5 @@
+# grace period in seconds
+drain_grace_period: 60
+
+# timeout with time unit
+drain_timeout: 180s
