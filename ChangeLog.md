@@ -1,6 +1,6 @@
 # ChangeLog
 
-## x.x.x
+## 0.9.2 - 2020/5/21
 
 ### Updated
 
@@ -9,6 +9,7 @@
 ### Fix
 
 - Fix ubuntu version check miss
+- Minor fixes
 
 ## 0.9.1 - 2020/5/13
 
