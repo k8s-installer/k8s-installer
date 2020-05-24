@@ -1,5 +1,11 @@
 # ChangeLog
 
+## x.x.x
+
+### Updates
+
+- Update rook 1.3.2 -> 1.3.4
+
 ## 0.9.2 - 2020/5/21
 
 ### Updated
