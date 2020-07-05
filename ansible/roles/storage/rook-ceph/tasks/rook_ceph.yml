@@ -31,5 +31,5 @@
     - csi/cephfs/storageclass.yaml
 
 - name: View the dashboard external to the cluster
-  shell: kubectl apply -f {{ yaml_dir }}/dashboard-external.yaml --kubeconfig /etc/kubernetes/admin.conf
+  shell: kubectl apply -f {{ yaml_dir }}/dashboard-external-https.yaml --kubeconfig /etc/kubernetes/admin.conf
   when: rook_ceph_dashboard_external
