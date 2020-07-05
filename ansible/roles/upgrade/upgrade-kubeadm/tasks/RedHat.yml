@@ -10,6 +10,7 @@
     allow_downgrade: yes
     enablerepo: "{{ yum_enablerepo }}"
     disablerepo: "{{ yum_disablerepo }}"
+    disable_excludes: kubernetes
 
 - name: Lock yum versions
   shell:
