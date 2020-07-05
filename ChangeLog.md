@@ -4,6 +4,7 @@
 
 ### Updates
 
+- Update rook 1.3.4 -> 1.3.7 
 - Exclude kubelet/kubectl/kubeadm in yum repository by default 
 
 ### Fix

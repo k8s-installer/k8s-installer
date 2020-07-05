@@ -1,7 +1,7 @@
-rook/ceph:v1.3.4
-rook/nfs:v1.3.4
+rook/ceph:v1.3.7
+rook/nfs:v1.3.7
 ceph/ceph:v14.2.9
-quay.io/cephcsi/cephcsi:v2.1.1
+quay.io/cephcsi/cephcsi:v2.1.2
 quay.io/k8scsi/csi-node-driver-registrar:v1.2.0
 quay.io/k8scsi/csi-resizer:v0.4.0
 quay.io/k8scsi/csi-provisioner:v1.4.0
