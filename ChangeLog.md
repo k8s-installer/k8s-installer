@@ -1,5 +1,15 @@
 # ChangeLog
 
+## 0.9.5 - 2020/7/5
+
+### Updates
+
+- Exclude kubelet/kubectl/kubeadm in yum repository by default 
+
+### Fix
+
+- Fix ceph dashboard installation failure.
+
 ## 0.9.4 - 2020/6/30
 
 ### Updates
