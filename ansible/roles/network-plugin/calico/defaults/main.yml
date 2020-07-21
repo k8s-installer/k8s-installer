@@ -1,6 +1,7 @@
 # Calico version
-calico_version: v3.14.0
 #calico_version: v3.13.3
+#calico_version: v.14.0
+calico_version: v3.14.1
 
 # Calico manifest url
 #calico_manifest_url: "https://docs.projectcalico.org/{{ calico_version }}/manifests/calico.yaml"
