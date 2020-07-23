@@ -1,6 +1,16 @@
 # ChangeLog
 
+## 0.9.7 - 2020/7/23
+
+### Updates
+
+- Disable IP-in-IP by default of Calico config (#11)
+- Add IPIP, VXLAN, and iptables backend options for Calico. 
+- Update calico 3.14.0 -> 3.14.1
+
 ## 0.9.6 - 2020/7/21
+
+### Updates
 
 - Update kubernetes 1.18.5 -> 1.18.6
 
