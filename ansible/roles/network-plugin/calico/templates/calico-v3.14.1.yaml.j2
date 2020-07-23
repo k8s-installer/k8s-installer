@@ -631,7 +631,7 @@ spec:
             # Use Kubernetes API as the backing datastore.
             - name: DATASTORE_TYPE
               value: "kubernetes"
-            # Wait for the datastore.
+            # Wait for the datastore.  {{
             - name: WAIT_FOR_DATASTORE
               value: "true"
             # Set based on the k8s node name.

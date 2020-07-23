@@ -16,7 +16,7 @@ download() {
   fi
 }
 
-CALICO_VERSION=v3.14
+CALICO_VERSION=v3.15
 METRICS_SERVER_VERSION=v0.3.6
 
 # download yamls
