@@ -5,7 +5,7 @@
     * 1.13 (RHEL7)
     * 19.03 (Ubuntu)
 * containerd: 1.3.4
-* Calico: 3.14.0
+* Calico: 3.15.1
 * metrics-server: 0.3.6 
 * Nginx ingress controller: 0.32.0
 * MetalLB: 0.9.3
