@@ -1,7 +1,20 @@
 # Calico version
-#calico_version: v3.13.3
-#calico_version: v.14.0
 calico_version: v3.14.1
 
-# Calico manifest url
-#calico_manifest_url: "https://docs.projectcalico.org/{{ calico_version }}/manifests/calico.yaml"
+# Enable IPIP?
+# "Always", "CrossSubnet", "Never"
+# See CALICO_IPV4POOL_IPIP option of calico.
+# https://docs.projectcalico.org/reference/node/configuration
+calico_ipv4pool_ipip: "Never"
+
+# Enable VXLAN?
+# "Always", "CrossSubnet", "Never"
+# See CALICO_IPV4POOL_VXLAN option:
+# https://docs.projectcalico.org/reference/node/configuration
+calico_ipv4pool_vxlan: "Never"
+
+# Felix iptables backend
+# "Legacy", "NFT", "Auto"
+# See FELIX_IPTABLESBACKEND option of calico.
+# https://docs.projectcalico.org/reference/felix/configuration
+calico_felix_iptablesbackend: "Auto"

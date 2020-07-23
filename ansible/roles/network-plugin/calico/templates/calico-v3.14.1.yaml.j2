@@ -557,7 +557,7 @@ spec:
         # It can be deleted if this is a fresh installation, or if you have already
         # upgraded to use calico-ipam.
         - name: upgrade-ipam
-          image: calico/cni:v3.14.0
+          image: calico/cni:v3.14.1
           command: ["/opt/cni/bin/calico-ipam", "-upgrade"]
           env:
             - name: KUBERNETES_NODE_NAME
@@ -579,7 +579,7 @@ spec:
         # This container installs the CNI binaries
         # and CNI network config file on each node.
         - name: install-cni
-          image: calico/cni:v3.14.0
+          image: calico/cni:v3.14.1
           command: ["/install-cni.sh"]
           env:
             # Name of the CNI config file to create.
@@ -615,7 +615,7 @@ spec:
         # Adds a Flex Volume Driver that creates a per-pod Unix Domain Socket to allow Dikastes
         # to communicate with Felix over the Policy Sync API.
         - name: flexvol-driver
-          image: calico/pod2daemon-flexvol:v3.14.0
+          image: calico/pod2daemon-flexvol:v3.14.1
           volumeMounts:
           - name: flexvol-driver-host
             mountPath: /host/driver
@@ -626,7 +626,7 @@ spec:
         # container programs network policy and routes on each
         # host.
         - name: calico-node
-          image: calico/node:v3.14.0
+          image: calico/node:v3.14.1
           env:
             # Use Kubernetes API as the backing datastore.
             - name: DATASTORE_TYPE
@@ -653,7 +653,10 @@ spec:
               value: "autodetect"
             # Enable IPIP
             - name: CALICO_IPV4POOL_IPIP
-              value: "Always"
+              value: "{{ calico_ipv4pool_ipip }}"
+            # Enable or Disable VXLAN on the default IP pool.
+            - name: CALICO_IPV4POOL_VXLAN
+              value: "{{ calico_ipv4pool_vxlan }}"
             # Set MTU for tunnel device used if ipip is enabled
             - name: FELIX_IPINIPMTU
               valueFrom:
@@ -688,7 +691,7 @@ spec:
             ## Support both nftables (for RHEL8/CentOS8) and iptables
             # See https://docs.projectcalico.org/reference/felix/configuration
             - name: FELIX_IPTABLESBACKEND
-              value: "Auto"
+              value: "{{ calico_felix_iptablesbackend }}"
           securityContext:
             privileged: true
           resources:
@@ -810,7 +813,7 @@ spec:
       priorityClassName: system-cluster-critical
       containers:
         - name: calico-kube-controllers
-          image: calico/kube-controllers:v3.14.0
+          image: calico/kube-controllers:v3.14.1
           env:
             # Choose which controllers to run.
             - name: ENABLED_CONTROLLERS

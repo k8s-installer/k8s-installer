@@ -4,8 +4,8 @@
     state: directory
 
 - name: Copy calico cni yaml
-  copy:
-    src: calico-{{ calico_version }}.yaml
+  template:
+    src: calico-{{ calico_version }}.yaml.j2
     dest: "{{ calico_config_dir }}/calico.yaml"
 
 - name: Install calico cni plugin

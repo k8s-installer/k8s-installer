@@ -2,6 +2,12 @@
 
 Calico network plugin をインストールします。
 
+## Variables
+
+* calico_ipv4pool_ipip: Enable IP-in-IP? (default: "Never")
+* calico_ipv4pool_vxlan: Enable VXLAN? (default: "Never")
+* calico_felix_iptablesbackend: Felix iptables backend (default: "Auto") 
+
 ## Note
 
 nftables (RHEL8/CentOS8) をサポートするため、calico.yaml に修正を加えてあります。
