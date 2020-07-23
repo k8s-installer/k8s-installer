@@ -6,6 +6,22 @@
 #firewall_enabled: no
 
 #----------------------------------------------------------
+# Calico config
+#----------------------------------------------------------
+
+# Enable IPIP?
+# "Always", "CrossSubnet", "Never"
+# See CALICO_IPV4POOL_IPIP option of calico.
+# https://docs.projectcalico.org/reference/node/configuration
+#calico_ipv4pool_ipip: Never
+
+# Enable VXLAN?
+# "Always", "CrossSubnet", "Never"
+# See CALICO_IPV4POOL_VXLAN option:
+# https://docs.projectcalico.org/reference/node/configuration
+#calico_ipv4pool_vxlan: Never
+
+#----------------------------------------------------------
 # MetalLB config
 #----------------------------------------------------------
 
