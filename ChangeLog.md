@@ -6,7 +6,7 @@
 
 - Disable IP-in-IP by default of Calico config (#11)
 - Add IPIP, VXLAN, and iptables backend options for Calico. 
-- Update calico 3.14.0 -> 3.14.1
+- Update calico 3.14.0 -> 3.15.1
 
 ## 0.9.6 - 2020/7/21
 
