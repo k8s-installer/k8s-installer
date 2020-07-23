@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. ./config.sh
+. ./scripts/load-config.sh
 
 OUTDIR=outputs/offline-files
 if [ ! -e outputs/offline-files ]; then

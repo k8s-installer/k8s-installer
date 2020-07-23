@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. ./config.sh
+. ./scripts/load-config.sh
 
 . /etc/os-release
 

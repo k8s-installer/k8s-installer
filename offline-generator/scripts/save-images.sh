@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. ./config.sh
+. ./scripts/load-config.sh
 
 #
 # Expand container image repo.

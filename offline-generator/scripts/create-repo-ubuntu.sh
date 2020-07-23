@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #. ./check-root.sh
-. ./config.sh
+. ./scripts/load-config.sh
 
 # Package list
 PKGS=$(cat pkglist/ubuntu/*.txt | grep -v "^#" | sort | uniq)
