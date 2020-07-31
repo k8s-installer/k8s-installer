@@ -17,8 +17,8 @@ download() {
 }
 
 CALICO_VERSION=v3.15
-METRICS_SERVER_VERSION=v0.3.7
+#METRICS_SERVER_VERSION=v0.3.7
 
 # download yamls
 download https://docs.projectcalico.org/${CALICO_VERSION}/manifests/calico.yaml
-download https://github.com/kubernetes-sigs/metrics-server/releases/download/${METRICS_SERVER_VERSION}/components.yaml metrics-server.yaml
+#download https://github.com/kubernetes-sigs/metrics-server/releases/download/${METRICS_SERVER_VERSION}/components.yaml metrics-server.yaml

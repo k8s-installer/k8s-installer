@@ -1,0 +1,4 @@
+# k8s yaml files exists in ansible roles dir, to extract image names.
+networking/ingress/nginx/files/deploy.yaml
+networking/loadbalancer/metallb/files/metallb.yaml
+apps/metrics-server/files/components.yaml

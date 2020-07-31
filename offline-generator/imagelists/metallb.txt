@@ -1,2 +1,0 @@
-metallb/speaker:v0.9.3
-metallb/controller:v0.9.3
