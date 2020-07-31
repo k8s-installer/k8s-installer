@@ -5,6 +5,7 @@
 ### Updates
 
 - Update Nginx ingress controller 0.32.0 -> 0.34.1
+- Update rook 1.3.7 -> 1.3.8
 - Update metrics-server 0.3.6 -> 0.3.7
 - Update helm 3.2.1 -> 3.2.4
 
