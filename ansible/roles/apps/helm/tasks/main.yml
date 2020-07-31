@@ -1,23 +1,28 @@
+- name: Create tmp dir
+  file:
+    path: /tmp/{{ helm_version }}
+    state: directory
+
 - name: Download and unarchive helm (online)
   unarchive:
     src: "{{ helm_download_url }}"
-    dest: /tmp
+    dest: /tmp/{{ helm_version }}
     remote_src: yes
-    creates: /tmp/linux-amd64/helm
+    creates: /tmp/{{ helm_version }}/linux-amd64/helm
   environment: "{{ proxy_env }}"
   when: not offline_install
 
 - name: Unarchive helm (offline)
   unarchive:
     src: ./offline-files/{{ helm_tarball }}
-    dest: /tmp
-    creates: /tmp/linux-amd64/helm
+    dest: /tmp/{{ helm_version }}
+    creates: /tmp/{{ helm_version }}/linux-amd64/helm
   when: offline_install
 
 
 - name: Install helm
   copy:
-    src: /tmp/linux-amd64/helm
+    src: /tmp/{{ helm_version }}/linux-amd64/helm
     dest: /usr/local/bin/
     owner: root
     mode: 0755

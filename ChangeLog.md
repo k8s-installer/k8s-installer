@@ -5,6 +5,7 @@
 ### Updates
 
 - Update metrics-server 0.3.6 -> 0.3.7
+- Update helm 3.2.1 -> 3.2.4
 
 ## 0.9.7 - 2020/7/23
 
