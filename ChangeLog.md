@@ -1,5 +1,11 @@
 # ChangeLog
 
+## 1.0.0 - 2020/8/XX
+
+### Updates
+
+- Update metrics-server 0.3.6 -> 0.3.7
+
 ## 0.9.7 - 2020/7/23
 
 ### Updates
