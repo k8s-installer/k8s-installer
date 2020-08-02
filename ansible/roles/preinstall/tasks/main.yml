@@ -25,6 +25,14 @@
     group: root
   notify: load_modules
 
+- name: load modules now
+  modprobe:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - br_netfilter
+    - overlay
+
 - name: sysctl
   command: sysctl --system
 
