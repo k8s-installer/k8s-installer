@@ -1,31 +1,31 @@
 # docker-registry role
 
-Docker private registry を起動する role です。
+Deploy Docker private registry.
 
-以下の2モードのいずれかでインストールが可能です。
+You can install in either of the following two modes.
 
-1. PV mode: PV を使用して Pod 起動する
-2. static-pod mode: PV は使用せず、kubelet のみを使用し static pod として起動する
+1. PV mode: Starting the Pod using PV.
+2. static-pod mode: Do not use PV, only use kubelet and start as static pod.
 
 ## PV mode
 
-ストレージとして PV (Persistent Volume) を使用し、Kubernetes 上で Registry を Pod 起動します。
+Use PV (Persistent Volume) as storage, and deploy the registry on the kubernetes cluster.
 
-`registry_pvc_storage_class` で使用するストレージクラス、`registry_pvc_size` で使用するストレージサイズを指定してください。
+Specify storage class with `registry_pvc_storage_class` and size with `registry_pvc_size`.
 
-ストレージクラスはデフォルトでは、`rook-nfs` role で作成する `rook-nfs-share1` を使用するようになっています。
-詳細は [rook-nfs](../rook-nfs/README.md) を参照してください。
+By default, uses storage class `rook-nfs-share1` created by `rook-nfs` role.
+See [rook-nfs](../rook-nfs/README.md).
 
 ## static-pod mode
 
-Static pod として Registry を起動します。PV は使用せず、本 role を実行するホスト上のファイルシステムを直接使用します。
+Deploy registry as Static pod. Do not use PV and use host filesystem.
 
-static-pod モードの場合は、本 role はいずれかの master で実施してください。
-worker では、kubeconfig や CA 証明書などがないため、使用できません。
+To use static-pod mode, apply this role on the one of the master node.
+You can't use worker node because they does not have kubeconfig and CA certificates.
 
-## 注意事項
+## Note
 
-* HA構成にはできません。シングルホスト構成になります。 
+* No HA mode, single host only.
 
 ## Variables
 

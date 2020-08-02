@@ -1,9 +1,9 @@
 # rook-ceph role
 
-Rook を使用して Ceph をインストールします。
+Install Ceph with Rook.
 
-Rook/Ceph の詳細は https://rook.github.io/docs/rook/master/ceph-quickstart.html を参照してください。
+Refer https://rook.github.io/docs/rook/master/ceph-quickstart.html for details of Rook/Ceph.
 
 ## Variables
 
-* rook_ceph_enabled: rook-ceph を有効にする (default: false)
+* rook_ceph_enabled: Enable rook-ceph (default: false)

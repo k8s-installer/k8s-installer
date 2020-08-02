@@ -1,9 +1,8 @@
 # installer-defaults role
 
-インストーラのデフォルト設定を保持する role です。
+The role contains default values of the installer.
 
-また、オフラインインストール用に使用する yum リポジトリ設定を
-`yum_enablerepo`, `yum_disablerepo` 変数に設定します。
+Also set yum repository configs to `yum_enablerepo`, `yum_disablerepo` variables (RHEL/CentOS only).
 
-* オンラインインストール時: デフォルトのまま
-* オフラインインストール時: `kubernetes-offline` リポジトリ有効、他全リポジトリ無効
+* For online install: Use default repo.
+* For offline install: Enable the `kubernetes-offline` repository and disable all others.

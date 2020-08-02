@@ -1,23 +1,21 @@
 # offline/prepare role
 
-オフラインインストールの準備を実行します。
-offline_install が yes の場合のみ実行されます。
+Prepare offline installation.
+It is executed only when `offline_install` is `yes`.
 
-以下手順が実行されます。
+* For RHEL / CentOS
+    * Extracts RPM repo, docker image files, yaml files to `/opt/kubernetes-offline` directory.
+    * Install `/etc/yum.repos.d/kubernetes-offline.repo` file.
+    * Install `yum-plugin-versionlock`.
+* For Ubuntu
+    * Extracts apt repo, docker image filea, yaml files to `/opt/kubernetes-offline` directory.
+    * Remove `/etc/apt/sources.list` (moves to `sources.list.backup` file)
+    * Install `/etc/apt/sources.list.d/kubernetes-offline` file.
 
-* RHEL / CentOS の場合
-    * /opt/kubernetes-offline ディレクトリに RPM リポジトリ、docker イメージファイル、yaml ファイルを展開
-    * /etc/yum.repos.d/kubernetes-offline.repo を投入
-    * yum-plugin-versionlock をインストール
-* Ubuntu の場合
-    * /opt/kubernetes-offline ディレクトリに apt リポジトリ、docker イメージファイル、yaml ファイルを展開 
-    * /etc/apt/sources.list を削除 (sources.list.backup に移動)   
-    * /etc/apt/sources.list.d/kubernetes-offline を投入
+Note: Loading container images is executed by [load-images](../load-images) role, not this one. 
 
-コンテナイメージのロードは本 role ではなく [load-images](../load-images) role で実行します。
+## Caution
 
-## 注意事項
+For Ubuntu, all default repositories are disabled.
 
-Ubuntu ではデフォルトのリポジトリがすべて無効化されます。
-
-元に戻したい場合は、/etc/apt/ ディレクトリの sources.list.backup を sources.list にリネームしてください。
+If you want to restore, rename `sources.list.backup` to `souces.list` in /etc/apt/ directory.

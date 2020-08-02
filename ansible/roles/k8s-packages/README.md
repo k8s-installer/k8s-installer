@@ -1,5 +1,5 @@
 # k8s-packages role
 
-kubeadm, kubelet, kubectl をインストールし、kubelet を起動します。
+Installs kubeadm, kubelet, kubectl and start kubelet.
 
-また、kubelet には --node-ip オプションが設定されます。
+Also adds `--node-ip` option to kubelet.

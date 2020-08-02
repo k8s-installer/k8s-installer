@@ -1,9 +1,9 @@
 # docker role
 
-Docker をインストール/アップデート、有効化します。
+Install and update Docker.
 
-デフォルトでは OS 標準の docker をインストールします。
+By default, installs OS standard docker.
 
 ## Variables
 
-* docker_ce: Docker CE を使用するか (default: no)
+* docker_ce: Use Docker CE? (default: no)

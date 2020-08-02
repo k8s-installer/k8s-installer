@@ -1,12 +1,13 @@
-# master/first role
+# worker role
 
-ワーカーノード Kubernetes コントロールプレーンをインストールします。
+Installs Kubernetes control plane for worker nodes.
 
-以下手順が実行されます。
+Execute followings:
 
-* join スクリプトを投入
-* kubeadm join を実行
+* Install join script.
+* Execute `kubeadm join`
 
-## 注意事項
+## Note
 
-/etc/kubernetes/kubelet.conf が存在する場合は、kubeadm join は完了しているとみなし再実行は行いません。
+If the `/etc/kubernetes/kubelet.conf` file already exists, 
+it assumes that the `kubeadm join` has already been executed and will not rerun.

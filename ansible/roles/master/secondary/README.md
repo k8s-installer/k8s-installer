@@ -1,15 +1,15 @@
 # master/secondary role
 
-マスタノード2台目以降に Kubernetes コントロールプレーンをインストールします。
+Installs Kubernetes control plane to secondary master nodes.
 
-以下手順が実行されます。
+Executes:
 
-* Kubernetes PKI ファイルを投入 (join-files.tar.gz)
-* join スクリプトを投入
-* kubeadm join を実行
-* ~/.kube/config を投入
+* Installs Kubernetes PKI files (join-files.tar.gz)
+* Installs join script.
+* Execute `kubeadm join`.
+* Installs `~/.kube/config`
 
-## 注意事項
+## Note
 
-/etc/kubernetes/pki/ca.key ファイルが存在している場合はすでに join は実行されているとみなし、
-再実行は行われません。
+If the `/etc/kubernetes/pki/ca.key` file already exists, 
+it assumes that the `kubeadm join` has already been executed and will not rerun.

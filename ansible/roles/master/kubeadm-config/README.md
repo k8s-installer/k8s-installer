@@ -1,6 +1,6 @@
 # master/kubeadm-config role
 
-kubeadm init に必要となる /etc/kubernetes/kubeadm-config.yaml ファイルを生成します。
+Generate `/etc/kubernetes/kubeadm-config.yaml` file for `kubeadm init`.
 
 ## Variables
 

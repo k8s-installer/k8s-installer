@@ -1,5 +1,5 @@
 # preflight role
 
-preflight チェックを行います。
+Execute preflight checks.
 
-* OS種別・バージョンをチェックします
+* Check OS type and versions.

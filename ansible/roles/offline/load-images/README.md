@@ -1,5 +1,6 @@
 # offline/load-images role
 
-コンテナイメージのロードを行います。
+Load container images.
 
-/opt/kubernetes-offline/images に格納されたすべてのコンテナイメージ(*.tar)を docker load でロードします。
+Load all container images (*.tar) in the `/opt/kubernetes-offline/images` directory
+using `docker load` or `ctr images load`.

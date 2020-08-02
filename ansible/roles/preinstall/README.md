@@ -1,10 +1,10 @@
 # preinstall role
 
-以下手順を実施します。
+Executes followings.
 
-* 共通に使用するパッケージをインストール(NFS client, etc)
-* SELinux を無効化
-* Swap を無効化
-* bridge-nf-call-iptables sysctl 設定を追加
-* モジュール(overlay,br_netfilter)をロード
-* cfssl をインストール
+* Installs common packages (NFS client, etc)
+* Disables SELinux.
+* Disables swap.
+* Adds bridge-nf-call-iptables sysctl config
+* Loads modules (overlay,br_netfilter)
+* Installs cfssl.

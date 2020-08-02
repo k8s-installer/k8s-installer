@@ -1,12 +1,12 @@
 # master/first role
 
-マスタノード1台目に Kubernetes コントロールプレーンをインストールします。
+Installs kubernetes control plane to first master node.
 
-以下手順が実行されます。
+Executes:
 
-* kubeadm init を実行
+* `kubeadm init`
 
-## 注意事項
+## Note
 
-/etc/kubernetes/admin.conf ファイルが存在している場合はすでに kubeadm init が実行済みと判断し、
-再実行は行われません。
+If the `/etc/kubernetes/admin.conf` file already exists, 
+it assumes that the `kubeadm init` has already been executed and will not rerun.

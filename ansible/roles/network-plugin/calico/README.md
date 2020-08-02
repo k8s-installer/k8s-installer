@@ -1,6 +1,6 @@
 # network-plugin/calico role
 
-Calico network plugin をインストールします。
+Installs Calico network plugin.
 
 ## Variables
 
@@ -10,9 +10,9 @@ Calico network plugin をインストールします。
 
 ## Note
 
-nftables (RHEL8/CentOS8) をサポートするため、calico.yaml に修正を加えてあります。
+The `calico.yaml` file is slightly modified to support nftables (RHEL8/CentOS8), 
 
-yaml ファイルの 640行目付近、FELIX_IPTABLESBACKEND を "Auto" に変更しています (Default は Legacy)。
+The `FELIX_IPTABLESBACKEND` is set to `Auto` (Default is `Legacy`) in the yaml file.
 
 ```yaml
 kind: DaemonSet
@@ -31,4 +31,4 @@ spec:
               value: "Auto"
 ``` 
 
-本パラメータの詳細は https://docs.projectcalico.org/reference/felix/configuration を参照してください。
+Refer https://docs.projectcalico.org/reference/felix/configuration for details of the option.

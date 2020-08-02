@@ -1,3 +1,3 @@
-# master/first role
+# master/install-kubeconfig role
 
-~/.kube/config ファイルを投入する role です。
+Install `~/.kube/config` file.
