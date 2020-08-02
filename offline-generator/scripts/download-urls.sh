@@ -24,7 +24,7 @@ download() {
 }
 
 HELM_VERSION=v3.2.4
-CONTAINERD_VERSION=1.3.4
+CONTAINERD_VERSION=1.3.6
 
 # download helm
 HELM_FILE=helm-${HELM_VERSION}-linux-amd64.tar.gz
@@ -32,6 +32,6 @@ download https://get.helm.sh/$HELM_FILE
 
 # download containerd
 if [ "$CONTAINER_ENGINE" = "containerd " ]; then
-    CONTAINERD_FILE=containerd-${CONTAINERD_VERSION}.linux-amd64.tar.gz
+    CONTAINERD_FILE=containerd-${CONTAINERD_VERSION}-linux-amd64.tar.gz
     download https://github.com/containerd/containerd/releases/download/v${CONTAINERD_VERSION}/${CONTAINERD_FILE}
 fi

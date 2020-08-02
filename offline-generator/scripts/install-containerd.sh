@@ -1,7 +1,7 @@
 #!/bin/sh
 
-VER=1.3.4
-TARBALL=containerd-$VER.linux-amd64.tar.gz
+VER=1.3.6
+TARBALL=containerd-$VER-linux-amd64.tar.gz
 URL=https://github.com/containerd/containerd/releases/download/v${VER}/${TARBALL}
 
 ANSIBLE_FILES_DIR=../ansible/roles/container-engine/containerd/files/

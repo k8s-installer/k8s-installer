@@ -8,6 +8,7 @@
 - Update rook 1.3.7 -> 1.3.8
 - Update metrics-server 0.3.6 -> 0.3.7
 - Update helm 3.2.1 -> 3.2.4
+- Update containerd 1.3.4 -> 1.3.6
 
 ## 0.9.7 - 2020/7/23
 
