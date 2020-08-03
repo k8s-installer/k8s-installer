@@ -13,6 +13,10 @@ software-properties-common
 #runc
 #containerd.io
 
+# nfs
+nfs-common
+nfs-kernel-server
+
 # Others
 firewalld
 lvm2
