@@ -1,5 +1,5 @@
 #!/bin/sh
-for host in 10.240.0.72 10.240.0.73; do
+for host in 10.240.0.80 10.240.0.81; do
     echo "Remove ssh key of $host from known_hosts"
     ssh-keygen -R $host
 
