@@ -1,5 +1,12 @@
 # ChangeLog
 
+## 1.0.1 - 2020/8/5
+
+### Fixes
+
+- Workaround: Fix registry image version to 2.7.0 for generate htpasswd. (#12)
+    - See https://github.com/docker/distribution-library-image/issues/107   
+
 ## 1.0.0 - 2020/8/2
 
 ### Updates

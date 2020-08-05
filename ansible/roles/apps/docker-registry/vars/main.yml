@@ -1,1 +1,5 @@
 registry_config_dir: /etc/kubernetes/apps/registry/config
+
+# Legacy registry image version contains htpasswd
+# See https://github.com/docker/distribution-library-image/issues/107
+registry_legacy_version: 2.7.0

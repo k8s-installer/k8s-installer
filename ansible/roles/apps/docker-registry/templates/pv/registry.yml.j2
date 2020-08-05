@@ -21,7 +21,7 @@ spec:
       initContainers:
         # Generate htpasswd file
         - name: init-registry
-          image: registry:{{ registry_version }}
+          image: registry:{{ registry_legacy_version }}
           imagePullPolicy: IfNotPresent
           command: [ /bin/sh ]
           args: [ -c, "/usr/bin/htpasswd -Bbn \"$REGISTRY_USER\" \"$REGISTRY_PASSWORD\" > /htpasswd/htpasswd" ]

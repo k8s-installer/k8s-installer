@@ -1,1 +1,2 @@
 registry:2.7.1
+registry:2.7.0
