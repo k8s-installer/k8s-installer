@@ -2,7 +2,7 @@
 
 Change default storage class.
 
-If rook-ceph or rook-ceph is enabled, the storage class is automatically changed.
+If rook-nfs or rook-ceph is enabled, the storage class is automatically changed.
 
 ## Variables
 
