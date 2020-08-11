@@ -11,6 +11,9 @@ registry_user: registry
 # Auth password
 registry_password: registry
 
+# Comma separated registry IPs and hostnames in certificates
+registry_hostnames: "{{ inventory_hostname }}"
+
 # Registry image version
 registry_version: 2.7.1
 

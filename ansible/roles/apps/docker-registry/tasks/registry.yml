@@ -18,7 +18,7 @@
       -ca /etc/kubernetes/pki/ca.crt
       -ca-key /etc/kubernetes/pki/ca.key
       -cn registry
-      -hostname localhost,127.0.0.1,{{ inventory_hostname }}
+      -hostname localhost,127.0.0.1,{{ registry_hostnames }}
       registry.csr.json
       | /usr/local/bin/cfssljson -bare registry
     chdir: "{{ registry_config_dir }}"
