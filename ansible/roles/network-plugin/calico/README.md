@@ -2,6 +2,11 @@
 
 Installs Calico network plugin.
 
+The configuration is <= 50 nodes with kubernetes API datastore, which described in
+[Install Calico networking and network policy for on-premises deployments](https://docs.projectcalico.org/getting-started/kubernetes/self-managed-onprem/onpremises).
+
+By default, overlay (IP-in-IP / VXLAN) is disabled.
+
 ## Variables
 
 * calico_ipv4pool_ipip: Enable IP-in-IP? (default: "Never")
