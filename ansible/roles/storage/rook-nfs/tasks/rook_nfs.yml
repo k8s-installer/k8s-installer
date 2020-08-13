@@ -15,7 +15,9 @@
     dest: "{{ yaml_dir }}"
   with_items:
     - namespace.yml
+    - rook/common.yaml
     - rook/operator.yaml
+    - rook/provisioner.yaml
 
 - name: Copy yaml templates
   template:
@@ -30,5 +32,7 @@
   with_items:
     - namespace.yml
     - nfs-local-pv.yml
+    - common.yaml
     - operator.yaml
+    - provisioner.yaml
     - nfs-server.yml
