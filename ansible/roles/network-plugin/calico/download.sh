@@ -4,3 +4,5 @@
 VER=v3.15
 
 curl -SLO https://docs.projectcalico.org/$VER/manifests/calico.yaml
+curl -SLO https://docs.projectcalico.org/$VER/manifests/calico-typha.yaml
+
