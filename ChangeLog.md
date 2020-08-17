@@ -1,5 +1,11 @@
 # ChangeLog
 
+## 1.0.4 - 2020/8/17
+
+### Updates
+
+- Update kubernetes 1.18.6 -> 1.18.8
+
 ## 1.0.3 - 2020/8/14
 
 ### Updates

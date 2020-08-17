@@ -1,5 +1,5 @@
 ## Kubernetes versions separated with space
-KUBE_VERSIONS="1.18.6"
+KUBE_VERSIONS="1.18.8"
 
 ## Proxy config
 #PROXY_URL=http://proxy.example.com:8080

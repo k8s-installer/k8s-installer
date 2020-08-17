@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # default values
-KUBE_VERSIONS="1.18.6"
+KUBE_VERSIONS="1.18.8"
 CONTAINER_ENGINE=docker
 
 # load config.sh
