@@ -28,5 +28,5 @@ EOF
 
 echo "==> Install kubeadm, kubelet, kubectl etc"
 yum install -y kubeadm kubelet kubectl yum-plugin-versionlock --disableexcludes=kubernetes
-yum versionlock add kubeadm kubelet kubectl
+#yum versionlock add kubeadm kubelet kubectl
 systemctl enable --now kubelet

@@ -1,4 +1,4 @@
-- name: Unlock yum versions
+- name: Unlock yum versions (backward compat)
   shell:
     cmd: yum versionlock delete kubeadm kubelet kubectl || exit 0  # need to unlock kubelet/kubectl for dependency...
     warn: false
@@ -12,7 +12,8 @@
     disablerepo: "{{ yum_disablerepo }}"
     disable_excludes: kubernetes
 
-- name: Lock yum versions
-  shell:
-    cmd: yum versionlock add kubeadm
-    warn: false
+## Don't version lock kubadm/kubelet/kubectl, because kubernetes.repo excludes them.
+#- name: Lock yum versions
+#  shell:
+#    cmd: yum versionlock add kubeadm
+#    warn: false

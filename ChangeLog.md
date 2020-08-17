@@ -5,6 +5,7 @@
 ### Updates
 
 - Update kubernetes 1.18.6 -> 1.18.8
+- Do not yum versionlock kubeadm, kubelet and kubectl.
 
 ## 1.0.3 - 2020/8/14
 
