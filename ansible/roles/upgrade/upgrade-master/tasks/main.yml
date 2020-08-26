@@ -5,7 +5,8 @@
   block:
     - block:
         - name: Execute kubeadm upgrade plan to {{ kube_version }}
-          shell: kubeadm upgrade plan v{{ kube_version }}
+          #shell: kubeadm upgrade plan v{{ kube_version }}  # can't specify specific version to avoid kubelet configmap existence error
+          shell: kubeadm upgrade plan
           register: kubeadm_upgrade
           tags:
             - upgrade-plan
