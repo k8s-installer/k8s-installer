@@ -1,4 +1,4 @@
-# Kubernetes installer
+# Kubernetes installer support offline mode
 
 For Japanese documentation, see [README.ja.md](./README.ja.md)
 

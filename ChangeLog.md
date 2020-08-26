@@ -1,5 +1,11 @@
 # ChangeLog
 
+## 1.18.8-0 - 2020/08/26
+
+Version number scheme is changed.
+
+New version scheme is $(kubernetes_version)-$(installer_version)
+
 ## 1.0.4 - 2020/8/17
 
 ### Updates
