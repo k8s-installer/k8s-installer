@@ -1,5 +1,11 @@
 # ChangeLog
 
+## 1.19.0-0 - 2020/xx/xx
+
+### Updates
+
+- Support kubernetes 1.19.0
+
 ## 1.18.8-0 - 2020/08/26
 
 Version number scheme is changed.
