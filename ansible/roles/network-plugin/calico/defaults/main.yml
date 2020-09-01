@@ -1,5 +1,5 @@
 # Calico version
-calico_version: v3.15.1
+calico_version: v3.16.0
 
 # Enable IPIP?
 # "Always", "CrossSubnet", "Never"
