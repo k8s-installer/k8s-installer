@@ -22,7 +22,7 @@
       yum_repository:
         name: kubernetes
         description: Kubernetes
-        baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-\$basearch
+        baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-$basearch
         gpgcheck: yes
         repo_gpgcheck: no
         exclude: kubelet kubeadm kubectl
