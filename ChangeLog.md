@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.18.8-2 - 2020/09/24
+
+- Support Docker CE for RHEL8/CentOS8
+
 ## 1.18.8-1 - 2020/09/01
 
 - Update rook 1.4.0 -> 1.4.2

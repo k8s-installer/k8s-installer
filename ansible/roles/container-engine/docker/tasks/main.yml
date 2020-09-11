@@ -1,3 +1,12 @@
+- name: Force to use Docker CE for RHEL8/CentOS8
+  set_fact:
+    docker_ce: yes
+  tags:
+    - always
+  when:
+    - ansible_os_family == "RedHat"
+    - ansible_distribution_major_version == "8"
+
 - include_tasks: "{{ ansible_os_family }}.yml"
   when: not docker_ce
 

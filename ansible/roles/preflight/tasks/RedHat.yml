@@ -14,3 +14,8 @@
     #  fail:
     #    msg: "Only support containerd for RHEL/CentOS 8"
     #  when: container_engine != "containerd"
+
+    #- name: Check container engine
+    #  fail:
+    #    msg: "You must use Docker CE for RHEL8 Docker"
+    #  when: container_engine == "docker" and not docker_ce
