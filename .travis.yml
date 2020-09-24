@@ -1,0 +1,11 @@
+os: linux
+#dist: xenial
+sudo: required
+services:
+  - docker
+
+jobs:
+  include:
+    - env: BASE=centos:7
+      install: true
+      script: ./ci/travis-offline-generate.sh
