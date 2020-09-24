@@ -12,8 +12,8 @@ done
 
 # setup k8s repo
 echo "===> Setup k8s repo"
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | $SUDO apt-key add -
+cat <<EOF | $SUDO tee /etc/apt/sources.list.d/kubernetes.list
 deb https://apt.kubernetes.io/ kubernetes-xenial main
 EOF
 
@@ -21,7 +21,7 @@ CACHEDIR=outputs/cache-debs
 mkdir -p $CACHEDIR
 
 echo "===> Update apt cache"
-sudo apt update
+$SUDO apt update
 
 # Resolve all dependencies
 echo "===> Resolving dependencies"
