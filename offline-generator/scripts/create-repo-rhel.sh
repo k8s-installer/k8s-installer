@@ -15,7 +15,16 @@ fi
 PKGS=$(cat pkglist/rhel/*.txt pkglist/rhel/${VERSION_ID}/*.txt | grep -v "^#" | sort | uniq)
 
 if [ "$CONTAINER_ENGINE" = "docker" ]; then
-    PKGS="docker $PKGS"
+    if [ "$VERSION_ID" = "8" ]; then
+        # Use docker-ce for RHEL8/CentOS8
+        echo "==> Setup docker-ce repo"
+        $SUDO yum install -y yum-utils
+        $SUDO yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+        $SUDO rpm -e podman-docker
+        PKGS="docker-ce $PKGS"
+    else
+        PKGS="docker $PKGS"
+    fi
 else
     PKGS="runc $PKGS"  # for containerd
 fi
