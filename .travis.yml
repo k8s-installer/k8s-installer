@@ -9,3 +9,12 @@ jobs:
     - env: BASE=centos:7
       install: true
       script: ./ci/travis-offline-generate.sh
+    - env: BASE=centos:8
+      install: true
+      script: ./ci/travis-offline-generate.sh
+    - env: BASE=ubuntu:18.04
+      install: true
+      script: ./ci/travis-offline-generate.sh
+    - env: BASE=ubuntu:20.04
+      install: true
+      script: ./ci/travis-offline-generate.sh
