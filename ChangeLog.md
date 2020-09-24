@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.19.1-1, 1.18.8-2 - 2020/09/24
+
+- Support Docker CE for RHEL8/CentOS8
+
 # 1.19.1-0 - 2020/9/14
 
 - Update Kubernetes 1.19.0 -> 1.19.1

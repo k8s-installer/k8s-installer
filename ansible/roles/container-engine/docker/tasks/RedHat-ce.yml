@@ -3,12 +3,13 @@
   environment: "{{ proxy_env }}"
   when: not offline_install
 
-- name: Uninstall docker
+- name: Uninstall docker and podman-docker
   yum:
     name:
       - docker
       - docker-common
       - docker-client
+      - podman-docker
     state: absent
 
 - name: Install docker-ce
