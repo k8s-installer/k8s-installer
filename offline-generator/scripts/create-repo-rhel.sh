@@ -31,18 +31,18 @@ done
 # setup repo
 if [ ! -e /etc/yum.repos.d/kubernetes.repo ]; then
     echo "==> Setup repo"
-    sudo cp kubernetes.repo /etc/yum.repos.d/
-    sudo yum check-update -y
+    $SUDO cp kubernetes.repo /etc/yum.repos.d/
+    $SUDO yum check-update -y
 fi
 
 # install tools
 if ! type createrepo >/dev/null 2>&1; then
     echo "==> Install createrepo"
-    sudo yum install -y createrepo || exit 1
+    $SUDO yum install -y createrepo || exit 1
 fi
 if ! type repotrack >/dev/null 2>&1; then
     echo "==> Install yum-utils"
-    sudo yum install -y yum-utils || exit 1
+    $SUDO yum install -y yum-utils || exit 1
 fi
 
 CACHEDIR=outputs/cache-rpms
@@ -51,12 +51,12 @@ mkdir -p $CACHEDIR
 cp ./config.sh outputs
 
 if [ "$VERSION_ID" = "8" ]; then
-    RT="sudo dnf download --resolve --alldeps --downloaddir $CACHEDIR"
+    RT="$SUDO dnf download --resolve --alldeps --downloaddir $CACHEDIR"
 else
-    RT="sudo repotrack -a x86_64 -p $CACHEDIR"
+    RT="$SUDO repotrack -a x86_64 -p $CACHEDIR"
 fi
 
-YD="sudo yumdownloader --destdir=$CACHEDIR -y"
+YD="$SUDO yumdownloader --destdir=$CACHEDIR -y"
 
 echo "==> Downloading: " $PKGS
 $RT $PKGS || (echo "Download error" && exit 1)
@@ -78,7 +78,7 @@ mkdir -p $RPMDIR
 /bin/cp $CACHEDIR/*.rpm $RPMDIR/
 /bin/rm $RPMDIR/*.i686.rpm
 
-sudo createrepo $RPMDIR || exit 1
+$SUDO createrepo $RPMDIR || exit 1
 
 echo "==> Create repo tarball"
 mkdir -p outputs/offline-files
