@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# default values
-KUBE_VERSIONS="1.19.1"
-CONTAINER_ENGINE=docker
-
 if [ $UID = 0 ]; then
     SUDO=
 else
@@ -15,4 +11,5 @@ if [ -e config.sh ]; then
     . ./config.sh
 else
     echo "Warning: no config.sh exists. Use default config."
+    . ./config.sh.default
 fi

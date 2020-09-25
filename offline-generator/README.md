@@ -24,7 +24,7 @@ Kubernetesクラスタを構成するマシンと同一の OS がインストー
 
 ## 設定
 
-最初に `config.sh.sample` を `config.sh` にコピーし、必要な設定を行ってください。
+最初に `config.sh.default` を `config.sh` にコピーし、必要な設定を行ってください。
 
 * コンテナエンジンに docker ではなく containerd を使用する場合は、CONTAINER_ENGINE に "containerd" を指定してください。
 
