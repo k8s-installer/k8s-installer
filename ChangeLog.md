@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.19.2-0 - 2020/09/25
+
+- Update kubernetes 1.19.1 -> 1.19.2
+
 ## 1.18.9-0 - 2020/09/25
 
 - Update kubernetes 1.18.8 -> 1.18.9
