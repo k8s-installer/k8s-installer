@@ -1,4 +1,8 @@
 # ChangeLog
+                       
+## xxx - 2020/xx/xx
+
+- Add support for cri-o (except for offline install) (#14)    
 
 ## 1.19.2-0 - 2020/09/25
 

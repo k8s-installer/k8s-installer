@@ -1,0 +1,1 @@
+cri_o_os: xUbuntu_{{ ansible_distribution_version }}

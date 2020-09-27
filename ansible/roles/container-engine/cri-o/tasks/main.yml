@@ -1,0 +1,10 @@
+- name: Set os dependent variables
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- include_tasks: "{{ ansible_os_family }}.yml"
+
+- name: Enable / start cri-o
+  service:
+    name: cri-o
+    enabled: yes
+    state: started

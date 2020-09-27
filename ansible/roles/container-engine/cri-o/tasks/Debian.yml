@@ -1,0 +1,29 @@
+- when: not offline_install
+  block:
+    - name: Add apt_key for cri-o repositories
+      apt_key:
+        url: "{{ item }}"
+        state: present
+      with_items:
+        - https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable:cri-o:{{ cri_o_version }}/{{ cri_o_os }}/Release.key
+        - https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/{{ cri_o_os }}/Release.key
+
+    - name: Add libcontainers apt repository
+      apt_repository:
+        repo: deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/{{ cri_o_os }}/ /
+        filename: libcontainers
+        state: present
+
+    - name: Add cri-o apt repository
+      apt_repository:
+        repo: deb http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable:/cri-o:/{{ cri_o_version }}/{{ cri_o_os }}/ /
+        filename: crio
+        state: present
+
+- name: Install cri-o
+  apt:
+    name:
+      - cri-o
+      - runc
+      #- cri-o-runc
+    state: latest

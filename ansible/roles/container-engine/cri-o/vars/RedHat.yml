@@ -1,0 +1,1 @@
+cri_o_os: CentOS_{{ ansible_distribution_major_version }}

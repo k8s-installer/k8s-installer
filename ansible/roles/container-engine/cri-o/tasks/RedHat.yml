@@ -1,0 +1,16 @@
+- name: Install libcontainers repo
+  shell: yum-config-manager --add-repo https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/{{ cri_o_os }}/devel:kubic:libcontainers:stable.repo
+  environment: "{{ proxy_env }}"
+  when: not offline_install
+
+- name: Install cri-o repo
+  shell: yum-config-manager --add-repo https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable:cri-o:{{ cri_o_version }}/{{ cri_o_os }}/devel:kubic:libcontainers:stable:cri-o:{{ cri_o_version }}.repo
+  environment: "{{ proxy_env }}"
+  when: not offline_install
+
+- name: Install cri-o
+  yum:
+    name: cri-o
+    state: present
+    enablerepo: "{{ yum_enablerepo }}"
+    disablerepo: "{{ yum_disablerepo }}"
