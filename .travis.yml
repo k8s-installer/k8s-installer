@@ -4,6 +4,9 @@ sudo: required
 services:
   - docker
 
+branches:
+  except: /\/feature\//
+
 jobs:
   include:
     - env: BASE=centos:7
