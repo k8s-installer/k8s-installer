@@ -1,23 +1,53 @@
 os: linux
-#dist: xenial
+language: python
+  - "3.7"
 sudo: required
-services:
-  - docker
 
 branches:
   except: /\/feature\//
 
 jobs:
   include:
+    ## ansible install test
+    - dist: bionic
+      install:
+        - pip install -r ansible/requirements.txt
+      env: CONTAINER_ENGINE=containerd
+      script: ./ci/travis-ansible.sh
+
+    #- dist: focal
+    #  install:
+    #    - pip install -r ansible/requirements.txt
+    #  env: CONTAINER_ENGINE=containerd
+    #  script: ./ci/travis-ansible.sh
+
+    #- dist: bionic
+    #  install:
+    #    - pip install -r ansible/requirements.txt
+    #  env: CONTAINER_ENGINE=docker
+    #  script: ./ci/travis-ansible.sh
+
+    #- dist: bionic
+    #  install:
+    #    - pip install -r ansible/requirements.txt
+    #  env: CONTAINER_ENGINE=cri-o
+    #  script: ./ci/travis-ansible.sh
+
+    ## offline install test
+
     - env: BASE=centos:7
       install: true
       script: ./ci/travis-offline-generate.sh
+      services: [ docker ]
     - env: BASE=centos:8
       install: true
       script: ./ci/travis-offline-generate.sh
+      services: [ docker ]
     - env: BASE=ubuntu:18.04
       install: true
       script: ./ci/travis-offline-generate.sh
+      services: [ docker ]
     - env: BASE=ubuntu:20.04
       install: true
       script: ./ci/travis-offline-generate.sh
+      services: [ docker ]

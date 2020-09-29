@@ -1,0 +1,13 @@
+[master_first]
+localhost
+
+[master_secondary]
+
+[worker]
+localhost
+
+[master:children]
+master_first
+master_secondary
+
+[all:vars]
