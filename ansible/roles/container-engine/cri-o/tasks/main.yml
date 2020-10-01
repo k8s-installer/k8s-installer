@@ -3,8 +3,14 @@
 
 - include_tasks: "{{ ansible_os_family }}.yml"
 
+- name: Use systemd as cgroup driver
+  lineinfile:
+    path: /etc/crio/crio.conf
+    line: cgroup_manager = "systemd"
+    regexp: "^cgroup_manager *="
+
 - name: Enable / start cri-o
   service:
     name: cri-o
     enabled: yes
-    state: started
+    state: restarted
