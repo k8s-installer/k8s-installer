@@ -1,1 +1,1 @@
-load_image_command: ctr -n k8s.io images import
+load_image_command: podman load -i

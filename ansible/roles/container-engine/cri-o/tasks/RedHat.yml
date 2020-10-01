@@ -11,6 +11,13 @@
 - name: Install cri-o
   yum:
     name: cri-o
-    state: present
+    state: latest
+    enablerepo: "{{ yum_enablerepo }}"
+    disablerepo: "{{ yum_disablerepo }}"
+
+- name: Install podman
+  yum:
+    name: podman
+    state: latest
     enablerepo: "{{ yum_enablerepo }}"
     disablerepo: "{{ yum_disablerepo }}"
