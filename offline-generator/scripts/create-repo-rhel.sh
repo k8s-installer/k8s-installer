@@ -15,15 +15,15 @@ fi
 PKGS=$(cat pkglist/rhel/*.txt pkglist/rhel/${VERSION_ID}/*.txt | grep -v "^#" | sort | uniq)
 
 if [ "$CONTAINER_ENGINE" = "docker" ]; then
-    if [ "$VERSION_ID" = "8" ]; then
+    if [ "$VERSION_ID" = "7" ]; then
+        PKGS="docker $PKGS"
+    else
         # Use docker-ce for RHEL8/CentOS8
         echo "==> Setup docker-ce repo"
         $SUDO yum install -y yum-utils
         $SUDO yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
         $SUDO rpm -e podman-docker
         PKGS="docker-ce $PKGS"
-    else
-        PKGS="docker $PKGS"
     fi
 else
     PKGS="runc $PKGS"  # for containerd
@@ -59,10 +59,10 @@ mkdir -p $CACHEDIR
 
 cp ./config.sh outputs
 
-if [ "$VERSION_ID" = "8" ]; then
-    RT="$SUDO dnf download --resolve --alldeps --downloaddir $CACHEDIR"
-else
+if [ "$VERSION_ID" = "7" ]; then
     RT="$SUDO repotrack -a x86_64 -p $CACHEDIR"
+else
+    RT="$SUDO dnf download --resolve --alldeps --downloaddir $CACHEDIR"
 fi
 
 YD="$SUDO yumdownloader --destdir=$CACHEDIR -y"
