@@ -7,10 +7,20 @@ fi
 
 . ./prepare.sh
 
+. /etc/os-release
+
 # install & start docker
 if ! type docker >/dev/null 2>&1; then
-    echo "==> Install and start docker"
-    yum install -y docker
+    if [ "$VERSION_ID" == "7" ]; then
+        echo "==> Install and start docker"
+        yum install -y docker
+    else
+        echo "==> Install and start docker-ce, and remove podman-docker"
+        yum install -y yum-utils
+        yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+        rpm -e podman-docker
+        yum install -y docker-ce
+    fi
 fi
 systemctl enable --now docker
 
