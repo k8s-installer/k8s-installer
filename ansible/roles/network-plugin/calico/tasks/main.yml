@@ -5,7 +5,7 @@
 
 - name: Copy calico cni yaml
   template:
-    src: calico-{{ calico_version }}.yaml.j2
+    src: calico.yaml.j2
     dest: "{{ calico_config_dir }}/calico.yaml"
 
 - name: Install calico cni plugin

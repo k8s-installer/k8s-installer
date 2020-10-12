@@ -18,7 +18,6 @@ parse_yaml() {
 # Generate image lists from yaml
 echo "==> Updating outputs/yaml-images.txt"
 /bin/rm outputs/yaml-images.txt >/dev/null 2>&1
-parse_yaml yamls/*.y*ml
 
 for i in $(cat yamls/ansible-yamls.txt | grep -v "^#" | sed 's/^/..\/ansible\/roles\//'); do
     if [ -f $i ]; then
@@ -26,5 +25,8 @@ for i in $(cat yamls/ansible-yamls.txt | grep -v "^#" | sed 's/^/..\/ansible\/ro
     fi
 done
 
+#parse_yaml yamls/*.y*ml
+
 # Copy yaml files
-cp yamls/*.y*ml $OUTDIR
+#cp yamls/*.y*ml $OUTDIR
+

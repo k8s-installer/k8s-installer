@@ -1,4 +1,5 @@
 # k8s yaml files exists in ansible roles dir, to extract image names.
+network-plugin/calico/templates/calico.yaml.j2
 networking/ingress/nginx/files/deploy.yaml
 networking/loadbalancer/metallb/files/metallb.yaml
 storage/rook-ceph/files/cluster.yaml
