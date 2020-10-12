@@ -34,8 +34,14 @@ EOF
 
 # Install and start docker
 if ! type docker >/dev/null 2>&1; then
-    echo "==> Install and start docker"
-    yum install -y --disablerepo="*" --enablerepo=kubernetes-offline docker
+    if [ "$VERSION_ID" = "7" ]; then
+        echo "==> Install and start docker"
+        yum install -y --disablerepo="*" --enablerepo=kubernetes-offline docker
+    else
+        echo "==> Install and start docker-ce, and remove podman-docker"
+        rpm -e podman-docker
+        yum install -y --disablerepo="*" --enablerepo=kubernetes-offline docker-ce
+    fi
 fi
 systemctl enable --now docker
 

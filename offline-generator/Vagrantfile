@@ -22,4 +22,10 @@ Vagrant.configure("2") do |config|
     c.vm.network "private_network", ip: "10.240.0.51"
     c.vm.box = "generic/ubuntu1804"
   end
+
+  config.vm.define "centos8" do |c|
+    c.vm.hostname = "centos8"
+    c.vm.network "private_network", ip: "10.240.0.52"
+    c.vm.box = "generic/centos8"
+  end
 end
