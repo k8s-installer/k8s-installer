@@ -1,8 +1,15 @@
 # ChangeLog
                        
-## xxx - 2020/xx/xx
+## 1.19.2-1 - 2020/10/12
 
-- Add support for cri-o (except for offline install) (#14)    
+### Updates
+
+- Add support for cri-o (except for offline install) (#14)
+- Add support for RHEL8/CentOS8 to script installer (beta)
+
+### Fixes
+
+- Fix etcd image version of offline-generator
 
 ## 1.19.2-0 - 2020/09/25
 
