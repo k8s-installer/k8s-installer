@@ -15,6 +15,7 @@ Common sequence for all nodes.
 * container-engine
     * [docker](../roles/container-engine/docker) : Install docker
     * [containerd](../roles/container-engine/containerd) : Install containerd (RHEL/CentOS 8)
+    * [cri-o](../roles/container-engine/cri-o) : Install cri-o
 * [offline/load-images](../roles/offline/load-images) : Import container images for offline install
 * [k8s-packages](../roles/k8s-packages): Install kubeadm / kubelet.
     * Add kubernetes yum/apt repository.
