@@ -5,7 +5,7 @@
 ### Updates
 
 - Update kubernetes 1.19.2 -> 1.19.3
-- Update rook 1.4.2 -> 1.4.5
+- Update rook 1.4.2 -> 1.4.6
 - Update calico 3.16.0 -> 3.16.3
 
 ## 1.19.2-1 - 2020/10/12
