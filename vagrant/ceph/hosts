@@ -11,3 +11,10 @@ worker-2  ansible_host=worker-2 ip=10.240.0.22
 [master:children]
 master_first
 master_secondary
+
+[all:vars]
+rook_ceph_enabled=True
+rook_nfs_enabled=True
+default_storage_class=rook-ceph-block
+registry_enabled=True
+metallb_enabled=True

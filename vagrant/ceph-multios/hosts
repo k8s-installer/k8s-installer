@@ -1,0 +1,20 @@
+[master_first]
+master-0  ansible_host=master-0 ip=10.240.0.10 container_engine=docker
+
+[master_secondary]
+
+[worker]
+worker-0  ansible_host=worker-0 ip=10.240.0.20 container_engine=docker
+worker-1  ansible_host=worker-1 ip=10.240.0.21 container_engine=containerd
+worker-2  ansible_host=worker-2 ip=10.240.0.22 container_engine=docker
+
+[master:children]
+master_first
+master_secondary
+
+[all:vars]
+rook_ceph_enabled=True
+rook_nfs_enabled=True
+default_storage_class=rook-ceph-block
+registry_enabled=True
+metallb_enabled=True
