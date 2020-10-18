@@ -66,7 +66,7 @@
   systemd:
     name: containerd
     enabled: yes
-    state: started
+    state: restarted
     daemon_reload: yes
 
 - name: Install crictl.yaml
