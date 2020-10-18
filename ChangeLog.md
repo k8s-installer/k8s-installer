@@ -2,9 +2,13 @@
 
 ## x.x.x
 
-### Updates
+### Breaking changes
 
 - Force use systemd as cgroup driver (#16)
+
+### Updates
+
+- Update containerd 1.3.6 -> 1.4.1
 
 ## 1.19.3-0 - 2020/10/16
 

@@ -2,7 +2,7 @@
 
 . ./scripts/load-config.sh
 
-VER=1.3.6
+VER=1.4.1
 TARBALL=containerd-$VER-linux-amd64.tar.gz
 URL=https://github.com/containerd/containerd/releases/download/v${VER}/${TARBALL}
 

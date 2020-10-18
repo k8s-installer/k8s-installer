@@ -24,7 +24,7 @@ download() {
 }
 
 HELM_VERSION=v3.2.4
-CONTAINERD_VERSION=1.3.6
+CONTAINERD_VERSION=1.4.1
 
 # download helm
 HELM_FILE=helm-${HELM_VERSION}-linux-amd64.tar.gz
