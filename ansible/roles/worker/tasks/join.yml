@@ -16,7 +16,7 @@
 - block:
     - name: Execute kubeadm join
       shell: /etc/kubernetes/join.sh --node-name {{ inventory_hostname }} {{ crisocket_flag }} # -v 5
-      ignore_errors: yes
+      # ignore_errors: yes
       register: kubeadm_join
 
     - name: Delete join.sh
