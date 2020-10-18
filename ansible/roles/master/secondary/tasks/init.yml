@@ -1,24 +1,39 @@
-- name: Copy join.sh
-  copy:
-    src: ./files/join.sh
-    dest: /etc/kubernetes
-    owner: root
-    mode: 0700
+- name: Read join.sh
+  set_fact:
+    join_sh: "{{ lookup('file', './files/join.sh') }}"
 
-#- debug:
-#    msg: "certificateKey = {{ lookup('file', './files/certificateKey') }}"
+- name: Read Certificate key
+  set_fact:
+    certificate_key: "{{ lookup('file', './files/certificateKey') }}"
+
+- name: Set control plane endpoint
+  set_fact:
+    control_plane_endpoint: "{{ join_sh | regex_replace('.*\\s(\\S+:\\d+)\\s.*', '\\1') }}"
+    token: "{{ join_sh | regex_replace('.*--token\\s+(\\S+).*', '\\1') }}"
+    token_ca_cert_hash: "{{ join_sh | regex_replace('.*--discovery-token-ca-cert-hash\\s+(\\S+).*', '\\1') }}"
+
+- name: Set default --cri-socket option
+  set_fact:
+    cri_socket: ""
+
+- name: Set --cri-socket option for containerd
+  set_fact:
+    cri_socket: /run/containerd/containerd.sock
+  when: container_engine == "containerd"
+
+- name: Generate kubeadm-config.yaml
+  template:
+    src: kubeadm-config.yaml.j2
+    dest: /etc/kubernetes/kubeadm-config.yaml
+    mode: 0600
 
 - block:
     - name: Execute kubeadm join
-      shell: /etc/kubernetes/join.sh --control-plane --apiserver-advertise-address {{ ip }} --node-name {{ inventory_hostname }} --certificate-key {{ lookup('file', './files/certificateKey') }} # -v 5
+      shell: kubeadm join --config /etc/kubernetes/kubeadm-config.yaml # -v 5
+      #shell: /etc/kubernetes/join.sh --control-plane --apiserver-advertise-address {{ ip }} --node-name {{ inventory_hostname }} # -v 5
       register: kubeadm_join
       retries: 3
       delay: 5
-
-    - name: Delete join.sh
-      file:
-        path: /etc/kubernetes/join.sh
-        state: absent
 
   rescue:
     - name: stdout

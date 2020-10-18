@@ -1,0 +1,17 @@
+apiVersion: kubeadm.k8s.io/v1beta2
+kind: JoinConfiguration
+caCertPath: /etc/kubernetes/pki/ca.crt
+discovery:
+  bootstrapToken:
+    apiServerEndpoint: {{ control_plane_endpoint }}
+    token: {{ token }}
+    caCertHashes:
+      - {{ token_ca_cert_hash }}
+    #unsafeSkipCAVerification: true
+  timeout: 5m0s
+  tlsBootstrapToken: {{ token }}
+nodeRegistration:
+  name: {{ inventory_hostname }}
+{% if cri_socket != "" %}
+  criSocket: {{ cri_socket }}
+{% endif %}
