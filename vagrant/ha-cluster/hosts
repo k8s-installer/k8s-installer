@@ -12,3 +12,6 @@ worker-1 ip=10.240.0.21
 [master:children]
 master_first
 master_secondary
+
+[all:vars]
+lb_apiserver_address=10.240.0.40
