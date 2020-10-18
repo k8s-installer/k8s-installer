@@ -13,6 +13,24 @@
 - include_tasks: "{{ ansible_os_family }}-ce.yml"
   when: docker_ce
 
+- name: Check if /etc/docker/daemon.json exists?
+  stat:
+    path: /etc/docker/daemon.json
+  register: st
+
+- when: not st.stat.exists
+  block:
+    - name: Create /etc/docker directory
+      file:
+        path: /etc/docker
+        state: directory
+
+    - name: Install /etc/docker/daemon.json
+      template:
+        src: daemon.json.j2
+        dest: /etc/docker/daemon.json
+
+
 - name: Enable / start docker
   service:
     name: docker
