@@ -25,6 +25,8 @@ imports = ["/etc/containerd/runtime_*.toml", "./debug.toml"]
   SystemdCgroup = true
 
 [plugins]
+  [plugins.cri]
+    systemd_cgroup = true
   [plugins.cgroups]
     no_prometheus = false
   [plugins.diff]
