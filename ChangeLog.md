@@ -1,5 +1,11 @@
 # ChangeLog
 
+## x.x.x
+
+### Updates
+
+- Force use systemd as cgroup driver (#16)
+
 ## 1.19.3-0 - 2020/10/16
 
 ### Updates

@@ -37,9 +37,6 @@ dns:
 #    dataDir: /var/lib/etcd
 
 ---
-{% if container_engine == "cri-o" %}
-# It seems that this is needed for cri-o.
 apiVersion: kubelet.config.k8s.io/v1beta1
 kind: KubeletConfiguration
 cgroupDriver: systemd
-{% endif %}
