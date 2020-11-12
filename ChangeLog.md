@@ -1,6 +1,6 @@
 # ChangeLog
 
-## x.x.x
+## 1.19.4-0 - 2020/11/13
 
 ### Breaking changes
 
@@ -8,6 +8,7 @@
 
 ### Updates
 
+- Update kubernetes 1.19.3 -> 1.19.4
 - Update containerd 1.3.6 -> 1.4.1
 
 ## 1.19.3-0 - 2020/10/16
