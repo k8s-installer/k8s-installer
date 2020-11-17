@@ -6,11 +6,12 @@
     - csi/rbd
     - csi/cephfs
 
-- name: Copy rook + ceph yamlc
+- name: Copy rook + ceph yamls
   copy:
     src: "{{ item }}"
     dest: "{{ yaml_dir }}/{{ item | dirname }}"
   with_items:
+    - crds.yaml
     - common.yaml
     - operator.yaml
     - cluster.yaml
@@ -23,6 +24,7 @@
 - name: Apply rook + ceph yamls
   shell: kubectl apply -f {{ yaml_dir }}/{{ item }} --kubeconfig /etc/kubernetes/admin.conf
   with_items:
+    - crds.yaml
     - common.yaml
     - operator.yaml
     - cluster.yaml

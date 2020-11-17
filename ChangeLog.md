@@ -1,5 +1,11 @@
 # ChangeLog
 
+## 1.19.4-1 - 2020/11/17
+
+### Updates
+
+- Update rook 1.4.6 -> 1.5.0
+
 ## 1.19.4-0 - 2020/11/13
 
 ### Breaking changes
