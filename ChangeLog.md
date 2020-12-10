@@ -1,5 +1,11 @@
 # ChangeLog
 
+## 1.19.4-2 - 2020/12/11
+
+### Bug fixes
+
+- Fix docker install error
+
 ## 1.19.4-1 - 2020/11/17
 
 ### Updates
