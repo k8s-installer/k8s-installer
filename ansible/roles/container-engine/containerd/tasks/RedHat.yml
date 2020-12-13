@@ -1,0 +1,11 @@
+- name: Install docker-ce repo
+  shell: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+  environment: "{{ proxy_env }}"
+  when: not offline_install
+
+- name: Install containerd
+  yum:
+    name: containerd.io
+    state: present
+    enablerepo: "{{ yum_enablerepo }}"
+    disablerepo: "{{ yum_disablerepo }}"
