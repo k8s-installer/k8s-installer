@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.20.1-0 - 2020/12/26
+
+- Update kubernetes to 1.20.1
+
 ## 1.20.0-0 - 2020/12/11
 
 ### Updates

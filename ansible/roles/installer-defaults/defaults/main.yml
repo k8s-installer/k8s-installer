@@ -3,7 +3,7 @@
 offline_install: no
 
 ## kubernetes version
-kube_version: 1.20.0
+kube_version: 1.20.1
 
 ## kubeadm version (RPM)
 kubeadm_version: "{{ kube_version }}-0"
