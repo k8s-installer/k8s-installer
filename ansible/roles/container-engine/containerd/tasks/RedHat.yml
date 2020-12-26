@@ -1,9 +1,9 @@
-- name: Install docker-ce repo
+- name: Install docker-ce repo (RedHat)
   shell: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
   environment: "{{ proxy_env }}"
   when: not offline_install
 
-- name: Install containerd
+- name: Install containerd (RedHat)
   yum:
     name: containerd.io
     state: present

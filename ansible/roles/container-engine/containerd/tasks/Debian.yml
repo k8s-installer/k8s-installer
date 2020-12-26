@@ -1,0 +1,4 @@
+- name: Install containerd (Debian)
+  apt:
+    name: containerd
+    state: latest
