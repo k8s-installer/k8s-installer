@@ -1,5 +1,10 @@
 # ChangeLog
 
+## 1.20.2-0 - 2021/xx/xx
+
+- Update kubernetes to 1.20.2
+- Get containerd from docker repo
+
 ## 1.20.1-0 - 2020/12/26
 
 - Update kubernetes to 1.20.1
