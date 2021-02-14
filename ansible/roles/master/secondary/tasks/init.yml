@@ -1,12 +1,16 @@
-- name: Extract join-files.tar.gz
-  unarchive:
-    src: ./files/join-files.tar.gz
+- name: Copy join.sh
+  copy:
+    src: ./files/join.sh
     dest: /etc/kubernetes
     owner: root
+    mode: 0700
+
+#- debug:
+#    msg: "certificateKey = {{ lookup('file', './files/certificateKey') }}"
 
 - block:
     - name: Execute kubeadm join
-      shell: /etc/kubernetes/join.sh --control-plane --apiserver-advertise-address {{ ip }} --node-name {{ inventory_hostname }} # -v 5
+      shell: /etc/kubernetes/join.sh --control-plane --apiserver-advertise-address {{ ip }} --node-name {{ inventory_hostname }} --certificate-key {{ lookup('file', './files/certificateKey') }} # -v 5
       register: kubeadm_join
       retries: 3
       delay: 5

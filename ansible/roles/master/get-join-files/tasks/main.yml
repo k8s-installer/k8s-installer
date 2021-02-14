@@ -7,22 +7,21 @@
 - name: Execute get-join-files.sh
   command: /tmp/get-join-files.sh
 
-- name: Fetch join-files.tar.gz
+- name: Fetch files
   fetch:
-    src: /tmp/join-files.tar.gz
+    src: /tmp/{{ item }}
     dest: ./files/
     flat: yes
-
-- name: Fetch join.sh
-  fetch:
-    src: /tmp/join.sh
-    dest: ./files/
-    flat: yes
+  with_items:
+    #- join-files.tar.gz
+    - join.sh
+    - certificateKey
 
 - name: Cleanup join files
   file:
     path: "{{ item }}"
     state: absent
   with_items:
-    - /tmp/join-files.tar.gz
+    #- /tmp/join-files.tar.gz
     - /tmp/join.sh
+    - /tmp/certificateKey
