@@ -4,7 +4,7 @@ Installs Kubernetes control plane for worker nodes.
 
 Execute followings:
 
-* Install join script.
+* Read join script.
 * Execute `kubeadm join`
 
 ## Note

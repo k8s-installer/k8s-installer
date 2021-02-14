@@ -4,8 +4,7 @@ Installs Kubernetes control plane to secondary master nodes.
 
 Executes:
 
-* Installs Kubernetes PKI files (join-files.tar.gz)
-* Installs join script.
+* Read and parse join script and certificate key files.
 * Execute `kubeadm join`.
 * Installs `~/.kube/config`
 

@@ -5,7 +5,7 @@ Get required files (certificates, bootstrap token) to join nodes to the cluster.
 Executes followings at first master node.
 
 * Generates bootstrap token and get join command line.
-* Collects Kubernetes certificates / key files, and generate `join-files.tar.gz` file.
-* Fetch `join-files.tar.gz` and join script file.
+* Upload certificates and get certificate key.  
+* Fetch join script and certificate key files.
 
-The collected files are transferred to the play/files directory in Ansible node.
+The collected files are stored in 'files' dir and read from playbooks.
