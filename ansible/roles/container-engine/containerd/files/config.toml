@@ -25,19 +25,19 @@ imports = ["/etc/containerd/runtime_*.toml", "./debug.toml"]
   SystemdCgroup = true
 
 [plugins]
-  [plugins.cri]
+  [plugins."io.containerd.grpc.v1.cri"]
     systemd_cgroup = true
-  [plugins.cgroups]
+  [plugins."io.containerd.monitor.v1.cgroups"]
     no_prometheus = false
-  [plugins.diff]
+  [plugins."io.containerd.service.v1.diff-service"]
     default = ["walking"]
-  [plugins.linux]
+  [plugins."io.containerd.runtime.v1.linux"]
     shim = "containerd-shim"
     runtime = "runc"
     runtime_root = ""
     no_shim = false
     shim_debug = false
-  [plugins.scheduler]
+  [plugins."io.containerd.gc.v1.scheduler"]
     pause_threshold = 0.02
     deletion_threshold = 0
     mutation_threshold = 100
