@@ -23,7 +23,7 @@ download() {
   fi
 }
 
-HELM_VERSION=v3.2.4
+HELM_VERSION=v3.5.2
 CONTAINERD_VERSION=1.4.1
 
 # download helm

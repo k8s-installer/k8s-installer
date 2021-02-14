@@ -10,5 +10,5 @@
 * Nginx ingress controller: 0.44.0
 * MetalLB: 0.9.5
 * Rook: 1.5.0
-* Helm: 3.4.1
+* Helm: 3.5.2
 * Docker registry: 2.7.1
