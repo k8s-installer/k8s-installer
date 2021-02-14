@@ -4,7 +4,8 @@
 
 - Update kubernetes to 1.20.2
 - Update Calico 3.16.3 -> 3.16.7  
-- Update nginx-ingress-controller 0.34.1 -> 0.44.0   
+- Update nginx-ingress-controller 0.34.1 -> 0.44.0
+- Update metrics-server 0.3.7 -> 0.4.2  
 - Get containerd from docker repo
 - Improve join logic: --upload-certs, use join config yaml
 
