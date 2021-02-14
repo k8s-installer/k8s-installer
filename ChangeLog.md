@@ -4,6 +4,7 @@
 
 - Update kubernetes to 1.20.2
 - Get containerd from docker repo
+- Improve join logic: --upload-certs, use join config yaml
 
 ## 1.20.1-0 - 2020/12/26
 
