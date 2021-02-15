@@ -20,7 +20,7 @@ Kubernetesクラスタを構成するマシンと同一の OS がインストー
 
 * RHEL 7
 * CentOS 7
-* Ubuntu 18.04
+* Ubuntu 20.04
 
 ## 設定
 
