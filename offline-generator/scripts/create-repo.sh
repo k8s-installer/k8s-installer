@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ -e /etc/redhat-release ]; then
     CREATEREPO="./scripts/create-repo-rhel.sh"

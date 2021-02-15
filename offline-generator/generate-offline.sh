@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 doit() {
     $1 $2 $3 $4 $5 || (echo "ERROR: $1 failed"; exit 1)

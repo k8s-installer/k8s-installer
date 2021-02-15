@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # install kubeadm, needed to pull image of k8s images
 
