@@ -1,6 +1,14 @@
 # ChangeLog
+                           
+## 1.20.4-0 - 2021/02/21
+
+### Updates
+
+- Update kubernetes to 1.20.4
 
 ## 1.20.2-0 - 2021/02/15
+
+### Updates
 
 - Update kubernetes to 1.20.2
 - Update Calico 3.16.3 -> 3.16.7  
