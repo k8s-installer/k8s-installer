@@ -5,6 +5,7 @@
 ### Updates
 
 - Update calico 3.16.7 -> 3.17.3
+- Update rook 1.5.0 -> 1.5.7
                            
 ## 1.20.4-0 - 2021/02/21
 

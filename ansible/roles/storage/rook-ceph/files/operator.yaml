@@ -20,7 +20,7 @@ apiVersion: v1
 metadata:
   name: rook-ceph-operator-config
   # should be in the namespace of the operator
-  namespace: rook-ceph
+  namespace: rook-ceph # namespace:operator
 data:
   # Enable the CSI driver.
   # To run the non-default version of the CSI driver, see the override-able image properties in operator.yaml
@@ -33,18 +33,38 @@ data:
   # Supported values from 0 to 5. 0 for general useful logs, 5 for trace level verbosity.
   # CSI_LOG_LEVEL: "0"
 
+  # OMAP generator will generate the omap mapping between the PV name and the RBD image.
+  # CSI_ENABLE_OMAP_GENERATOR need to be enabled when we are using rbd mirroring feature.
+  # By default OMAP generator sidecar is deployed with CSI provisioner pod, to disable
+  # it set it to false.
+  # CSI_ENABLE_OMAP_GENERATOR: "false"
+
+  # set to false to disable deployment of snapshotter container in CephFS provisioner pod.
+  CSI_ENABLE_CEPHFS_SNAPSHOTTER: "true"
+
+  # set to false to disable deployment of snapshotter container in RBD provisioner pod.
+  CSI_ENABLE_RBD_SNAPSHOTTER: "true"
+
   # Enable cephfs kernel driver instead of ceph-fuse.
   # If you disable the kernel client, your application may be disrupted during upgrade.
   # See the upgrade guide: https://rook.io/docs/rook/master/ceph-upgrade.html
   # NOTE! cephfs quota is not supported in kernel version < 4.17
   CSI_FORCE_CEPHFS_KERNEL_CLIENT: "true"
 
+  # (Optional) policy for modifying a volume's ownership or permissions when the RBD PVC is being mounted.
+  # supported values are documented at https://kubernetes-csi.github.io/docs/support-fsgroup.html
+  CSI_RBD_FSGROUPPOLICY: "ReadWriteOnceWithFSType"
+
+  # (Optional) policy for modifying a volume's ownership or permissions when the CephFS PVC is being mounted.
+  # supported values are documented at https://kubernetes-csi.github.io/docs/support-fsgroup.html
+  CSI_CEPHFS_FSGROUPPOLICY: "ReadWriteOnceWithFSType"
+
   # (Optional) Allow starting unsupported ceph-csi image
   ROOK_CSI_ALLOW_UNSUPPORTED_VERSION: "false"
   # The default version of CSI supported by Rook will be started. To change the version
   # of the CSI driver to something other than what is officially supported, change
   # these images to the desired release of the CSI driver.
-  # ROOK_CSI_CEPH_IMAGE: "quay.io/cephcsi/cephcsi:v3.1.1"
+  # ROOK_CSI_CEPH_IMAGE: "quay.io/cephcsi/cephcsi:v3.2.0"
   # ROOK_CSI_REGISTRAR_IMAGE: "k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.0.1"
   # ROOK_CSI_RESIZER_IMAGE: "k8s.gcr.io/sig-storage/csi-resizer:v1.0.0"
   # ROOK_CSI_PROVISIONER_IMAGE: "k8s.gcr.io/sig-storage/csi-provisioner:v2.0.0"
@@ -271,7 +291,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: rook-ceph-operator
-  namespace: rook-ceph
+  namespace: rook-ceph # namespace:operator
   labels:
     operator: rook
     storage-backend: ceph
@@ -288,7 +308,7 @@ spec:
       serviceAccountName: rook-ceph-system
       containers:
       - name: rook-ceph-operator
-        image: rook/ceph:v1.5.0
+        image: rook/ceph:v1.5.7
         args: ["ceph", "operator"]
         volumeMounts:
         - mountPath: /var/lib/rook

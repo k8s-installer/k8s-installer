@@ -17,7 +17,6 @@
     - namespace.yml
     - rook/common.yaml
     - rook/operator.yaml
-    #- rook/provisioner.yaml
 
 - name: Copy yaml templates
   template:
@@ -34,5 +33,4 @@
     - nfs-local-pv.yml
     - common.yaml
     - operator.yaml
-    #- provisioner.yaml
     - nfs-server.yml

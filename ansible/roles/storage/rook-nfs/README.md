@@ -2,16 +2,16 @@
 
 Deploy NFS server using Rook .
 
-Refer https://rook.io/docs/rook/v1.3/nfs.html for details of Rook/NFS.
+Refer https://rook.io/docs/rook/v1.5/nfs.html for details of Rook/NFS.
 
 ## Implementation
 
-Use Local Volus of Kubernetes.
+Use Local Volume of Kubernetes.
 
 * Use `rook_nfs_pv_host` to specify host to generate Local Volume on.
 * NFS server also runs on the same host. To use master node, the master node must be Schedulable.
 
-Note: No availability because of using Local voluem.
+Note: No availability because of using Local volume.
 
 ## Variables
 

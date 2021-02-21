@@ -9,6 +9,6 @@
 * metrics-server: 0.4.2 
 * Nginx ingress controller: 0.44.0
 * MetalLB: 0.9.5
-* Rook: 1.5.0
+* Rook: 1.5.7
 * Helm: 3.5.2
 * Docker registry: 2.7.1
