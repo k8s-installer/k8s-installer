@@ -1,6 +1,6 @@
 # Versions
 
-* Kubernetes/kubeadm: 1.20.4
+* Kubernetes/kubeadm: 1.20.5
 * Docker
     * 1.13 (RHEL7)
     * 19.03 (Ubuntu)

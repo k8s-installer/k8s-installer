@@ -1,9 +1,10 @@
 # ChangeLog
 
-## 1.20.4-1 - 2021/xx/xx
+## 1.20.5-0 - 2021/xx/xx
 
 ### Updates
 
+- Update kubernetes to 1.20.5
 - Update calico 3.16.7 -> 3.17.3
 - Update rook 1.5.0 -> 1.5.7
                            
