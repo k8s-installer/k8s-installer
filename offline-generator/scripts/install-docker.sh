@@ -13,7 +13,7 @@ if ! type docker >/dev/null 2>&1; then
             $SUDO yum install -y docker-ce || (echo "Error: can't install docker-ce" && exit 1)
         fi
     else
-        $SUDO apt install docker.io || (echo "Error: can't install docker.io" && exit 1)
+        $SUDO apt install -y docker.io || (echo "Error: can't install docker.io" && exit 1)
     fi
 fi
 $SUDO systemctl enable --now docker

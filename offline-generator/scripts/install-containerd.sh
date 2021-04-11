@@ -12,7 +12,7 @@ if [ ! -x /usr/bin/runc ]; then
     if [ -e /etc/redhat-release ]; then
         $SUDO yum install -y runc
     else
-        $SUDO apt install runc
+        $SUDO apt install -y runc
     fi
 fi
 
