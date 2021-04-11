@@ -3,6 +3,11 @@
 #. ./check-root.sh
 . ./scripts/load-config.sh
 
+# Install prereqs
+echo "===> Install prereqs"
+$SUDO apt update
+$SUDO apt install -y curl ca-certificates gnupg apt-utils
+
 # Package list
 PKGS=$(cat pkglist/ubuntu/*.txt | grep -v "^#" | sort | uniq)
 
