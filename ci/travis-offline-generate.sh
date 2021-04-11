@@ -2,6 +2,9 @@
 
 PJDIR=$PWD
 
+echo "Docker login"
+echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
 echo "Starting docker"
 docker run -d -it -v $HOME:$HOME $BASE /bin/bash
 
