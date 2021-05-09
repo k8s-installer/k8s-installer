@@ -14,20 +14,18 @@ fi
 # packages
 PKGS=$(cat pkglist/rhel/*.txt pkglist/rhel/${VERSION_ID}/*.txt | grep -v "^#" | sort | uniq)
 
-if [ "$CONTAINER_ENGINE" = "docker" ]; then
-    if [ "$VERSION_ID" = "7" ]; then
-        PKGS="docker $PKGS"
-    else
-        # Use docker-ce for RHEL8/CentOS8
-        echo "==> Setup docker-ce repo"
-        $SUDO yum install -y yum-utils
-        $SUDO yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-        $SUDO rpm -e podman-docker
-        PKGS="docker-ce $PKGS"
-    fi
-else
-    PKGS="runc $PKGS"  # for containerd
+# Add RHEL7 docker (not docker-ce)
+if [ "$VERSION_ID" = "7" ]; then
+    PKGS="docker $PKGS"
 fi
+
+# Use docker-ce for RHEL8/CentOS8
+echo "==> Setup docker-ce repo"
+$SUDO yum install -y yum-utils
+$SUDO yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+$SUDO rpm -e podman-docker
+PKGS="docker-ce $PKGS"
+PKGS="containerd.io runc $PKGS"  # for containerd
 
 for v in $KUBE_VERSIONS; do
     KUBEADM_VERSION=${v}-0
