@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# DEPRECATED
+
 . ./scripts/load-config.sh
 
 VER=1.4.1

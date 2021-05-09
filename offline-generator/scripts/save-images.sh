@@ -23,11 +23,8 @@ expand_image_repo() {
 image_pull() {
     image="$1"
 
-    if [ "$CONTAINER_ENGINE" = "docker" ]; then
-        sudo docker pull $image || exit 1
-    else
-        sudo ctr -n k8s.io images pull $image || exit 1
-    fi
+    sudo docker pull $image || exit 1
+    #sudo ctr -n k8s.io images pull $image || exit 1
 }
 
 # Save container image to tarball
@@ -35,18 +32,12 @@ image_save() {
     image="$1"
     out="$2"
 
-    if [ "$CONTAINER_ENGINE" = "docker" ]; then
-        sudo docker save $image > "$out" || exit 1
-    else
-        sudo ctr -n k8s.io images export $out $image || exit 1
-    fi
+    sudo docker save $image > "$out" || exit 1
+    #sudo ctr -n k8s.io images export $out $image || exit 1
 }
 
-if [ "$CONTAINER_ENGINE" = "docker" ]; then
-    ./scripts/install-docker.sh || exit 1
-else
-    ./scripts/install-containerd.sh || exit 1
-fi
+./scripts/install-docker.sh || exit 1
+#./scripts/install-containerd.sh || exit 1
 
 IMAGEDIR=outputs/images
 if [ -e $IMAGEDIR ]; then

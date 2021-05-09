@@ -7,11 +7,12 @@
 if ! type docker >/dev/null 2>&1; then
     echo "==> Install docker"
     if [ -e /etc/redhat-release ]; then
-        if [ "$VERSION_ID" = "7" ]; then
-            $SUDO yum install -y docker || (echo "Error: can't install docker" && exit 1)
-        else
-            $SUDO yum install -y docker-ce || (echo "Error: can't install docker-ce" && exit 1)
-        fi
+        #if [ "$VERSION_ID" = "7" ]; then
+        #    $SUDO yum install -y docker || (echo "Error: can't install docker" && exit 1)
+        #else
+        #    $SUDO yum install -y docker-ce || (echo "Error: can't install docker-ce" && exit 1)
+        #fi
+        $SUDO yum install -y docker-ce || (echo "Error: can't install docker-ce" && exit 1)
     else
         $SUDO apt install -y docker.io || (echo "Error: can't install docker.io" && exit 1)
     fi
