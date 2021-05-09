@@ -1,4 +1,4 @@
 # python2
-libselinux-python
-python-virtualenv
-python2-cryptography
+#libselinux-python
+#python-virtualenv
+#python2-cryptography
