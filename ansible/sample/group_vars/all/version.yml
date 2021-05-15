@@ -1,5 +1,5 @@
 ## kubernetes version
-#kube_version: 1.21.0
+#kube_version: 1.21.1
 
 ## kubeadm/kubelet/kubectl version (RPM)
 #kubeadm_version: "{{ kube_version }}-0"
