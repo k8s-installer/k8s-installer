@@ -21,12 +21,9 @@ imports = ["/etc/containerd/runtime_*.toml", "./debug.toml"]
 [cgroup]
   path = ""
 
-[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
-  SystemdCgroup = true
-
 [plugins]
-  [plugins."io.containerd.grpc.v1.cri"]
-    systemd_cgroup = true
+  [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+    SystemdCgroup = true
   [plugins."io.containerd.monitor.v1.cgroups"]
     no_prometheus = false
   [plugins."io.containerd.service.v1.diff-service"]
