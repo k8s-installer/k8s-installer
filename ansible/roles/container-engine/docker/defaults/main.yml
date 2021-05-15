@@ -1,2 +1,2 @@
 # Use docker-ce, or os default docker
-docker_ce: no
+docker_ce: yes
