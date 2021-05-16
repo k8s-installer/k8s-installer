@@ -19,7 +19,7 @@ if [ "$VERSION_ID" = "7" ]; then
     PKGS="docker $PKGS"
 fi
 
-# Use docker-ce for RHEL8/CentOS8
+# Docker CE
 echo "==> Setup docker-ce repo"
 $SUDO yum install -y yum-utils
 $SUDO yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
