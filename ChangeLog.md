@@ -1,8 +1,9 @@
 # ChangeLog
 
-## 1.21.1-0 - 2021/xx/xx
+## 1.21.1-0 - 2021/05/23
 
 - Update kubernetes to 1.21.1
+- Use Docker CE by default, not OS distribution.
 
 ## 1.21.0-0 - 2021/05/04
 
