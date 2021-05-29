@@ -9,9 +9,3 @@ calico_ipv4pool_ipip: Never
 # See CALICO_IPV4POOL_VXLAN option:
 # https://docs.projectcalico.org/reference/node/configuration
 calico_ipv4pool_vxlan: Never
-
-# Felix iptables backend
-# "Legacy", "NFT", "Auto"
-# See FELIX_IPTABLESBACKEND option of calico.
-# https://docs.projectcalico.org/reference/felix/configuration
-calico_felix_iptablesbackend: Auto

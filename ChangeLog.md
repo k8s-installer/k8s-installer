@@ -1,5 +1,10 @@
 # ChangeLog
 
+## 1.21.1-1 - xxx
+
+- Update calico 3.17 -> 3.19.1
+- Remove calico_felix_iptablesbackend variable, because calico default is now Auto.
+
 ## 1.21.1-0 - 2021/05/23
 
 - Update kubernetes to 1.21.1
