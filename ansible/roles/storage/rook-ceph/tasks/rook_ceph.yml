@@ -28,9 +28,14 @@
     - common.yaml
     - operator.yaml
     - cluster.yaml
-    - filesystem.yaml
     - csi/rbd/storageclass.yaml
+
+- name: Apply cephfs
+  shell: kubectl apply -f {{ yaml_dir }}/{{ item }} --kubeconfig /etc/kubernetes/admin.conf
+  with_items:
+    - filesystem.yaml
     - csi/cephfs/storageclass.yaml
+  when: rook_ceph_cephfs_enabled
 
 - name: View the dashboard external to the cluster
   shell: kubectl apply -f {{ yaml_dir }}/dashboard-external-https.yaml --kubeconfig /etc/kubernetes/admin.conf
