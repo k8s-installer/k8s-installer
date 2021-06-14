@@ -1,0 +1,28 @@
+- name: Create tmp dir
+  file:
+    path: /tmp/nerdctl
+    state: directory
+
+- name: Download and unarchive nerdctl (online)
+  unarchive:
+    src: "{{ nerdctl_download_url }}"
+    dest: /tmp/nerdctl
+    remote_src: yes
+    creates: /tmp/nerdctl/nerdctl
+  environment: "{{ proxy_env }}"
+  when: not offline_install
+
+- name: Unarchive helm (offline)
+  unarchive:
+    src: ./offline-files/{{ nerdctl_tarball }}
+    dest: /tmp/nerdctl
+    creates: /tmp/nerdctl/nerdctl
+  when: offline_install
+
+- name: Install nerdctl
+  copy:
+    src: /tmp/nerdctl/nerdctl
+    dest: /usr/bin/
+    owner: root
+    mode: 0755
+    remote_src: yes

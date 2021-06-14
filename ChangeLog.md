@@ -6,6 +6,7 @@
 - Remove calico_felix_iptablesbackend variable, because calico default is now Auto.
 - Update rook 1.5.7 -> 1.6.3 (ceph)
 - Disable rook cephfs by default
+- Add nerdctl to containerd
 
 ## 1.21.1-0 - 2021/05/23
 

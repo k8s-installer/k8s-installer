@@ -31,3 +31,5 @@
   copy:
     src: crictl.yaml
     dest: /etc
+
+- include_tasks: nerdctl.yml
