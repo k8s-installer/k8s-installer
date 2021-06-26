@@ -1,6 +1,6 @@
 # ChangeLog
 
-## 1.21.2-0 - xxx
+## 1.21.2-0 - 2021/06/27
                                     
 - BREAKING CHANGE: Use containerd by default, not docker
 - Update kubernetes to 1.21.2
