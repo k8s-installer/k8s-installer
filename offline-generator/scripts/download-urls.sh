@@ -23,15 +23,19 @@ download() {
   fi
 }
 
-HELM_VERSION=v3.5.2
-CONTAINERD_VERSION=1.4.1
 
 # download helm
+HELM_VERSION=v3.5.2
 HELM_FILE=helm-${HELM_VERSION}-linux-amd64.tar.gz
 download https://get.helm.sh/$HELM_FILE
 
 # download containerd
-if [ "$CONTAINER_ENGINE" = "containerd " ]; then
-    CONTAINERD_FILE=containerd-${CONTAINERD_VERSION}-linux-amd64.tar.gz
-    download https://github.com/containerd/containerd/releases/download/v${CONTAINERD_VERSION}/${CONTAINERD_FILE}
-fi
+#CONTAINERD_VERSION=1.4.1
+#CONTAINERD_FILE=containerd-${CONTAINERD_VERSION}-linux-amd64.tar.gz
+#download https://github.com/containerd/containerd/releases/download/v${CONTAINERD_VERSION}/${CONTAINERD_FILE}
+#fi
+
+# download nerdctl
+NERDCTL_VERSION=0.8.3
+NERDCTL_FILE=nerdctl-${NERDCTL_VERSION}-linux-amd64.tar.gz
+download https://github.com/containerd/nerdctl/releases/download/v${NERDCTL_VERSION}/${NERDCTL_FILE}
