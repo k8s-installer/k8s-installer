@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.22.0-0 - xxxx/xx/xx
+
+- Update kubernetes to 1.22.0
+
 ## 1.21.4-0 - 2021/08/15
 
 - Update kubernetes to 1.21.4
