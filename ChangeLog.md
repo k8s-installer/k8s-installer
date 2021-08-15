@@ -2,8 +2,9 @@
 
 ## 1.21.2-1 - 2021/08/15
 
-- Update nginx-ingress-controller 0.44.0 -> 0.48.1
 - Update rook 1.6.3 -> 1.7.1
+- Update nginx-ingress-controller 0.44.0 -> 0.48.1
+- Update metrics-server 0.4.2 -> 0.5.0
 - Update MetalLB 0.9.5 -> 0.10.2
 
 ## 1.21.2-0 - 2021/06/27

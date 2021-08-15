@@ -4,7 +4,7 @@
 * Docker CE: 20.04
 * containerd: 1.4.1
 * Calico: 3.19.1
-* metrics-server: 0.4.2 
+* metrics-server: 0.5.0 
 * Nginx ingress controller: 0.48.1
 * MetalLB: 0.10.2
 * Rook: 1.7.1
