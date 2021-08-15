@@ -2,7 +2,7 @@
 
 Deploy NFS server using Rook .
 
-Refer https://rook.io/docs/rook/v1.5/nfs.html for details of Rook/NFS.
+Refer https://rook.io/docs/rook/v1.7/nfs.html for details of Rook/NFS.
 
 ## Implementation
 

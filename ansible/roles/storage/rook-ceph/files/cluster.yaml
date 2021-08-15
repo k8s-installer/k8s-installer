@@ -16,13 +16,13 @@ metadata:
 spec:
   cephVersion:
     # The container image used to launch the Ceph daemon pods (mon, mgr, osd, mds, rgw).
-    # v13 is mimic, v14 is nautilus, and v15 is octopus.
+    # v14 is nautilus, v15 is octopus, and v16 is pacific.
     # RECOMMENDATION: In production, use a specific version tag instead of the general v14 flag, which pulls the latest release and could result in different
     # versions running within the cluster. See tags available at https://hub.docker.com/r/ceph/ceph/tags/.
-    # If you want to be more precise, you can always use a timestamp tag such ceph/ceph:v15.2.13-20210526
+    # If you want to be more precise, you can always use a timestamp tag such quay.io/ceph/ceph:v16.2.5-20210708
     # This tag might not contain a new Ceph version, just security fixes from the underlying operating system, which will reduce vulnerabilities
-    image: ceph/ceph:v15.2.13
-    # Whether to allow unsupported versions of Ceph. Currently `nautilus` and `octopus` are supported.
+    image: quay.io/ceph/ceph:v16.2.5
+    # Whether to allow unsupported versions of Ceph. Currently `nautilus`, `octopus`, and `pacific` are supported.
     # Future versions such as `pacific` would require this to be set to `true`.
     # Do not set to true in production.
     allowUnsupported: false
@@ -81,7 +81,7 @@ spec:
   network:
     # enable host networking
     #provider: host
-    # EXPERIMENTAL: enable the Multus network provider
+    # enable the Multus network provider
     #provider: multus
     #selectors:
       # The selector keys are required to be `public` and `cluster`.
@@ -189,6 +189,10 @@ spec:
 # The above example requests/limits can also be added to the other components
 #    mon:
 #    osd:
+# For OSD it also is a possible to specify requests/limits based on device class
+#    osd-hdd:
+#    osd-ssd:
+#    osd-nvme:
 #    prepareosd:
 #    mgr-sidecar:
 #    crashcollector:
@@ -225,6 +229,8 @@ spec:
 #      config: # configuration can be specified at the node level which overrides the cluster level config
 #    - name: "172.17.4.301"
 #      deviceFilter: "^sd."
+    # when onlyApplyOSDPlacement is false, will merge both placement.All() and placement.osd
+    onlyApplyOSDPlacement: false
   # The section for configuring management of daemon disruptions during upgrade or fencing.
   disruptionManagement:
     # If true, the operator will create and manage PodDisruptionBudgets for OSD, Mon, RGW, and MDS daemons. OSD PDBs are managed dynamically
