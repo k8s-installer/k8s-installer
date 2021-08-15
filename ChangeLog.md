@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.21.2-1 - 2021/08/15
+
+- Update nginx-ingress-controller 0.44.0 -> 0.48.1
+
 ## 1.21.2-0 - 2021/06/27
                                     
 - BREAKING CHANGE: Use containerd by default, not docker

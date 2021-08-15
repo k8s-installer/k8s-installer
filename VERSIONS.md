@@ -5,7 +5,7 @@
 * containerd: 1.4.1
 * Calico: 3.19.1
 * metrics-server: 0.4.2 
-* Nginx ingress controller: 0.44.0
+* Nginx ingress controller: 0.48.1
 * MetalLB: 0.9.5
 * Rook: 1.6.3
 * Helm: 3.5.2
