@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.21.4-1 - 2021/xx/xx
+
+- FIX: fix metrics-server arguments
+
 ## 1.21.4-0 - 2021/08/15
 
 - Update kubernetes to 1.21.4
