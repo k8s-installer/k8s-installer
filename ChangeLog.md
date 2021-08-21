@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.22.0-1 - 2021/08/15
+
+- FIX: update nginx-ingress-controller 0.48.1 -> 1.0.0-beta.3
+
 ## 1.22.0-0 - 2021/08/15
 
 - Update kubernetes to 1.22.0
