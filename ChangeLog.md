@@ -4,6 +4,7 @@
 
 - FIX: update nginx-ingress-controller 0.48.1 -> 1.0.0-beta.3
 - FIX: fix metrics-server arguments
+- Update calico 3.19.1 -> 3.20.0
 
 ## 1.22.0-0 - 2021/08/15
 

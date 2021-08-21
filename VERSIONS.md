@@ -3,7 +3,7 @@
 * Kubernetes/kubeadm: 1.22.0
 * Docker CE: 20.04
 * containerd: 1.4.1
-* Calico: 3.19.1
+* Calico: 3.20.0
 * metrics-server: 0.5.0 
 * Nginx ingress controller: 1.0.0-beta.3
 * MetalLB: 0.10.2
