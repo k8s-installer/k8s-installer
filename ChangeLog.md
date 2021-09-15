@@ -1,8 +1,9 @@
 # ChangeLog
 
-## 1.21.4-1 - 2021/xx/xx
+## 1.21.4-1 - 2021/09/15
 
 - FIX: fix metrics-server arguments
+- Update nginx-ingress-controller 0.48.1 -> 1.0.0
 
 ## 1.21.4-0 - 2021/08/15
 
