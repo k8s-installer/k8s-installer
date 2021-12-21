@@ -1,6 +1,6 @@
 # Versions
 
-* Kubernetes/kubeadm: 1.22.0
+* Kubernetes/kubeadm: 1.23.1
 * Docker CE: 20.04
 * containerd: 1.4.1
 * Calico: 3.20.0
