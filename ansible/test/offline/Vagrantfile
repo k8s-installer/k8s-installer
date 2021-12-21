@@ -12,26 +12,26 @@ Vagrant.configure("2") do |config|
   config.vm.define "centos" do |c|
     c.vm.hostname = "test-offline-centos"
     c.vm.box = "generic/centos7"
-    c.vm.network "private_network", ip: "10.240.0.80"
+    c.vm.network "private_network", ip: "192.168.56.80"
     c.vm.network "forwarded_port", guest: 22, host: 2380, id: "ssh"
 
     # make offline
     c.vm.provision "shell", inline: <<-EOL
       ip route delete default
-      ip route add default via 10.240.0.254 dev eth1
+      ip route add default via 192.168.56.254 dev eth1
     EOL
   end
 
   config.vm.define "ubuntu" do |c|
     c.vm.hostname = "test-offline-ubuntu"
-    c.vm.box = "generic/ubuntu1804"
-    c.vm.network "private_network", ip: "10.240.0.81"
+    c.vm.box = "generic/ubuntu2004"
+    c.vm.network "private_network", ip: "192.168.56.81"
     c.vm.network "forwarded_port", guest: 22, host: 2381, id: "ssh"
 
     # make offline
     c.vm.provision "shell", inline: <<-EOL
       ip route delete default
-      ip route add default via 10.240.0.254 dev eth1
+      ip route add default via 192.168.56.254 dev eth1
     EOL
   end
 end

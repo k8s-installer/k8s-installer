@@ -3,7 +3,7 @@
 ip route del default
 
 # Use lb as default gateway (temporal)
-ip route add default via 10.240.0.40
+ip route add default via 192.168.56.40
 
 # for rhel/centos
 if [ -e /etc/redhat-release ]; then
@@ -11,7 +11,7 @@ if [ -e /etc/redhat-release ]; then
     nmcli con mod "System eth0" ipv4.never-default yes
 
     # Set default gateway for eth1 (private)
-    nmcli con mod "System eth1" ipv4.gateway 10.240.0.40
+    nmcli con mod "System eth1" ipv4.gateway 192.168.56.40
 
     systemctl restart network
 fi

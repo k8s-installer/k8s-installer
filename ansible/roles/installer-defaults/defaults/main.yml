@@ -33,7 +33,7 @@ lb_apiserver_address: "{{ ip }}"
 lb_apiserver_port: 6443
 
 # Pod CIDR
-pod_subnet: 192.168.0.0/16
+pod_subnet: 172.31.0.0/16
 
 # Firewall
 firewall_enabled: no
