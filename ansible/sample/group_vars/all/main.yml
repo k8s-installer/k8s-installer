@@ -6,10 +6,10 @@
 #ip: "{{ ansible_default_ipv4.address | default(ansible_all_ipv4_addresses[0]) }}"
 
 ## External load balancer address.
-#lb_apiserver_address: 10.240.0.40   # lb defined in Vagrantfile
+#lb_apiserver_address: 192.168.56.40   # lb defined in Vagrantfile
 
 ## Pod CIDR
-pod_subnet: 192.168.0.0/16
+pod_subnet: 172.31.0.0/16
 
 ## master schedulable?
 #master_schedulable: yes

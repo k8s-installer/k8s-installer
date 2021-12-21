@@ -5,7 +5,7 @@ OFFLINE_INSTALL=no
 #OFFLINE_INSTALL=yes
 
 # Pod network CIDR
-POD_NETWORK_CIDR=192.168.0.0/16
+POD_NETWORK_CIDR=172.31.0.0/16
 
 # Proxy config
 #PROXY_URL=http://proxy.example.com:8080

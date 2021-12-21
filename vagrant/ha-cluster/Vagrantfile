@@ -13,7 +13,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "lb" do |c|
     c.vm.hostname = "lb"
-    c.vm.network "private_network", ip: "10.240.0.40"
+    c.vm.network "private_network", ip: "192.168.56.40"
 
     c.vm.provider "virtualbox" do |vb|
       vb.memory = "512"
@@ -25,9 +25,9 @@ Vagrant.configure("2") do |config|
 
   (0..2).each do |n|
     config.vm.define "master-#{n}" do |c|
-      #c.vm.box = "generic/ubuntu1804" if n == 2
+      #c.vm.box = "generic/ubuntu2004" if n == 2
       c.vm.hostname = "master-#{n}"
-      c.vm.network "private_network", ip: "10.240.0.1#{n}"
+      c.vm.network "private_network", ip: "192.168.56.1#{n}"
       c.vm.network "forwarded_port", guest: 22, host: 2310 + n, id: "ssh"
 
       c.vm.provision :shell, :path => "scripts/setup-route.sh"
@@ -36,9 +36,9 @@ Vagrant.configure("2") do |config|
 
   (0..1).each do |n|
     config.vm.define "worker-#{n}" do |c|
-      #c.vm.box = "generic/ubuntu1804" if n == 1
+      #c.vm.box = "generic/ubuntu2004" if n == 1
       c.vm.hostname = "worker-#{n}"
-      c.vm.network "private_network", ip: "10.240.0.2#{n}"
+      c.vm.network "private_network", ip: "192.168.56.2#{n}"
       c.vm.network "forwarded_port", guest: 22, host: 2320 + n, id: "ssh"
       
       c.vm.provision :shell, :path => "scripts/setup-route.sh"
