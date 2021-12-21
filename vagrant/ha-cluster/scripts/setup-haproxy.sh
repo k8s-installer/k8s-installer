@@ -56,15 +56,15 @@ defaults
 	#errorfile 504 /etc/haproxy/errors/504.http
 
 frontend k8s
-	bind 10.240.0.40:6443
+	bind 192.168.56.40:6443
 	default_backend k8s_backend
 
 backend k8s_backend
 	balance roundrobin
 	mode tcp
-	server controller-0 10.240.0.10:6443 check inter 1000
-	server controller-1 10.240.0.11:6443 check inter 1000
-	server controller-2 10.240.0.12:6443 check inter 1000
+	server controller-0 192.168.56.10:6443 check inter 1000
+	server controller-1 192.168.56.11:6443 check inter 1000
+	server controller-2 192.168.56.12:6443 check inter 1000
 EOF
 
 systemctl enable haproxy
