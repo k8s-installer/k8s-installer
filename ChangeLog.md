@@ -4,9 +4,6 @@
 
 - Update kubernetes 1.23.3
 - Add support for AlmaLinux
-
-## 1.22.0-2 - 2021/xx/xx
-
 - FIX: update nginx-ingress-controller 1.0.0-beta.3 -> 1.0.0
 
 ## 1.21.4-1 - 2021/09/15
