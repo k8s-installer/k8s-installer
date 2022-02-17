@@ -1,4 +1,4 @@
-ansible>=2.9
+ansible ~= 3.4.0
 selinux
 #cryptography>=2.8
 #pyopenssl
