@@ -15,7 +15,7 @@ Vagrant.configure("2") do |config|
     end
   end
 
-  boxes = [ "generic/centos8", "generic/ubuntu1804", "generic/ubuntu2004" ]
+  boxes = [ "bento/almalinux-8", "generic/ubuntu1804", "generic/ubuntu2004" ]
   (0..2).each do |n|
     config.vm.define "worker-#{n}" do |c|
       c.vm.box = boxes[n]
