@@ -5,6 +5,6 @@
 #containerd_tarball: containerd-{{ containerd_version }}-linux-amd64.tar.gz
 #containerd_download_url: https://github.com/containerd/containerd/releases/download/v{{ containerd_version }}/{{ containerd_tarball }}
 
-nerdctl_version: "0.8.3"
+nerdctl_version: "0.17.0"
 nerdctl_tarball: "nerdctl-{{ nerdctl_version }}-linux-amd64.tar.gz"
 nerdctl_download_url: "https://github.com/containerd/nerdctl/releases/download/v{{ nerdctl_version }}/{{ nerdctl_tarball }}"
