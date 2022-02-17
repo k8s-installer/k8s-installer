@@ -3,6 +3,7 @@
 ## 1.23.3-0
 
 - Update kubernetes 1.23.3
+- Add support for AlmaLinux
 
 ## 1.22.0-2 - 2021/xx/xx
 

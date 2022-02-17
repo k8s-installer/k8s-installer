@@ -1,6 +1,6 @@
 - name: Check OS
   fail:
     msg: "Unsupported OS : {{ ansible_distribution }}"
-  when: not ansible_distribution in ["RedHat", "CentOS", "Ubuntu"]
+  when: not ansible_distribution in ["RedHat", "CentOS", "AlmaLinux", "Ubuntu"]
 
 - include_tasks: "{{ ansible_os_family }}.yml"
