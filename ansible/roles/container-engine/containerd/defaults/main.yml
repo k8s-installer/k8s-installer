@@ -1,9 +1,10 @@
-#runc_version: v1.0.0-rc91
-#runc_download_url: https://github.com/opencontainers/runc/releases/download/{{ runc_version }}/runc.amd64
+runc_version: v1.0.3
+runc_file: runc.amd64
+runc_download_url: https://github.com/opencontainers/runc/releases/download/{{ runc_version }}/{{ runc_file }}
 
-#containerd_version: 1.4.1
-#containerd_tarball: containerd-{{ containerd_version }}-linux-amd64.tar.gz
-#containerd_download_url: https://github.com/containerd/containerd/releases/download/v{{ containerd_version }}/{{ containerd_tarball }}
+containerd_version: 1.5.9
+containerd_tarball: containerd-{{ containerd_version }}-linux-amd64.tar.gz
+containerd_download_url: https://github.com/containerd/containerd/releases/download/v{{ containerd_version }}/{{ containerd_tarball }}
 
 nerdctl_version: "0.17.0"
 nerdctl_tarball: "nerdctl-{{ nerdctl_version }}-linux-amd64.tar.gz"

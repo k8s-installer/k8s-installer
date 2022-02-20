@@ -8,9 +8,9 @@ gnupg-agent
 software-properties-common
 lsb-release
 
-docker-ce
-docker-ce-cli
-containerd.io
+#docker-ce
+#docker-ce-cli
+#containerd.io
 
 # nfs
 nfs-common

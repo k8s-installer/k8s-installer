@@ -1,9 +1,42 @@
-- include_tasks: "{{ ansible_os_family }}.yml"
+- name: Uninstall docker.io / containerd if present
+  package:
+    name:
+      - docker.io
+      - docker-io
+      - containerd
+    state: absent
 
-#- name: Install containerd config.toml
-#  copy:
-#    src: config.toml
-#    dest: /etc/containerd/config.toml
+- name: Download and install runc (online)
+  get_url:
+    url: "{{ runc_download_url }}"
+    dest: /usr/local/bin/runc
+    mode: 0755
+  environment: "{{ proxy_env }}"
+  when: not offline_install
+
+- name: Install runc (offline)
+  copy:
+    src: ./offline-files/{{ runc_file }}
+    dest: /usr/local/bin/runc
+    mode: 0755
+  when: offline_install
+
+- name: Install containerd (online)
+  unarchive:
+    src: "{{ containerd_download_url }}"
+    dest: /usr/local/bin
+    extra_opts:
+      - --strip-components=1
+    remote_src: yes
+  when: not offline_install
+
+- name: Install containerd (offline)
+  unarchive:
+    src: ./offline-files/{{ containerd_tarball }}
+    dest: /usr/local/bin
+    extra_opts:
+      - --strip-components=1
+  when: offline_install
 
 - name: Create /etc/containerd dir
   file:
@@ -11,14 +44,14 @@
     state: directory
 
 - name: Install containerd config.toml
-  copy:
-    src: config.toml
+  template:
+    src: config.toml.j2
     dest: /etc/containerd/config.toml
 
-#- name: Install containerd unit file
-#  copy:
-#    src: containerd.service
-#    dest: /etc/systemd/system/containerd.service
+- name: Install containerd unit file
+  copy:
+    src: containerd.service
+    dest: /etc/systemd/system/containerd.service
 
 - name: Enable containerd service
   systemd:

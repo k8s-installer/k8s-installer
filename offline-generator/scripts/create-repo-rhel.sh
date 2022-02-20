@@ -20,12 +20,12 @@ if [ "$VERSION_ID" = "7" ]; then
 fi
 
 # Docker CE
-echo "==> Setup docker-ce repo"
-$SUDO yum install -y yum-utils
-$SUDO yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-$SUDO rpm -e podman-docker
-PKGS="docker-ce $PKGS"
-PKGS="containerd.io runc $PKGS"  # for containerd
+#echo "==> Setup docker-ce repo"
+#$SUDO yum install -y yum-utils
+#$SUDO yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+#$SUDO rpm -e podman-docker
+#PKGS="docker-ce $PKGS"
+#PKGS="containerd.io runc $PKGS"  # for containerd
 
 for v in $KUBE_VERSIONS; do
     KUBEADM_VERSION=${v}-0

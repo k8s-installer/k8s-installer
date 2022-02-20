@@ -29,11 +29,13 @@ HELM_VERSION=v3.5.2
 HELM_FILE=helm-${HELM_VERSION}-linux-amd64.tar.gz
 download https://get.helm.sh/$HELM_FILE
 
-# download containerd
-#CONTAINERD_VERSION=1.4.1
-#CONTAINERD_FILE=containerd-${CONTAINERD_VERSION}-linux-amd64.tar.gz
-#download https://github.com/containerd/containerd/releases/download/v${CONTAINERD_VERSION}/${CONTAINERD_FILE}
-#fi
+# download runc
+RUNC_VERSION=v1.0.3
+download https://github.com/opencontainers/runc/releases/download/${RUNC_VERSION}/runc.amd64
+
+CONTAINERD_VERSION=1.5.9
+CONTAINERD_FILE=containerd-${CONTAINERD_VERSION}-linux-amd64.tar.gz
+download https://github.com/containerd/containerd/releases/download/v${CONTAINERD_VERSION}/${CONTAINERD_FILE}
 
 # download nerdctl
 NERDCTL_VERSION=0.17.0
