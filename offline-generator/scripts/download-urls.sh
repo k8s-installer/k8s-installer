@@ -36,6 +36,6 @@ download https://get.helm.sh/$HELM_FILE
 #fi
 
 # download nerdctl
-NERDCTL_VERSION=0.8.3
+NERDCTL_VERSION=0.17.0
 NERDCTL_FILE=nerdctl-${NERDCTL_VERSION}-linux-amd64.tar.gz
 download https://github.com/containerd/nerdctl/releases/download/v${NERDCTL_VERSION}/${NERDCTL_FILE}

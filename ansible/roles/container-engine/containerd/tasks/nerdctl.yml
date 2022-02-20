@@ -12,7 +12,7 @@
   environment: "{{ proxy_env }}"
   when: not offline_install
 
-- name: Unarchive helm (offline)
+- name: Unarchive nerdctl (offline)
   unarchive:
     src: ./offline-files/{{ nerdctl_tarball }}
     dest: /tmp/nerdctl
