@@ -5,7 +5,7 @@
         - check-expiration
 
     - name: Renew server certs
-      command: kubeadm alpha certs renew all
+      command: kubeadm certs renew all
       tags:
         - renew-certs
 
